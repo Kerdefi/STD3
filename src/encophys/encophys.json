@@ -1,3 +1,28 @@
 {
-  "timestep":50
+  "timestep":50,
+  "materials":{
+    "stone":{
+        "stiffness":1,
+        "angularstifness":1,
+        "platicstiffness":1,
+        "plasticlenght":0.1,
+        "breaklenght":0.1,
+        "heattransfer":1,
+        "heatcapacity":3,
+        "fusiontemp":1000,
+        "gastemp":5000
+    },
+    "metal":{
+        "stiffness":1,
+        "angularstifness":0.5,
+        "platicstiffness":0.2,
+        "plasticlenght":0.3,
+        "breaklenght":0.5,
+        "heattransfer":3,
+        "heatcapacity":1,
+        "fusiontemp":500,
+        "gastemp":5000
+    }
+  }
 }
+
