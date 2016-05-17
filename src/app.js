@@ -9,7 +9,7 @@ var MainLayer = cc.Layer.extend({
 
         //EncoPhys
         g_enp = new encophys.world () ;
-        g_enp.init ();
+        g_enp.init ("src/encophys/encophys.json");
 
         //2. get the screen size of your game canvas et construit les variables
         var winsize = cc.director.getWinSize();

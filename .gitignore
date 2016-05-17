@@ -1,0 +1,9 @@
+tools/bindings-generator/AUTHORS
+tools/bindings-generator/backup/clang-llvm-3.3-pybinding/cindex.py
+/assets/
+/frameworks/
+/library/
+/local/
+/packages/
+/publish/
+/tools/

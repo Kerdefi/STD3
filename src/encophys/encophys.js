@@ -1,25 +1,30 @@
-var encophys = encophys || {} ;
+var encophys = encophys||{};
 
 encophys.world = function () {
-    this.timestep = 5 ;
+    //Default timestep set to 50 frame per second
+    this.timestep = 20 ;
 
-    this.setTimestep = function (timestep) {
-        this.timestep = timestep ;
-        cc.log("Timestep set");
-    };
-
-    this.getTimestep = function () {
-        return this.timestep ;
-    };
-
+    //Callback to load json config file
     this.loadJson = function (error, data) {
-        cc.log(data); //data is the json object
-        cc.log(data["timestep"]);
-        cc.log("Hello");
-        this.setTimestep (data["timestep"]);
+        this.timestep = data["timestep"];
     }.bind(this);
 
-    this.init = function () {
-        cc.loader.loadJson("src/encophys/encophys.json", this.loadJson);
+    //
+    this.init = function (configpath) {
+        cc.loader.loadJson(configpath, this.loadJson);
+    };
+
+    this.update = function () {
+    };
+};
+
+encophys.point = function () {
+
+    this.init = function (material, mass, heat) {
+        this.material=material;
+        this.position=2;
+        this.mass=mass;
+        this.heat=heat;
+        this.energy=0;
     };
 };
