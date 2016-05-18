@@ -80,6 +80,11 @@ var MainLayer = cc.Layer.extend({
     onClick : function(){
         if(g_gamestate==1) {
             this.getChildByTag(TagOfLayer.animation).onJump();
+            //if (g_enp.state==encophys.PAUSE) {
+                //g_enp.changeState (encophys.RUN);
+            //}else {
+                //g_enp.changeState (encophys.PAUSE);
+            //}
         }
         if(g_gamestate==0){
             cc.log("==game started");

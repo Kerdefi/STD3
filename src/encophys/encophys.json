@@ -1,5 +1,8 @@
 {
-  "timestep":50,
+  "timestep":1,
+  "maxspeed":50,
+  "minspeed":50,
+  "limits":{"x":[-100,100],"y":[-100,100]},
   "materials":{
     "stone":{
         "stiffness":1,
@@ -25,4 +28,3 @@
     }
   }
 }
-
