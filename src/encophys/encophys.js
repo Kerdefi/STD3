@@ -22,14 +22,14 @@ encophys.world = function () {
         this.maxspeed = data.maxspeed;
         this.minspeed = data.minspeed;
         this.limits = data.limits;
+        cc.director.getScheduler().unscheduleAllCallbacksForTarget(this);
+        cc.director.getScheduler().scheduleCallbackForTarget(this,this.update,this.timestep,cc.REPEAT_FOREVER,false);
+        cc.director.getScheduler().pauseTarget(this);
     }.bind(this);
 
     //configpath = string
     this.init = function (configpath) {
         cc.loader.loadJson(configpath, this.loadJson);
-        //trouver une autre fonction !
-        cc.director.getScheduler().scheduleCallbackForTarget(this,this.update,this.timestep,10,true);
-        cc.director.getScheduler().pauseTarget(this);
     };
 
     this.addPoint = function (point) {
@@ -49,17 +49,18 @@ encophys.world = function () {
     };
 
     this.changeState = function (state) {
-        this.state = state;
-        if (this.state == encophys.RUN || this.state == encophys.REVERSE) {
-            //cc.director.getScheduler().resumeTarget(this);
+        if (this.state == encophys.PAUSE && (state == encophys.RUN || state == encophys.REVERSE)) {
+            this.state = state;
+            cc.director.getScheduler().resumeTarget(this);
         } else {
-            //cc.director.getScheduler().pauseTarget(this);
+            cc.director.getScheduler().pauseTarget(this);
+            this.state = state;
         }
     };
 
     this.update = function () {
-        //time check
-        cc.log("update is comming");
+        this.step = this.step + 1;
+        cc.log("Update is comming " + this.step);
     };
 };
 
