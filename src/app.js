@@ -61,7 +61,7 @@ var MainLayer = cc.Layer.extend({
         this.labelBonus.setPosition(cc.p(20, 330));
         this.addChild(this.labelBonus,99,100);
 
-        cc.audioEngine.playMusic(res.music_mp3, true);
+        //cc.audioEngine.playMusic(res.music_mp3, true);
         cc.audioEngine.setEffectsVolume(0.1);
 
         this.scheduleUpdate();
@@ -87,12 +87,11 @@ var MainLayer = cc.Layer.extend({
             }
         }
         if(g_gamestate==0){
-            cc.log("==game started");
-            this.getChildByTag(TagOfLayer.background).onPlay();
-            this.getChildByTag(TagOfLayer.ground).onPlay();
-            this.getChildByTag(TagOfLayer.decoration).onPlay();
-            this.getChildByTag(TagOfLayer.bonus).onPlay();
-            this.getChildByTag(TagOfLayer.animation).onPlay();
+            //this.getChildByTag(TagOfLayer.background).onPlay();
+            //this.getChildByTag(TagOfLayer.ground).onPlay();
+            //this.getChildByTag(TagOfLayer.decoration).onPlay();
+            //this.getChildByTag(TagOfLayer.bonus).onPlay();
+            //this.getChildByTag(TagOfLayer.animation).onPlay();
 
             this.labelLevel = new cc.LabelTTF("Niveau : Amis Mineurs", "Helvetica", 12);
             this.labelLevel.setColor(cc.color(0,0,0));//black color
@@ -117,11 +116,30 @@ var MainLayer = cc.Layer.extend({
             menuItemPlay.setPosition(buttonpos);
             this.addChild(menu,98,200);
 
+            //Test physic
+            g_enp.addPoint(new encophys.point ("stone",1,new cc.math.Vec2(winsize.width / 2,winsize.height / 2),0));
+            g_enp.addForcesgravitydir(new encophys.forcegravitydir(9.8,new cc.math.Vec2(0,-1)));
+
+            cc.log(g_enp.forcesgravitydir[0]);
+
+            var testheart = new cc.Sprite(res.heart_png);
+            testheart.setAnchorPoint(0, 0);
+            testheart.setPosition(g_enp.points[0].position.x, g_enp.points[0].position.y);
+            testheart.texture.setAliasTexParameters(false);
+            this.addChild(testheart,0,42);
+
+            cc.log(g_enp.points[0]);
+
             g_gamestate = 1 ;
         }
     },
 
     update:function () {
+
+        //Test Physic
+        if(g_gamestate == 1){
+            this.getChildByTag(42).setPosition(g_enp.points[0].position.x,g_enp.points[0].position.y);
+        }
 
         //Test fin de jeu
         if(this.getChildByTag(TagOfLayer.background).getChildByTag(0).getPositionX() < -3119 && g_gamestate == 1){

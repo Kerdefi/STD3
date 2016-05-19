@@ -1,5 +1,5 @@
 {
-  "timestep":1,
+  "timestep":0.02,
   "maxspeed":50,
   "minspeed":50,
   "limits":{"x":[-100,100],"y":[-100,100]},
