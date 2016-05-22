@@ -1,5 +1,6 @@
 //TODO move the init to loader
 //TODO collision
+//TODO automove
 
 var encophys = encophys || {};
 
@@ -73,7 +74,8 @@ encophys.world = function () {
     };
 
     this.removeForce = function (force) {
-        this.forces.slice(this.forces.indexOf(force), 1);
+        cc.log(this.forces.indexOf(force));
+        this.forces.splice(this.forces.indexOf(force), 1);
     };
 
     this.update = function () {
@@ -91,7 +93,7 @@ encophys.world = function () {
             this.forces[i].life+=this.framestep;
             if(this.forces[i].life>=this.booms[this.forces[i].type].duration) {
                 this.removeForce(this.forces[i]);
-                if(i=0) { break; } else {i--;}
+                if(i==0) { break; } else {i--;}
             }
         }
 
@@ -190,12 +192,12 @@ encophys.world = function () {
         this.map[2][15] = new encophys.point
         ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
         this.mapIddle[2][15]=false;
-        this.linkH[2][15]=20;
+        this.linkH[2][15]=5;
 
         this.map[1][15] = new encophys.point
         ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
         this.mapIddle[1][15]=false;
-        this.linkH[1][15]=0.5;
+        this.linkH[1][15]=5;
 
         this.map[0][15] = new encophys.point
         ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
