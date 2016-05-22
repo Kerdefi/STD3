@@ -117,18 +117,23 @@ var MainLayer = cc.Layer.extend({
             this.addChild(menu,98,200);
 
             //Test physic
-            g_enp.addPoint(new encophys.point ("stone",1,new cc.math.Vec2(winsize.width / 2,winsize.height / 2),0));
-            g_enp.addForcesgravitydir(new encophys.forcegravitydir(9.8,new cc.math.Vec2(0,-1)));
+            g_enp.populate ();
+            var i = 0;
+            var j = 0;
 
-            cc.log(g_enp.forcesgravitydir[0]);
-
-            var testheart = new cc.Sprite(res.heart_png);
-            testheart.setAnchorPoint(0, 0);
-            testheart.setPosition(g_enp.points[0].position.x, g_enp.points[0].position.y);
-            testheart.texture.setAliasTexParameters(false);
-            this.addChild(testheart,0,42);
-
-            cc.log(g_enp.points[0]);
+            for (i = 0 ; i < g_enp.size.x ; i++) {
+                for (j = 0 ; j < g_enp.size.y ; j++) {
+                    var testheart = new cc.Sprite(res.dirtMid_png);
+                    testheart.setAnchorPoint(0, 0);
+                    testheart.setPosition(200+i*10, 100+j*10);
+                    testheart.setScale(0.15,0.15);
+                    testheart.texture.setAliasTexParameters(false);
+                    if(g_enp.map[i][j]==null) {
+                        testheart.visible=false;
+                    }
+                    this.addChild(testheart,0,1000+i+j*1000);
+                }
+            }
 
             g_gamestate = 1 ;
         }
@@ -138,7 +143,20 @@ var MainLayer = cc.Layer.extend({
 
         //Test Physic
         if(g_gamestate == 1){
-            this.getChildByTag(42).setPosition(g_enp.points[0].position.x,g_enp.points[0].position.y);
+            var i = 0;
+            var j = 0;
+
+            for (i = 0 ; i < g_enp.size.x ; i++) {
+                for (j = 0 ; j < g_enp.size.y ; j++) {
+                    if(!g_enp.mapIddle[i][j]) {
+                        if(g_enp.map[i][j]==null) {
+                            this.getChildByTag(1000+i+j*1000).visible=false;
+                        } else {
+                            this.getChildByTag(1000+i+j*1000).visible=true;
+                        }
+                    }
+                }
+            }
         }
 
         //Test fin de jeu
