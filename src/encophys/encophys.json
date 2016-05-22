@@ -3,7 +3,7 @@
   "maxspeed":100,
   "maxheat":1000,
   "gravity":10,
-  "size":{"x":10,"y":20},
+  "size":{"x":20,"y":30},
   "materials":{
     "stone":{
         "mass":5,
@@ -15,6 +15,16 @@
         "burnheat":5000,
         "meltheat":500,
         "meltmatter":"lava"
+    }
+  },
+  "booms":{
+    "standard":{
+        "maxdiameter":5,
+        "growth":0.5,
+        "force":5,
+        "heat":300,
+        "damage":50,
+        "duration":1000
     }
   }
 }

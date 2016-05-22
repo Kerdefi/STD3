@@ -125,13 +125,13 @@ var MainLayer = cc.Layer.extend({
                 for (j = 0 ; j < g_enp.size.y ; j++) {
                     var testheart = new cc.Sprite(res.dirtMid_png);
                     testheart.setAnchorPoint(0, 0);
-                    testheart.setPosition(200+i*10, 100+j*10);
+                    testheart.setPosition(200+i*10, 50+j*10);
                     testheart.setScale(0.15,0.15);
                     testheart.texture.setAliasTexParameters(false);
                     if(g_enp.map[i][j]==null) {
                         testheart.visible=false;
                     }
-                    this.addChild(testheart,0,1000+i+j*1000);
+                    this.addChild(testheart,1000,1000+i+j*1000);
                 }
             }
 

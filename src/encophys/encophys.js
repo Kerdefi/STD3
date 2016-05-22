@@ -1,6 +1,5 @@
 //TODO move the init to loader
-//TODO ajouter un mapisiddle pour optimiser
-//TODO utiliser le material
+//TODO collision
 
 var encophys = encophys || {};
 
@@ -14,10 +13,12 @@ encophys.world = function () {
     this.maxspeed = 0;
     this.framestep = 0;
     this.gravity = 0;
+    this.forces = [];
 
     //Callback to load json config file
     this.loadJson = function (error, data) {
         this.materials = data.materials;
+        this.booms = data.booms;
         this.maxspeed = data.maxspeed;
         this.size = data.size;
         this.framestep = data.framestep;
@@ -67,12 +68,32 @@ encophys.world = function () {
         }
     };
 
+    this.addForce = function (force) {
+        this.forces.push (force);
+    };
+
+    this.removeForce = function (force) {
+        this.forces.slice(this.forces.indexOf(force), 1);
+    };
+
     this.update = function () {
         var i = 0;
         var j = 0;
+        var k = 0;
         var calc = new cc.math.Vec2(0, 0);
+        var calcB = new cc.math.Vec2(0, 0);
 
         //Update les forces d'explosion
+        for (i = 0 ; i < this.forces.length ; i++) {
+            if(this.forces[i].life<=this.booms[this.forces[i].type].maxdiameter) {
+                this.forces[i].diameter+=this.booms[this.forces[i].type].growth*this.framestep;
+            }
+            this.forces[i].life+=this.framestep;
+            if(this.forces[i].life>=this.booms[this.forces[i].type].duration) {
+                this.removeForce(this.forces[i]);
+                if(i=0) { break; } else {i--;}
+            }
+        }
 
         //Reset le statut des points et les passe en iddle
         for (i = 0 ; i < this.size.x ; i++) {
@@ -92,20 +113,46 @@ encophys.world = function () {
                         //Pour un point libre
                         //ajoute la gravité
                         this.map[i][j].speed.y -= this.gravity*this.framestep ;
+
                         //ajoute les forces d'explosion et la chaleur d'explosion
-
-                        //ajoute le frottement
-                        calc.x = -this.map[i][j].speed.x*this.materials[this.map[i][j].material].friction ;
-                        calc.y = -this.map[i][j].speed.y*this.materials[this.map[i][j].material].friction ;
-                        this.map[i][j].speed.add (calc);
-
-                        //limite la vitesse
-                        if((this.map[i][j].speed.x + this.map[i][j].speed.y)>this.maxspeed) {
-                            this.map[i][j].speed.scale(this.maxspeed/(this.map[i][j].speed.x + this.map[i][j].speed.y));
+                        for (k = 0 ; k < this.forces.length ; k++) {
+                            calcB.x=calc.x=i-this.forces[k].position.x;
+                            calc.x=Math.abs(calc.x);
+                            calcB.y=calc.y=j-this.forces[k].position.y;
+                            calc.y=Math.abs(calc.y);
+                            if(calc.x<this.forces[k].diameter && calc.y<this.forces[k].diameter) {
+                                if ((calcB.x+calcB.y)==0) {
+                                    calcB.x=1;
+                                }
+                                calcB.normalize();
+                                calcB.scale(this.booms[this.forces[k].type].force*this.framestep);
+                                this.map[i][j].speed.add(calcB);
+                            }
                         }
                     } else {
                         //Pour un point lié
                         //ajoute les forces d'explosion (sur les link) et la chaleur d'explosion
+                        for (k = 0 ; k < this.forces.length ; k++) {
+                            calcB.x=calc.x=i-this.forces[k].position.x;
+                            calc.x=Math.abs(calc.x);
+                            calcB.y=calc.y=j-this.forces[k].position.y;
+                            calc.y=Math.abs(calc.y);
+                            if(calc.x<this.forces[k].diameter && calc.y<this.forces[k].diameter) {
+                                calcB.normalize();
+                                calcB = this.applyDamage (i,j,this.booms[this.forces[k].type].force*this.framestep,calcB);
+                                this.map[i][j].speed.add(calcB);
+                            }
+                        }
+                    }
+
+                    //ajoute le frottement
+                    calc.x = -this.map[i][j].speed.x*this.materials[this.map[i][j].material].friction ;
+                    calc.y = -this.map[i][j].speed.y*this.materials[this.map[i][j].material].friction ;
+                    this.map[i][j].speed.add (calc);
+
+                    //limite la vitesse
+                    if((this.map[i][j].speed.x + this.map[i][j].speed.y)>this.maxspeed) {
+                        this.map[i][j].speed.scale(this.maxspeed/(this.map[i][j].speed.x + this.map[i][j].speed.y));
                     }
                 }
             }
@@ -129,21 +176,113 @@ encophys.world = function () {
         this.map[5][15] = new encophys.point
         ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
         this.mapIddle[5][15]=false;
+
+        this.map[4][15] = new encophys.point
+        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
+        this.mapIddle[4][15]=false;
+        this.linkH[4][15]=20;
+
+        this.map[3][15] = new encophys.point
+        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
+        this.mapIddle[3][15]=false;
+        this.linkH[3][15]=20;
+
         this.map[2][15] = new encophys.point
         ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
         this.mapIddle[2][15]=false;
+        this.linkH[2][15]=20;
+
+        this.map[1][15] = new encophys.point
+        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
+        this.mapIddle[1][15]=false;
+        this.linkH[1][15]=0.5;
+
         this.map[0][15] = new encophys.point
         ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
         this.mapIddle[0][15]=false;
         this.linkH[0][15]=50;
+
+        //forcetest
+        this.addForce (new encophys.force("standard",new cc.math.Vec2(0, 14)));
     };
 
-    this.isConnected = function (x,y) {
-        //test si un point est encore connecté
+    this.applyDamage = function (i,j,force,residual) {
+        residual.normalize();
+        var sumlink = this.linkH[i][j] + this.linkH[i+1][j] + this.linkV[i][j] + this.linkV[i][j+1] ;
+        if(force-sumlink>0) {
+            residual.scale(force-sumlink);
 
-        //Détruit tous les liens non connectés
+            if (i-1>=0 && this.linkH[i][j]>0) {if (this.map[i-1][j]!=null) {if(this.isConnected (i-1,j,0,i,j)) {this.destroyLinks(i-1,j,0);}}}
+            if (i+1<this.size.x && this.linkH[i+1][j]>0) {if (this.map[i+1][j]!=null) {if(this.isConnected (i+1,j,0,i,j)) {this.destroyLinks(i+1,j,0);}}}
+            if (j-1>=0 && this.linkV[i][j]) {if (this.map[i][j-1]!=null) {if(this.isConnected (i,j-1,0,i,j)) {this.destroyLinks(i,j-1,0);}}}
+            if (j+1<this.size.y && this.linkV[i][j+1]) {if (this.map[i][j+1]!=null) {if(this.isConnected (i,j+1,0,i,j)) {this.destroyLinks(i,j+1,0);}}}
+
+            this.linkH[i][j]=0;
+            this.linkH[i+1][j]=0;
+            this.linkV[i][j]=0;
+            this.linkV[i][j+1]=0;
+
+        } else {
+            residual.scale(0);
+            this.linkH[i][j]-=force*this.linkH[i][j]/sumlink;
+            this.linkH[i+1][j]-=force*this.linkH[i+1][j]/sumlink;
+            this.linkV[i][j]-=force*this.linkV[i][j]/sumlink;
+            this.linkV[i][j+1]-=force*this.linkV[i][j+1]/sumlink;
+        }
+        //Retourne un vecteur avec la force non répartie
+        return residual;
+    };
+
+    this.isConnected = function (i,j,round, oi, oj) {
+        //Suite à une déconnexion de point, test si ses voisins sont encore connectés (récursif jusqu'à 20)
+        if(round>20) return false;
+
+        var connected = false ;
+
+        if (i-1>=0 && this.linkH[i][j]>0 && i-1 !=oi) {connected = connected || this.isConnected (i-1,j,round+1);}
+        else {if (i-1>=0 && this.linkH[i][j]>0){connected = true;}}
+
+        if (i+1<this.size.x && this.linkH[i+1][j]>0 && i+1 !=oi) {connected = connected || this.isConnected (i+1,j,round+1);}
+
+        else {if (i+1>=0 && this.linkH[i+1][j]>0 && j-1 !=oj){connected = true;}}
+        if (j-1>=0 && this.linkV[i][j]>0) {connected = connected || this.isConnected (i,j-1,round+1);}
+        else {if (j-1>=0 && this.linkV[i][j]>0){connected = true;}}
+
+        if (j+1<this.size.y && this.linkV[i][j+1]>0 && j+1 !=oj) {connected = connected || this.isConnected (i,j+1,round+1);}
+        else {if (j+1>=0 && this.linkV[i][j+1]>0){connected = true;}}
 
         //Retourne le résultat
+        return connected;
+    };
+
+    this.destroyLinks = function (i,j, round) {
+        if(round>20) return true;
+        if (i-1>=0 && this.linkH[i][j]>0) {
+            this.linkH[i][j]=0;
+            this.destroyLinks (i-1,j,round+1);
+        }
+        if (i+1<this.size.x && this.linkH[i+1][j]>0) {
+            this.linkH[i+1][j]=0;
+            this.destroyLinks (i+1,j,round+1);
+        }
+        if (j-1>=0 && this.linkV[i][j]>0) {
+            this.linkV[i][j]=0;
+            this.destroyLinks (i,j-1,round+1);
+        }
+        if (j+1<this.size.y && this.linkV[i][j+1]>0) {
+            this.linkV[i][j+1]=0;
+            this.destroyLinks (i,j+1,round+1);
+        }
+    };
+
+    this.collision = function (x1,y1,x2,y2) {
+        //Brule la vitesse sur les link et les détruits
+
+        //Transfère la vitesse à l'autre point
+
+        //Réalise les dégats
+
+        //Détruit les points
     };
 
     this.moveblock = function(i,j) {
@@ -188,6 +327,7 @@ encophys.world = function () {
                         } else {
                             //collision
                             this.collision (i+k,j+l,i+k+calc.x,j+l);
+                            break;
                             //si le point n'a pas survécu, fin de la boucle A UPDATER
                             if (this.map[i][j] == null) {
                                 break;
@@ -210,6 +350,7 @@ encophys.world = function () {
                         } else {
                             //collision
                             this.collision (i+k,j+l,i+k,j+l+calc.y);
+                            break;
                             //si le point n'a pas survécu, fin de la boucle A UPDATER
                             if (this.map[i][j] == null) {
                                 break;
@@ -224,16 +365,6 @@ encophys.world = function () {
                 }
             }
         }
-    };
-
-    this.collision = function (x1,y1,x2,y2) {
-        //Brule la vitesse sur les link et les détruits
-
-        //Transfère la vitesse à l'autre point
-
-        //Réalise les dégats
-
-        //Détruit les points
     };
 };
 
@@ -250,12 +381,10 @@ encophys.point = function (material, heat, health, damage) {
     this.isUpdated = false ;
 };
 
-encophys.force = function (position, diameter, strenght, heat, duration, damage) {
+encophys.force = function (type, position) {
+    this.type = type ;
     this.position = position ;
-    this.diameter = diameter ;
-    this.strenght = strenght ;
-    this.heat = heat ;
-    this.damage = damage ;
-    this.duration = duration ;
+    this.diameter = 1 ;
+    this.life = 0;
 };
 
