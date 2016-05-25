@@ -1,5 +1,4 @@
 //TODO move the init to loader
-//TODO debug collision (pas de destruction de link)
 //TODO automove
 //TODO populate
 //TODO AI Monster
@@ -120,8 +119,12 @@ encophys.world = function () {
                 if(this.map[i][j]!=null) {
                     if(this.linkH[i][j]<=0 && this.linkH[i + 1][j]<=0 && this.linkV[i][j]<=0 && this.linkV[i][j+1]<=0) {
                         //Pour un point libre
-                        //ajoute la gravité
-                        this.map[i][j].speed.y -= this.gravity*this.framestep ;
+                        //ajoute la gravité (uniquement s'il n'y a pas de point fixe en dessous)
+                        if(j-1>0) {
+                            if(this.map[i][j-1]==null || Math.abs(this.map[i][j].speed.y) >= 1 || Math.abs(this.map[i][j-1].speed.y) != 0) {
+                                this.map[i][j].speed.y -= this.gravity*this.framestep ;
+                            }
+                        }
 
                         //ajoute les forces d'explosion et la chaleur d'explosion
                         for (k = 0 ; k < this.forces.length ; k++) {
@@ -199,9 +202,9 @@ encophys.world = function () {
         ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
         this.mapIddle[5][15]=false;
 
-        this.map[3][18] = new encophys.point
+        this.map[3][22] = new encophys.point
         ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
-        this.mapIddle[5][15]=false;
+        this.mapIddle[3][29]=false;
 
         this.map[4][15] = new encophys.point
         ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
@@ -209,12 +212,12 @@ encophys.world = function () {
         this.linkH[4][15]=20;
 
         this.map[3][15] = new encophys.point
-        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
+        ("wood",this.materials["wood"].baseheat,this.materials["wood"].basehealth,0);
         this.mapIddle[3][15]=false;
         this.linkH[3][15]=20;
 
         this.map[2][15] = new encophys.point
-        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
+        ("wood",this.materials["wood"].baseheat,this.materials["wood"].basehealth,0);
         this.mapIddle[2][15]=false;
         this.linkH[2][15]=5;
 
@@ -229,7 +232,7 @@ encophys.world = function () {
         this.linkH[0][15]=50;
 
         //forcetest
-        this.addForce (new encophys.force("standard",new cc.math.Vec2(0, 14)));
+        //this.addForce (new encophys.force("standard",new cc.math.Vec2(0, 14)));
     };
 
     this.applyDamage = function (i,j,force,residual) {
@@ -279,7 +282,7 @@ encophys.world = function () {
         else {if (i-1>=0 && this.linkH[i][j]>0){this.connected = true;}}
 
         if (i+1<this.size.x && this.linkH[i+1][j]>0 && !this.mapConnected[i+1][j]) {this.connected = this.connected || this.isConnected (i+1,j,round+1);}
-        else {if (i+1>=0 && this.linkH[i+1][j]>0 && j-1 !=oj){this.connected = true;}}
+        else {if (i+1>=0 && this.linkH[i+1][j]>0){this.connected = true;}}
 
         if (j-1>=0 && this.linkV[i][j]>0 && !this.mapConnected[i][j-1]) {this.connected = this.connected || this.isConnected (i,j-1,round+1);}
         else {if (j-1>=0 && this.linkV[i][j]>0){this.connected = true;}}
@@ -312,23 +315,42 @@ encophys.world = function () {
     };
 
     this.collision = function (x1,y1,x2,y2) {
-        //Détecte s'il s'agit d'une fausse collision (v1<v2) (fait perdre un tour de mvt au point en mvt)
-        if (this.map[x1][y1].speed.x*(x2-x1)-this.map[x2][y2].speed.x*(x2-x1)<=0 || this.map[x1][y1].speed.y*(y2-y1)-this.map[x2][y2].speed.y*(y2-y1)<=0) {
-            //Marque le point bougé en isUpdate = false pour la deuxième passe
-            this.map[x1][y1].isUpdated=false;
-            return false ;
+
+        var residual = new cc.math.Vec2(x2-x1, y2-y1);
+
+        //Détecte si le deuxième point est connecté
+        if(this.linkH[x2][y2]<=0 && this.linkH[x2 + 1][y2]<=0 && this.linkV[x2][y2]<=0 && this.linkV[x2][y2+1]<=0) {
+            //Détecte s'il s'agit d'une fausse collision (v1<v2)
+            if (this.map[x1][y1].speed.x*(x2-x1)-this.map[x2][y2].speed.x*(x2-x1)<=0 && (x2-x1)!=0 || this.map[x1][y1].speed.y*(y2-y1)-this.map[x2][y2].speed.y*(y2-y1)<=0 && (y2-y1) != 0) {
+                //Marque le point bougé en isUpdate = false pour la deuxième passe
+                this.map[x1][y1].isUpdated=false;
+                return false ;
+            }
+            if(x2-x1!=0) {
+                residual.x = (this.map[x1][y1].speed.x*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].speed.x*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
+            } else {
+                residual.y = (this.map[x1][y1].speed.y*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].speed.y*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
+            }
+        } else {
+            //Brule la vitesse sur les link et les détruits
+            //N*s = m/s*kg = V * kg
+            var force = (this.map[x1][y1].speed.x*(x2-x1)+this.map[x1][y1].speed.y*(y2-y1))*this.materials[this.map[x1][y1].material].mass;
+            this.applyDamage (x2,y2,force,residual);
+            residual.scale(1/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass));
         }
 
-        //Brule la vitesse sur les link et les détruits
-        //N*s = m/s*kg = V * kg
-        var force = (this.map[x1][y1].speed.x*(x2-x1)+this.map[x1][y1].speed.y*(y2-y1))*this.materials[this.map[x1][y1].material].mass;
-        var residual = new cc.math.Vec2(x2-x1, y2-y1);
-        this.applyDamage (x2,y2,force,residual);
+        //Reprogramme pour le move si les points sonten mvt
+        if(Math.abs(residual.x) >= 0 || Math.abs(residual.y) != 0) {
+            this.map[x1][y1].isUpdated=false;
+            this.map[x2][y2].isUpdated=false;
+        }
 
         //Transfère la vitesse entre les points
-        residual.scale(1/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass));
+        if(x2-x1==0) {this.map[x1][y1].speed.y=0; this.map[x2][y2].speed.y=0;}
+        else {this.map[x1][y1].speed.x=0; this.map[x2][y2].speed.x=0;}
+
         this.map[x2][y2].speed.add(residual);
-        this.map[x1][y1].speed.add(residual.scale(-1));
+        this.map[x1][y1].speed.add(residual);
 
         //Réalise les dégats
         this.map[x2][y2].health-=this.map[x1][y1].damage;
@@ -378,11 +400,10 @@ encophys.world = function () {
                             calcS.x-=calc.x;
                             k+=calc.x;
                         } else {
-                            break;
                             //collision
                             this.collision (i+k,j+l,i+k+calc.x,j+l);
                             //Intègre le mouvement déjà réalisé dans unusedspeed (pour le deuxième passage) et arrête le calcul sur x
-                            calcS.x=calcS.x-this.map[i+k][j+l].unusedSpeed.x-this.map[i+k][j+l].speed.x;
+                            calc.x=0;
                         }
                     }
                     if(calc.y*calcS.y>=1) {
@@ -399,11 +420,10 @@ encophys.world = function () {
                             calcS.y-=calc.y;
                             l+=calc.y;
                         } else {
-                            break;
                             //collision
                             this.collision (i+k,j+l,i+k,j+l+calc.y);
                             //Intègre le mouvement déjà réalisé dans unusedspeed (pour le deuxième passage) et arrête le calcul sur y
-                            calcS.y=calcS.y-this.map[i+k][j+l].unusedSpeed.y-this.map[i+k][j+l].speed.y;
+                            calc.y=0;
                         }
                     }
                 }
