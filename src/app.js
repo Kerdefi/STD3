@@ -153,6 +153,8 @@ var MainLayer = cc.Layer.extend({
                             this.getChildByTag(1000+i+j*1000).visible=false;
                         } else {
                             this.getChildByTag(1000+i+j*1000).visible=true;
+                            if(g_enp.map[i][j].material=="lava") this.getChildByTag(1000+i+j*1000).setTexture (res.snowMid_png);
+                            else this.getChildByTag(1000+i+j*1000).setTexture (res.dirtMid_png);
                         }
                     }
                 }

@@ -1,12 +1,14 @@
 {
   "framestep":0.03,
   "maxspeed":100,
-  "maxheat":1000,
+  "maxheat":3000,
   "gravity":10,
+  "heatTransferRate":0.2,
+  "burnrate":0.2,
   "size":{"x":20,"y":30},
   "materials":{
     "stone":{
-        "mass":500,
+        "mass":10,
         "automove":0,
         "friction":0.05,
         "linkstrenght":50,
@@ -14,10 +16,11 @@
         "baseheat":20,
         "burnheat":5000,
         "meltheat":500,
-        "meltmatter":"lava"
+        "meltmatter":"lava",
+        "gravity":true
     },
     "wood":{
-        "mass":5,
+        "mass":1,
         "automove":0,
         "friction":0.05,
         "linkstrenght":10,
@@ -25,7 +28,20 @@
         "baseheat":10,
         "burnheat":200,
         "meltheat":500,
-        "meltmatter":"lava"
+        "meltmatter":"lava",
+        "gravity":true
+    },
+    "lava":{
+        "mass":10,
+        "automove":0.5,
+        "friction":0.05,
+        "linkstrenght":0,
+        "basehealth":20,
+        "baseheat":2000,
+        "burnheat":5000,
+        "meltheat":500,
+        "meltmatter":"stone",
+        "gravity":true
     }
   },
   "booms":{
