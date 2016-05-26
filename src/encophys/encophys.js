@@ -275,8 +275,10 @@ encophys.world = function () {
 
         this.mapConnected[i][j] = true;
 
-        if (i-1>=0 && this.linkH[i][j]>0 && !this.mapConnected[i-1][j]) {this.connected = this.connected || this.isConnected (i-1,j,round+1);}
-        else {if (i-1>=0 && this.linkH[i][j]>0){this.connected = true;}}
+        if (i-1>=0) {
+            if(this.linkH[i][j]>0 && !this.mapConnected[i-1][j]) {this.connected = this.connected || this.isConnected (i-1,j,round+1);}
+        }
+        else {if (i-1=0 && this.linkH[i][j]>0){this.connected = true;}}
 
         if (i+1<this.size.x && this.linkH[i+1][j]>0 && !this.mapConnected[i+1][j]) {this.connected = this.connected || this.isConnected (i+1,j,round+1);}
         else {if (i+1>=0 && this.linkH[i+1][j]>0 && j-1 !=oj){this.connected = true;}}
@@ -312,6 +314,7 @@ encophys.world = function () {
     };
 
     this.collision = function (x1,y1,x2,y2) {
+        //BUG tout part en fausse collision (c'est nul au moins d'un côté)
         //Détecte s'il s'agit d'une fausse collision (v1<v2) (fait perdre un tour de mvt au point en mvt)
         if (this.map[x1][y1].speed.x*(x2-x1)-this.map[x2][y2].speed.x*(x2-x1)<=0 || this.map[x1][y1].speed.y*(y2-y1)-this.map[x2][y2].speed.y*(y2-y1)<=0) {
             //Marque le point bougé en isUpdate = false pour la deuxième passe
@@ -319,12 +322,14 @@ encophys.world = function () {
             return false ;
         }
 
+        //BUG la force est à réduire si le point avance
         //Brule la vitesse sur les link et les détruits
         //N*s = m/s*kg = V * kg
         var force = (this.map[x1][y1].speed.x*(x2-x1)+this.map[x1][y1].speed.y*(y2-y1))*this.materials[this.map[x1][y1].material].mass;
         var residual = new cc.math.Vec2(x2-x1, y2-y1);
         this.applyDamage (x2,y2,force,residual);
 
+        //BUG l'idée c'est que la vitesse sur l'axe soit égal à residual
         //Transfère la vitesse entre les points
         residual.scale(1/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass));
         this.map[x2][y2].speed.add(residual);
@@ -382,6 +387,7 @@ encophys.world = function () {
                             //collision
                             this.collision (i+k,j+l,i+k+calc.x,j+l);
                             //Intègre le mouvement déjà réalisé dans unusedspeed (pour le deuxième passage) et arrête le calcul sur x
+                            //Quid BUG ?
                             calcS.x=calcS.x-this.map[i+k][j+l].unusedSpeed.x-this.map[i+k][j+l].speed.x;
                         }
                     }
@@ -403,6 +409,7 @@ encophys.world = function () {
                             //collision
                             this.collision (i+k,j+l,i+k,j+l+calc.y);
                             //Intègre le mouvement déjà réalisé dans unusedspeed (pour le deuxième passage) et arrête le calcul sur y
+                            //Quid BUG ?
                             calcS.y=calcS.y-this.map[i+k][j+l].unusedSpeed.y-this.map[i+k][j+l].speed.y;
                         }
                     }
