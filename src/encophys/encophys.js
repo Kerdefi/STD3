@@ -1,7 +1,8 @@
 //TODO move the init to loader
-//TODO Bug le populate n'est pas équilibré - BUG sur les liens x+1 (tout se destroy)
+//TODO Menu
+//TODO Graphics et réduire résolution
+//TODO Smooth ? smooth position lors d'un move mettre un smooth factor dépendant du speed
 //TODO AI Monster
-//TODO Graphics
 //TODO Projectiles
 //TODO player management
 
@@ -33,6 +34,7 @@ encophys.world = function () {
         this.burnrate = data.burnrate;
         this.maxheat = data.maxheat;
         this.minspeed = data.gravity/2*data.framestep/2;
+        this.roundlimit = data.roundlimit;
 
         var i = 0;
         var j = 0;
@@ -342,7 +344,7 @@ encophys.world = function () {
 
     this.isConnected = function (i,j,round) {
         //Suite à une déconnexion de point, test si ses voisins sont encore connectés (récursif jusqu'à 20)
-        if(round>20) return false;
+        if(round>this.roundlimit) return false;
         if(round==0) {
             this.connected = false;
             //Reseting la table de passage
@@ -369,7 +371,7 @@ encophys.world = function () {
     };
 
     this.destroyLinks = function (i,j, round) {
-        if(round>20) return true;
+        if(round>this.roundlimit) return true;
 
         if (this.linkH[i][j]>0) {
             this.linkH[i][j]=0;
@@ -539,7 +541,6 @@ encophys.world = function () {
     };
 };
 
-//material = string ; mass = number ; position = Vec2 ; heat = number
 encophys.point = function (material, heat, health, damage) {
     "use strict";
     this.material = material;
@@ -547,7 +548,7 @@ encophys.point = function (material, heat, health, damage) {
     this.health = health ;
     this.speed = new cc.math.Vec2(0, 0);
     this.unusedSpeed = new cc.math.Vec2(0, 0);
-    this.position = new cc.math.Vec2(0, 0);
+    this.smoothposition = new cc.math.Vec2(0, 0);
     this.damage = damage ;
     //Sert à savoir si le point a bougé
     this.isUpdated = false ;

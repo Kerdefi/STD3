@@ -4,9 +4,10 @@ var gameLayer = cc.Layer.extend({
         this.offsetblock = 0;
         this.space = 0;
         this.minspace = 5;
-        this.layer = [["stone"],["void","stone","lava"]] ;
+        this.layer = [["stone"],["void","stone","stone","stone","stone","lava"]] ;
         this.lenghtx1 = 0 ;
         this.lenghtx2 = 0;
+        this.minlenght = 30 ;
         this.maxlenght = 40 ;
         this.spawnproba = 0.5
 
@@ -87,27 +88,6 @@ var gameLayer = cc.Layer.extend({
         }
         g_enp.linkH[g_enp.size.x].splice(0,1);
         g_enp.linkH[g_enp.size.x].push(0);
-
-        /*for (i = 0 ; i < g_enp.size.x ; i++) {
-            for (j = 0 ; j < g_enp.size.y-1 ; j++) {
-                g_enp.map[i][j] = g_enp.map[i][j+1];
-                g_enp.mapIddle[i][j] = false;
-            }
-            g_enp.map[i][g_enp.size.y-1] = null;
-            g_enp.mapIddle[i][g_enp.size.y-1] = false;
-        }
-        for (i = 0 ; i < g_enp.size.x+1 ; i++) {
-            for (j = 0 ; j < g_enp.size.y-1 ; j++) {
-                g_enp.linkH[i][j] = g_enp.linkH[i][j+1];
-            }
-            g_enp.linkH[i][g_enp.size.y-1] = 0;
-        }
-        for (i = 0 ; i < g_enp.size.x ; i++) {
-            for (j = 0 ; j < g_enp.size.y ; j++) {
-                g_enp.linkV[i][j] = g_enp.linkV[i][j+1];
-            }
-            g_enp.linkV[i][g_enp.size.y] = 0;
-        }*/
     },
 
     populate:function() {
@@ -116,8 +96,10 @@ var gameLayer = cc.Layer.extend({
 
         //Fixe la forme de la couche
         if(this.space == 0) {
-            this.lenghtx1 = Math.round(Math.random()*this.maxlenght + 1);
-            this.lenghtx2 = Math.round(g_enp.size.x - (Math.random()*this.maxlenght-this.lenghtx1 + 1));
+            this.lenghtx1 = Math.round(Math.random()*(this.maxlenght-this.minlenght+1)) + this.minlenght;
+            this.lenghtx2 = Math.round(Math.random()*this.lenghtx1);
+            this.lenghtx1 -= this.lenghtx2;
+            this.lenghtx2 = g_enp.size.x - this.lenghtx2;
         }
         //Créée la couche
         if(this.space < this.layer.length) {
