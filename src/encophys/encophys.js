@@ -1,5 +1,5 @@
 //TODO move the init to loader
-//TODO Bug le populate n'est pas équilibré - BUG sur les liens x+1
+//TODO Bug le populate n'est pas équilibré - BUG sur les liens x+1 (tout se destroy)
 //TODO AI Monster
 //TODO Graphics
 //TODO Projectiles

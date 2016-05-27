@@ -7,7 +7,7 @@ var gameLayer = cc.Layer.extend({
         this.layer = [["stone"],["void","stone","lava"]] ;
         this.lenghtx1 = 0 ;
         this.lenghtx2 = 0;
-        this.maxlenght = 15 ;
+        this.maxlenght = 40 ;
         this.spawnproba = 0.5
 
         this.setAnchorPoint(0,0);
@@ -25,8 +25,8 @@ var gameLayer = cc.Layer.extend({
             for (j = 0 ; j <= g_enp.size.y-1 ; j++) {
                 var testheart = new cc.Sprite(res.dirtMid_png);
                 testheart.setAnchorPoint(0, 0);
-                testheart.setPosition(200+i*g_blocksize, 50+j*g_blocksize);
-                testheart.setScale(0.05,0.05);
+                testheart.setPosition(20+i*g_blocksize, 20+j*g_blocksize);
+                testheart.setScale(1/14,1/14);
                 testheart.texture.setAliasTexParameters(false);
                 if(g_enp.map[i][j]==null) {
                     testheart.visible=true;
@@ -85,7 +85,7 @@ var gameLayer = cc.Layer.extend({
             g_enp.linkV[i].splice(0,1);
             g_enp.linkV[i].push(0);
         }
-        g_enp.linkH[g_enp.size.x].splice(0);
+        g_enp.linkH[g_enp.size.x].splice(0,1);
         g_enp.linkH[g_enp.size.x].push(0);
 
         /*for (i = 0 ; i < g_enp.size.x ; i++) {

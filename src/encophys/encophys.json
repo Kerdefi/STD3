@@ -5,7 +5,7 @@
   "gravity":10,
   "heatTransferRate":0.2,
   "burnrate":0.2,
-  "size":{"x":80,"y":120},
+  "size":{"x":60,"y":60},
   "materials":{
     "stone":{
         "mass":10,
