@@ -1,6 +1,5 @@
 //TODO move the init to loader
-//TODO populate
-//TODO scroll down
+//TODO Bug le populate n'est pas équilibré - BUG sur les liens x+1
 //TODO AI Monster
 //TODO Graphics
 //TODO Projectiles
@@ -295,48 +294,21 @@ encophys.world = function () {
         this.mapIddle[i][j]=false;
     };
 
-    this.populate = function () {
+    this.addPoint = function (x,y,material, damage) {
         //remplit le tableau par le haut
-        this.map[5][15] = new encophys.point
-        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
-        this.mapIddle[5][15]=false;
+        this.map[x][y] = new encophys.point (material,this.materials[material].baseheat,this.materials[material].basehealth,damage);
 
-        this.map[3][22] = new encophys.point
-        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
-        this.mapIddle[3][22]=false;
+        if(x-1 >= 0 && this.map[x-1][y] != null && this.map[x-1][y].material == material || x==0) {this.linkH[x][y]=this.materials[material].linkstrenght;}
 
-        this.map[4][15] = new encophys.point
-        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
-        this.mapIddle[4][15]=false;
-        this.linkH[4][15]=1;
+        if(x+1 < this.size.x && this.map[x+1][y] != null && this.map[x+1][y].material == material || x==this.size.x-1) {this.linkH[x+1][y]=this.materials[material].linkstrenght;}
 
-        this.map[3][15] = new encophys.point
-        ("wood",this.materials["wood"].baseheat,this.materials["wood"].basehealth,0);
-        this.mapIddle[3][15]=false;
-        this.linkH[3][15]=1;
+        if(y-1 >= 0 && this.map[x][y-1] != null && this.map[x][y-1].material == material || y==0) {this.linkV[x][y]=this.materials[material].linkstrenght;}
 
-        this.map[2][16] = new encophys.point("lava",this.materials["lava"].baseheat,this.materials["lava"].basehealth,0);
-        this.mapIddle[2][16]=false;
-        this.map[1][16] = new encophys.point("lava",this.materials["lava"].baseheat,this.materials["lava"].basehealth,0);
-        this.mapIddle[1][16]=false;
+        //if(y+1 < this.size.y && this.map[x][y+1] != null && this.map[x][y+1].material == material || y==this.size.y-1) {this.linkV[x][y+1]=this.materials[material].linkstrenght;}
 
-        this.map[2][15] = new encophys.point
-        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
-        this.mapIddle[2][15]=false;
-        this.linkH[2][15]=5;
+        if(!this.isConnected (x,y)) this.destroyLinks(x,y);
 
-        this.map[1][15] = new encophys.point
-        ("stone",this.materials["stone"].baseheat,this.materials["stone"].basehealth,0);
-        this.mapIddle[1][15]=false;
-        this.linkH[1][15]=5;
-
-        this.map[0][15] = new encophys.point
-        ("wood",this.materials["wood"].baseheat,this.materials["wood"].basehealth,0);
-        this.mapIddle[0][15]=false;
-        this.linkH[0][15]=5;
-
-        //forcetest
-        //this.addForce (new encophys.force("standard",new cc.math.Vec2(0, 14)));
+        this.mapIddle[x][y]=false;
     };
 
     this.applyDamage = function (i,j,force,residual) {

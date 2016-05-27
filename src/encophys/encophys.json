@@ -5,13 +5,13 @@
   "gravity":10,
   "heatTransferRate":0.2,
   "burnrate":0.2,
-  "size":{"x":20,"y":30},
+  "size":{"x":80,"y":120},
   "materials":{
     "stone":{
         "mass":10,
         "automove":0,
         "friction":0.05,
-        "linkstrenght":50,
+        "linkstrenght":5,
         "basehealth":100,
         "baseheat":20,
         "burnheat":5000,

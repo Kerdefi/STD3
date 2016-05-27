@@ -18,6 +18,7 @@
         "src/ground.js",
         "src/animation.js",
         "src/decoration.js",
+        "src/game.js",
         "src/encophys/encophys.js"
     ]
 }

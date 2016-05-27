@@ -7,6 +7,8 @@ var g_gamestate = 0;
 var g_snowcount = 5;
 var g_sound = 1;
 var g_enp ;
+var g_blocksize = 5;
+var g_blockspeed = 1;
 
 if(typeof TagOfLayer == "undefined") {
     var TagOfLayer = {};
@@ -17,4 +19,5 @@ if(typeof TagOfLayer == "undefined") {
     TagOfLayer.ground = 4;
     TagOfLayer.decoration = 5;
     TagOfLayer.bonus = 6;
+    TagOfLayer.game = 7;
 };
