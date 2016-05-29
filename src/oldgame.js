@@ -1,4 +1,4 @@
-var MainLayer = cc.Layer.extend({
+var mainLayer = cc.Layer.extend({
     ctor : function(){
         //1. call super class's ctor function
         this._super();
@@ -21,7 +21,7 @@ var MainLayer = cc.Layer.extend({
         this.addChild(new decorationLayer(),2,TagOfLayer.decoration);
         this.addChild(new bonusLayer(),3,TagOfLayer.bonus);
         this.addChild(new frameLayer(),100,TagOfLayer.frame);
-        this.addChild(new gameLayer(),1000,TagOfLayer.game);
+        this.addChild(new blockLayer(),1000,TagOfLayer.game);
 
         //4.
         cc.MenuItemFont.setFontSize(60);
@@ -226,11 +226,11 @@ var MainLayer = cc.Layer.extend({
     }
 });
 
-var MainScene = cc.Scene.extend({
+var mainScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
-        var layer = new MainLayer();
+        var layer = new mainLayer();
         layer.init();
-        this.addChild(layer,0,TagOfLayer.Menu);
+        this.addChild(layer,0,0);
     }
 });

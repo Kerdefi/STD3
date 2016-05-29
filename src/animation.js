@@ -91,10 +91,19 @@ var animationLayer = cc.Layer.extend({
 
         //WALK
         var frameNico = [];
-        for (i = 0; i < 4; i++) {
+        /*for (i = 0; i < 4; i++) {
             str = "n_walk1_Frame_" + i + ".png";
             frame = cc.spriteFrameCache.getSpriteFrame(str);
             frameNico.push(frame);
+        }*/
+        str = "n_walk1_Frame_" + i + ".png";
+        i = 0 ;
+        frame = cc.spriteFrameCache.getSpriteFrame(str);
+        while (frame!=null) {
+            str = "n_walk1_Frame_" + i + ".png";
+            frame = cc.spriteFrameCache.getSpriteFrame(str);
+            if(frame!=null) frameNico.push(frame);
+            i++;
         }
         //3.create a animation with the spriteframe array along with a period time
         var animNicoMarche = new cc.Animation(frameNico, 0.15);

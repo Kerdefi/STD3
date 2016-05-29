@@ -1,10 +1,8 @@
+//TODO Menu (main - explication et loading - pause - endgame et highscore)
+//Test sprites
+//TODO Mécanique de jeu (call-back destruction, AI monster, projectiles, scores, levels, player management)
+//TODO Hightscore
 //TODO move the init to loader
-//TODO Menu
-//TODO Graphics et réduire résolution
-//TODO Smooth ? smooth position lors d'un move mettre un smooth factor dépendant du speed
-//TODO AI Monster
-//TODO Projectiles
-//TODO player management
 
 
 var encophys = encophys || {};
@@ -72,6 +70,35 @@ encophys.world = function () {
         cc.loader.loadJson(configpath, this.loadJson);
     };
 
+    //remets le moteur en état initial
+    this.reset = function () {
+        this.changeState(encophys.PAUSE);
+        //Efface tous les tableaux
+        var i = 0;
+        var j = 0;
+        for (i = 0; i < this.size.x; i++) {
+            for (j = 0 ; j < this.size.y ; j++) {
+                this.map[i][j]=null;
+                this.mapConnected[i][j]=false;
+                this.mapIddle[i][j]=true;
+            }
+        }
+        for (i = 0 ; i < this.size.x + 1 ; i++) {
+            for (j = 0 ; j < this.size.y ; j++) {
+                this.linkH[i][j]=0;
+            }
+        }
+        for (i = 0 ; i < this.size.x ; i++) {
+            for (j = 0 ; j < this.size.y + 1 ; j++) {
+                this.linkV[i][j]=0;
+            }
+        }
+        for (i = 0; i < this.forces.length ; i++) {
+            this.removeforce (this.forces[i]);
+        }
+    };
+
+    //Modification de l'état du moteur
     this.changeState = function (state) {
         if (this.state == encophys.PAUSE && (state == encophys.RUN)) {
             this.state = state;
@@ -82,15 +109,17 @@ encophys.world = function () {
         }
     };
 
+    //Ajoute une nouvelle force
     this.addForce = function (force) {
         this.forces.push (force);
     };
 
+    //Enlève une force
     this.removeForce = function (force) {
-        cc.log(this.forces.indexOf(force));
         this.forces.splice(this.forces.indexOf(force), 1);
     };
 
+    //Mise à jour du moteur chaque frame
     this.update = function () {
         var i = 0;
         var j = 0;
@@ -195,6 +224,45 @@ encophys.world = function () {
             }
         }
 
+        //Smoothmove (ralenti le décalae discret d'une position)
+        for (i = 0 ; i < this.size.x ; i++) {
+            for (j = 0 ; j < this.size.y ; j++) {
+                if(this.map[i][j]!=null) {
+                    //smoothmove à zéro si un point est à côté
+                    if(i==0 && this.map[i][j].smoothposition.x<0 || i>0 && this.map[i-1][j]!=null && this.map[i][j].smoothposition.x<0)this.map[i][j].smoothposition.x=Math.min(0,this.map[i-1][j].smoothposition.x);
+                    if(i==this.size.x-1 && this.map[i][j].smoothposition.x>0 || i < this.size.x-1 && this.map[i+1][j]!=null && this.map[i][j].smoothposition.x>0)this.map[i][j].smoothposition.x=Math.max(0,this.map[i+1][j].smoothposition.x);
+
+                    //smoothmove à 1 au max
+                    if(Math.abs(this.map[i][j].smoothposition.x)>1)this.map[i][j].smoothposition.x = this.map[i][j].smoothposition.x/Math.abs(this.map[i][j].smoothposition.x);
+
+                    //évol de smooth move
+                    if(this.map[i][j].smoothposition.x != 0) {
+                        k = (Math.abs(this.map[i][j].speed.x)+this.materials[this.map[i][j].material].automove)*this.framestep;
+                        if(Math.abs(this.map[i][j].smoothposition.x) > k) {
+                            this.map[i][j].smoothposition.x *= 1-k/Math.abs(this.map[i][j].smoothposition.x);
+                        } else this.map[i][j].smoothposition.x = 0;
+                        this.mapIddle[i][j]=false;
+                    }
+
+                     //smoothmove à zéro si un point est à côté
+                    if(j==0 && this.map[i][j].smoothposition.y<0 || j>0 && this.map[i][j-1]!=null && this.map[i][j].smoothposition.y<0)this.map[i][j].smoothposition.y=Math.min(0,this.map[i][j-1].smoothposition.y);
+                    if(j==this.size.y-1 && this.map[i][j].smoothposition.y>0 || j < this.size.y-1 && this.map[i][j+1]!=null && this.map[i][j].smoothposition.y>0)this.map[i][j].smoothposition.y=Math.max(0,this.map[i][j+1].smoothposition.y);
+
+                    //smoothmove à 1 au max
+                    if(Math.abs(this.map[i][j].smoothposition.y)>1)this.map[i][j].smoothposition.y = this.map[i][j].smoothposition.y/Math.abs(this.map[i][j].smoothposition.y);
+
+                    //évol de smooth move
+                    if(this.map[i][j].smoothposition.y != 0) {
+                        k = Math.abs(this.map[i][j].speed.y)*this.framestep;
+                        if(Math.abs(this.map[i][j].smoothposition.y) > k) {
+                            this.map[i][j].smoothposition.y *= 1-k/Math.abs(this.map[i][j].smoothposition.y);
+                        } else this.map[i][j].smoothposition.flipY = 0;
+                        this.mapIddle[i][j]=false;
+                    }
+                }
+            }
+        }
+
         //Réalise les échanges de chaleur et étend le feu
         for (i = 0 ; i < this.size.x ; i++) {
             for (j = 0 ; j < this.size.y ; j++) {
@@ -231,6 +299,7 @@ encophys.world = function () {
                     if(this.materials[this.map[i][j].material].meltheat < this.materials[this.map[i][j].material].baseheat && this.materials[this.map[i][j].material].meltheat > this.map[i][j].heat) {
                         //Solidification
                         this.map[i][j].material = this.materials[this.map[i][j].material].meltmatter;
+                        this.map[i][j].smoothposition.x=0;
                         this.mapIddle[i][j]=false;
                     }
 
@@ -241,7 +310,7 @@ encophys.world = function () {
                             this.map[i-1][j].heat = this.materials[this.map[i-1][j].material].burnheat ;
                             this.mapIddle[i-1][j]=false;
                         }
-                        if(i+1>=0 && this.map[i+1][j]!=null && this.materials[this.map[i+1][j].material].burnheat < this.materials[this.map[i+1][j].material].meltheat && Math.random () < this.burnrate*this.framestep) {
+                        if(i+1<this.size.x && this.map[i+1][j]!=null && this.materials[this.map[i+1][j].material].burnheat < this.materials[this.map[i+1][j].material].meltheat && Math.random () < this.burnrate*this.framestep) {
                             this.map[i+1][j].heat = this.materials[this.map[i+1][j].material].burnheat ;
                             this.mapIddle[i+1][j]=false;
                         }
@@ -249,7 +318,7 @@ encophys.world = function () {
                             this.map[i][j-1].heat = this.materials[this.map[i][j-1].material].burnheat ;
                             this.mapIddle[i][j-1]=false;
                         }
-                        if(j+1>=0 && this.map[i][j+1]!=null && this.materials[this.map[i][j+1].material].burnheat < this.materials[this.map[i][j+1].material].meltheat && Math.random () < this.burnrate*this.framestep) {
+                        if(j+1<this.size.y && this.map[i][j+1]!=null && this.materials[this.map[i][j+1].material].burnheat < this.materials[this.map[i][j+1].material].meltheat && Math.random () < this.burnrate*this.framestep) {
                             this.map[i][j+1].heat = this.materials[this.map[i][j+1].material].burnheat ;
                             this.mapIddle[i][j+1]=false;
                         }
@@ -285,17 +354,16 @@ encophys.world = function () {
                 }
             }
         }
-
-        //Toutes les X frames descend tout le tableau et appelle populate
-
     };
 
+    //Détruit un point
     this.destroy = function (i,j) {
         this.map[i][j]=null;
         this.isConnectedInit (i,j);
         this.mapIddle[i][j]=false;
     };
 
+    //Ajoute un point et créée les link adéquats
     this.addPoint = function (x,y,material, damage) {
         //remplit le tableau par le haut
         this.map[x][y] = new encophys.point (material,this.materials[material].baseheat,this.materials[material].basehealth,damage);
@@ -313,6 +381,7 @@ encophys.world = function () {
         this.mapIddle[x][y]=false;
     };
 
+    //Applique les dégats (collisions ou force)
     this.applyDamage = function (i,j,force,residual) {
         residual.normalize();
         var sumlink = this.linkH[i][j] + this.linkH[i+1][j] + this.linkV[i][j] + this.linkV[i][j+1] ;
@@ -330,6 +399,7 @@ encophys.world = function () {
         return residual;
     };
 
+    //Vérifie si un point et connecté - si ce n'est pas le cas détruit les links
     this.isConnectedInit = function (i,j) {
         if (i-1>=0 && this.linkH[i][j]>0) {if (this.map[i-1][j]!=null) {this.linkH[i][j]=0; if(!this.isConnected (i-1,j,0)) {this.destroyLinks(i-1,j,0);}}}
         if (i+1<this.size.x && this.linkH[i+1][j]>0) {if (this.map[i+1][j]!=null) {this.linkH[i+1][j]=0; if(!this.isConnected (i+1,j,0)) {this.destroyLinks(i+1,j,0);}}}
@@ -342,6 +412,7 @@ encophys.world = function () {
         this.linkV[i][j+1]=0;
     };
 
+    //Récursif : avance petit à petit pour chercher une connexion au bord
     this.isConnected = function (i,j,round) {
         //Suite à une déconnexion de point, test si ses voisins sont encore connectés (récursif jusqu'à 20)
         if(round>this.roundlimit) return false;
@@ -370,6 +441,7 @@ encophys.world = function () {
         return this.connected;
     };
 
+    //Détruit tous les links d'un ensemble non connecté
     this.destroyLinks = function (i,j, round) {
         if(round>this.roundlimit) return true;
 
@@ -394,6 +466,7 @@ encophys.world = function () {
         } else {this.linkV[i][j+1]=0;}
     };
 
+    //Brule la vitesse sur les links puis équilibre les vitesses
     this.collision = function (x1,y1,x2,y2,unused) {
         var residual = new cc.math.Vec2(x2-x1, y2-y1);
 
@@ -452,6 +525,7 @@ encophys.world = function () {
         return unused;
     };
 
+    //Déplace un block
     this.moveblock = function(i,j) {
         //Analyse et déplace un élément
         if(this.map[i][j]!=null) {
@@ -461,11 +535,12 @@ encophys.world = function () {
                 var l = 0;
                 var calc = new cc.math.Vec2(0, 0);
                 var calcS = new cc.math.Vec2(0, 0);
+                var calcSS = new cc.math.Vec2(0, 0);
                 calcS.x = (this.map[i][j].unusedSpeed.x+this.map[i][j].speed.x)*this.framestep;
                 calcS.y = (this.map[i][j].unusedSpeed.y+this.map[i][j].speed.y)*this.framestep;
 
                 //Automove
-                if(calcS.x == 0 && this.materials[this.map[i][j].material].automove > 0) {
+                if(calcS.x == 0 && calcS.y == 0 && this.materials[this.map[i][j].material].automove > 0 && this.map[i][j].smoothposition.x==0) {
                     if(i-1 >= 0 && this.map[i-1][j]==null && Math.random () < this.materials[this.map[i][j].material].automove*this.framestep) {
                         calcS.x = -1;
                     } else {
@@ -486,6 +561,8 @@ encophys.world = function () {
                 } else {
                     calc.y = -1 ;
                 }
+                calcSS.x = calcS.x;
+                calcSS.y = calcS.y;
 
                 while ((calc.x*calcS.x>=1) || (calc.y*calcS.y>=1)) {
                     this.mapIddle[i][j]=false;
@@ -524,7 +601,7 @@ encophys.world = function () {
                             l+=calc.y;
                         } else {
                             //collision
-                            calcS = this.collision (i+k,j+l,i+k,j+l+calc.y,calcS.scale(1/this.framestep)).scale(this.framestep)
+                            calcS = this.collision (i+k,j+l,i+k,j+l+calc.y,calcS.scale(1/this.framestep)).scale(this.framestep);
                             //Intègre le mouvement déjà réalisé dans unusedspeed (pour le deuxième passage) et arrête le calcul sur y
                             calc.y=0;
                         }
@@ -534,6 +611,11 @@ encophys.world = function () {
                 if(this.map[i+k][j+l]!=null) {
                     this.map[i+k][j+l].unusedSpeed.x = calcS.x/this.framestep;
                     this.map[i+k][j+l].unusedSpeed.y = calcS.y/this.framestep;
+
+                    //Smoothmove
+                    if(calcS.x != calcSS.x) this.map[i+k][j+l].smoothposition.x = calcS.x - calcSS.x;
+                    if(calcS.y != calcSS.y) this.map[i+k][j+l].smoothposition.y = calcS.y - calcSS.y;
+
                     this.mapIddle[i+k][j+l]=false;
                 }
             }

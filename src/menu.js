@@ -1,0 +1,184 @@
+var MenuLayer = cc.Layer.extend({
+    ctor : function(){
+        //1. call super class's ctor function
+        this._super();
+    },
+    init:function(){
+        var winsize = cc.director.getWinSize();
+
+        //Menu anims and Bkgnd
+        this.addChild(new MenuBack(),1,1);
+        this.addChild(new MenuAnim(),1,1);
+
+        //create a menu and assign onPlay event callback to it
+        cc.spriteFrameCache.addSpriteFrames(res.menu_plist);
+        var buttonpos = cc.p(winsize.width / 2, winsize.height * 2 / 3);
+        var menuItemPlay = new cc.MenuItemSprite(
+            new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("menu/buttons/start_n.png")), // normal state image
+            new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("menu/buttons/start_s.png")), // select state image
+            this.onClick, this);
+
+        var menu = new cc.Menu(menuItemPlay);
+        menu.setAnchorPoint(0,0);
+        menu.setPosition(0,0);
+        menuItemPlay.setScale(0.75,0.75);
+        menuItemPlay.setAnchorPoint(0.5,0.5);
+        menuItemPlay.setPosition(buttonpos);
+
+        this.addChild(menu,98,200);
+
+        buttonpos = cc.p(winsize.width / 2, winsize.height * 1 / 2);
+        this.labelBonus = new cc.LabelTTF("High score", "Helvetica", 40);
+        this.labelBonus.setColor(cc.color(255,255,255));//black color
+        this.labelBonus.setAnchorPoint(cc.p(0.5, 0.5));
+        this.labelBonus.setPosition(buttonpos);
+        this.addChild(this.labelBonus,99,100);
+
+        //Init EncoPhys
+        g_enp = new encophys.world ();
+        g_enp.init ("src/encophys/encophys.json");
+    },
+    update:function (){
+    },
+    onClick:function (){
+        cc.director.runScene(new gameScene());
+    }
+});
+
+var MenuBack = cc.Layer.extend({
+    ctor : function(){
+        //1. call super class's ctor function
+        this._super();
+        this.init();
+    },
+    init:function(){
+        //create the background image and position it at the center of screen
+        var spriteBG = new cc.Sprite(res.bkgnd_png);
+        //spriteBG.texture.setAliasTexParameters(false);
+        spriteBG.setAnchorPoint(0,0);
+        spriteBG.setPosition(0,0);
+        spriteBG.setScale(4,4);
+        this.addChild(spriteBG,0,0);
+
+        var winsize = cc.director.getWinSize();
+        var buttonpos = cc.p(winsize.width / 2, winsize.height * 3/4);
+
+        cc.spriteFrameCache.addSpriteFrames(res.menu_plist);
+        var spriteTitle = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("menu/buttons/start_n.png"));
+        spriteTitle.setAnchorPoint(0.5,0.5);
+        spriteTitle.setPosition(buttonpos);
+        spriteBG.setScale(20,20);
+        this.addChild(spriteTitle,1,1);
+    }
+});
+
+var MenuAnim = cc.Layer.extend({
+    ctor : function(){
+        //1. call super class's ctor function
+        this._super();
+        this.init();
+    },
+    init:function(){
+        this._super();
+
+        //1.Load spreadsheet (joanna)
+        cc.spriteFrameCache.addSpriteFrames(res.menu_plist);
+
+        var frameJoanna = [];
+        var frame = "emptyframe";
+        var str = "menu/joanna/" + i + ".png";
+        var i = 0 ;
+        while (frame!=null) {
+            str = "menu/joanna/" + i + ".png";
+            frame = cc.spriteFrameCache.getSpriteFrame(str);
+            if(frame!=null) frameJoanna.push(frame);
+            i++;
+        }
+        var animJoanna = new cc.Animation(frameJoanna, 0.5);
+
+        //4.wrap the animate action with a repeat forever action
+        this.joannaAction = new cc.RepeatForever(new cc.Animate(animJoanna));
+        this.joannaAction.setTag(10);
+
+        var frameNicolas = [];
+        frame = "emptyframe";
+        str = "menu/nicolas/" + i + ".png";
+        i = 0 ;
+        while (frame!=null) {
+            str = "menu/nicolas/" + i + ".png";
+            frame = cc.spriteFrameCache.getSpriteFrame(str);
+            if(frame!=null) frameNicolas.push(frame);
+            i++;
+        }
+        var animNicolas = new cc.Animation(frameNicolas, 0.5);
+
+        //4.wrap the animate action with a repeat forever action
+        this.nicolasAction = new cc.RepeatForever(new cc.Animate(animNicolas));
+        this.nicolasAction.setTag(20);
+
+
+        cc.spriteFrameCache.addSpriteFrames(res.divers_plist);
+        var frameStorm = [];
+        frame = "emptyframe";
+        str = "divers/storm/" + i + ".png";
+        i = 3 ;
+        while (frame!=null) {
+            str = "divers/storm/" + i + ".png";
+            frame = cc.spriteFrameCache.getSpriteFrame(str);
+            if(frame!=null) frameStorm.push(frame);
+            i++;
+        }
+        while (i>=3) {
+            str = "divers/storm/" + i + ".png";
+            frame = cc.spriteFrameCache.getSpriteFrame(str);
+            if(frame!=null) frameStorm.push(frame);
+            i--;
+        }
+        var animStorm = new cc.Animation(frameStorm, 0.15);
+
+        //4.wrap the animate action with a repeat forever action
+        this.stormAction = new cc.RepeatForever(new cc.Animate(animStorm));
+        this.stormAction.setTag(20);
+
+
+        //Créée les sprites
+
+        var spriteJoanna = new cc.Sprite(res.heart_png);
+        spriteJoanna.texture.setAliasTexParameters(false);
+        spriteJoanna.flippedX = true;
+        spriteJoanna.setAnchorPoint(0,0);
+        spriteJoanna.setPosition(g_joannaStartX,135);
+        this.addChild(spriteJoanna,0,1);
+
+        this.getChildByTag(1).runAction(this.joannaAction);
+
+        var spriteNicolas = new cc.Sprite(res.heart_png);
+        spriteNicolas.texture.setAliasTexParameters(false);
+        spriteNicolas.setAnchorPoint(0,0);
+        spriteNicolas.setPosition(g_nicolasStartX,135);
+        this.addChild(spriteNicolas,0,2);
+
+        this.getChildByTag(2).runAction(this.nicolasAction);
+
+        var spriteStorm = new cc.Sprite(res.heart_png);
+        spriteStorm.texture.setAliasTexParameters(false);
+        spriteStorm.setAnchorPoint(0,0);
+        spriteStorm.setScale(3,3);
+        spriteStorm.setPosition(g_joannaStartX,135);
+        this.addChild(spriteStorm,0,3);
+
+        this.getChildByTag(3).runAction(this.stormAction);
+    }
+});
+
+var MenuScene = cc.Scene.extend({
+    onEnter:function () {
+        this._super();
+        var layer = new MenuLayer();
+        layer.init();
+        this.addChild(layer,0,TagOfLayer.Menu);
+    },
+    onExit:function () {
+        this._super();
+    }
+});

@@ -6,7 +6,7 @@
   "heatTransferRate":0.2,
   "burnrate":0.2,
   "roundlimit":40,
-  "size":{"x":60,"y":60},
+  "size":{"x":38,"y":52},
   "materials":{
     "stone":{
         "mass":10,

@@ -13,12 +13,13 @@
     "jsList" : [
         "src/globals.js",
         "src/resource.js",
-        "src/app.js",
+        "src/game.js",
         "src/background.js",
         "src/ground.js",
         "src/animation.js",
         "src/decoration.js",
-        "src/game.js",
-        "src/encophys/encophys.js"
+        "src/block.js",
+        "src/encophys/encophys.js",
+        "src/menu.js"
     ]
 }

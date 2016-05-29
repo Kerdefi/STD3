@@ -1,4 +1,13 @@
 var res = {
+    //new
+    bkgnd_png : "res/new/bkgnd.png",
+    menu_png  : "res/new/menu.png",
+    menu_plist : "res/new/menu.plist",
+    divers_png  : "res/new/divers.png",
+    divers_plist : "res/new/divers.plist",
+    tiles_png  : "res/new/tiles.png",
+    tiles_plist : "res/new/tiles.plist",
+    //old
     STD_Back_png : "res/STD_Back.png",
     start_n_png : "res/start_n.png",
     start_s_png : "res/start_s.png",
@@ -29,7 +38,15 @@ var res = {
 };
 
 var g_resources = [
-    //image
+    //new
+    res.bkgnd_png,
+    res.menu_png,
+    res.menu_plist,
+    res.divers_png,
+    res.divers_plist,
+    res.tiles_png,
+    res.tiles_plist,
+    //old
     res.STD_Back_png,
     res.start_n_png,
     res.start_s_png,
