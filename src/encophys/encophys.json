@@ -3,8 +3,8 @@
   "maxspeed":100,
   "maxheat":3000,
   "gravity":10,
-  "heatTransferRate":0.2,
-  "burnrate":0.2,
+  "heatTransferRate":0.05,
+  "burnrate":0.4,
   "roundlimit":40,
   "size":{"x":38,"y":52},
   "materials":{
@@ -12,47 +12,83 @@
         "mass":10,
         "automove":0,
         "friction":0.05,
-        "linkstrenght":5,
+        "linkstrenght":30,
         "basehealth":100,
         "baseheat":20,
         "burnheat":5000,
-        "meltheat":500,
+        "meltheat":1000,
         "meltmatter":"lava",
         "gravity":true
     },
     "wood":{
+        "mass":3,
+        "automove":0,
+        "friction":0.1,
+        "linkstrenght":10,
+        "basehealth":50,
+        "baseheat":20,
+        "burnheat":300,
+        "meltheat":600,
+        "meltmatter":"lava",
+        "gravity":true
+    },
+    "grass":{
         "mass":1,
         "automove":0,
-        "friction":0.05,
-        "linkstrenght":10,
-        "basehealth":20,
-        "baseheat":10,
+        "friction":0.2,
+        "linkstrenght":1,
+        "basehealth":5,
+        "baseheat":20,
         "burnheat":200,
         "meltheat":500,
         "meltmatter":"lava",
         "gravity":true
     },
-    "lava":{
-        "mass":10,
-        "automove":0.5,
+    "water":{
+        "mass":5,
+        "automove":0.8,
         "friction":0.05,
         "linkstrenght":0,
-        "basehealth":20,
+        "basehealth":50,
+        "baseheat":20,
+        "burnheat":100,
+        "meltheat":0,
+        "meltmatter":"ice",
+        "gravity":true
+    },
+    "ice":{
+        "mass":5,
+        "automove":0,
+        "friction":0.05,
+        "linkstrenght":10,
+        "basehealth":50,
+        "baseheat":-50,
+        "burnheat":5000,
+        "meltheat":0,
+        "meltmatter":"water",
+        "gravity":true
+    },
+    "lava":{
+        "mass":10,
+        "automove":0.4,
+        "friction":0.05,
+        "linkstrenght":0,
+        "basehealth":100,
         "baseheat":2000,
         "burnheat":5000,
-        "meltheat":500,
+        "meltheat":1000,
         "meltmatter":"stone",
         "gravity":true
     }
   },
   "booms":{
     "standard":{
-        "maxdiameter":5,
+        "maxdiameter":15,
         "growth":0.5,
-        "force":10,
-        "heat":300,
-        "damage":50,
-        "duration":2
+        "force":20,
+        "heat":500,
+        "damage":5,
+        "duration":20000
     }
   }
 }

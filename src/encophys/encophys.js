@@ -1,3 +1,5 @@
+//Revoir estion du burn
+//Corriger bugs
 //TODO Menu (main - explication et loading - pause - endgame et highscore)
 //Test sprites
 //TODO Mécanique de jeu (call-back destruction, AI monster, projectiles, scores, levels, player management)
@@ -94,7 +96,7 @@ encophys.world = function () {
             }
         }
         for (i = 0; i < this.forces.length ; i++) {
-            this.removeforce (this.forces[i]);
+            this.removeForce (this.forces[i]);
         }
     };
 
@@ -157,7 +159,8 @@ encophys.world = function () {
                         //Pour un point libre
                         //ajoute la gravité (uniquement s'il n'y a pas de point fixe en dessous)
                         if(j-1>0) {
-                            if(this.map[i][j-1]==null || Math.abs(this.map[i][j].speed.y) >= 1 || Math.abs(this.map[i][j-1].speed.y) != 0) {
+                            //if(this.map[i][j-1]==null || Math.abs(this.map[i][j].speed.y) >= 1 || Math.abs(this.map[i][j-1].speed.y) != 0) {
+                            if(this.map[i][j-1]==null) {
                                 if(this.materials[this.map[i][j].material].gravity) this.map[i][j].speed.y -= this.gravity*this.framestep ;
                             }
                         }
@@ -229,8 +232,9 @@ encophys.world = function () {
             for (j = 0 ; j < this.size.y ; j++) {
                 if(this.map[i][j]!=null) {
                     //smoothmove à zéro si un point est à côté
-                    if(i==0 && this.map[i][j].smoothposition.x<0 || i>0 && this.map[i-1][j]!=null && this.map[i][j].smoothposition.x<0)this.map[i][j].smoothposition.x=Math.min(0,this.map[i-1][j].smoothposition.x);
-                    if(i==this.size.x-1 && this.map[i][j].smoothposition.x>0 || i < this.size.x-1 && this.map[i+1][j]!=null && this.map[i][j].smoothposition.x>0)this.map[i][j].smoothposition.x=Math.max(0,this.map[i+1][j].smoothposition.x);
+                    if(i==0 && this.map[i][j].smoothposition.x<0 || i>0 && this.map[i-1][j]!=null && this.map[i][j].smoothposition.x<0)this.map[i][j].smoothposition.x= (i==0 ? 0 : Math.min(0,this.map[i-1][j].smoothposition.x));
+
+                    if(i==this.size.x-1 && this.map[i][j].smoothposition.x>0 || i < this.size.x-1 && this.map[i+1][j]!=null && this.map[i][j].smoothposition.x>0)this.map[i][j].smoothposition.x= (i==this.size.x-1 ? 0 : Math.min(0,this.map[i+1][j].smoothposition.x));
 
                     //smoothmove à 1 au max
                     if(Math.abs(this.map[i][j].smoothposition.x)>1)this.map[i][j].smoothposition.x = this.map[i][j].smoothposition.x/Math.abs(this.map[i][j].smoothposition.x);
@@ -245,20 +249,23 @@ encophys.world = function () {
                     }
 
                      //smoothmove à zéro si un point est à côté
-                    if(j==0 && this.map[i][j].smoothposition.y<0 || j>0 && this.map[i][j-1]!=null && this.map[i][j].smoothposition.y<0)this.map[i][j].smoothposition.y=Math.min(0,this.map[i][j-1].smoothposition.y);
-                    if(j==this.size.y-1 && this.map[i][j].smoothposition.y>0 || j < this.size.y-1 && this.map[i][j+1]!=null && this.map[i][j].smoothposition.y>0)this.map[i][j].smoothposition.y=Math.max(0,this.map[i][j+1].smoothposition.y);
+                    if(j==0 && this.map[i][j].smoothposition.y<0 || j>0 && this.map[i][j-1]!=null && this.map[i][j].smoothposition.y<0)this.map[i][j].smoothposition.y= (j==0 ? 0 : Math.min(0,this.map[i][j-1].smoothposition.y));
+
+                    if(j==this.size.y-1 && this.map[i][j].smoothposition.y>0 || j < this.size.y-1 && this.map[i][j+1]!=null && this.map[i][j].smoothposition.y>0)this.map[i][j].smoothposition.y = (j==this.size.y-1 ? 0 : Math.min(0,this.map[i][j+1].smoothposition.y));
 
                     //smoothmove à 1 au max
                     if(Math.abs(this.map[i][j].smoothposition.y)>1)this.map[i][j].smoothposition.y = this.map[i][j].smoothposition.y/Math.abs(this.map[i][j].smoothposition.y);
 
                     //évol de smooth move
                     if(this.map[i][j].smoothposition.y != 0) {
-                        k = Math.abs(this.map[i][j].speed.y)*this.framestep;
+                        k = (Math.abs(this.map[i][j].speed.y)+this.gravity*this.framestep)*this.framestep;
                         if(Math.abs(this.map[i][j].smoothposition.y) > k) {
                             this.map[i][j].smoothposition.y *= 1-k/Math.abs(this.map[i][j].smoothposition.y);
                         } else this.map[i][j].smoothposition.flipY = 0;
                         this.mapIddle[i][j]=false;
                     }
+                    this.map[i][j].smoothposition.x = 0;
+                    this.map[i][j].smoothposition.y = 0;
                 }
             }
         }
@@ -307,27 +314,33 @@ encophys.world = function () {
                     if(this.map[i][j].heat >= this.materials[this.map[i][j].material].burnheat && this.materials[this.map[i][j].material].burnheat < this.materials[this.map[i][j].material].meltheat) {
                         //Transfert du feu
                         if(i-1>=0 && this.map[i-1][j]!=null && this.materials[this.map[i-1][j].material].burnheat < this.materials[this.map[i-1][j].material].meltheat && Math.random () < this.burnrate*this.framestep) {
-                            this.map[i-1][j].heat = this.materials[this.map[i-1][j].material].burnheat ;
+                            this.map[i-1][j].heat = this.materials[this.map[i-1][j].material].burnheat + 50 ;
                             this.mapIddle[i-1][j]=false;
                         }
                         if(i+1<this.size.x && this.map[i+1][j]!=null && this.materials[this.map[i+1][j].material].burnheat < this.materials[this.map[i+1][j].material].meltheat && Math.random () < this.burnrate*this.framestep) {
-                            this.map[i+1][j].heat = this.materials[this.map[i+1][j].material].burnheat ;
+                            this.map[i+1][j].heat = this.materials[this.map[i+1][j].material].burnheat  + 50  ;
                             this.mapIddle[i+1][j]=false;
                         }
                         if(j-1>=0 && this.map[i][j-1]!=null && this.materials[this.map[i][j-1].material].burnheat < this.materials[this.map[i][j-1].material].meltheat && Math.random () < this.burnrate*this.framestep) {
-                            this.map[i][j-1].heat = this.materials[this.map[i][j-1].material].burnheat ;
+                            this.map[i][j-1].heat = this.materials[this.map[i][j-1].material].burnheat  + 50  ;
                             this.mapIddle[i][j-1]=false;
                         }
                         if(j+1<this.size.y && this.map[i][j+1]!=null && this.materials[this.map[i][j+1].material].burnheat < this.materials[this.map[i][j+1].material].meltheat && Math.random () < this.burnrate*this.framestep) {
-                            this.map[i][j+1].heat = this.materials[this.map[i][j+1].material].burnheat ;
+                            this.map[i][j+1].heat = this.materials[this.map[i][j+1].material].burnheat  + 50  ;
                             this.mapIddle[i][j+1]=false;
                         }
+
+                        this.mapIddle[i][j]=false;
 
                         //Augentation de la chaleur
                         this.map[i][j].heat+=(this.materials[this.map[i][j].material].meltheat-this.materials[this.map[i][j].material].burnheat)*this.burnrate*this.framestep;
 
                         //Destruction si la chaleur dépasse le niveau admis
                         if(this.map[i][j].heat >= this.materials[this.map[i][j].material].meltheat) {
+                            this.destroy (i,j);
+                        }
+                    } else {
+                        if(this.map[i][j].heat >= this.materials[this.map[i][j].material].burnheat) {
                             this.destroy (i,j);
                         }
                     }
@@ -448,22 +461,34 @@ encophys.world = function () {
         if (this.linkH[i][j]>0) {
             this.linkH[i][j]=0;
             if(i-1>=0) this.destroyLinks (i-1,j,round+1);
-        } else {this.linkH[i][j]=0;}
+        } else {
+            if(i-1>0 && this.map[i][j]!=null  && this.map[i-1][j]!=null && this.map[i][j].material!=this.map[i-1][j].material && !this.isConnected(i-1,j)) this.isConnectedInit (i-1,j);
+            this.linkH[i][j]=0;
+        }
 
         if (this.linkH[i+1][j]>0) {
             this.linkH[i+1][j]=0;
             if(i<this.size.x) this.destroyLinks (i+1,j,round+1);
-        } else {this.linkH[i+1][j]=0;}
+        } else {
+            if(i+1<this.size.x-1 && this.map[i][j]!=null  && this.map[i+1][j]!=null && this.map[i][j].material!=this.map[i+1][j].material  && !this.isConnected(i+1,j)) this.isConnectedInit (i+1,j);
+            this.linkH[i+1][j]=0;
+        }
 
         if (this.linkV[i][j]>0) {
             this.linkV[i][j]=0;
             if(j-1>=0) this.destroyLinks (i,j-1,round+1);
-        } else {this.linkV[i][j]=0;}
+        } else {
+            if(j-1>0 && this.map[i][j-1]!=null && this.map[i][j]!=null  && this.map[i][j].material!=this.map[i][j-1].material && !this.isConnected(i,j-1)) this.isConnectedInit (i,j-1);
+            this.linkV[i][j]=0;
+        }
 
         if (this.linkV[i][j+1]>0) {
             this.linkV[i][j+1]=0;
             if (j+1<this.size.y) this.destroyLinks (i,j+1,round+1);
-        } else {this.linkV[i][j+1]=0;}
+        } else {
+            if(j+1<this.size.y-1 && this.map[i][j]!=null && this.map[i][j+1]!=null && this.map[i][j].material!=this.map[i][j+1].material && !this.isConnected(i,j+1)) this.isConnectedInit (i,j+1);
+            this.linkV[i][j+1]=0;
+        }
     };
 
     //Brule la vitesse sur les links puis équilibre les vitesses
