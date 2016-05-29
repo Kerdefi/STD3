@@ -1,5 +1,3 @@
-//Revoir estion du burn
-//Corriger bugs
 //TODO Menu (main - explication et loading - pause - endgame et highscore)
 //Test sprites
 //TODO Mécanique de jeu (call-back destruction, AI monster, projectiles, scores, levels, player management)
@@ -131,7 +129,7 @@ encophys.world = function () {
 
         //Update les forces d'explosion
         for (i = 0 ; i < this.forces.length ; i++) {
-            if(this.forces[i].life<=this.booms[this.forces[i].type].maxdiameter) {
+            if(this.forces[i].diameter<=this.booms[this.forces[i].type].maxdiameter) {
                 this.forces[i].diameter+=this.booms[this.forces[i].type].growth*this.framestep;
             }
             this.forces[i].life+=this.framestep;
@@ -167,11 +165,16 @@ encophys.world = function () {
 
                         //ajoute les forces d'explosion et la chaleur d'explosion
                         for (k = 0 ; k < this.forces.length ; k++) {
+                            //force
                             calcB.x=calc.x=i-this.forces[k].position.x;
                             calc.x=Math.abs(calc.x);
                             calcB.y=calc.y=j-this.forces[k].position.y;
                             calc.y=Math.abs(calc.y);
                             if(calc.x<this.forces[k].diameter && calc.y<this.forces[k].diameter) {
+                                //heat
+                                this.map[i][j].heat+=this.booms[this.forces[k].type].heat*this.framestep;
+                                //damage
+                                this.map[i][j].health-=this.booms[this.forces[k].type].damage*this.framestep;
                                 if ((calcB.x+calcB.y)==0) {
                                     calcB.x=1;
                                 }
@@ -184,11 +187,19 @@ encophys.world = function () {
                         //Pour un point lié
                         //ajoute les forces d'explosion (sur les link) et la chaleur d'explosion
                         for (k = 0 ; k < this.forces.length ; k++) {
+                            //force
                             calcB.x=calc.x=i-this.forces[k].position.x;
                             calc.x=Math.abs(calc.x);
                             calcB.y=calc.y=j-this.forces[k].position.y;
                             calc.y=Math.abs(calc.y);
                             if(calc.x<this.forces[k].diameter && calc.y<this.forces[k].diameter) {
+                                //heat
+                                this.map[i][j].heat+=this.booms[this.forces[k].type].heat*this.framestep;
+                                //damage
+                                this.map[i][j].health-=this.booms[this.forces[k].type].damage*this.framestep;
+                                if ((calcB.x+calcB.y)==0) {
+                                    calcB.x=1;
+                                }
                                 calcB.normalize();
                                 calcB = this.applyDamage (i,j,this.booms[this.forces[k].type].force*this.framestep,calcB);
                                 this.map[i][j].speed.add(calcB);
@@ -202,7 +213,7 @@ encophys.world = function () {
                     this.map[i][j].speed.add (calc);
 
                     //limite la vitesse (max)
-                    if((this.map[i][j].speed.x + this.map[i][j].speed.y)>this.maxspeed) {
+                    if(Math.abs(this.map[i][j].speed.x + this.map[i][j].speed.y)>this.maxspeed) {
                         this.map[i][j].speed.scale(this.maxspeed/(this.map[i][j].speed.x + this.map[i][j].speed.y));
                     }
                     //limite la vitesse (min) à 0,25 * g * timestep
@@ -264,8 +275,8 @@ encophys.world = function () {
                         } else this.map[i][j].smoothposition.flipY = 0;
                         this.mapIddle[i][j]=false;
                     }
-                    this.map[i][j].smoothposition.x = 0;
-                    this.map[i][j].smoothposition.y = 0;
+                    //this.map[i][j].smoothposition.x = 0;
+                    //this.map[i][j].smoothposition.y = 0;
                 }
             }
         }
@@ -381,10 +392,13 @@ encophys.world = function () {
         //remplit le tableau par le haut
         this.map[x][y] = new encophys.point (material,this.materials[material].baseheat,this.materials[material].basehealth,damage);
 
+        if(x-1 >= 0 && this.map[x-1][y] != null || x==0) {this.linkH[x][y]=1}
         if(x-1 >= 0 && this.map[x-1][y] != null && this.map[x-1][y].material == material || x==0) {this.linkH[x][y]=this.materials[material].linkstrenght;}
 
+        if(x+1 < this.size.x && this.map[x+1][y] != null || x==this.size.x-1) {this.linkH[x+1][y]=1}
         if(x+1 < this.size.x && this.map[x+1][y] != null && this.map[x+1][y].material == material || x==this.size.x-1) {this.linkH[x+1][y]=this.materials[material].linkstrenght;}
 
+        if(y-1 >= 0 && this.map[x][y-1] != null || y==0) {this.linkV[x][y]=1}
         if(y-1 >= 0 && this.map[x][y-1] != null && this.map[x][y-1].material == material || y==0) {this.linkV[x][y]=this.materials[material].linkstrenght;}
 
         //if(y+1 < this.size.y && this.map[x][y+1] != null && this.map[x][y+1].material == material || y==this.size.y-1) {this.linkV[x][y+1]=this.materials[material].linkstrenght;}
@@ -415,9 +429,12 @@ encophys.world = function () {
     //Vérifie si un point et connecté - si ce n'est pas le cas détruit les links
     this.isConnectedInit = function (i,j) {
         if (i-1>=0 && this.linkH[i][j]>0) {if (this.map[i-1][j]!=null) {this.linkH[i][j]=0; if(!this.isConnected (i-1,j,0)) {this.destroyLinks(i-1,j,0);}}}
+
         if (i+1<this.size.x && this.linkH[i+1][j]>0) {if (this.map[i+1][j]!=null) {this.linkH[i+1][j]=0; if(!this.isConnected (i+1,j,0)) {this.destroyLinks(i+1,j,0);}}}
-        if (j-1>=0 && this.linkV[i][j]) {if (this.map[i][j-1]!=null) {this.linkV[i][j]=0; if(!this.isConnected (i,j-1,0)) {this.destroyLinks(i,j-1,0);}}}
-        if (j+1<this.size.y && this.linkV[i][j+1]) {if (this.map[i][j+1]!=null) {this.linkV[i][j+1]=0; if(!this.isConnected (i,j+1,0)) {this.destroyLinks(i,j+1,0);}}}
+
+        if (j-1>=0 && this.linkV[i][j]>0) {if (this.map[i][j-1]!=null) {this.linkV[i][j]=0; if(!this.isConnected (i,j-1,0)) {this.destroyLinks(i,j-1,0);}}}
+
+        if (j+1<this.size.y && this.linkV[i][j+1]>0) {if (this.map[i][j+1]!=null) {this.linkV[i][j+1]=0; if(!this.isConnected (i,j+1,0)) {this.destroyLinks(i,j+1,0);}}}
 
         this.linkH[i][j]=0;
         this.linkH[i+1][j]=0;
@@ -461,34 +478,22 @@ encophys.world = function () {
         if (this.linkH[i][j]>0) {
             this.linkH[i][j]=0;
             if(i-1>=0) this.destroyLinks (i-1,j,round+1);
-        } else {
-            if(i-1>0 && this.map[i][j]!=null  && this.map[i-1][j]!=null && this.map[i][j].material!=this.map[i-1][j].material && !this.isConnected(i-1,j)) this.isConnectedInit (i-1,j);
-            this.linkH[i][j]=0;
-        }
+        } else this.linkH[i][j]=0;
 
         if (this.linkH[i+1][j]>0) {
             this.linkH[i+1][j]=0;
-            if(i<this.size.x) this.destroyLinks (i+1,j,round+1);
-        } else {
-            if(i+1<this.size.x-1 && this.map[i][j]!=null  && this.map[i+1][j]!=null && this.map[i][j].material!=this.map[i+1][j].material  && !this.isConnected(i+1,j)) this.isConnectedInit (i+1,j);
-            this.linkH[i+1][j]=0;
-        }
+            if(i<this.size.x+1) this.destroyLinks (i+1,j,round+1);
+        } else this.linkH[i+1][j]=0;
 
         if (this.linkV[i][j]>0) {
             this.linkV[i][j]=0;
             if(j-1>=0) this.destroyLinks (i,j-1,round+1);
-        } else {
-            if(j-1>0 && this.map[i][j-1]!=null && this.map[i][j]!=null  && this.map[i][j].material!=this.map[i][j-1].material && !this.isConnected(i,j-1)) this.isConnectedInit (i,j-1);
-            this.linkV[i][j]=0;
-        }
+        } else this.linkV[i][j]=0;
 
         if (this.linkV[i][j+1]>0) {
             this.linkV[i][j+1]=0;
-            if (j+1<this.size.y) this.destroyLinks (i,j+1,round+1);
-        } else {
-            if(j+1<this.size.y-1 && this.map[i][j]!=null && this.map[i][j+1]!=null && this.map[i][j].material!=this.map[i][j+1].material && !this.isConnected(i,j+1)) this.isConnectedInit (i,j+1);
-            this.linkV[i][j+1]=0;
-        }
+            if (j+1<this.size.y+1) this.destroyLinks (i,j+1,round+1);
+        } else this.linkV[i][j+1]=0;
     };
 
     //Brule la vitesse sur les links puis équilibre les vitesses
@@ -602,6 +607,8 @@ encophys.world = function () {
                         if(this.map[i+k+calc.x][j+l]==null){
                             this.map[i+k+calc.x][j+l] = this.map[i+k][j+l];
                             this.map[i+k][j+l]=null;
+                            //safeuard links
+                            this.linkH[i+k][j+l]=this.linkH[i+k+1][j+l]=this.linkV[i+k][j+l]=this.linkV[i+k][j+l+1]=0;
                             calcS.x-=calc.x;
                             k+=calc.x;
                         } else {
@@ -622,6 +629,8 @@ encophys.world = function () {
                         if(this.map[i+k][j+l+calc.y]==null){
                             this.map[i+k][j+l+calc.y] = this.map[i+k][j+l];
                             this.map[i+k][j+l]=null;
+                            //safeuard links
+                            this.linkH[i+k][j+l]=this.linkH[i+k+1][j+l]=this.linkV[i+k][j+l]=this.linkV[i+k][j+l+1]=0;
                             calcS.y-=calc.y;
                             l+=calc.y;
                         } else {

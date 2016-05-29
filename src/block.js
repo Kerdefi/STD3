@@ -45,7 +45,7 @@ var blockLayer = cc.Layer.extend({
         g_enp.changeState(encophys.RUN);
 
         //Test
-        g_enp.addForce (new encophys.force ("standard", new cc.math.Vec2(20, 20)));
+        g_enp.addForce (new encophys.force ("standard", new cc.math.Vec2(10, 20)));
     },
 
     onUpdate:function () {

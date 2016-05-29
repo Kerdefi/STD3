@@ -1,29 +1,29 @@
 {
   "framestep":0.03,
   "maxspeed":100,
-  "maxheat":3000,
+  "maxheat":5000,
   "gravity":10,
-  "heatTransferRate":0.05,
+  "heatTransferRate":0.1,
   "burnrate":0.4,
-  "roundlimit":40,
+  "roundlimit":80,
   "size":{"x":38,"y":52},
   "materials":{
     "stone":{
         "mass":10,
         "automove":0,
         "friction":0.05,
-        "linkstrenght":30,
+        "linkstrenght":2,
         "basehealth":100,
         "baseheat":20,
         "burnheat":5000,
-        "meltheat":1000,
+        "meltheat":2000,
         "meltmatter":"lava",
         "gravity":true
     },
     "wood":{
         "mass":3,
         "automove":0,
-        "friction":0.1,
+        "friction":0.05,
         "linkstrenght":10,
         "basehealth":50,
         "baseheat":20,
@@ -35,7 +35,7 @@
     "grass":{
         "mass":1,
         "automove":0,
-        "friction":0.2,
+        "friction":0.05,
         "linkstrenght":1,
         "basehealth":5,
         "baseheat":20,
@@ -74,18 +74,18 @@
         "friction":0.05,
         "linkstrenght":0,
         "basehealth":100,
-        "baseheat":2000,
-        "burnheat":5000,
-        "meltheat":1000,
+        "baseheat":4000,
+        "burnheat":6000,
+        "meltheat":2000,
         "meltmatter":"stone",
         "gravity":true
     }
   },
   "booms":{
     "standard":{
-        "maxdiameter":15,
+        "maxdiameter":2,
         "growth":0.5,
-        "force":20,
+        "force":40,
         "heat":500,
         "damage":5,
         "duration":20000
