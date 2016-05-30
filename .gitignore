@@ -8,4 +8,3 @@ tools/bindings-generator/backup/clang-llvm-3.3-pybinding/cindex.py
 /publish/
 /tools/
 /.gitignore
-/res/

@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>nicolas/booms/arrow12/0.png</key>
+            <key>nicolas/booms/arrow1/0.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/booms/arrow12/1.png</key>
+            <key>nicolas/booms/arrow1/1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -30,11 +30,11 @@
                 <key>spriteSourceSize</key>
                 <string>{40,40}</string>
                 <key>textureRect</key>
-                <string>{{945,278},{26,24}}</string>
+                <string>{{903,861},{26,24}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>nicolas/booms/arrow12/2.png</key>
+            <key>nicolas/booms/arrow1/2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -45,11 +45,11 @@
                 <key>spriteSourceSize</key>
                 <string>{40,40}</string>
                 <key>textureRect</key>
-                <string>{{764,992},{28,28}}</string>
+                <string>{{935,902},{28,28}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/booms/arrow12/3.png</key>
+            <key>nicolas/booms/arrow1/3.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -60,11 +60,11 @@
                 <key>spriteSourceSize</key>
                 <string>{40,40}</string>
                 <key>textureRect</key>
-                <string>{{722,969},{40,40}}</string>
+                <string>{{905,489},{40,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/booms/arrow12/4.png</key>
+            <key>nicolas/booms/arrow1/4.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -75,11 +75,11 @@
                 <key>spriteSourceSize</key>
                 <string>{40,40}</string>
                 <key>textureRect</key>
-                <string>{{792,910},{40,40}}</string>
+                <string>{{934,765},{40,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/booms/arrow12/5.png</key>
+            <key>nicolas/booms/arrow1/5.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -90,11 +90,11 @@
                 <key>spriteSourceSize</key>
                 <string>{40,40}</string>
                 <key>textureRect</key>
-                <string>{{834,910},{40,40}}</string>
+                <string>{{893,889},{40,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/booms/arrow12/6.png</key>
+            <key>nicolas/booms/arrow1/6.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -105,11 +105,11 @@
                 <key>spriteSourceSize</key>
                 <string>{40,40}</string>
                 <key>textureRect</key>
-                <string>{{792,952},{40,38}}</string>
+                <string>{{940,683},{40,38}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
-            <key>nicolas/booms/arrow12/7.png</key>
+            <key>nicolas/booms/arrow1/7.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -120,11 +120,11 @@
                 <key>spriteSourceSize</key>
                 <string>{40,40}</string>
                 <key>textureRect</key>
-                <string>{{834,952},{38,38}}</string>
+                <string>{{940,725},{38,38}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/booms/arrow12/8.png</key>
+            <key>nicolas/booms/arrow1/8.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -135,7 +135,142 @@
                 <key>spriteSourceSize</key>
                 <string>{40,40}</string>
                 <key>textureRect</key>
-                <string>{{874,973},{38,38}}</string>
+                <string>{{935,862},{38,38}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/booms/arrow2/0.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,2}</string>
+                <key>spriteSize</key>
+                <string>{26,20}</string>
+                <key>spriteSourceSize</key>
+                <string>{40,40}</string>
+                <key>textureRect</key>
+                <string>{{173,155},{26,20}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/booms/arrow2/1.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,2}</string>
+                <key>spriteSize</key>
+                <string>{26,24}</string>
+                <key>spriteSourceSize</key>
+                <string>{40,40}</string>
+                <key>textureRect</key>
+                <string>{{903,861},{26,24}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>nicolas/booms/arrow2/2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,2}</string>
+                <key>spriteSize</key>
+                <string>{28,28}</string>
+                <key>spriteSourceSize</key>
+                <string>{40,40}</string>
+                <key>textureRect</key>
+                <string>{{935,902},{28,28}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/booms/arrow2/3.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{40,40}</string>
+                <key>spriteSourceSize</key>
+                <string>{40,40}</string>
+                <key>textureRect</key>
+                <string>{{905,489},{40,40}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/booms/arrow2/4.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{40,40}</string>
+                <key>spriteSourceSize</key>
+                <string>{40,40}</string>
+                <key>textureRect</key>
+                <string>{{934,765},{40,40}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/booms/arrow2/5.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{40,40}</string>
+                <key>spriteSourceSize</key>
+                <string>{40,40}</string>
+                <key>textureRect</key>
+                <string>{{893,889},{40,40}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/booms/arrow2/6.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,1}</string>
+                <key>spriteSize</key>
+                <string>{40,38}</string>
+                <key>spriteSourceSize</key>
+                <string>{40,40}</string>
+                <key>textureRect</key>
+                <string>{{940,683},{40,38}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>nicolas/booms/arrow2/7.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{1,1}</string>
+                <key>spriteSize</key>
+                <string>{38,38}</string>
+                <key>spriteSourceSize</key>
+                <string>{40,40}</string>
+                <key>textureRect</key>
+                <string>{{940,725},{38,38}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/booms/arrow2/8.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{1,1}</string>
+                <key>spriteSize</key>
+                <string>{38,38}</string>
+                <key>spriteSourceSize</key>
+                <string>{40,40}</string>
+                <key>textureRect</key>
+                <string>{{935,862},{38,38}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -150,7 +285,7 @@
                 <key>spriteSourceSize</key>
                 <string>{65,70}</string>
                 <key>textureRect</key>
-                <string>{{577,669},{59,70}}</string>
+                <string>{{714,717},{59,70}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -165,9 +300,9 @@
                 <key>spriteSourceSize</key>
                 <string>{65,70}</string>
                 <key>textureRect</key>
-                <string>{{911,831},{63,60}}</string>
+                <string>{{424,525},{63,60}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/booms/arrow3/2.png</key>
             <dict>
@@ -180,7 +315,7 @@
                 <key>spriteSourceSize</key>
                 <string>{65,70}</string>
                 <key>textureRect</key>
-                <string>{{794,718},{65,62}}</string>
+                <string>{{747,951},{65,62}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -195,7 +330,7 @@
                 <key>spriteSourceSize</key>
                 <string>{65,70}</string>
                 <key>textureRect</key>
-                <string>{{911,767},{65,62}}</string>
+                <string>{{778,778},{65,62}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -210,7 +345,7 @@
                 <key>spriteSourceSize</key>
                 <string>{65,70}</string>
                 <key>textureRect</key>
-                <string>{{794,785},{65,62}}</string>
+                <string>{{811,951},{65,62}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -240,7 +375,7 @@
                 <key>spriteSourceSize</key>
                 <string>{51,50}</string>
                 <key>textureRect</key>
-                <string>{{722,873},{41,46}}</string>
+                <string>{{937,534},{41,46}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -255,7 +390,7 @@
                 <key>spriteSourceSize</key>
                 <string>{51,50}</string>
                 <key>textureRect</key>
-                <string>{{722,921},{41,46}}</string>
+                <string>{{937,635},{41,46}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -285,7 +420,7 @@
                 <key>spriteSourceSize</key>
                 <string>{51,50}</string>
                 <key>textureRect</key>
-                <string>{{858,707},{51,48}}</string>
+                <string>{{691,901},{51,48}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -300,9 +435,9 @@
                 <key>spriteSourceSize</key>
                 <string>{51,50}</string>
                 <key>textureRect</key>
-                <string>{{858,855},{49,50}}</string>
+                <string>{{744,900},{49,50}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/booms/spell1/5.png</key>
             <dict>
@@ -315,9 +450,9 @@
                 <key>spriteSourceSize</key>
                 <string>{51,50}</string>
                 <key>textureRect</key>
-                <string>{{858,757},{51,48}}</string>
+                <string>{{917,582},{51,48}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/booms/spell1/6.png</key>
             <dict>
@@ -330,7 +465,7 @@
                 <key>spriteSourceSize</key>
                 <string>{51,50}</string>
                 <key>textureRect</key>
-                <string>{{858,807},{51,46}}</string>
+                <string>{{840,889},{51,46}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -345,9 +480,9 @@
                 <key>spriteSourceSize</key>
                 <string>{51,50}</string>
                 <key>textureRect</key>
-                <string>{{909,893},{49,42}}</string>
+                <string>{{796,900},{49,42}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/booms/spell1/8.png</key>
             <dict>
@@ -360,7 +495,7 @@
                 <key>spriteSourceSize</key>
                 <string>{51,50}</string>
                 <key>textureRect</key>
-                <string>{{956,405},{23,26}}</string>
+                <string>{{955,834},{23,26}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -375,7 +510,7 @@
                 <key>spriteSourceSize</key>
                 <string>{106,100}</string>
                 <key>textureRect</key>
-                <string>{{753,393},{100,94}}</string>
+                <string>{{753,391},{100,94}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -405,9 +540,9 @@
                 <key>spriteSourceSize</key>
                 <string>{106,100}</string>
                 <key>textureRect</key>
-                <string>{{485,469},{96,90}}</string>
+                <string>{{855,391},{96,90}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/booms/spell2/3.png</key>
             <dict>
@@ -435,7 +570,7 @@
                 <key>spriteSourceSize</key>
                 <string>{106,100}</string>
                 <key>textureRect</key>
-                <string>{{811,205},{100,90}}</string>
+                <string>{{811,201},{100,90}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -450,9 +585,9 @@
                 <key>spriteSourceSize</key>
                 <string>{106,100}</string>
                 <key>textureRect</key>
-                <string>{{807,307},{86,84}}</string>
+                <string>{{809,303},{86,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/booms/spell3/0.png</key>
             <dict>
@@ -555,9 +690,9 @@
                 <key>spriteSourceSize</key>
                 <string>{10,24}</string>
                 <key>textureRect</key>
-                <string>{{855,393},{10,24}}</string>
+                <string>{{491,165},{10,24}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/bullets/arrow1/1.png</key>
             <dict>
@@ -570,9 +705,9 @@
                 <key>spriteSourceSize</key>
                 <string>{10,24}</string>
                 <key>textureRect</key>
-                <string>{{663,93},{8,24}}</string>
+                <string>{{93,861},{8,24}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/bullets/arrow2/0.png</key>
             <dict>
@@ -585,7 +720,7 @@
                 <key>spriteSourceSize</key>
                 <string>{18,43}</string>
                 <key>textureRect</key>
-                <string>{{956,433},{18,43}}</string>
+                <string>{{917,531},{18,43}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -600,7 +735,7 @@
                 <key>spriteSourceSize</key>
                 <string>{18,43}</string>
                 <key>textureRect</key>
-                <string>{{481,1008},{12,43}}</string>
+                <string>{{840,937},{12,43}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -615,7 +750,7 @@
                 <key>spriteSourceSize</key>
                 <string>{15,70}</string>
                 <key>textureRect</key>
-                <string>{{337,1005},{15,70}}</string>
+                <string>{{868,709},{15,70}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -630,7 +765,7 @@
                 <key>spriteSourceSize</key>
                 <string>{15,70}</string>
                 <key>textureRect</key>
-                <string>{{409,1005},{15,70}}</string>
+                <string>{{790,715},{15,70}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -645,7 +780,7 @@
                 <key>spriteSourceSize</key>
                 <string>{25,40}</string>
                 <key>textureRect</key>
-                <string>{{269,631},{25,40}}</string>
+                <string>{{273,624},{25,40}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -660,7 +795,7 @@
                 <key>spriteSourceSize</key>
                 <string>{25,40}</string>
                 <key>textureRect</key>
-                <string>{{903,278},{25,40}}</string>
+                <string>{{269,651},{25,40}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -675,7 +810,7 @@
                 <key>spriteSourceSize</key>
                 <string>{25,40}</string>
                 <key>textureRect</key>
-                <string>{{765,861},{25,40}}</string>
+                <string>{{908,931},{25,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -690,7 +825,7 @@
                 <key>spriteSourceSize</key>
                 <string>{25,40}</string>
                 <key>textureRect</key>
-                <string>{{765,903},{25,40}}</string>
+                <string>{{908,973},{25,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -705,9 +840,9 @@
                 <key>spriteSourceSize</key>
                 <string>{25,40}</string>
                 <key>textureRect</key>
-                <string>{{876,907},{25,40}}</string>
+                <string>{{935,807},{25,40}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/bullets/spell1/5.png</key>
             <dict>
@@ -720,9 +855,9 @@
                 <key>spriteSourceSize</key>
                 <string>{25,40}</string>
                 <key>textureRect</key>
-                <string>{{765,945},{25,40}}</string>
+                <string>{{913,834},{25,40}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/bullets/spell2/0.png</key>
             <dict>
@@ -735,9 +870,9 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{727,653},{29,70}}</string>
+                <string>{{418,750},{29,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/bullets/spell2/1.png</key>
             <dict>
@@ -750,9 +885,9 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{730,725},{29,70}}</string>
+                <string>{{786,732},{29,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/bullets/spell2/10.png</key>
             <dict>
@@ -765,9 +900,9 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{761,795},{31,64}}</string>
+                <string>{{514,828},{31,64}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/bullets/spell2/11.png</key>
             <dict>
@@ -780,7 +915,7 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{913,701},{31,66}}</string>
+                <string>{{845,823},{31,66}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -795,7 +930,7 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{911,734},{31,66}}</string>
+                <string>{{835,856},{31,66}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -810,9 +945,9 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{579,636},{31,68}}</string>
+                <string>{{714,951},{31,68}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/bullets/spell2/4.png</key>
             <dict>
@@ -825,9 +960,9 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{122,343},{31,70}}</string>
+                <string>{{947,390},{31,70}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/bullets/spell2/5.png</key>
             <dict>
@@ -840,7 +975,7 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{689,943},{31,70}}</string>
+                <string>{{947,462},{31,70}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -855,9 +990,9 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{742,581},{31,70}}</string>
+                <string>{{122,343},{31,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/bullets/spell2/7.png</key>
             <dict>
@@ -870,9 +1005,9 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{758,653},{31,70}}</string>
+                <string>{{903,269},{31,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/bullets/spell2/8.png</key>
             <dict>
@@ -885,9 +1020,9 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{761,725},{31,68}}</string>
+                <string>{{845,790},{31,68}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/bullets/spell2/9.png</key>
             <dict>
@@ -900,7 +1035,7 @@
                 <key>spriteSourceSize</key>
                 <string>{31,70}</string>
                 <key>textureRect</key>
-                <string>{{728,801},{31,66}}</string>
+                <string>{{875,951},{31,66}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -945,7 +1080,7 @@
                 <key>spriteSourceSize</key>
                 <string>{53,90}</string>
                 <key>textureRect</key>
-                <string>{{924,489},{53,90}}</string>
+                <string>{{363,689},{53,90}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -960,9 +1095,9 @@
                 <key>spriteSourceSize</key>
                 <string>{53,90}</string>
                 <key>textureRect</key>
-                <string>{{318,603},{53,90}}</string>
+                <string>{{580,557},{53,90}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/bullets/spell3/4.png</key>
             <dict>
@@ -975,9 +1110,9 @@
                 <key>spriteSourceSize</key>
                 <string>{53,90}</string>
                 <key>textureRect</key>
-                <string>{{485,651},{53,90}}</string>
+                <string>{{635,557},{53,90}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/bullets/spell3/5.png</key>
             <dict>
@@ -990,7 +1125,7 @@
                 <key>spriteSourceSize</key>
                 <string>{53,90}</string>
                 <key>textureRect</key>
-                <string>{{353,658},{53,88}}</string>
+                <string>{{513,861},{53,88}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1005,7 +1140,7 @@
                 <key>spriteSourceSize</key>
                 <string>{53,90}</string>
                 <key>textureRect</key>
-                <string>{{264,749},{53,90}}</string>
+                <string>{{651,731},{53,90}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1020,7 +1155,7 @@
                 <key>spriteSourceSize</key>
                 <string>{53,90}</string>
                 <key>textureRect</key>
-                <string>{{265,841},{53,88}}</string>
+                <string>{{568,861},{53,88}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1065,9 +1200,9 @@
                 <key>spriteSourceSize</key>
                 <string>{88,100}</string>
                 <key>textureRect</key>
-                <string>{{895,307},{84,96}}</string>
+                <string>{{318,603},{84,96}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/deathsummon/3.png</key>
             <dict>
@@ -1080,9 +1215,9 @@
                 <key>spriteSourceSize</key>
                 <string>{88,100}</string>
                 <key>textureRect</key>
-                <string>{{834,489},{86,88}}</string>
+                <string>{{265,862},{86,88}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/deathsummon/4.png</key>
             <dict>
@@ -1095,7 +1230,7 @@
                 <key>spriteSourceSize</key>
                 <string>{88,100}</string>
                 <key>textureRect</key>
-                <string>{{485,561},{88,92}}</string>
+                <string>{{486,557},{88,92}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1110,9 +1245,9 @@
                 <key>spriteSourceSize</key>
                 <string>{88,100}</string>
                 <key>textureRect</key>
-                <string>{{408,689},{76,74}}</string>
+                <string>{{770,561},{76,74}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/deathsummon/6.png</key>
             <dict>
@@ -1125,9 +1260,9 @@
                 <key>spriteSourceSize</key>
                 <string>{88,100}</string>
                 <key>textureRect</key>
-                <string>{{404,767},{72,78}}</string>
+                <string>{{440,781},{72,78}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/fly/bow1/0.png</key>
             <dict>
@@ -1140,9 +1275,9 @@
                 <key>spriteSourceSize</key>
                 <string>{75,73}</string>
                 <key>textureRect</key>
-                <string>{{410,612},{75,73}}</string>
+                <string>{{903,194},{75,73}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/fly/bow1/1.png</key>
             <dict>
@@ -1155,9 +1290,9 @@
                 <key>spriteSourceSize</key>
                 <string>{75,73}</string>
                 <key>textureRect</key>
-                <string>{{579,561},{69,73}}</string>
+                <string>{{501,951},{69,73}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/fly/bow2/0.png</key>
             <dict>
@@ -1170,9 +1305,9 @@
                 <key>spriteSourceSize</key>
                 <string>{88,86}</string>
                 <key>textureRect</key>
-                <string>{{744,489},{88,86}}</string>
+                <string>{{353,862},{88,86}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/fly/bow2/1.png</key>
             <dict>
@@ -1185,9 +1320,9 @@
                 <key>spriteSourceSize</key>
                 <string>{88,86}</string>
                 <key>textureRect</key>
-                <string>{{269,658},{82,86}}</string>
+                <string>{{264,778},{82,86}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/fly/bow3/0.png</key>
             <dict>
@@ -1200,7 +1335,7 @@
                 <key>spriteSourceSize</key>
                 <string>{68,70}</string>
                 <key>textureRect</key>
-                <string>{{568,868},{68,70}}</string>
+                <string>{{429,952},{68,70}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1215,7 +1350,7 @@
                 <key>spriteSourceSize</key>
                 <string>{68,70}</string>
                 <key>textureRect</key>
-                <string>{{843,577},{62,70}}</string>
+                <string>{{706,778},{62,70}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1230,9 +1365,9 @@
                 <key>spriteSourceSize</key>
                 <string>{68,70}</string>
                 <key>textureRect</key>
-                <string>{{619,943},{68,70}}</string>
+                <string>{{576,951},{68,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/fly/spell1/1.png</key>
             <dict>
@@ -1245,9 +1380,9 @@
                 <key>spriteSourceSize</key>
                 <string>{68,70}</string>
                 <key>textureRect</key>
-                <string>{{791,646},{62,70}}</string>
+                <string>{{862,726},{62,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/fly/spell2/0.png</key>
             <dict>
@@ -1260,9 +1395,9 @@
                 <key>spriteSourceSize</key>
                 <string>{68,70}</string>
                 <key>textureRect</key>
-                <string>{{619,943},{68,70}}</string>
+                <string>{{576,951},{68,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/fly/spell2/1.png</key>
             <dict>
@@ -1275,9 +1410,9 @@
                 <key>spriteSourceSize</key>
                 <string>{68,70}</string>
                 <key>textureRect</key>
-                <string>{{791,646},{62,70}}</string>
+                <string>{{862,726},{62,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/fly/spell3/0.png</key>
             <dict>
@@ -1290,9 +1425,9 @@
                 <key>spriteSourceSize</key>
                 <string>{68,70}</string>
                 <key>textureRect</key>
-                <string>{{619,943},{68,70}}</string>
+                <string>{{576,951},{68,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/fly/spell3/1.png</key>
             <dict>
@@ -1305,9 +1440,9 @@
                 <key>spriteSourceSize</key>
                 <string>{68,70}</string>
                 <key>textureRect</key>
-                <string>{{791,646},{62,70}}</string>
+                <string>{{862,726},{62,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/fly/sword1/0.png</key>
             <dict>
@@ -1320,7 +1455,7 @@
                 <key>spriteSourceSize</key>
                 <string>{68,80}</string>
                 <key>textureRect</key>
-                <string>{{640,873},{68,80}}</string>
+                <string>{{347,952},{68,80}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1335,7 +1470,7 @@
                 <key>spriteSourceSize</key>
                 <string>{68,80}</string>
                 <key>textureRect</key>
-                <string>{{337,923},{62,80}}</string>
+                <string>{{650,649},{62,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1410,7 +1545,7 @@
                 <key>spriteSourceSize</key>
                 <string>{158,100}</string>
                 <key>textureRect</key>
-                <string>{{794,852},{62,56}}</string>
+                <string>{{771,842},{62,56}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1425,161 +1560,11 @@
                 <key>spriteSourceSize</key>
                 <string>{158,100}</string>
                 <key>textureRect</key>
-                <string>{{855,641},{56,64}}</string>
+                <string>{{705,842},{56,64}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/levelup/10.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{158,100}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{689,1},{158,100}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/11.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{158,100}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{331,165},{158,100}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/12.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-4}</string>
-                <key>spriteSize</key>
-                <string>{64,68}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{915,581},{64,68}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/13.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,6}</string>
-                <key>spriteSize</key>
-                <string>{158,88}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{503,93},{158,88}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/14.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,7}</string>
-                <key>spriteSize</key>
-                <string>{156,86}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{823,108},{156,86}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/15.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,8}</string>
-                <key>spriteSize</key>
-                <string>{154,84}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{651,307},{154,84}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/16.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{8,7}</string>
-                <key>spriteSize</key>
-                <string>{82,56}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{592,383},{82,56}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>nicolas/levelup/17.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{8,7}</string>
-                <key>spriteSize</key>
-                <string>{82,56}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{561,938},{82,56}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>nicolas/levelup/18.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{16,5}</string>
-                <key>spriteSize</key>
-                <string>{66,48}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{913,651},{66,48}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/19.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,6}</string>
-                <key>spriteSize</key>
-                <string>{34,40}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{903,937},{34,40}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>nicolas/levelup/2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1590,116 +1575,11 @@
                 <key>spriteSourceSize</key>
                 <string>{158,100}</string>
                 <key>textureRect</key>
-                <string>{{646,801},{80,70}}</string>
+                <string>{{823,489},{80,70}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/levelup/20.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-3,-4}</string>
-                <key>spriteSize</key>
-                <string>{60,66}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{417,550},{60,66}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>nicolas/levelup/21.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{4,-7}</string>
-                <key>spriteSize</key>
-                <string>{80,68}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{648,731},{80,68}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/22.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{4,-5}</string>
-                <key>spriteSize</key>
-                <string>{78,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{401,929},{78,74}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/23.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-5}</string>
-                <key>spriteSize</key>
-                <string>{84,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{482,854},{84,74}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/24.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-5,-4}</string>
-                <key>spriteSize</key>
-                <string>{78,76}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{481,930},{78,76}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/25.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-4,-4}</string>
-                <key>spriteSize</key>
-                <string>{76,76}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{649,653},{76,76}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/26.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{2,-5}</string>
-                <key>spriteSize</key>
-                <string>{86,74}</string>
-                <key>spriteSourceSize</key>
-                <string>{158,100}</string>
-                <key>textureRect</key>
-                <string>{{484,778},{86,74}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>nicolas/levelup/3.png</key>
+            <key>nicolas/levelup/11.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1710,11 +1590,11 @@
                 <key>spriteSourceSize</key>
                 <string>{158,100}</string>
                 <key>textureRect</key>
-                <string>{{903,196},{80,76}}</string>
+                <string>{{623,823},{80,76}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
-            <key>nicolas/levelup/4.png</key>
+            <key>nicolas/levelup/12.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1729,7 +1609,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>nicolas/levelup/5.png</key>
+            <key>nicolas/levelup/13.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1740,11 +1620,11 @@
                 <key>spriteSourceSize</key>
                 <string>{158,100}</string>
                 <key>textureRect</key>
-                <string>{{491,183},{158,96}}</string>
+                <string>{{689,1},{158,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/levelup/6.png</key>
+            <key>nicolas/levelup/14.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1755,11 +1635,11 @@
                 <key>spriteSourceSize</key>
                 <string>{158,100}</string>
                 <key>textureRect</key>
-                <string>{{663,103},{158,100}}</string>
+                <string>{{331,165},{158,100}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/levelup/7.png</key>
+            <key>nicolas/levelup/15.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1770,11 +1650,56 @@
                 <key>spriteSourceSize</key>
                 <string>{158,100}</string>
                 <key>textureRect</key>
-                <string>{{651,205},{158,100}}</string>
+                <string>{{503,93},{158,100}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>nicolas/levelup/8.png</key>
+            <key>nicolas/levelup/16.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{158,100}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{663,99},{158,100}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/17.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{158,100}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{491,195},{158,100}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/18.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{158,100}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{651,201},{158,100}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/19.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1789,20 +1714,230 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
+            <key>nicolas/levelup/2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,-4}</string>
+                <key>spriteSize</key>
+                <string>{64,68}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{648,951},{64,68}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/20.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,6}</string>
+                <key>spriteSize</key>
+                <string>{158,88}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{491,297},{158,88}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/21.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,7}</string>
+                <key>spriteSize</key>
+                <string>{156,86}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{651,303},{156,86}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/22.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,8}</string>
+                <key>spriteSize</key>
+                <string>{154,84}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{823,108},{154,84}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/23.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{8,7}</string>
+                <key>spriteSize</key>
+                <string>{82,56}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{592,387},{82,56}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>nicolas/levelup/24.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{8,7}</string>
+                <key>spriteSize</key>
+                <string>{82,56}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{587,473},{82,56}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>nicolas/levelup/25.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{16,5}</string>
+                <key>spriteSize</key>
+                <string>{66,48}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{623,901},{66,48}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/26.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,6}</string>
+                <key>spriteSize</key>
+                <string>{34,40}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{580,823},{34,40}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>nicolas/levelup/3.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-3,-4}</string>
+                <key>spriteSize</key>
+                <string>{60,66}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{424,457},{60,66}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/4.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{4,-7}</string>
+                <key>spriteSize</key>
+                <string>{80,68}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{265,952},{80,68}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/5.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{4,-5}</string>
+                <key>spriteSize</key>
+                <string>{78,74}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{714,637},{78,74}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>nicolas/levelup/6.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,-5}</string>
+                <key>spriteSize</key>
+                <string>{84,74}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{574,649},{84,74}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>nicolas/levelup/7.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-5,-4}</string>
+                <key>spriteSize</key>
+                <string>{78,76}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{690,559},{78,76}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>nicolas/levelup/8.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-4,-4}</string>
+                <key>spriteSize</key>
+                <string>{76,76}</string>
+                <key>spriteSourceSize</key>
+                <string>{158,100}</string>
+                <key>textureRect</key>
+                <string>{{790,637},{76,76}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
             <key>nicolas/levelup/9.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{2,-5}</string>
                 <key>spriteSize</key>
-                <string>{158,100}</string>
+                <string>{86,74}</string>
                 <key>spriteSourceSize</key>
                 <string>{158,100}</string>
                 <key>textureRect</key>
-                <string>{{491,281},{158,100}}</string>
+                <string>{{575,735},{86,74}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/shoot/bow1/0.png</key>
             <dict>
@@ -1815,9 +1950,9 @@
                 <key>spriteSourceSize</key>
                 <string>{72,67}</string>
                 <key>textureRect</key>
-                <string>{{775,577},{66,67}}</string>
+                <string>{{417,590},{66,67}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/shoot/bow1/1.png</key>
             <dict>
@@ -1830,9 +1965,9 @@
                 <key>spriteSourceSize</key>
                 <string>{72,67}</string>
                 <key>textureRect</key>
-                <string>{{574,730},{72,67}}</string>
+                <string>{{848,561},{72,67}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/shoot/bow1/2.png</key>
             <dict>
@@ -1845,9 +1980,9 @@
                 <key>spriteSourceSize</key>
                 <string>{72,67}</string>
                 <key>textureRect</key>
-                <string>{{572,799},{72,67}}</string>
+                <string>{{868,635},{72,67}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/shoot/bow2/0.png</key>
             <dict>
@@ -1860,9 +1995,9 @@
                 <key>spriteSourceSize</key>
                 <string>{79,86}</string>
                 <key>textureRect</key>
-                <string>{{320,835},{79,86}}</string>
+                <string>{{352,781},{79,86}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/shoot/bow2/1.png</key>
             <dict>
@@ -1875,7 +2010,7 @@
                 <key>spriteSourceSize</key>
                 <string>{79,86}</string>
                 <key>textureRect</key>
-                <string>{{401,841},{79,86}}</string>
+                <string>{{493,647},{79,86}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1890,7 +2025,7 @@
                 <key>spriteSourceSize</key>
                 <string>{79,86}</string>
                 <key>textureRect</key>
-                <string>{{401,841},{79,86}}</string>
+                <string>{{493,647},{79,86}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1950,9 +2085,9 @@
                 <key>spriteSourceSize</key>
                 <string>{192,84}</string>
                 <key>textureRect</key>
-                <string>{{484,706},{88,70}}</string>
+                <string>{{441,861},{88,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/shoot/spell1/1.png</key>
             <dict>
@@ -1965,7 +2100,7 @@
                 <key>spriteSourceSize</key>
                 <string>{192,84}</string>
                 <key>textureRect</key>
-                <string>{{486,383},{104,84}}</string>
+                <string>{{486,387},{104,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1995,9 +2130,9 @@
                 <key>spriteSourceSize</key>
                 <string>{250,174}</string>
                 <key>textureRect</key>
-                <string>{{265,931},{70,84}}</string>
+                <string>{{737,487},{70,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/shoot/spell2/1.png</key>
             <dict>
@@ -2040,9 +2175,9 @@
                 <key>spriteSourceSize</key>
                 <string>{226,165}</string>
                 <key>textureRect</key>
-                <string>{{650,578},{90,73}}</string>
+                <string>{{418,658},{90,73}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>nicolas/shoot/spell3/1.png</key>
             <dict>
@@ -2055,7 +2190,7 @@
                 <key>spriteSourceSize</key>
                 <string>{226,165}</string>
                 <key>textureRect</key>
-                <string>{{650,393},{94,101}}</string>
+                <string>{{650,391},{94,101}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -2115,7 +2250,7 @@
                 <key>spriteSourceSize</key>
                 <string>{129,99}</string>
                 <key>textureRect</key>
-                <string>{{424,457},{59,91}}</string>
+                <string>{{514,735},{59,91}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2130,7 +2265,7 @@
                 <key>spriteSourceSize</key>
                 <string>{129,99}</string>
                 <key>textureRect</key>
-                <string>{{319,748},{83,85}}</string>
+                <string>{{895,303},{83,85}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2160,9 +2295,9 @@
                 <key>spriteSourceSize</key>
                 <string>{150,111}</string>
                 <key>textureRect</key>
-                <string>{{583,469},{90,65}}</string>
+                <string>{{645,487},{90,65}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>nicolas/shoot/sword2/1.png</key>
             <dict>
@@ -2175,7 +2310,7 @@
                 <key>spriteSourceSize</key>
                 <string>{150,111}</string>
                 <key>textureRect</key>
-                <string>{{855,405},{82,99}}</string>
+                <string>{{486,473},{82,99}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -2235,7 +2370,7 @@
                 <key>spriteSourceSize</key>
                 <string>{178,133}</string>
                 <key>textureRect</key>
-                <string>{{650,489},{92,87}}</string>
+                <string>{{269,689},{92,87}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -2266,9 +2401,9 @@
             <key>realTextureFileName</key>
             <string>nicolas.png</string>
             <key>size</key>
-            <string>{980,1021}</string>
+            <string>{979,1021}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:18a41c396bb7a631017bcd1c495a2343:0d1496a3abc9b832164f8aa5b126c14e:29af21af12c3a83ffaaf39901d5790f7$</string>
+            <string>$TexturePacker:SmartUpdate:e8fff4916dac6bd5bd90160c88d223a8:073af73f32062ee4573e88001dfee546:29af21af12c3a83ffaaf39901d5790f7$</string>
             <key>textureFileName</key>
             <string>nicolas.png</string>
         </dict>

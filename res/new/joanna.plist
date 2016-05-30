@@ -4,7 +4,7 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>joanna/booms/arrow12/0.png</key>
+            <key>joanna/booms/arrow1/0.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -19,7 +19,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>joanna/booms/arrow12/1.png</key>
+            <key>joanna/booms/arrow1/1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -34,7 +34,52 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>joanna/booms/arrow12/2.png</key>
+            <key>joanna/booms/arrow1/2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,1}</string>
+                <key>spriteSize</key>
+                <string>{21,18}</string>
+                <key>spriteSourceSize</key>
+                <string>{25,20}</string>
+                <key>textureRect</key>
+                <string>{{824,805},{21,18}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>joanna/booms/arrow2/0.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{25,20}</string>
+                <key>spriteSourceSize</key>
+                <string>{25,20}</string>
+                <key>textureRect</key>
+                <string>{{814,318},{25,20}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>joanna/booms/arrow2/1.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,0}</string>
+                <key>spriteSize</key>
+                <string>{25,20}</string>
+                <key>spriteSourceSize</key>
+                <string>{25,20}</string>
+                <key>textureRect</key>
+                <string>{{833,704},{25,20}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>joanna/booms/arrow2/2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1134,126 +1179,6 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,-10}</string>
-                <key>spriteSize</key>
-                <string>{57,80}</string>
-                <key>spriteSourceSize</key>
-                <string>{153,100}</string>
-                <key>textureRect</key>
-                <string>{{376,959},{57,80}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>joanna/levelup/11.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-6}</string>
-                <key>spriteSize</key>
-                <string>{63,88}</string>
-                <key>spriteSourceSize</key>
-                <string>{153,100}</string>
-                <key>textureRect</key>
-                <string>{{561,872},{63,88}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>joanna/levelup/12.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,-3}</string>
-                <key>spriteSize</key>
-                <string>{65,92}</string>
-                <key>spriteSourceSize</key>
-                <string>{153,100}</string>
-                <key>textureRect</key>
-                <string>{{626,827},{65,92}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>joanna/levelup/13.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,1}</string>
-                <key>spriteSize</key>
-                <string>{69,96}</string>
-                <key>spriteSourceSize</key>
-                <string>{153,100}</string>
-                <key>textureRect</key>
-                <string>{{338,337},{69,96}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>joanna/levelup/14.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,1}</string>
-                <key>spriteSize</key>
-                <string>{139,98}</string>
-                <key>spriteSourceSize</key>
-                <string>{153,100}</string>
-                <key>textureRect</key>
-                <string>{{489,298},{139,98}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>joanna/levelup/15.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,2}</string>
-                <key>spriteSize</key>
-                <string>{151,96}</string>
-                <key>spriteSourceSize</key>
-                <string>{153,100}</string>
-                <key>textureRect</key>
-                <string>{{185,337},{151,96}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>joanna/levelup/16.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,2}</string>
-                <key>spriteSize</key>
-                <string>{147,96}</string>
-                <key>spriteSourceSize</key>
-                <string>{153,100}</string>
-                <key>textureRect</key>
-                <string>{{340,238},{147,96}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>joanna/levelup/17.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,2}</string>
-                <key>spriteSize</key>
-                <string>{145,96}</string>
-                <key>spriteSourceSize</key>
-                <string>{153,100}</string>
-                <key>textureRect</key>
-                <string>{{489,200},{145,96}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>joanna/levelup/2.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
                 <string>{2,2}</string>
                 <key>spriteSize</key>
                 <string>{149,96}</string>
@@ -1264,7 +1189,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>joanna/levelup/3.png</key>
+            <key>joanna/levelup/11.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1279,7 +1204,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>joanna/levelup/4.png</key>
+            <key>joanna/levelup/12.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1294,7 +1219,7 @@
                 <key>textureRotated</key>
                 <true/>
             </dict>
-            <key>joanna/levelup/5.png</key>
+            <key>joanna/levelup/13.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1309,7 +1234,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>joanna/levelup/6.png</key>
+            <key>joanna/levelup/14.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1324,7 +1249,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>joanna/levelup/7.png</key>
+            <key>joanna/levelup/15.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1335,11 +1260,11 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{259,549},{139,98}}</string>
+                <string>{{489,298},{139,98}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
-            <key>joanna/levelup/8.png</key>
+            <key>joanna/levelup/16.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1354,7 +1279,7 @@
                 <key>textureRotated</key>
                 <false/>
             </dict>
-            <key>joanna/levelup/9.png</key>
+            <key>joanna/levelup/17.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
@@ -1366,6 +1291,126 @@
                 <string>{153,100}</string>
                 <key>textureRect</key>
                 <string>{{449,100},{31,30}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>joanna/levelup/2.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-10}</string>
+                <key>spriteSize</key>
+                <string>{57,80}</string>
+                <key>spriteSourceSize</key>
+                <string>{153,100}</string>
+                <key>textureRect</key>
+                <string>{{376,959},{57,80}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>joanna/levelup/3.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-6}</string>
+                <key>spriteSize</key>
+                <string>{63,88}</string>
+                <key>spriteSourceSize</key>
+                <string>{153,100}</string>
+                <key>textureRect</key>
+                <string>{{561,872},{63,88}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>joanna/levelup/4.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,-3}</string>
+                <key>spriteSize</key>
+                <string>{65,92}</string>
+                <key>spriteSourceSize</key>
+                <string>{153,100}</string>
+                <key>textureRect</key>
+                <string>{{626,827},{65,92}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>joanna/levelup/5.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,1}</string>
+                <key>spriteSize</key>
+                <string>{69,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{153,100}</string>
+                <key>textureRect</key>
+                <string>{{338,337},{69,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>joanna/levelup/6.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,1}</string>
+                <key>spriteSize</key>
+                <string>{139,98}</string>
+                <key>spriteSourceSize</key>
+                <string>{153,100}</string>
+                <key>textureRect</key>
+                <string>{{259,549},{139,98}}</string>
+                <key>textureRotated</key>
+                <true/>
+            </dict>
+            <key>joanna/levelup/7.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,2}</string>
+                <key>spriteSize</key>
+                <string>{151,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{153,100}</string>
+                <key>textureRect</key>
+                <string>{{185,337},{151,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>joanna/levelup/8.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{-1,2}</string>
+                <key>spriteSize</key>
+                <string>{147,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{153,100}</string>
+                <key>textureRect</key>
+                <string>{{340,238},{147,96}}</string>
+                <key>textureRotated</key>
+                <false/>
+            </dict>
+            <key>joanna/levelup/9.png</key>
+            <dict>
+                <key>aliases</key>
+                <array/>
+                <key>spriteOffset</key>
+                <string>{0,2}</string>
+                <key>spriteSize</key>
+                <string>{145,96}</string>
+                <key>spriteSourceSize</key>
+                <string>{153,100}</string>
+                <key>textureRect</key>
+                <string>{{489,200},{145,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1773,7 +1818,7 @@
             <key>size</key>
             <string>{854,1021}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:5e7eeb4d1bd36dbfd507907e81044bf1:9b92f31e53ee9df09f2022756a3f2b49:97eeacd75898b8e79a691a0c9eab20ee$</string>
+            <string>$TexturePacker:SmartUpdate:8e802f7f3756812197a7f2b1e7d0fdc3:1f5a1b957a9b384b5b798b09ec224d5f:97eeacd75898b8e79a691a0c9eab20ee$</string>
             <key>textureFileName</key>
             <string>joanna.png</string>
         </dict>

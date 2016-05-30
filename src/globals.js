@@ -9,6 +9,7 @@ var g_sound = 1;
 var g_enp ;
 var g_blocksize = 20;
 var g_blockspeed = 3;
+var g_animtime = 0.15;
 
 if(typeof TagOfLayer == "undefined") {
     var TagOfLayer = {};
@@ -31,6 +32,6 @@ if(typeof TagOfAction == "undefined") {
 
 if(typeof TagOfPlayer== "undefined") {
     var TagOfPlayer = {};
-    TagOfPlayer.joanna = 0;
-    TagOfPlayer.nicolas = 1;
+    TagOfPlayer.player = 0;
+    TagOfPlayer.anim = 1;
 };

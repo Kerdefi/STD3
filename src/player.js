@@ -26,25 +26,49 @@ var playerLayer = cc.Layer.extend({
         var l = 0;
         var frame ;
         var self = this;
-        this.joannasFlyText = [];
-        this.joannasFlyAnim = [];
-        this.joannasFlyAction = [];
-        this.joannasShootText = [];
-        this.joannasShootAnim = [];
-        this.joannasShootAction = [];
+        this.flyText = [[],[]];
+        this.flyAnim = [[],[]];
+        this.flyAction = [[],[]];
+        this.shootText = [[],[]];
+        this.shootAnim = [[],[]];
+        this.shootAction = [[],[]];
+        this.lvlupText = [[],[]];
+        this.lvlupAnim = [];
+        this.lvlupAction = [];
+        this.summondeathText = [[],[]];
+        this.summondeathAnim = [];
+        this.summondeathAction = [];
 
+        //Create les sprites players
         cc.spriteFrameCache.addSpriteFrames(res.joanna_plist);
-        this.createAnimationChara (this.joannasFlyText,this.joannasFlyAnim,this.joannasFlyAction,"joanna/fly/",TagOfAction.fly,"forever");
-        this.createAnimationChara (this.joannasShootText,this.joannasShootAnim,this.joannasShootAction,"joanna/shoot/",TagOfAction.shoot,"once");
+        this.createAnimationChara (this.flyText[0],this.flyAnim[0],this.flyAction[0],"joanna/fly/",TagOfAction.fly,"forever");
+        this.createAnimationChara (this.shootText[0],this.shootAnim[0],this.shootAction[0],"joanna/shoot/",TagOfAction.shoot,"once");
+        this.createAnim(this.lvlupText[0],this.lvlupAnim,this.lvlupAction,"joanna/levelup/","once");
+        this.createAnim(this.summondeathText[0],this.summondeathAnim,this.summondeathAction,"joanna/deathsummon/","once");
 
-        var joanna = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("joanna/fly/sword1/0.png"));
-        joanna.setAnchorPoint(0, 0);
-        joanna.setPosition(100, 300);
-        joanna.texture.setAliasTexParameters(true);
-        joanna.visible=true;
 
-        this.addChild(joanna,1,TagOfPlayer.joanna);
-        this.getChildByTag(TagOfPlayer.joanna).runAction (this.joannasFlyAction[this.weapon][this.levels[this.weapon]]);
+        cc.spriteFrameCache.addSpriteFrames(res.nicolas_plist);
+        this.createAnimationChara (this.flyText[1],this.flyAnim[1],this.flyAction[1],"nicolas/fly/",TagOfAction.fly,"forever");
+        this.createAnimationChara (this.shootText[1],this.shootAnim[1],this.shootAction[1],"nicolas/shoot/",TagOfAction.shoot,"once");
+        this.createAnim(this.lvlupText[1],this.lvlupAnim,this.lvlupAction,"nicolas/levelup/","once");
+        this.createAnim(this.summondeathText[1],this.summondeathAnim,this.summondeathAction,"nicolas/deathsummon/","once");
+
+        //spriteplayer
+        var player = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("joanna/fly/sword1/0.png"));
+        player.setAnchorPoint(0.5, 0.5);
+        player.setPosition(100, 300);
+        player.texture.setAliasTexParameters(true);
+        player.visible=true;
+        this.addChild(player,1,TagOfPlayer.player);
+        this.getChildByTag(TagOfPlayer.player).runAction (this.flyAction[this.player][this.weapon][this.levels[this.weapon]]);
+
+        //spriteanim
+        var anim = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("joanna/fly/sword1/0.png"));
+        anim.setAnchorPoint(0.5, 0.5);
+        anim.setPosition(100, 300);
+        anim.texture.setAliasTexParameters(true);
+        anim.visible=false;
+        this.addChild(anim,1,TagOfPlayer.anim);
 
         //Add keyboard stroke listener
         if( 'keyboard' in cc.sys.capabilities ) {
@@ -54,19 +78,31 @@ var playerLayer = cc.Layer.extend({
                     switch(key) {
                     case cc.KEY.a:
                             self.weapon = self.weapon == 2 ? 0 : self.weapon + 1;
-                            self.getChildByTag(TagOfPlayer.joanna).stopAllActions();
-                            self.getChildByTag(TagOfPlayer.joanna).runAction (self.joannasFlyAction[self.weapon][self.levels[self.weapon]]);
+                            self.getChildByTag(TagOfPlayer.player).stopAllActions();
+                            self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
                         break;
                     case cc.KEY.z:
                             self.levels [0] = self.levels [0] == 2 ? 0 : self.levels [0] + 1;
                             self.levels [1] = self.levels [1] == 2 ? 0 : self.levels [1] + 1;
                             self.levels [2] = self.levels [2] == 2 ? 0 : self.levels [2] + 1;
-                            self.getChildByTag(TagOfPlayer.joanna).stopAllActions();
-                            self.getChildByTag(TagOfPlayer.joanna).runAction (self.joannasFlyAction[self.weapon][self.levels[self.weapon]]);
+                            self.getChildByTag(TagOfPlayer.player).stopAllActions();
+                            self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
+
+                            self.getChildByTag(TagOfPlayer.anim).visible=true;
+                            self.getChildByTag(TagOfPlayer.anim).stopAllActions();
+                            self.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(self.lvlupAction[self.player],cc.callFunc(function() {self.getChildByTag(TagOfPlayer.anim).visible=false},self)));
                         break;
                     case cc.KEY.e:
-                        self.getChildByTag(TagOfPlayer.joanna).stopAllActions();
-                        self.getChildByTag(TagOfPlayer.joanna).runAction (new cc.Sequence(self.joannasShootAction[self.weapon][self.levels[self.weapon]],new cc.RepeatForever(self.getChildByTag(TagOfPlayer.joanna).runAction (self.joannasFlyAction[self.weapon][self.levels[self.weapon]]))));
+                            self.player = self.player == 1 ? 0 : self.player + 1;
+                            self.getChildByTag(TagOfPlayer.player).stopAllActions();
+                            self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
+
+                            self.getChildByTag(TagOfPlayer.anim).visible=true;
+                            self.getChildByTag(TagOfPlayer.anim).stopAllActions();
+                            self.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(self.summondeathAction[self.player],cc.callFunc(function() {self.getChildByTag(TagOfPlayer.anim).visible=false},self)));
+                        break;
+                    case cc.KEY.s:
+                        self.shoot(self);
                         break;
                     }
                 }
@@ -98,11 +134,37 @@ var playerLayer = cc.Layer.extend({
                     if(frame!=null) text[i][j].push(frame);
                     k++;
                 }
-                anim[i].push (new cc.Animation(text[i][j], 0.25));
+                anim[i].push (new cc.Animation(text[i][j], g_animtime));
                 if(repeat=="forever") action[i].push (new cc.RepeatForever(new cc.Animate(anim[i][j])));
                 else action[i].push (new cc.Animate(anim[i][j]));
                 action[i][j].setTag(tag+i*10+j);
             }
         }
+    },
+
+    createAnim:function (text,anim,action,target,tag,repeat) {
+        var i = 0;
+        var frame ;
+
+        frame = "emptyframe";
+        while (frame!=null) {
+            str = target + i + ".png";
+            frame = cc.spriteFrameCache.getSpriteFrame(str);
+            if(frame!=null) text.push(frame);
+            i++;
+        }
+        anim.push(new cc.Animation(text, g_animtime));
+        if(repeat=="forever") action.push(new cc.RepeatForever(new cc.Animate(anim[anim.length-1])));
+        else action.push(new cc.Animate(anim[anim.length-1]));
+        action[action.length-1].setTag(tag);
+    },
+
+    shoot:function (self) {
+        self.getChildByTag(TagOfPlayer.player).stopAllActions();
+        self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]],cc.callFunc(function() {self.shootEnd(self)},self)));
+    },
+
+    shootEnd:function (self) {
+        self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
     }
 });
