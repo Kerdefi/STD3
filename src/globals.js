@@ -19,4 +19,18 @@ if(typeof TagOfLayer == "undefined") {
     TagOfLayer.decoration = 4;
     TagOfLayer.bonus = 5;
     TagOfLayer.block = 6;
+    TagOfLayer.player = 7;
+};
+
+if(typeof TagOfAction == "undefined") {
+    var TagOfAction = {};
+    TagOfAction.fly = 0;
+    TagOfAction.shoot = 10;
+    TagOfAction.die = 20;
+};
+
+if(typeof TagOfPlayer== "undefined") {
+    var TagOfPlayer = {};
+    TagOfPlayer.joanna = 0;
+    TagOfPlayer.nicolas = 1;
 };

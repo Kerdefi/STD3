@@ -20,6 +20,7 @@
         "src/decoration.js",
         "src/block.js",
         "src/encophys/encophys.js",
-        "src/menu.js"
+        "src/menu.js",
+        "src/player.js"
     ]
 }

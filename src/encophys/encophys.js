@@ -1,3 +1,4 @@
+//TODO corriger arborescence sprites (commencer à 0, évietr arrow12)
 //TODO Menu (main - explication et loading - pause - endgame et highscore)
 //Test sprites
 //TODO Mécanique de jeu (call-back destruction, AI monster, projectiles, scores, levels, player management)
