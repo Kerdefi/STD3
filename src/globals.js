@@ -25,8 +25,8 @@ if(typeof TagOfLayer == "undefined") {
 if(typeof TagOfAction == "undefined") {
     var TagOfAction = {};
     TagOfAction.fly = 0;
-    TagOfAction.shoot = 10;
-    TagOfAction.die = 20;
+    TagOfAction.shoot = 100;
+    TagOfAction.die = 200;
 };
 
 if(typeof TagOfPlayer== "undefined") {
