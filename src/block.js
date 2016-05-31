@@ -59,7 +59,7 @@ var blockLayer = cc.Layer.extend({
         var l = 0;
 
         //Scrolldown
-        if(g_enp.state == encophys.RUN && this.getParent().getChildByTag(TagOfLayer.player).player == 0) {
+        if(g_enp.state == encophys.RUN) {
             this.offsetblock -= g_blocksize * g_enp.framestep * g_blockspeed ;
             if(this.offsetblock < -g_blocksize) {this.offsetblock = 0; this.shiftdown (); this.populate ();}
             this.setPosition(0,this.offsetblock);
