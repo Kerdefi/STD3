@@ -1,5 +1,4 @@
-//Lier avec des blocks et ID ?
-//Utiliser des forces non diamétrales ?
+//Mettre une animation damage
 
 var playerLayer = cc.Layer.extend({
     ctor:function () {
@@ -18,6 +17,8 @@ var playerLayer = cc.Layer.extend({
         this.playerposition = new cc.math.Vec2(100, 300);
         this.playerspeed = new cc.math.Vec2(0, 0);
         this.playerspeedmax = 250;
+        this.damage = 0;
+        this.damageduration = 0.1;
 
         this.init();
     },
@@ -74,6 +75,15 @@ var playerLayer = cc.Layer.extend({
         anim.texture.setAliasTexParameters(true);
         anim.visible=false;
         this.addChild(anim,2,TagOfPlayer.anim);
+
+        //spritedamage
+        var damage = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("nicolas/deathsummon/5.png"));
+        damage.setAnchorPoint(0.5, 0.5);
+        damage.setScale(1.5,1.5);
+        damage.setPosition(this.playerposition);
+        damage.texture.setAliasTexParameters(true);
+        damage.visible=false;
+        this.addChild(damage,2,TagOfPlayer.damage);
 
         //Add keyboard stroke listener
         if( 'keyboard' in cc.sys.capabilities ) {
@@ -203,6 +213,8 @@ var playerLayer = cc.Layer.extend({
     shoot:function (self) {
         if (!self.isShooting) {
             self.isShooting=true;
+            var pos = new cc.math.Vec2(Math.round(this.playerposition.x/g_blocksize),Math.round(this.playerposition.y/g_blocksize));
+            g_enp.addForce (new encophys.force ("standard", pos));
             self.getChildByTag(TagOfPlayer.player).stopAllActions();
             self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]],cc.callFunc(function() {self.shootEnd(self)},self)));
         }
@@ -220,6 +232,16 @@ var playerLayer = cc.Layer.extend({
             this.playerposition.y+=this.playerspeed.y*g_enp.framestep;
             this.adjustPosition (this);
         }
+
+        //affiche les dégats
+        if(this.damage > 0) {
+            this.getChildByTag(TagOfPlayer.damage).visible = true;
+            this.damage -= g_enp.framestep;
+        }
+        else {
+            this.getChildByTag(TagOfPlayer.damage).visible = false;
+            this.damage = 0;
+        }
     },
 
     //Contrôle si le joueur ne sort pas du cadre
@@ -230,10 +252,11 @@ var playerLayer = cc.Layer.extend({
             if(self.getChildByTag(TagOfPlayer.player).getPosition().x + self.getChildByTag(TagOfPlayer.player).getContentSize().width/2 > winsize.width) self.playerposition.x = winsize.width-self.getChildByTag(TagOfPlayer.player).getContentSize().width/2;
         }
         if(self.getChildByTag(TagOfPlayer.player).getPosition().y - self.getChildByTag(TagOfPlayer.player).getContentSize().height/2 < 0) { self.playerposition.y = self.getChildByTag(TagOfPlayer.player).getContentSize().height/2; } else {
-            if(self.getChildByTag(TagOfPlayer.player).getPosition().y + self.getChildByTag(TagOfPlayer.player).getContentSize().height/2 > winsize.height) self.playerposition.x = winsize.height-self.getChildByTag(TagOfPlayer.player).getContentSize().height/2;
+            if(self.getChildByTag(TagOfPlayer.player).getPosition().y + self.getChildByTag(TagOfPlayer.player).getContentSize().height/2 > winsize.height) self.playerposition.x = winsize.height-3*g_blocksize-self.getChildByTag(TagOfPlayer.player).getContentSize().height/2;
         }
 
         self.getChildByTag(TagOfPlayer.player).setPosition(self.playerposition);
         self.getChildByTag(TagOfPlayer.anim).setPosition(self.playerposition);
+        self.getChildByTag(TagOfPlayer.damage).setPosition(self.playerposition);
     }
 });

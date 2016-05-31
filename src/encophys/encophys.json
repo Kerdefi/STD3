@@ -1,94 +1,121 @@
 {
   "framestep":0.03,
-  "maxspeed":100,
-  "maxheat":5000,
+  "maxspeed":30,
+  "maxheat":15000,
   "gravity":10,
   "heatTransferRate":0.1,
   "burnrate":0.4,
   "roundlimit":80,
-  "size":{"x":38,"y":52},
+  "collisionfriction":0.8,
+  "size":{"x":39,"y":52},
   "materials":{
     "stone":{
         "mass":10,
         "automove":0,
-        "friction":0.05,
+        "friction":0.02,
         "linkstrenght":2,
         "basehealth":100,
         "baseheat":20,
         "burnheat":5000,
         "meltheat":2000,
         "meltmatter":"lava",
-        "gravity":true
+        "gravity":true,
+        "fix":false,
+        "inert":false
     },
     "wood":{
         "mass":3,
         "automove":0,
-        "friction":0.05,
+        "friction":0.02,
         "linkstrenght":10,
         "basehealth":50,
         "baseheat":20,
         "burnheat":300,
         "meltheat":600,
         "meltmatter":"lava",
-        "gravity":true
+        "gravity":true,
+        "fix":false,
+        "inert":false
     },
     "grass":{
         "mass":1,
         "automove":0,
-        "friction":0.05,
+        "friction":0.02,
         "linkstrenght":1,
         "basehealth":5,
         "baseheat":20,
         "burnheat":200,
         "meltheat":500,
         "meltmatter":"lava",
-        "gravity":true
+        "gravity":true,
+        "fix":false,
+        "inert":false
     },
     "water":{
         "mass":5,
         "automove":0.8,
-        "friction":0.05,
+        "friction":0.02,
         "linkstrenght":0,
         "basehealth":50,
         "baseheat":20,
         "burnheat":100,
         "meltheat":0,
         "meltmatter":"ice",
-        "gravity":true
+        "gravity":true,
+        "fix":false,
+        "inert":false
     },
     "ice":{
         "mass":5,
         "automove":0,
-        "friction":0.05,
+        "friction":0.02,
         "linkstrenght":10,
         "basehealth":50,
         "baseheat":-50,
         "burnheat":5000,
         "meltheat":0,
         "meltmatter":"water",
-        "gravity":true
+        "gravity":true,
+        "fix":false,
+        "inert":false
     },
     "lava":{
         "mass":10,
         "automove":0.4,
-        "friction":0.05,
+        "friction":0.02,
         "linkstrenght":0,
         "basehealth":100,
         "baseheat":4000,
         "burnheat":6000,
         "meltheat":2000,
         "meltmatter":"stone",
-        "gravity":true
+        "gravity":true,
+        "fix":false,
+        "inert":false
+    },
+    "playermonster":{
+        "mass":1000,
+        "automove":0,
+        "friction":0,
+        "linkstrenght":1000,
+        "basehealth":1000,
+        "baseheat":10000,
+        "burnheat":19000,
+        "meltheat":20000,
+        "meltmatter":"stone",
+        "gravity":false,
+        "fix":true,
+        "inert":true
     }
   },
   "booms":{
     "standard":{
-        "maxdiameter":2,
-        "growth":0.5,
-        "force":40,
+        "maxdiameter":6,
+        "growth":100,
+        "force":50,
         "heat":500,
         "damage":5,
-        "duration":20000
+        "duration":0.5
     }
   }
 }

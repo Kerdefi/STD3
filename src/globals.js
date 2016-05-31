@@ -8,7 +8,7 @@ var g_snowcount = 5;
 var g_sound = 1;
 var g_enp ;
 var g_blocksize = 20;
-var g_blockspeed = 3;
+var g_blockspeed = 5;
 var g_animtime = 0.15;
 
 if(typeof TagOfLayer == "undefined") {
@@ -34,4 +34,11 @@ if(typeof TagOfPlayer== "undefined") {
     var TagOfPlayer = {};
     TagOfPlayer.player = 0;
     TagOfPlayer.anim = 1;
+    TagOfPlayer.damage = 2;
+};
+
+if(typeof BlockIndex== "undefined") {
+    var BlockIndex = {};
+    BlockIndex.player = 1;
+    BlockIndex.standard = 0;
 };

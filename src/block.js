@@ -4,7 +4,7 @@ var blockLayer = cc.Layer.extend({
         this.offsetblock = 0;
         this.space = 0;
         this.minspace = 5;
-        this.layer = [["stone"],["wood","wood","grass","wood","lava","lava","grass"]];
+        this.layer = [["stone"],["wood","wood","grass","wood","grass"]];
         this.lenghtx1 = 0 ;
         this.lenghtx2 = 0;
         this.minlenght = 20 ;
@@ -16,8 +16,6 @@ var blockLayer = cc.Layer.extend({
 
         this.setAnchorPoint(0,0);
         this.setPosition(0,0);
-
-        this.init ();
     },
 
     init:function () {
@@ -25,8 +23,8 @@ var blockLayer = cc.Layer.extend({
 
         var i = 0;
         var j = 0;
-
-
+        var k = 0;
+        var l = 0;
 
         //Création des sprites
         for (i = 0 ; i <= g_enp.size.x-1 ; i++) {
@@ -44,42 +42,71 @@ var blockLayer = cc.Layer.extend({
         }
         g_enp.changeState(encophys.RUN);
 
-        //Test
-        g_enp.addForce (new encophys.force ("standard", new cc.math.Vec2(10, 20)));
+        //Création du block personnage
+        for (i = -3 ; i <= 3 ; i++) {
+            for (j = -2 ; j <= 2 ; j++) {
+                k = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.x/g_blocksize)+i;
+                l = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.y/g_blocksize)+j;
+                g_enp.addPoint(k,l,"playermonster",10, BlockIndex.player);
+            }
+        }
     },
 
     onUpdate:function () {
+        var i = 0;
+        var j = 0;
+        var k = 0;
+        var l = 0;
+
         //Scrolldown
-        if(g_enp.state == encophys.RUN) {
+        if(g_enp.state == encophys.RUN && this.getParent().getChildByTag(TagOfLayer.player).player == 0) {
             this.offsetblock -= g_blocksize * g_enp.framestep * g_blockspeed ;
             if(this.offsetblock < -g_blocksize) {this.offsetblock = 0; this.shiftdown (); this.populate ();}
             this.setPosition(0,this.offsetblock);
+        }
+
+        //Détruit les blocs personnage et repositionne les blocs personnages
+        for (i = 0 ; i < g_enp.size.x ; i++) {
+            for (j = 0 ; j < g_enp.size.y ; j++) {
+                if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.player) {
+                    g_enp.map[i][j]=null;
+                    g_enp.mapIddle[i][j]=false;
+                }
+            }
+        }
+        for (i = -3 ; i <= 3 ; i++) {
+            for (j = -2 ; j <= 2 ; j++) {
+                k = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.x/g_blocksize)+i;
+                l = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.y/g_blocksize)+j;
+                //ajouter dégats et mettre une animation
+                k = g_enp.addPoint(k,l,"playermonster",0, BlockIndex.player);
+                if(k>0) {
+                    this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
+                }
+            }
         }
 
         //Modification de l'état burn
         this.frameburn++;
         if(this.frameburnmax < this.frameburn) {this.frameburn=0; this.burn=1-this.burn;}
 
-        //Affichage des bloks
+        //Affichage des blocks
         if(g_gamestate == 1){
-            var i = 0;
-            var j = 0;
-
             for (i = 0 ; i < g_enp.size.x ; i++) {
                 for (j = 0 ; j < g_enp.size.y ; j++) {
                     if(!g_enp.mapIddle[i][j]) {
-                        if(g_enp.map[i][j]==null) {
-                            this.getChildByTag(1000+i+j*1000).visible=false;
-                        } else {
-                            this.getChildByTag(1000+i+j*1000).visible=true;
-                            this.getChildByTag(1000+i+j*1000).setPosition(i*g_blocksize+g_enp.map[i][j].smoothposition.x*g_blocksize, j*g_blocksize+g_enp.map[i][j].smoothposition.y*g_blocksize);
+                        if(g_enp.map[i][j]!=null) {
+                            if(g_enp.map[i][j].index==BlockIndex.standard) {
+                                this.getChildByTag(1000+i+j*1000).visible=true;
+                                this.getChildByTag(1000+i+j*1000).setPosition(i*g_blocksize+g_enp.map[i][j].smoothposition.x*g_blocksize, j*g_blocksize+g_enp.map[i][j].smoothposition.y*g_blocksize);
 
-                            if(g_enp.map[i][j].heat >= g_enp.materials[g_enp.map[i][j].material].burnheat && g_enp.materials[g_enp.map[i][j].material].burnheat < g_enp.materials[g_enp.map[i][j].material].meltheat) {
-                                this.getChildByTag(1000+i+j*1000).setTexture(res[g_enp.map[i][j].material+"burn"+this.burn+"_png"]);
-                            } else {
-                                this.getChildByTag(1000+i+j*1000).setTexture(res[g_enp.map[i][j].material+"_png"]);
-                            }
-                        }
+                                if(g_enp.map[i][j].heat >= g_enp.materials[g_enp.map[i][j].material].burnheat && g_enp.materials[g_enp.map[i][j].material].burnheat < g_enp.materials[g_enp.map[i][j].material].meltheat) {
+                                    this.getChildByTag(1000+i+j*1000).setTexture(res[g_enp.map[i][j].material+"burn"+this.burn+"_png"]);
+                                } else {
+                                    this.getChildByTag(1000+i+j*1000).setTexture(res[g_enp.map[i][j].material+"_png"]);
+                                }
+                            } else this.getChildByTag(1000+i+j*1000).visible=false;
+                        } else this.getChildByTag(1000+i+j*1000).visible=false;
                     }
                 }
             }
@@ -123,11 +150,11 @@ var blockLayer = cc.Layer.extend({
         if(this.space < this.layer.length) {
             for(i = 0 ; i < this.lenghtx1 ; i++) {
                 material = this.layer[this.space][Math.round(this.layer[this.space].length * Math.random() - 0.5)];
-                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,0);
+                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,1,BlockIndex.standard);
             }
             for(i = g_enp.size.x-1 ; i > this.lenghtx2 ; i--) {
                 material = this.layer[this.space][Math.round(this.layer[this.space].length * Math.random() - 0.5)];
-                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,0);
+                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,1,BlockIndex.standard);
             }
         }
 

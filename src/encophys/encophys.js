@@ -34,6 +34,7 @@ encophys.world = function () {
         this.maxheat = data.maxheat;
         this.minspeed = data.gravity/2*data.framestep/2;
         this.roundlimit = data.roundlimit;
+        this.collisionfriction = data.collisionfriction;
 
         var i = 0;
         var j = 0;
@@ -216,6 +217,7 @@ encophys.world = function () {
                     //limite la vitesse (max)
                     if(Math.abs(this.map[i][j].speed.x + this.map[i][j].speed.y)>this.maxspeed) {
                         this.map[i][j].speed.scale(this.maxspeed/(this.map[i][j].speed.x + this.map[i][j].speed.y));
+                        this.map[i][j].unusedSpeed.scale(this.maxspeed/(this.map[i][j].unusedSpeed.x + this.map[i][j].unusedSpeed.y));
                     }
                     //limite la vitesse (min) à 0,25 * g * timestep
                     if(Math.abs(this.map[i][j].speed.x + this.map[i][j].speed.y)<this.minspeed) {
@@ -226,12 +228,14 @@ encophys.world = function () {
             }
         }
 
+        this.checkFix ();
         //Modifie la position et détecte les collisions
         for (i = 0 ; i < this.size.x ; i++) {
             for (j = 0 ; j < this.size.y ; j++) {
                 this.moveblock (i,j);
             }
         }
+        this.checkFix ();
         //Réalise un nouveau balayage pour les "fausses collisions" / ou les destructions de lien
         for (i = 0 ; i < this.size.x ; i++) {
             for (j = 0 ; j < this.size.y ; j++) {
@@ -389,24 +393,33 @@ encophys.world = function () {
     };
 
     //Ajoute un point et créée les link adéquats
-    this.addPoint = function (x,y,material, damage) {
+    this.addPoint = function (x,y,material, damage, index) {
+        var damagedone = 0;
+        if(this.map[x][y]!=null && this.map[x][y].index != index) {
+            damagedone = this.map[x][y].damage;
+            this.isConnectedInit(x,y);
+        }
+
         //remplit le tableau par le haut
         this.map[x][y] = new encophys.point (material,this.materials[material].baseheat,this.materials[material].basehealth,damage);
+        this.map[x][y].index = index;
 
-        if(x-1 >= 0 && this.map[x-1][y] != null || x==0) {this.linkH[x][y]=1}
-        if(x-1 >= 0 && this.map[x-1][y] != null && this.map[x-1][y].material == material || x==0) {this.linkH[x][y]=this.materials[material].linkstrenght;}
+        if(this.materials[this.map[x][y].material].fix == false) {
+            if(x-1 >= 0 && this.map[x-1][y] != null && this.materials[this.map[x-1][y].material].linkstrenght != 0) {this.linkH[x][y]=1}
+            if(x-1 >= 0 && this.map[x-1][y] != null && this.map[x-1][y].material == material || x==0) {this.linkH[x][y]=this.materials[material].linkstrenght;}
 
-        if(x+1 < this.size.x && this.map[x+1][y] != null || x==this.size.x-1) {this.linkH[x+1][y]=1}
-        if(x+1 < this.size.x && this.map[x+1][y] != null && this.map[x+1][y].material == material || x==this.size.x-1) {this.linkH[x+1][y]=this.materials[material].linkstrenght;}
+            if(x+1 < this.size.x && this.map[x+1][y] != null  && this.materials[this.map[x+1][y].material].linkstrenght != 0) {this.linkH[x+1][y]=1}
+            if(x+1 < this.size.x && this.map[x+1][y] != null && this.map[x+1][y].material == material || x==this.size.x-1) {this.linkH[x+1][y]=this.materials[material].linkstrenght;}
 
-        if(y-1 >= 0 && this.map[x][y-1] != null || y==0) {this.linkV[x][y]=1}
-        if(y-1 >= 0 && this.map[x][y-1] != null && this.map[x][y-1].material == material || y==0) {this.linkV[x][y]=this.materials[material].linkstrenght;}
+            if(y-1 >= 0 && this.map[x][y-1] != null && this.materials[this.map[x][y-1].material].linkstrenght != 0) {this.linkV[x][y]=1}
+            if(y-1 >= 0 && this.map[x][y-1] != null && this.map[x][y-1].material == material || y==0) {this.linkV[x][y]=this.materials[material].linkstrenght;}
 
-        //if(y+1 < this.size.y && this.map[x][y+1] != null && this.map[x][y+1].material == material || y==this.size.y-1) {this.linkV[x][y+1]=this.materials[material].linkstrenght;}
-
-        if(!this.isConnected (x,y)) this.destroyLinks(x,y);
+            if(!this.isConnected (x,y)) this.destroyLinks(x,y);
+        }
 
         this.mapIddle[x][y]=false;
+
+        return damagedone;
     };
 
     //Applique les dégats (collisions ou force)
@@ -500,6 +513,7 @@ encophys.world = function () {
     //Brule la vitesse sur les links puis équilibre les vitesses
     this.collision = function (x1,y1,x2,y2,unused) {
         var residual = new cc.math.Vec2(x2-x1, y2-y1);
+        var unused2 = new cc.math.Vec2(0, 0);
 
         //Détecte si le deuxième point est connecté
         if(this.linkH[x2][y2]<=0 && this.linkH[x2 + 1][y2]<=0 && this.linkV[x2][y2]<=0 && this.linkV[x2][y2+1]<=0) {
@@ -510,24 +524,26 @@ encophys.world = function () {
                 return unused ;
             }
             if(x2-x1!=0) {
-                residual.x = (this.map[x1][y1].speed.x*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].speed.x*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
-                unused.x = (unused.x*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].unusedSpeed.x*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
+                residual.x = this.collisionfriction*(this.map[x1][y1].speed.x*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].speed.x*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
+                unused.x = this.collisionfriction*(unused.x*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].unusedSpeed.x*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
             } else {
-                residual.y = (this.map[x1][y1].speed.y*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].speed.y*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
-                unused.y = (unused.y*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].unusedSpeed.y*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
+                residual.y = this.collisionfriction*(this.map[x1][y1].speed.y*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].speed.y*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
+                unused.y = this.collisionfriction*(unused.y*this.materials[this.map[x1][y1].material].mass+this.map[x2][y2].unusedSpeed.y*this.materials[this.map[x2][y2].material].mass)/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass);
             }
         } else {
             //Brule la vitesse sur les link et les détruits
             //N*s = m/s*kg = V * kg
             var force = (this.map[x1][y1].speed.x*(x2-x1)+this.map[x1][y1].speed.y*(y2-y1))*this.materials[this.map[x1][y1].material].mass;
             this.applyDamage (x2,y2,force,residual);
-            residual.scale(1/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass));
+            residual.scale(this.collisionfriction/(this.materials[this.map[x1][y1].material].mass+this.materials[this.map[x2][y2].material].mass));
             //Transfert le unused speed
-            if(x2-x1!=0 && this.map[x1][y1].speed.x !=0) {
+            if(x2-x1!=0 && this.map[x1][y1].speed.x > this.minspeed) {
                 unused.x = unused.x * (residual.x / this.map[x1][y1].speed.x);
+                unused2.x = unused.x;
             }
-            if(y2-y1!=0 && this.map[x1][y1].speed.y !=0) {
+            if(y2-y1!=0 && this.map[x1][y1].speed.y > this.minspeed) {
                 unused.y = unused.y * (residual.y / this.map[x1][y1].speed.y);
+                unused2.y = unused.y;
             }
         }
 
@@ -552,7 +568,8 @@ encophys.world = function () {
         this.mapIddle[x2][y2]=false;
 
         //Applique la modification des unusedspeed
-        this.map[x2][y2].unusedSpeed.add(unused);
+        this.map[x2][y2].unusedSpeed.add(unused2);
+        unused.scale(this.framestep);
         return unused;
     };
 
@@ -560,6 +577,13 @@ encophys.world = function () {
     this.moveblock = function(i,j) {
         //Analyse et déplace un élément
         if(this.map[i][j]!=null) {
+
+            //limite la vitesse (max)
+            if(Math.abs(this.map[i][j].speed.x + this.map[i][j].speed.y)>this.maxspeed) {
+                this.map[i][j].speed.scale(this.maxspeed/(this.map[i][j].speed.x + this.map[i][j].speed.y));
+                this.map[i][j].unusedSpeed.scale(this.maxspeed/(this.map[i][j].unusedSpeed.x + this.map[i][j].unusedSpeed.y));
+            }
+
             if(!this.map[i][j].isUpdated) {
                 this.map[i][j].isUpdated=true;
                 var k = 0;
@@ -623,6 +647,7 @@ encophys.world = function () {
 
                         //vérification du respect des limites y
                         if (j+l+calc.y < 0 || j+l+calc.y >= this.size.y) {
+
                             this.map[i+k][j+l] = null;
                             break;
                         }
@@ -656,6 +681,22 @@ encophys.world = function () {
             }
         }
     };
+
+    this.checkFix = function () {
+        for (var i = 0 ; i < this.size.x ; i++) {
+            for (var j = 0 ; j < this.size.y ; j++) {
+                if(this.map[i][j]!=null && this.materials[this.map[i][j].material].fix == true) {
+                    this.map[i][j].speed.scale(0);
+                    this.map[i][j].unusedSpeed.scale(0);
+                    this.map[i][j].smoothposition.scale(0);
+                }
+            }
+        }
+    };
+
+    this.checkInert = function () {
+        //A compléter
+    };
 };
 
 encophys.point = function (material, heat, health, damage) {
@@ -669,6 +710,8 @@ encophys.point = function (material, heat, health, damage) {
     this.damage = damage ;
     //Sert à savoir si le point a bougé
     this.isUpdated = false ;
+    //Détonne des points spécifiques (0 indique un point standard)
+    this.index = 0;
 };
 
 encophys.force = function (type, position) {

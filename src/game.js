@@ -11,8 +11,11 @@ var gameLayer = cc.Layer.extend({
         g_enp.reset();
 
         this.addChild(new gameBack(),0,TagOfLayer.background);
-        this.addChild(new blockLayer(),1,TagOfLayer.block);
         this.addChild(new playerLayer(),2,TagOfLayer.player);
+        this.addChild(new blockLayer(),1,TagOfLayer.block);
+
+        this.getChildByTag(TagOfLayer.block).init ();
+
         this.scheduleUpdate();
     },
 
