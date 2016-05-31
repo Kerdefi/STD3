@@ -18,6 +18,7 @@ var gameLayer = cc.Layer.extend({
 
     update:function () {
         this.getChildByTag(TagOfLayer.block).onUpdate();
+        this.getChildByTag(TagOfLayer.player).onUpdate();
         g_gamestate = 1;
     }
 });
@@ -36,14 +37,13 @@ var gameBack = cc.Layer.extend({
         spriteBG.setPosition(0,0);
         spriteBG.setScale(4,4);
         this.addChild(spriteBG,0,0);
-    }
+    },
 });
 
 var gameScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
         var layer = new gameLayer();
-        layer.init();
         this.addChild(layer,0,0);
     }
 });
