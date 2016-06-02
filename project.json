@@ -21,6 +21,8 @@
         "src/block.js",
         "src/encophys/encophys.js",
         "src/menu.js",
-        "src/player.js"
+        "src/player.js",
+        "src/bullet.js",
+        "src/booms.js"
     ]
 }

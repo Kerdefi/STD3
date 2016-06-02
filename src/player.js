@@ -1,5 +1,3 @@
-//Mettre une animation damage
-
 var playerLayer = cc.Layer.extend({
     ctor:function () {
         this._super();
@@ -51,7 +49,6 @@ var playerLayer = cc.Layer.extend({
         this.createAnimationChara (this.shootText[0],this.shootAnim[0],this.shootAction[0],"joanna/shoot/",TagOfAction.shoot,"once");
         this.createAnim(this.lvlupText[0],this.lvlupAnim,this.lvlupAction,"joanna/levelup/","once");
         this.createAnim(this.summondeathText[0],this.summondeathAnim,this.summondeathAction,"joanna/deathsummon/","once");
-
 
         cc.spriteFrameCache.addSpriteFrames(res.nicolas_plist);
         this.createAnimationChara (this.flyText[1],this.flyAnim[1],this.flyAction[1],"nicolas/fly/",TagOfAction.fly,"forever");
@@ -168,7 +165,7 @@ var playerLayer = cc.Layer.extend({
         var l = 0;
         var frame ;
 
-        //Création du pack de texture/animation joanna
+        //Création du pack de texture/animation player
         for(i = 0 ; i < 3 ; i++) {
             text.push([]);
             anim.push([]);
@@ -213,10 +210,17 @@ var playerLayer = cc.Layer.extend({
     shoot:function (self) {
         if (!self.isShooting) {
             self.isShooting=true;
-            var pos = new cc.math.Vec2(Math.round(this.playerposition.x/g_blocksize),Math.round(this.playerposition.y/g_blocksize));
-            g_enp.addForce (new encophys.force ("standard", pos));
             self.getChildByTag(TagOfPlayer.player).stopAllActions();
             self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]],cc.callFunc(function() {self.shootEnd(self)},self)));
+
+            if(this.weapon == 0) {
+                var pos = new cc.math.Vec2(Math.round(this.playerposition.x/g_blocksize),Math.round(this.playerposition.y/g_blocksize));
+                g_enp.addForce (new encophys.force ("standard", pos));
+            } else {
+                //crée le projectile
+                var projectilepos = new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*4);
+                this.getParent().getChildByTag(TagOfLayer.bullets).addBullet("bullet",new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*4),new cc.math.Vec2(0,20),this.player,this.weapon,this.levels[this.weapon]);
+            }
         }
     },
 
@@ -252,7 +256,7 @@ var playerLayer = cc.Layer.extend({
             if(self.getChildByTag(TagOfPlayer.player).getPosition().x + self.getChildByTag(TagOfPlayer.player).getContentSize().width/2 > winsize.width) self.playerposition.x = winsize.width-self.getChildByTag(TagOfPlayer.player).getContentSize().width/2;
         }
         if(self.getChildByTag(TagOfPlayer.player).getPosition().y - self.getChildByTag(TagOfPlayer.player).getContentSize().height/2 < 0) { self.playerposition.y = self.getChildByTag(TagOfPlayer.player).getContentSize().height/2; } else {
-            if(self.getChildByTag(TagOfPlayer.player).getPosition().y + self.getChildByTag(TagOfPlayer.player).getContentSize().height/2 > winsize.height) self.playerposition.x = winsize.height-3*g_blocksize-self.getChildByTag(TagOfPlayer.player).getContentSize().height/2;
+            if(self.getChildByTag(TagOfPlayer.player).getPosition().y + self.getChildByTag(TagOfPlayer.player).getContentSize().height/2 > winsize.height - 10*g_blocksize) self.playerposition.x = winsize.height-3*g_blocksize-self.getChildByTag(TagOfPlayer.player).getContentSize().height/2;
         }
 
         self.getChildByTag(TagOfPlayer.player).setPosition(self.playerposition);

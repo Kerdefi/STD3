@@ -133,6 +133,14 @@ var blockLayer = cc.Layer.extend({
         }
         g_enp.linkH[g_enp.size.x].splice(0,1);
         g_enp.linkH[g_enp.size.x].push(0);
+
+        //descend toutes les forces
+        for (i = 0 ; i < g_enp.forces.length ; i++) {
+            g_enp.forces[i].position.y--;
+            if(g_enp.forces[i].position.y<0) {
+                g_enp.removeForce(i);
+            }
+        }
     },
 
     populate:function() {
@@ -150,11 +158,11 @@ var blockLayer = cc.Layer.extend({
         if(this.space < this.layer.length) {
             for(i = 0 ; i < this.lenghtx1 ; i++) {
                 material = this.layer[this.space][Math.round(this.layer[this.space].length * Math.random() - 0.5)];
-                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,1,BlockIndex.standard);
+                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,10,BlockIndex.standard);
             }
             for(i = g_enp.size.x-1 ; i > this.lenghtx2 ; i--) {
                 material = this.layer[this.space][Math.round(this.layer[this.space].length * Math.random() - 0.5)];
-                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,1,BlockIndex.standard);
+                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,10,BlockIndex.standard);
             }
         }
 

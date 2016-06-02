@@ -20,6 +20,7 @@ encophys.world = function () {
     this.gravity = 0;
     this.forces = [];
     this.connected = false;
+    this.creationCancelled = -500;
 
     //Callback to load json config file
     this.loadJson = function (error, data) {
@@ -394,32 +395,34 @@ encophys.world = function () {
 
     //Ajoute un point et créée les link adéquats
     this.addPoint = function (x,y,material, damage, index) {
-        var damagedone = 0;
-        if(this.map[x][y]!=null && this.map[x][y].index != index) {
-            damagedone = this.map[x][y].damage;
-            this.isConnectedInit(x,y);
-        }
+        if(x>=0 && x<this.size.x && y>=0 && y<this.size.y) {
+            var damagedone = 0;
+            if(this.map[x][y]!=null && this.map[x][y].index != index) {
+                damagedone = this.map[x][y].damage;
+                this.isConnectedInit(x,y);
+            }
 
-        //remplit le tableau par le haut
-        this.map[x][y] = new encophys.point (material,this.materials[material].baseheat,this.materials[material].basehealth,damage);
-        this.map[x][y].index = index;
+            //remplit le tableau par le haut
+            this.map[x][y] = new encophys.point (material,this.materials[material].baseheat,this.materials[material].basehealth,damage);
+            this.map[x][y].index = index;
 
-        if(this.materials[this.map[x][y].material].fix == false) {
-            if(x-1 >= 0 && this.map[x-1][y] != null && this.materials[this.map[x-1][y].material].linkstrenght != 0) {this.linkH[x][y]=1}
-            if(x-1 >= 0 && this.map[x-1][y] != null && this.map[x-1][y].material == material || x==0) {this.linkH[x][y]=this.materials[material].linkstrenght;}
+            if(this.materials[this.map[x][y].material].fix == false) {
+                if(x-1 >= 0 && this.map[x-1][y] != null && this.materials[this.map[x-1][y].material].linkstrenght != 0) {this.linkH[x][y]=1}
+                if(x-1 >= 0 && this.map[x-1][y] != null && this.map[x-1][y].material == material || x==0) {this.linkH[x][y]=this.materials[material].linkstrenght;}
 
-            if(x+1 < this.size.x && this.map[x+1][y] != null  && this.materials[this.map[x+1][y].material].linkstrenght != 0) {this.linkH[x+1][y]=1}
-            if(x+1 < this.size.x && this.map[x+1][y] != null && this.map[x+1][y].material == material || x==this.size.x-1) {this.linkH[x+1][y]=this.materials[material].linkstrenght;}
+                if(x+1 < this.size.x && this.map[x+1][y] != null  && this.materials[this.map[x+1][y].material].linkstrenght != 0) {this.linkH[x+1][y]=1}
+                if(x+1 < this.size.x && this.map[x+1][y] != null && this.map[x+1][y].material == material || x==this.size.x-1) {this.linkH[x+1][y]=this.materials[material].linkstrenght;}
 
-            if(y-1 >= 0 && this.map[x][y-1] != null && this.materials[this.map[x][y-1].material].linkstrenght != 0) {this.linkV[x][y]=1}
-            if(y-1 >= 0 && this.map[x][y-1] != null && this.map[x][y-1].material == material || y==0) {this.linkV[x][y]=this.materials[material].linkstrenght;}
+                if(y-1 >= 0 && this.map[x][y-1] != null && this.materials[this.map[x][y-1].material].linkstrenght != 0) {this.linkV[x][y]=1}
+                if(y-1 >= 0 && this.map[x][y-1] != null && this.map[x][y-1].material == material || y==0) {this.linkV[x][y]=this.materials[material].linkstrenght;}
 
-            if(!this.isConnected (x,y)) this.destroyLinks(x,y);
-        }
+                if(!this.isConnected (x,y)) this.destroyLinks(x,y);
+            }
 
-        this.mapIddle[x][y]=false;
+            this.mapIddle[x][y]=false;
 
-        return damagedone;
+            return damagedone;
+        } else return this.creationCancelled;
     };
 
     //Applique les dégats (collisions ou force)
@@ -692,10 +695,6 @@ encophys.world = function () {
                 }
             }
         }
-    };
-
-    this.checkInert = function () {
-        //A compléter
     };
 };
 

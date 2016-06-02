@@ -10,6 +10,8 @@ var g_enp ;
 var g_blocksize = 20;
 var g_blockspeed = 5;
 var g_animtime = 0.15;
+var g_maxbullets = 10 ;
+var g_maxbooms = 20 ;
 
 if(typeof TagOfLayer == "undefined") {
     var TagOfLayer = {};
@@ -21,6 +23,8 @@ if(typeof TagOfLayer == "undefined") {
     TagOfLayer.bonus = 5;
     TagOfLayer.block = 6;
     TagOfLayer.player = 7;
+    TagOfLayer.bullets = 8;
+    TagOfLayer.booms = 9;
 };
 
 if(typeof TagOfAction == "undefined") {
@@ -41,4 +45,5 @@ if(typeof BlockIndex== "undefined") {
     var BlockIndex = {};
     BlockIndex.player = 1;
     BlockIndex.standard = 0;
+    BlockIndex.bullets = 100;
 };

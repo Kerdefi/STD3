@@ -13,7 +13,10 @@ var gameLayer = cc.Layer.extend({
         this.addChild(new gameBack(),0,TagOfLayer.background);
         this.addChild(new playerLayer(),2,TagOfLayer.player);
         this.addChild(new blockLayer(),1,TagOfLayer.block);
+        this.addChild(new bulletsLayer(),3,TagOfLayer.bullets);
+        this.addChild(new boomsLayer(),4,TagOfLayer.booms);
 
+        this.getChildByTag(TagOfLayer.booms).init();
         this.getChildByTag(TagOfLayer.block).init ();
 
         this.scheduleUpdate();
@@ -22,6 +25,8 @@ var gameLayer = cc.Layer.extend({
     update:function () {
         this.getChildByTag(TagOfLayer.block).onUpdate();
         this.getChildByTag(TagOfLayer.player).onUpdate();
+        this.getChildByTag(TagOfLayer.bullets).onUpdate();
+        this.getChildByTag(TagOfLayer.booms).onUpdate();
         g_gamestate = 1;
     }
 });
