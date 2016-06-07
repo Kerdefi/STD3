@@ -20,31 +20,7 @@ var res = {
     ice_png  : "res/new/tiles/ice/0.png",
     lava_png  : "res/new/tiles/lava/0.png",
     //old
-    STD_Back_png : "res/STD_Back.png",
-    start_n_png : "res/start_n.png",
-    start_s_png : "res/start_s.png",
-    jump_n_png : "res/jump_n.png",
-    jump_s_png : "res/jump_s.png",
-    backframe_png : "res/backframe.png",
-    backframe2_png : "res/backframe2.png",
-    mineMid_png : "res/tile/mineMid.png",
-    dirtMid_png : "res/tile/dirtMid.png",
-    grassMid_png : "res/tile/grassMid.png",
-    snowMid_png : "res/tile/snowMid.png",
-    //grass_png : "res/tile/grass.png",
-    bush_png : "res/tile/bush.png",
-    snowhill_png : "res/tile/snowhill.png",
-    right_png : "res/tile/right.png",
-    heart_png : "res/tile/heart.png",
-    nico_png  : "res/anim/nico.png",
-    nico_plist : "res/anim/nico.plist",
-    snow_png  : "res/snow.png",
-    gem_png : "res/gem.png",
-    bandeau_png : "res/bandeau.png",
-    soundon_png : "res/soundon.png",
-    pick_mp3 : "res/snd/pickup_coin.mp3",
-    music_mp3 : "res/snd/music.mp3",
-    STD_png : "res/STD.png"
+    heart_png : "res/tile/heart.png"
 };
 
 var g_resources = [
@@ -69,29 +45,5 @@ var g_resources = [
     res.ice_png,
     res.lava_png,
     //old
-    res.STD_Back_png,
-    res.start_n_png,
-    res.start_s_png,
-    res.jump_n_png,
-    res.jump_s_png,
-    res.backframe_png,
-    res.backframe2_png,
-    res.mineMid_png,
-    res.dirtMid_png,
-    res.grassMid_png,
-    res.snowMid_png,
-    res.grass_png,
-    res.bush_png,
-    res.snowhill_png,
-    res.right_png,
-    res.heart_png,
-    res.nico_png,
-    res.nico_plist,
-    res.snow_png,
-    res.gem_png,
-    res.bandeau_png,
-    res.soundon_png,
-    res.pick_mp3,
-    res.music_mp3,
-    res.STD_png
+    res.heart_png
 ];

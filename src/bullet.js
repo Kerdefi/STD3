@@ -138,6 +138,6 @@ bullet = function (layer,tag) {
         this.isAlive = false;
         this.layer.getChildByTag (this.tag).visible=false;
         //déclenche l'explosion
-        this.layer.getParent().getChildByTag(TagOfLayer.booms).addBoom("standard",this.position,this.player,this.weapon,this.level);
+        this.layer.getParent().getChildByTag(TagOfLayer.booms).addBoom(this.position,this.player,this.weapon,this.level);
     };
 };

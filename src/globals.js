@@ -8,7 +8,7 @@ var g_snowcount = 5;
 var g_sound = 1;
 var g_enp ;
 var g_blocksize = 20;
-var g_blockspeed = 5;
+var g_blockspeed = 3;
 var g_animtime = 0.15;
 var g_maxbullets = 10 ;
 var g_maxbooms = 20 ;

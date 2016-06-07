@@ -1,5 +1,3 @@
-//Mettre une animation damage
-
 var boomsLayer = cc.Layer.extend({
     ctor:function () {
         this._super();
@@ -49,7 +47,6 @@ boom = function (layer,tag) {
     var frame ;
     var self = this;
 
-    //TODO push booms cara
     for(i = 0 ; i < 2 ; i++) {
         this.text.push([]);
         this.anim.push([]);
@@ -72,7 +69,7 @@ boom = function (layer,tag) {
                     if(frame!=null) this.text[i][j][k].push(frame);
                     l++;
                 }
-                this.anim[i][j].push(new cc.Animation(this.text[i][j][k], g_animtime));
+                this.anim[i][j].push(new cc.Animation(this.text[i][j][k], g_animtime*0.75));
                 this.action[i][j].push(new cc.Animate(this.anim[i][j][k]));
                 this.action[i][j][k].setTag(i*100+j*10+k);
             }
@@ -89,11 +86,11 @@ boom = function (layer,tag) {
     this.layer.getChildByTag(this.tag+100).runAction (this.action[0][1][0]);
 
     //Créée et lie à un point encophys
-    this.create = function (type,position,player,weapon,level) {
+    this.create = function (position,player,weapon,level) {
         i = Math.round(position.x/g_blocksize);
         j = Math.round(position.y/g_blocksize);
 
-        //TODO Add force
+        g_enp.addForce(new encophys.force(players[player]+weapons[weapon-1]+(level+1),new cc.math.Vec2(i,j)));
 
         this.isAlive = true;
 
@@ -104,7 +101,7 @@ boom = function (layer,tag) {
     };
 
     this.onUpdate = function () {
-        //this.layer.getChildByTag (this.tag+100).setPosition(0,0); += g_blocksize * g_enp.framestep * g_blockspeed;
+        this.layer.getChildByTag (this.tag+100).setPosition(this.layer.getChildByTag (this.tag+100).getPositionX(),this.layer.getChildByTag (this.tag+100).getPositionY() - (g_blocksize * g_enp.framestep * g_blockspeed));
     };
 
     this.death = function () {

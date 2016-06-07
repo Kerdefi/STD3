@@ -256,7 +256,7 @@ var playerLayer = cc.Layer.extend({
             if(self.getChildByTag(TagOfPlayer.player).getPosition().x + self.getChildByTag(TagOfPlayer.player).getContentSize().width/2 > winsize.width) self.playerposition.x = winsize.width-self.getChildByTag(TagOfPlayer.player).getContentSize().width/2;
         }
         if(self.getChildByTag(TagOfPlayer.player).getPosition().y - self.getChildByTag(TagOfPlayer.player).getContentSize().height/2 < 0) { self.playerposition.y = self.getChildByTag(TagOfPlayer.player).getContentSize().height/2; } else {
-            if(self.getChildByTag(TagOfPlayer.player).getPosition().y + self.getChildByTag(TagOfPlayer.player).getContentSize().height/2 > winsize.height - 10*g_blocksize) self.playerposition.x = winsize.height-3*g_blocksize-self.getChildByTag(TagOfPlayer.player).getContentSize().height/2;
+            if(self.getChildByTag(TagOfPlayer.player).getPosition().y + self.getChildByTag(TagOfPlayer.player).getContentSize().height/2 > winsize.height - 10*g_blocksize) self.playerposition.y = winsize.height-10*g_blocksize-self.getChildByTag(TagOfPlayer.player).getContentSize().height/2;
         }
 
         self.getChildByTag(TagOfPlayer.player).setPosition(self.playerposition);

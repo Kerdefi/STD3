@@ -3,12 +3,12 @@ var blockLayer = cc.Layer.extend({
         this._super();
         this.offsetblock = 0;
         this.space = 0;
-        this.minspace = 5;
+        this.minspace = 10;
         this.layer = [["stone"],["wood","wood","grass","wood","grass"]];
         this.lenghtx1 = 0 ;
         this.lenghtx2 = 0;
-        this.minlenght = 20 ;
-        this.maxlenght = 30 ;
+        this.minlenght = 25 ;
+        this.maxlenght = 40 ;
         this.spawnproba = 0.5;
         this.burn = 0;
         this.frameburn = 0;
@@ -32,6 +32,7 @@ var blockLayer = cc.Layer.extend({
                 var block = new cc.Sprite(res.stone_png);
                 block.setAnchorPoint(0, 0);
                 block.setPosition(i*g_blocksize, j*g_blocksize);
+                //block.setScale (2,2);
                 block.texture.setAliasTexParameters(false);
                 block.visible=false;
                 if(g_enp.map[i][j]!=null) {
