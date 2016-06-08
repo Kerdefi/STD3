@@ -696,6 +696,11 @@ encophys.world = function () {
             }
         }
     };
+
+    this.inLimits = function (i,j) {
+        if(i >= 0 && i < this.size.x && j >= 0 && j < this.size.y) return true;
+        else return false;
+    }
 };
 
 encophys.point = function (material, heat, health, damage) {

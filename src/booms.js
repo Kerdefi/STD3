@@ -19,10 +19,10 @@ var boomsLayer = cc.Layer.extend({
         }
     },
 
-    addBoom:function (type,position,player,weapon,level) {
+    addBoom:function (position,player,weapon,level) {
         for(i = 0 ; i < g_maxbooms ; i++) {
             if(this.booms[i].isAlive == false) {
-                this.booms[i].create (type,position,player,weapon,level);
+                this.booms[i].create (position,player,weapon,level);
                 return true ;
             }
         }

@@ -7,8 +7,8 @@ var blockLayer = cc.Layer.extend({
         this.layer = [["stone"],["wood","wood","grass","wood","grass"]];
         this.lenghtx1 = 0 ;
         this.lenghtx2 = 0;
-        this.minlenght = 25 ;
-        this.maxlenght = 40 ;
+        this.minlenght = 20 ;
+        this.maxlenght = 25 ;
         this.spawnproba = 0.5;
         this.burn = 0;
         this.frameburn = 0;
@@ -32,7 +32,7 @@ var blockLayer = cc.Layer.extend({
                 var block = new cc.Sprite(res.stone_png);
                 block.setAnchorPoint(0, 0);
                 block.setPosition(i*g_blocksize, j*g_blocksize);
-                //block.setScale (2,2);
+                block.setScale (g_blocksize/g_textureblocksize,g_blocksize/g_textureblocksize);
                 block.texture.setAliasTexParameters(false);
                 block.visible=false;
                 if(g_enp.map[i][j]!=null) {
@@ -44,8 +44,8 @@ var blockLayer = cc.Layer.extend({
         g_enp.changeState(encophys.RUN);
 
         //Création du block personnage
-        for (i = -3 ; i <= 3 ; i++) {
-            for (j = -2 ; j <= 2 ; j++) {
+        for (i = -2 ; i <= 2 ; i++) {
+            for (j = -1 ; j <= 1 ; j++) {
                 k = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.x/g_blocksize)+i;
                 l = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.y/g_blocksize)+j;
                 g_enp.addPoint(k,l,"playermonster",10, BlockIndex.player);
@@ -75,14 +75,25 @@ var blockLayer = cc.Layer.extend({
                 }
             }
         }
-        for (i = -3 ; i <= 3 ; i++) {
-            for (j = -2 ; j <= 2 ; j++) {
+        for (i = -1 ; i <= 1 ; i++) {
+            for (j = -1 ; j <= 1 ; j++) {
                 k = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.x/g_blocksize)+i;
                 l = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.y/g_blocksize)+j;
-                //ajouter dégats et mettre une animation
-                k = g_enp.addPoint(k,l,"playermonster",0, BlockIndex.player);
-                if(k>0) {
-                    this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
+                //Vérifie si le point est un monstre
+                if(g_enp.inLimits(k,l) && g_enp.map[k][l]!=null && g_enp.map[k][l].index >= BlockIndex.monsters) {
+                    k = this.getParent().getChildByTag(TagOfLayer.monsters).monsters[g_enp.map[k][l].index-BlockIndex.monsters].deathstart();
+                    g_enp.addPoint(k,l,"playermonster",0, BlockIndex.player);
+                    //Dégat à appliquer
+                    if(k>0) {
+                        this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
+                    }
+                } else {
+                    //ajouter dégats et mettre une animation
+                    k = g_enp.addPoint(k,l,"playermonster",0, BlockIndex.player);
+                    //Dégat à appliquer
+                    if(k>0) {
+                        this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
+                    }
                 }
             }
         }
@@ -155,7 +166,7 @@ var blockLayer = cc.Layer.extend({
             this.lenghtx1 -= this.lenghtx2;
             this.lenghtx2 = g_enp.size.x - this.lenghtx2;
         }
-        //Créée la couche
+        //Créée la couche tant que l'on est dans l'épaisseur admise (caractérisée par la taille du tableau layer)
         if(this.space < this.layer.length) {
             for(i = 0 ; i < this.lenghtx1 ; i++) {
                 material = this.layer[this.space][Math.round(this.layer[this.space].length * Math.random() - 0.5)];
@@ -170,5 +181,10 @@ var blockLayer = cc.Layer.extend({
         //Incrémente et décide de créer une nouvelle couche
         this.space += 1 ;
         if(this.space > this.minspace && Math.random() < this.spawnproba) this.space = 0;
+
+        //zone de création de monstres
+        if (this.space == Math.round(this.minspace/2)+3) {
+            this.getParent().getChildByTag(TagOfLayer.monsters).addMonster(new cc.math.Vec2 (400,1024),Math.round(Math.random()*9));
+        }
     }
 });

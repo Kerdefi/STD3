@@ -23,10 +23,10 @@ var bulletsLayer = cc.Layer.extend({
         }
     },
 
-    addBullet:function (type,position,speed,player,weapon,level) {
+    addBullet:function (position,speed,player,weapon,level) {
         for(i = 0 ; i < g_maxbullets ; i++) {
             if(this.bullets[i].isAlive == false) {
-                this.bullets[i].create (type,position,speed,player,weapon,level);
+                this.bullets[i].create (position,speed,player,weapon,level);
                 return true ;
             }
         }
@@ -89,12 +89,12 @@ bullet = function (layer,tag) {
     this.layer.getChildByTag(this.tag).runAction (this.action[0][1][0]);
 
     //Créée et lie à un point encophys
-    this.create = function (type,position,speed,player,weapon,level) {
+    this.create = function (position,speed,player,weapon,level) {
         this.position = position;
         i = Math.round(this.position.x/g_blocksize);
         j = Math.round(this.position.y/g_blocksize);
 
-        if(g_enp.addPoint(i,j,type,0,BlockIndex.bullets+this.tag)!=g_enp.creationCancelled) {
+        if(g_enp.addPoint(i,j,"bullet",0,BlockIndex.bullets+this.tag)!=g_enp.creationCancelled) {
             this.isAlive = true;
             g_enp.map[i][j].speed = speed;
             this.layer.getChildByTag (this.tag).visible=true;

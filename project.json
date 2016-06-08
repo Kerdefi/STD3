@@ -23,6 +23,7 @@
         "src/menu.js",
         "src/player.js",
         "src/bullet.js",
-        "src/booms.js"
+        "src/booms.js",
+        "src/monster.js"
     ]
 }

@@ -219,7 +219,7 @@ var playerLayer = cc.Layer.extend({
             } else {
                 //crée le projectile
                 var projectilepos = new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*4);
-                this.getParent().getChildByTag(TagOfLayer.bullets).addBullet("bullet",new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*4),new cc.math.Vec2(0,20),this.player,this.weapon,this.levels[this.weapon]);
+                this.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*4),new cc.math.Vec2(0,20),this.player,this.weapon,this.levels[this.weapon]);
             }
         }
     },

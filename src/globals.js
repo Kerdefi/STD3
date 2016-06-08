@@ -7,11 +7,14 @@ var g_gamestate = 0;
 var g_snowcount = 5;
 var g_sound = 1;
 var g_enp ;
-var g_blocksize = 20;
+var g_blocksize = 30;
+var g_textureblocksize = 20;
 var g_blockspeed = 3;
 var g_animtime = 0.15;
-var g_maxbullets = 10 ;
+var g_maxbullets = 20 ;
 var g_maxbooms = 20 ;
+var g_maxmonsters = 15 ;
+var g_monstersmaxspeed = 125 ;
 
 if(typeof TagOfLayer == "undefined") {
     var TagOfLayer = {};
@@ -25,6 +28,7 @@ if(typeof TagOfLayer == "undefined") {
     TagOfLayer.player = 7;
     TagOfLayer.bullets = 8;
     TagOfLayer.booms = 9;
+    TagOfLayer.monsters = 10;
 };
 
 if(typeof TagOfAction == "undefined") {
@@ -46,4 +50,5 @@ if(typeof BlockIndex== "undefined") {
     BlockIndex.player = 1;
     BlockIndex.standard = 0;
     BlockIndex.bullets = 100;
+    BlockIndex.monsters = 1000;
 };
