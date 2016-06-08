@@ -209,18 +209,17 @@ var playerLayer = cc.Layer.extend({
 
     shoot:function (self) {
         if (!self.isShooting) {
-            self.isShooting=true;
-            self.getChildByTag(TagOfPlayer.player).stopAllActions();
-            self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]],cc.callFunc(function() {self.shootEnd(self)},self)));
-
             if(this.weapon == 0) {
                 var pos = new cc.math.Vec2(Math.round(this.playerposition.x/g_blocksize),Math.round(this.playerposition.y/g_blocksize));
                 g_enp.addForce (new encophys.force ("standard", pos));
             } else {
                 //crée le projectile
-                var projectilepos = new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*4);
-                this.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*4),new cc.math.Vec2(0,20),this.player,this.weapon,this.levels[this.weapon]);
+                var projectilepos = new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*3);
+                if (!this.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*4),new cc.math.Vec2(0,20),this.player,this.weapon,this.levels[this.weapon])) return false;
             }
+            self.isShooting=true;
+            self.getChildByTag(TagOfPlayer.player).stopAllActions();
+            self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]],cc.callFunc(function() {self.shootEnd(self)},self)));
         }
     },
 

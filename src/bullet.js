@@ -104,7 +104,8 @@ bullet = function (layer,tag) {
             this.player = player;
             this.weapon = weapon;
             this.level = level;
-        }
+            return true;
+        } else return false ;
     };
 
     this.onUpdate = function () {

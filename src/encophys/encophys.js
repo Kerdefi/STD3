@@ -155,7 +155,7 @@ encophys.world = function () {
         //Applique les forces hors collision
         for (i = 0 ; i < this.size.x ; i++) {
             for (j = 0 ; j < this.size.y ; j++) {
-                if(this.map[i][j]!=null) {
+                if(this.map[i][j]!=null && this.map[i][j].index == BlockIndex.standard) {
                     if(this.linkH[i][j]<=0 && this.linkH[i + 1][j]<=0 && this.linkV[i][j]<=0 && this.linkV[i][j+1]<=0) {
                         //Pour un point libre
                         //ajoute la gravité (uniquement s'il n'y a pas de point fixe en dessous)
@@ -176,13 +176,13 @@ encophys.world = function () {
                             if(calc.x<this.forces[k].diameter && calc.y<this.forces[k].diameter) {
                                 //heat
                                 this.map[i][j].heat+=this.booms[this.forces[k].type].heat*this.framestep;
-                                //damage
+                                //damage (hors bullets)
                                 this.map[i][j].health-=this.booms[this.forces[k].type].damage*this.framestep;
                                 if ((calcB.x+calcB.y)==0) {
                                     calcB.x=1;
                                 }
                                 calcB.normalize();
-                                calcB.scale(this.booms[this.forces[k].type].force*this.framestep);
+                                calcB.scale(this.booms[this.forces[k].type].force*this.framestep/this.materials[this.map[i][j].material].mass);
                                 this.map[i][j].speed.add(calcB);
                             }
                         }
@@ -205,6 +205,7 @@ encophys.world = function () {
                                 }
                                 calcB.normalize();
                                 calcB = this.applyDamage (i,j,this.booms[this.forces[k].type].force*this.framestep,calcB);
+                                calcB.scale(1/this.materials[this.map[i][j].material].mass);
                                 this.map[i][j].speed.add(calcB);
                             }
                         }
@@ -406,7 +407,7 @@ encophys.world = function () {
             this.map[x][y] = new encophys.point (material,this.materials[material].baseheat,this.materials[material].basehealth,damage);
             this.map[x][y].index = index;
 
-            if(this.materials[this.map[x][y].material].fix == false) {
+            if(this.materials[this.map[x][y].material].fix == false && index == BlockIndex.standard) {
                 if(x-1 >= 0 && this.map[x-1][y] != null && this.materials[this.map[x-1][y].material].linkstrenght != 0) {this.linkH[x][y]=1}
                 if(x-1 >= 0 && this.map[x-1][y] != null && this.map[x-1][y].material == material || x==0) {this.linkH[x][y]=this.materials[material].linkstrenght;}
 

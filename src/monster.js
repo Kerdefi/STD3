@@ -39,8 +39,8 @@ monster = function (layer,tag) {
     this.isAlive = false;
     this.canShoot = [false,false,false,true,false,false,true,true,true,true] ;
     this.shootTime = [0,0,0,3,0,0,3,3,3,3] ;
-    this.lifeArray = [100,200,300,400,500,600,700,800,900,1000] ;
-    this.sizeArray = [1,1,1,2,2,2,2,3,3,3] ;
+    this.lifeArray = [10,20,30,40,50,60,70,80,90,10] ;
+    this.sizeArray = [1,1,1,1,1,1,1,1,1,1] ;
     this.listOfActions = ["fly","die","shoot"];
     this.dying = false;
     var i = 0; //monster
@@ -68,7 +68,8 @@ monster = function (layer,tag) {
                     k++;
                 }
                 this.anim[i].push(new cc.Animation(this.text[i][j], g_animtime));
-                this.action[i].push(new cc.RepeatForever(new cc.Animate(this.anim[i][j])));
+                if(j==0) this.action[i].push(new cc.RepeatForever(new cc.Animate(this.anim[i][j])));
+                else this.action[i].push(new cc.Animate(this.anim[i][j]));
                 this.action[i][j].setTag(i*10+j);
             }
         }
@@ -133,7 +134,7 @@ monster = function (layer,tag) {
                 for (j = -this.sizeArray[this.level] ; j <= this.sizeArray[this.level] ; j++) {
                     k = Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize)+i;
                     l = Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize)+j;
-                    if(g_enp.inLimits(k,l) && g_enp.map[k][l]!=null && g_enp.map[k][l].index >= BlockIndex.player) {
+                    if(g_enp.inLimits(k,l) && g_enp.map[k][l]!=null) {
                         //ajouter dégats et mettre une animation
                         this.life -= g_enp.addPoint(k,l,"playermonster",this.lifeArray[this.level], BlockIndex.monsters+this.tag);
                     }
@@ -141,6 +142,7 @@ monster = function (layer,tag) {
             }
 
             //TODO on vérifie que le point est en vie si ce n'est pas le cas lance l'animation
+            if(this.life <= 0) this.deathstart ();
 
             //TODO on vérifie que le monstre n'est pas complétement hors frame
             if(k<-this.sizeArray[this.level]) this.death(this);
