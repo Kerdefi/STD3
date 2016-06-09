@@ -29,6 +29,7 @@ if(typeof TagOfLayer == "undefined") {
     TagOfLayer.bullets = 8;
     TagOfLayer.booms = 9;
     TagOfLayer.monsters = 10;
+    TagOfLayer.monstersbullet = 11;
 };
 
 if(typeof TagOfAction == "undefined") {

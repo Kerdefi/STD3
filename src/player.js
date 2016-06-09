@@ -215,7 +215,7 @@ var playerLayer = cc.Layer.extend({
             } else {
                 //crée le projectile
                 var projectilepos = new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*3);
-                if (!this.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*4),new cc.math.Vec2(0,20),this.player,this.weapon,this.levels[this.weapon])) return false;
+                if (!this.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),this.player,this.weapon,this.levels[this.weapon])) return false;
             }
             self.isShooting=true;
             self.getChildByTag(TagOfPlayer.player).stopAllActions();

@@ -67,7 +67,7 @@ monster = function (layer,tag) {
                     if(frame!=null) this.text[i][j].push(frame);
                     k++;
                 }
-                this.anim[i].push(new cc.Animation(this.text[i][j], g_animtime));
+                this.anim[i].push(new cc.Animation(this.text[i][j], g_animtime/2));
                 if(j==0) this.action[i].push(new cc.RepeatForever(new cc.Animate(this.anim[i][j])));
                 else this.action[i].push(new cc.Animate(this.anim[i][j]));
                 this.action[i][j].setTag(i*10+j);
@@ -100,9 +100,7 @@ monster = function (layer,tag) {
         this.life = this.lifeArray [level];
         this.shootCount = this.shootTime [level];
         this.dying = false;
-
-        /*if(g_enp.addPoint(i,j,"bullet",0,BlockIndex.bullets+this.tag)!=g_enp.creationCancelled) {
-        }*/
+        this.shooting=false;
     };
 
     this.onUpdate = function () {
@@ -125,8 +123,9 @@ monster = function (layer,tag) {
             for (i = 0 ; i < g_enp.size.x ; i++) {
                 for (j = 0 ; j < g_enp.size.y ; j++) {
                     if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.monsters+this.tag) {
-                        g_enp.map[i][j]=null;
-                        g_enp.mapIddle[i][j]=false;
+                        g_enp.destroy(i,j);
+                        //g_enp.map[i][j]=null;
+                        //g_enp.mapIddle[i][j]=false;
                     }
                 }
             }
@@ -148,20 +147,34 @@ monster = function (layer,tag) {
             if(k<-this.sizeArray[this.level]) this.death(this);
 
             //TODO shoot et update timer
-            this.shootCount = this.shootCount - g_enp.framestep > 0 ? this.shootCount - g_enp.framestep : this.shoot ();
+            if(this.canShoot[this.level] && !this.shooting) this.shootCount = this.shootCount - g_enp.framestep > 0 ? this.shootCount - g_enp.framestep : this.shoot ();
         }
     };
 
     this.shoot = function () {
+        this.shooting=true;
         //Lance l'animation
-
-        //Créée la bullet
+        this.layer.getChildByTag(this.tag).stopAllActions();
+        this.layer.getChildByTag(this.tag).runAction (new cc.Sequence(self.action[self.level][2],cc.callFunc(function() {self.shootend(self)},self)));
 
         return this.shootTime [this.level];
     };
 
-    this.shoot = function (self) {
+    this.shootend = function (self) {
+        if(self.isAlive) {
+            //Créée la bullet
+            if (self.level != 7) {
+                var position = new cc.math.Vec2(self.layer.getChildByTag (self.tag).getPositionX(),self.layer.getChildByTag (self.tag).getPositionY());
+                var speed = new cc.math.Vec2(0,-200);
+                self.layer.getParent().getChildByTag(TagOfLayer.monstersbullet).addBullet(position,speed,self.level);
+            } else {
+                //boom
+            }
 
+            self.shooting=false;
+            self.layer.getChildByTag(self.tag).stopAllActions();
+            self.layer.getChildByTag(self.tag).runAction (self.action[self.level][0]);
+        }
     };
 
     this.deathstart = function () {
@@ -169,8 +182,9 @@ monster = function (layer,tag) {
         for (i = 0 ; i < g_enp.size.x ; i++) {
             for (j = 0 ; j < g_enp.size.y ; j++) {
                 if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.monsters+this.tag) {
-                    g_enp.map[i][j]=null;
-                    g_enp.mapIddle[i][j]=false;
+                    g_enp.destroy(i,j);
+                    //g_enp.map[i][j]=null;
+                    //g_enp.mapIddle[i][j]=false;
                 }
             }
         }

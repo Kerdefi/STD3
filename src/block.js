@@ -70,8 +70,9 @@ var blockLayer = cc.Layer.extend({
         for (i = 0 ; i < g_enp.size.x ; i++) {
             for (j = 0 ; j < g_enp.size.y ; j++) {
                 if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.player) {
-                    g_enp.map[i][j]=null;
-                    g_enp.mapIddle[i][j]=false;
+                    g_enp.destroy(i,j);
+                    //g_enp.map[i][j]=null;
+                    //g_enp.mapIddle[i][j]=false;
                 }
             }
         }
@@ -120,6 +121,7 @@ var blockLayer = cc.Layer.extend({
                             } else this.getChildByTag(1000+i+j*1000).visible=false;
                         } else this.getChildByTag(1000+i+j*1000).visible=false;
                     }
+                    g_enp.mapIddle[i][j]=true;
                 }
             }
         }

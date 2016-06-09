@@ -145,7 +145,7 @@ encophys.world = function () {
         //Reset le statut des points et les passe en iddle
         for (i = 0 ; i < this.size.x ; i++) {
             for (j = 0 ; j < this.size.y ; j++) {
-                this.mapIddle[i][j]=true;
+                //this.mapIddle[i][j]=true;
                 if(this.map[i][j]!=null) {
                     this.map[i][j].isUpdated=false;
                 }
@@ -397,6 +397,7 @@ encophys.world = function () {
     //Ajoute un point et créée les link adéquats
     this.addPoint = function (x,y,material, damage, index) {
         if(x>=0 && x<this.size.x && y>=0 && y<this.size.y) {
+            this.mapIddle[x][y]=false;
             var damagedone = 0;
             if(this.map[x][y]!=null && this.map[x][y].index != index) {
                 damagedone = this.map[x][y].damage;
@@ -419,9 +420,6 @@ encophys.world = function () {
 
                 if(!this.isConnected (x,y)) this.destroyLinks(x,y);
             }
-
-            this.mapIddle[x][y]=false;
-
             return damagedone;
         } else return this.creationCancelled;
     };
