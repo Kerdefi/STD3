@@ -15,6 +15,7 @@ var g_maxbullets = 20 ;
 var g_maxbooms = 20 ;
 var g_maxmonsters = 15 ;
 var g_monstersmaxspeed = 125 ;
+var g_monsterbulletspeed = 200 ;
 
 if(typeof TagOfLayer == "undefined") {
     var TagOfLayer = {};

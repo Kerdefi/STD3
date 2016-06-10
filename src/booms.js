@@ -38,33 +38,47 @@ boom = function (layer,tag) {
     this.layer = layer;
     this.tag = tag;
     this.isAlive = false;
-    var players = ["joanna","nicolas"];
+    var players = ["joanna","nicolas","monsters"];
     var weapons = ["arrow","spell"];
+    this.levelmap = [2,6,7,9];
     var i = 0; //Player
     var j = 0; //Weapon
     var k = 0; //Level
     var l = 0; //frame
+    var m = 0; //max weapon
+    var n = 0; //max level
     var frame ;
     var self = this;
 
-    for(i = 0 ; i < 2 ; i++) {
+    for(i = 0 ; i < 3 ; i++) {
         this.text.push([]);
         this.anim.push([]);
         this.action.push([]);
 
+        m = 2;
+        n = 3;
         if(i==0) cc.spriteFrameCache.addSpriteFrames(res.joanna_plist);
-        else cc.spriteFrameCache.addSpriteFrames(res.nicolas_plist);
+        else {
+            if(i==1) cc.spriteFrameCache.addSpriteFrames(res.nicolas_plist);
+            else  {
+                cc.spriteFrameCache.addSpriteFrames(res.monsters_plist);
+                m = 1;
+                n = 4;
+            }
+        }
 
-        for(j = 0 ; j < 2 ; j++) {
+        for(j = 0 ; j < m ; j++) {
             this.text[i].push([]);
             this.anim[i].push([]);
             this.action[i].push([]);
-            for(k = 0 ; k < 3 ; k++) {
+            for(k = 0 ; k < n ; k++) {
                 this.text[i][j].push([]);
                 frame = "emptyframe";
                 l = 0;
                 while (frame!=null) {
-                    str = players[i]+"/booms/"+ weapons[j] + (k+1) + "/" + l + ".png";
+                    //vérifie si on est en monstre ou player
+                    if(m==2) str = players[i]+"/booms/"+ weapons[j] + (k+1) + "/" + l + ".png";
+                    else str = "monsters/m"+this.levelmap[k]+"/boom/"+ l + ".png";
                     frame = cc.spriteFrameCache.getSpriteFrame(str);
                     if(frame!=null) this.text[i][j][k].push(frame);
                     l++;
@@ -77,7 +91,7 @@ boom = function (layer,tag) {
     }
 
     //spriteplayer
-    var boom = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("nicolas/fly/sword1/0.png"));
+    var boom = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("monsters/m0/fly/0.png"));
     boom.setAnchorPoint(0.5, 0.5);
     boom.setPosition(0,0);
     boom.texture.setAliasTexParameters(true);
@@ -94,10 +108,12 @@ boom = function (layer,tag) {
 
         this.isAlive = true;
 
+        var truelevel = player==2 ? this.levelmap.indexOf(level) : level;
+
         this.layer.getChildByTag (this.tag+100).visible=true;
         this.layer.getChildByTag (this.tag+100).setPosition(position);
         this.layer.getChildByTag(this.tag+100).stopAllActions();
-        this.layer.getChildByTag(this.tag+100).runAction (new cc.Sequence(this.action[player][weapon-1][level],cc.callFunc(this.death)));
+        this.layer.getChildByTag(this.tag+100).runAction (new cc.Sequence(this.action[player][weapon-1][truelevel],cc.callFunc(this.death)));
     };
 
     this.onUpdate = function () {

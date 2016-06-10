@@ -37,8 +37,11 @@ monster = function (layer,tag) {
     this.layer = layer;
     this.tag = tag;
     this.isAlive = false;
-    this.canShoot = [false,false,false,true,false,false,true,true,true,true] ;
-    this.shootTime = [0,0,0,3,0,0,3,3,3,3] ;
+    this.canShoot = [false,false,true,false,false,false,true,true,true,true] ;
+    this.shootTime = [0,0,2,0,0,0,2,2,3,2] ;
+    //Nombre de balles - doit être impair
+    this.shootBullets = [0,0,3,0,0,0,9,3,0,5] ;
+    this.shootAngle = [0,0,30,0,0,0,38,30,0,36] ;
     this.lifeArray = [10,20,30,40,50,60,70,80,90,10] ;
     this.sizeArray = [1,1,1,1,1,1,1,1,1,1] ;
     this.listOfActions = ["fly","die","shoot"];
@@ -163,12 +166,18 @@ monster = function (layer,tag) {
     this.shootend = function (self) {
         if(self.isAlive) {
             //Créée la bullet
-            if (self.level != 7) {
-                var position = new cc.math.Vec2(self.layer.getChildByTag (self.tag).getPositionX(),self.layer.getChildByTag (self.tag).getPositionY());
-                var speed = new cc.math.Vec2(0,-200);
-                self.layer.getParent().getChildByTag(TagOfLayer.monstersbullet).addBullet(position,speed,self.level);
+            if (self.level != 8) {
+                for (var i=-(self.shootBullets[self.level]-1)/2;i<=(self.shootBullets[self.level]-1)/2;i++) {
+                    var position = new cc.math.Vec2(self.layer.getChildByTag (self.tag).getPositionX() + self.speed*0.5,self.layer.getChildByTag (self.tag).getPositionY());
+                    var angle = (270+i*self.shootAngle[self.level])*3.14/180;
+                    var speed = new cc.math.Vec2(g_monsterbulletspeed*Math.cos(angle),g_monsterbulletspeed*Math.sin(angle));
+                    self.layer.getParent().getChildByTag(TagOfLayer.monstersbullet).addBullet(position,speed,self.level);
+                }
+
             } else {
                 //boom
+                var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize)-3);
+                g_enp.addForce(new encophys.force("monstersarrow9",boompos));
             }
 
             self.shooting=false;
@@ -192,7 +201,11 @@ monster = function (layer,tag) {
         this.layer.getChildByTag(this.tag).runAction (new cc.Sequence(self.action[self.level][1],cc.callFunc(function() {self.death(self)},self)));
         this.dying = true;
         //déclenche l'explosion si le monstre déclenche des explosions
-        //this.layer.getParent().getChildByTag(TagOfLayer.booms).addBoom(this.position,this.player,this.weapon,this.level);
+        if(this.level == 3) {
+            //boom
+            var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize));
+            g_enp.addForce(new encophys.force("monstersarrow4",boompos));
+        }
         return this.lifeArray[this.level];
     };
 

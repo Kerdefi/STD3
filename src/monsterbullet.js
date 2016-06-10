@@ -44,7 +44,7 @@ monsterbullet = function (layer,tag) {
     this.layer = layer;
     this.tag = tag;
     this.isAlive = false;
-    this.canShoot = [false,false,false,true,false,false,true,true,true,true] ;
+    this.canShoot = [false,false,true,false,false,false,true,true,false,true] ;
     var i = 0; //Level
     var j = 0; //frame
     var frame ;
@@ -84,7 +84,8 @@ monsterbullet = function (layer,tag) {
         this.layer.getChildByTag (this.tag).setPosition(this.position);
         //Rotate
         var angle = Math.acos(speed.x*1/speed.length())*180/3.14;
-        this.layer.getChildByTag (this.tag).setRotation(angle);
+        if (level != 7 && level !=6) this.layer.getChildByTag (this.tag).setRotation(angle);
+        else this.layer.getChildByTag (this.tag).setRotation(0);
         this.layer.getChildByTag(this.tag).stopAllActions();
         this.layer.getChildByTag(this.tag).runAction (this.action[level]);
         this.level = level;
@@ -96,19 +97,25 @@ monsterbullet = function (layer,tag) {
         this.position.y -= g_blocksize * g_enp.framestep * g_blockspeed;
         this.layer.getChildByTag (this.tag).setPosition(this.position);
         //On check s'il est dans le cadre
-        if(this.position.x < -g_blocksize || this.position.x > 768+g_blocksize || this.position.y < -g_blocksize || this.position.y > 1024+g_blocksize) this.death ;
+        if(this.position.x < -g_blocksize || this.position.x > 768+g_blocksize || this.position.y < -g_blocksize || this.position.y > 1024+g_blocksize) this.death (false) ;
         //On check s'il est en colision avec le joueur
-        if(cc.rectContainsPoint(player, this.position)) {
-            this.death ();
+        var bulletrect = new cc.Rect(this.layer.getChildByTag(this.tag).getPositionX(),
+                this.layer.getChildByTag(this.tag).getPositionY(),
+                this.layer.getChildByTag(this.tag).width/2,
+                this.layer.getChildByTag(this.tag).height/2);
+
+        if(cc.rectIntersectsRect(player, bulletrect)) {
+            this.death (true);
             //On applique les dégats
+            this.layer.getParent().getChildByTag(TagOfLayer.player).damage = this.layer.getParent().getChildByTag(TagOfLayer.player).damageduration;
         }
     };
 
-    this.death = function () {
+    this.death = function (withboom) {
         //libère l'espace
         this.isAlive = false;
         this.layer.getChildByTag (this.tag).visible=false;
         //déclenche l'explosion
-        //this.layer.getParent().getChildByTag(TagOfLayer.booms).addBoom(this.position,this.player,this.weapon,this.level);
+        if(withboom) this.layer.getParent().getChildByTag(TagOfLayer.booms).addBoom(this.position,2,1,this.level);
     };
 };
