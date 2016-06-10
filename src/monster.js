@@ -42,7 +42,7 @@ monster = function (layer,tag) {
     //Nombre de balles - doit être impair
     this.shootBullets = [0,0,3,0,0,0,9,3,0,5] ;
     this.shootAngle = [0,0,30,0,0,0,38,30,0,36] ;
-    this.lifeArray = [10,20,30,40,50,60,70,80,90,10] ;
+    this.lifeArray = [1,2,3,4,5,6,7,8,9,10] ;
     this.sizeArray = [1,1,1,1,1,1,1,1,1,1] ;
     this.listOfActions = ["fly","die","shoot"];
     this.dying = false;
@@ -144,7 +144,7 @@ monster = function (layer,tag) {
             }
 
             //TODO on vérifie que le point est en vie si ce n'est pas le cas lance l'animation
-            if(this.life <= 0) this.deathstart ();
+            if(this.life <= 0) this.deathstart (true);
 
             //TODO on vérifie que le monstre n'est pas complétement hors frame
             if(k<-this.sizeArray[this.level]) this.death(this);
@@ -186,7 +186,7 @@ monster = function (layer,tag) {
         }
     };
 
-    this.deathstart = function () {
+    this.deathstart = function (withhonor) {
         //Détruit les blocs personnage et repositionne les blocs personnages
         for (i = 0 ; i < g_enp.size.x ; i++) {
             for (j = 0 ; j < g_enp.size.y ; j++) {
@@ -206,6 +206,16 @@ monster = function (layer,tag) {
             var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize));
             g_enp.addForce(new encophys.force("monstersarrow4",boompos));
         }
+        //Créée un bonus (si la chance est du bon côté)
+        if(Math.random()<g_bonusproba && withhonor) {
+            //Une chance sur deux d'avoir une vie par rapport à XP
+            if(Math.random()<0.5) {
+                this.layer.getParent().getChildByTag(TagOfLayer.bonus).createCoeur (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
+            } else {
+                this.layer.getParent().getChildByTag(TagOfLayer.bonus).createBonus (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
+            }
+        }
+
         return this.lifeArray[this.level];
     };
 

@@ -15,8 +15,9 @@ var gameLayer = cc.Layer.extend({
         this.addChild(new blockLayer(),1,TagOfLayer.block);
         this.addChild(new bulletsLayer(),3,TagOfLayer.bullets);
         this.addChild(new boomsLayer(),10,TagOfLayer.booms);
-        this.addChild(new monstersLayer(),5,TagOfLayer.monsters);
+        this.addChild(new monstersLayer(),8,TagOfLayer.monsters);
         this.addChild(new monstersbulletLayer(),6,TagOfLayer.monstersbullet);
+        this.addChild(new bonusLayer(),7,TagOfLayer.bonus);
 
         this.getChildByTag(TagOfLayer.booms).init();
         this.getChildByTag(TagOfLayer.block).init ();
@@ -33,6 +34,7 @@ var gameLayer = cc.Layer.extend({
         this.getChildByTag(TagOfLayer.booms).onUpdate();
         this.getChildByTag(TagOfLayer.monsters).onUpdate();
         this.getChildByTag(TagOfLayer.monstersbullet).onUpdate();
+        this.getChildByTag(TagOfLayer.bonus).onUpdate();
         g_gamestate = 1;
     }
 });

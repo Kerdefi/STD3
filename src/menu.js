@@ -147,7 +147,7 @@ var MenuAnim = cc.Layer.extend({
         spriteJoanna.texture.setAliasTexParameters(false);
         spriteJoanna.flippedX = true;
         spriteJoanna.setAnchorPoint(0,0);
-        spriteJoanna.setPosition(g_joannaStartX,135);
+        spriteJoanna.setPosition(200,135);
         this.addChild(spriteJoanna,0,1);
 
         this.getChildByTag(1).runAction(this.joannaAction);
@@ -155,7 +155,7 @@ var MenuAnim = cc.Layer.extend({
         var spriteNicolas = new cc.Sprite(res.heart_png);
         spriteNicolas.texture.setAliasTexParameters(false);
         spriteNicolas.setAnchorPoint(0,0);
-        spriteNicolas.setPosition(g_nicolasStartX,135);
+        spriteNicolas.setPosition(300,135);
         this.addChild(spriteNicolas,0,2);
 
         this.getChildByTag(2).runAction(this.nicolasAction);
@@ -164,7 +164,7 @@ var MenuAnim = cc.Layer.extend({
         spriteStorm.texture.setAliasTexParameters(false);
         spriteStorm.setAnchorPoint(0,0);
         spriteStorm.setScale(3,3);
-        spriteStorm.setPosition(g_joannaStartX,135);
+        spriteStorm.setPosition(200,135);
         this.addChild(spriteStorm,0,3);
 
         this.getChildByTag(3).runAction(this.stormAction);

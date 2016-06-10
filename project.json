@@ -16,7 +16,7 @@
         "src/game.js",
         "src/ground.js",
         "src/animation.js",
-        "src/decoration.js",
+        "src/bonus.js",
         "src/block.js",
         "src/encophys/encophys.js",
         "src/menu.js",

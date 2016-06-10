@@ -1,11 +1,4 @@
-var g_joannaStartX = 100;
-var g_nicolasStartX = 170;
-var g_duration = 40;
-var g_duration_jump = 0.4;
-var g_bonusCount = 0;
 var g_gamestate = 0;
-var g_snowcount = 5;
-var g_sound = 1;
 var g_enp ;
 var g_blocksize = 30;
 var g_textureblocksize = 20;
@@ -16,6 +9,7 @@ var g_maxbooms = 20 ;
 var g_maxmonsters = 15 ;
 var g_monstersmaxspeed = 125 ;
 var g_monsterbulletspeed = 200 ;
+var g_bonusproba = 0.5 ;
 
 if(typeof TagOfLayer == "undefined") {
     var TagOfLayer = {};

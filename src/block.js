@@ -82,7 +82,7 @@ var blockLayer = cc.Layer.extend({
                 l = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.y/g_blocksize)+j;
                 //Vérifie si le point est un monstre
                 if(g_enp.inLimits(k,l) && g_enp.map[k][l]!=null && g_enp.map[k][l].index >= BlockIndex.monsters) {
-                    k = this.getParent().getChildByTag(TagOfLayer.monsters).monsters[g_enp.map[k][l].index-BlockIndex.monsters].deathstart();
+                    k = this.getParent().getChildByTag(TagOfLayer.monsters).monsters[g_enp.map[k][l].index-BlockIndex.monsters].deathstart(false);
                     g_enp.addPoint(k,l,"playermonster",0, BlockIndex.player);
                     //Dégat à appliquer
                     if(k>0) {
