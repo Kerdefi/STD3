@@ -73,6 +73,7 @@ var bonusLayer = cc.Layer.extend({
                 this.getChildByTag(0).runAction(this.coeurActionTouche);
                 this.coeurAlive = false;
                 //ajouter gain vie
+                this.getParent().getChildByTag(TagOfLayer.player).addHealth(g_bonushealthgain);
             }
             //Vérifie si le point est toujours dans le cadre
             if(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY()<-g_blocksize) {
@@ -97,6 +98,7 @@ var bonusLayer = cc.Layer.extend({
                 this.getChildByTag(1).runAction(this.bonusActionTouche);
                 this.bonusAlive = false;
                 //ajouter gain XP
+                this.getParent().getChildByTag(TagOfLayer.player).addXP(g_bonusxpgain);
             }
             //Vérifie si le point est toujours dans le cadre
             if(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY()<-g_blocksize) {

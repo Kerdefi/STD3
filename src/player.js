@@ -3,14 +3,20 @@ var playerLayer = cc.Layer.extend({
         this._super();
         //Variable clé du joueur
         this.levels = [0,0,0];
-        this.levelmax = 300;
-        this.levelsgrowth = [1,1,1];
+        this.levelgrowth = [0,0,0];
+        this.levelmax = 2;
+        this.levelgrowthmax = 100;
         this.weapons = ["sword","bow","spell"];
         this.mana = 100;
-        this.managrowth = 3;
+        this.managrowth = 5;
+        this.maxmana = 100;
+        this.manacost = 10;
         this.health = 100;
+        this.maxhealth = 100;
         this.weapon = 0;
         this.isShooting = false;
+        this.shootcountdown = 0;
+        this.shootduration = [1,0.5,0.1];
         this.player = 0;
         this.playerposition = new cc.math.Vec2(100, 300);
         this.playerspeed = new cc.math.Vec2(0, 0);
@@ -107,9 +113,9 @@ var playerLayer = cc.Layer.extend({
                             self.adjustPosition (self);
                         break;
                     case cc.KEY.k:
-                            self.levels [0] = self.levels [0] == 2 ? 0 : self.levels [0] + 1;
-                            self.levels [1] = self.levels [1] == 2 ? 0 : self.levels [1] + 1;
-                            self.levels [2] = self.levels [2] == 2 ? 0 : self.levels [2] + 1;
+                            self.levels [0] = self.levels [0] == self.levelmax ? 0 : self.levels [0] + 1;
+                            self.levels [1] = self.levels [1] == self.levelmax ? 0 : self.levels [1] + 1;
+                            self.levels [2] = self.levels [2] == self.levelmax ? 0 : self.levels [2] + 1;
                             self.getChildByTag(TagOfPlayer.player).stopAllActions();
                             self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
 
@@ -208,15 +214,16 @@ var playerLayer = cc.Layer.extend({
     },
 
     shoot:function (self) {
-        if (!self.isShooting) {
-            if(this.weapon == 0) {
-                var pos = new cc.math.Vec2(Math.round(this.playerposition.x/g_blocksize),Math.round(this.playerposition.y/g_blocksize));
+        if (!self.isShooting && self.shootcountdown==0 && (self.weapon!=2 || self.mana >= self.manacost)) {
+            if(self.weapon == 0) {
+                var pos = new cc.math.Vec2(Math.round(self.playerposition.x/g_blocksize),Math.round(self.playerposition.y/g_blocksize));
                 g_enp.addForce (new encophys.force ("standard", pos));
             } else {
                 //crée le projectile
-                var projectilepos = new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*3);
-                if (!this.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(this.playerposition.x, this.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),this.player,this.weapon,this.levels[this.weapon])) return false;
+                var projectilepos = new cc.math.Vec2(self.playerposition.x, self.playerposition.y+g_blocksize*3);
+                if (!self.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(self.playerposition.x, self.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),self.player,self.weapon,self.levels[self.weapon])) return false;
             }
+            if(self.weapon==2) self.mana = Math.max(self.mana-self.manacost,0);
             self.isShooting=true;
             self.getChildByTag(TagOfPlayer.player).stopAllActions();
             self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]],cc.callFunc(function() {self.shootEnd(self)},self)));
@@ -225,6 +232,7 @@ var playerLayer = cc.Layer.extend({
 
     shootEnd:function (self) {
         self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
+        self.shootcountdown = self.shootduration[self.weapon];
         self.isShooting=false;
     },
 
@@ -245,6 +253,35 @@ var playerLayer = cc.Layer.extend({
             this.getChildByTag(TagOfPlayer.damage).visible = false;
             this.damage = 0;
         }
+
+        //Rempli la jauge de mana
+        this.mana = this.mana + this.managrowth*g_enp.framestep > this.maxmana ? this.maxmana : this.mana + this.managrowth*g_enp.framestep;
+
+        //Réduit le shootcountdown
+        this.shootcountdown = this.shootcountdown - g_enp.framestep < 0 ? 0 : this.shootcountdown - g_enp.framestep;
+
+        //Ajuste le niveau d'XP
+        for (var i = 0 ; i < 3 ; i++) {
+            if(this.levelgrowth[i] >= this.levelgrowthmax && this.levels [i] != this.levelmax) {
+                this.levels [i] +=1;
+                this.levelgrowth[i] = this.levelgrowth[i]-this.levelgrowthmax;
+                this.getChildByTag(TagOfPlayer.player).stopAllActions();
+                this.getChildByTag(TagOfPlayer.player).runAction (this.flyAction[this.player][this.weapon][this.levels[this.weapon]]);
+                this.getChildByTag(TagOfPlayer.anim).visible=true;
+                this.getChildByTag(TagOfPlayer.anim).stopAllActions();
+                var self = this;
+                this.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(this.lvlupAction[this.player],cc.callFunc(function() {self.getChildByTag(TagOfPlayer.anim).visible=false},self)));
+                this.adjustPosition (this);
+            }
+        }
+    },
+
+    addXP:function (xp) {
+        this.levelgrowth[this.weapon]+=xp;
+    },
+
+    addHealth:function (heal) {
+        this.health = Math.min(this.health+heal,this.maxhealth);
     },
 
     //Contrôle si le joueur ne sort pas du cadre

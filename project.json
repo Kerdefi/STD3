@@ -14,8 +14,6 @@
         "src/globals.js",
         "src/resource.js",
         "src/game.js",
-        "src/ground.js",
-        "src/animation.js",
         "src/bonus.js",
         "src/block.js",
         "src/encophys/encophys.js",
@@ -24,6 +22,7 @@
         "src/bullet.js",
         "src/booms.js",
         "src/monster.js",
-        "src/monsterbullet.js"
+        "src/monsterbullet.js",
+        "src/gamemenu.js"
     ]
 }

@@ -102,6 +102,7 @@ monster = function (layer,tag) {
         if (this.speed > 0) this.layer.getChildByTag (this.tag).flippedX = true;
         this.life = this.lifeArray [level];
         this.shootCount = this.shootTime [level];
+        this.baby
         this.dying = false;
         this.shooting=false;
     };
@@ -122,11 +123,18 @@ monster = function (layer,tag) {
             }
             this.layer.getChildByTag (this.tag).setPosition(this.layer.getChildByTag (this.tag).getPositionX() + this.speed*g_enp.framestep,this.layer.getChildByTag (this.tag).getPositionY() - (g_blocksize * g_enp.framestep * g_blockspeed));
 
+            //Protection contre un monstre zombie - sauf au premier tour
+            var blockfound=false;
+            if (this.baby) {
+                this.baby=false;
+                blockfound=true;
+            }
             //Détruit les blocs personnage et repositionne les blocs personnages
             for (i = 0 ; i < g_enp.size.x ; i++) {
                 for (j = 0 ; j < g_enp.size.y ; j++) {
                     if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.monsters+this.tag) {
                         g_enp.destroy(i,j);
+                        blockfound=true;
                         //g_enp.map[i][j]=null;
                         //g_enp.mapIddle[i][j]=false;
                     }
@@ -144,7 +152,7 @@ monster = function (layer,tag) {
             }
 
             //TODO on vérifie que le point est en vie si ce n'est pas le cas lance l'animation
-            if(this.life <= 0) this.deathstart (true);
+            if(this.life <= 0 || blockfound) this.deathstart (true);
 
             //TODO on vérifie que le monstre n'est pas complétement hors frame
             if(k<-this.sizeArray[this.level]) this.death(this);
@@ -214,6 +222,8 @@ monster = function (layer,tag) {
             } else {
                 this.layer.getParent().getChildByTag(TagOfLayer.bonus).createBonus (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
             }
+            //Augmente l'expérience
+            this.layer.getParent().getChildByTag(TagOfLayer.player).addXP(g_monsterxpgain);
         }
 
         return this.lifeArray[this.level];

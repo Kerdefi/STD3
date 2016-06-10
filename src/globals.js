@@ -10,6 +10,10 @@ var g_maxmonsters = 15 ;
 var g_monstersmaxspeed = 125 ;
 var g_monsterbulletspeed = 200 ;
 var g_bonusproba = 0.5 ;
+var g_monsterxpgain = 5 ;
+var g_bonusxpgain = 30 ;
+var g_bonushealthgain = 10 ;
+var g_score = 0 ;
 
 if(typeof TagOfLayer == "undefined") {
     var TagOfLayer = {};
@@ -25,6 +29,7 @@ if(typeof TagOfLayer == "undefined") {
     TagOfLayer.booms = 9;
     TagOfLayer.monsters = 10;
     TagOfLayer.monstersbullet = 11;
+    TagOfLayer.info = 12;
 };
 
 if(typeof TagOfAction == "undefined") {
