@@ -107,10 +107,12 @@ var playerLayer = cc.Layer.extend({
                         self.playerspeed.y=self.playerspeed.y > 0 ? 0 : self.playerspeed.y;
                         break;
                     case cc.KEY.j:
-                            self.weapon = self.weapon == 2 ? 0 : self.weapon + 1;
-                            self.getChildByTag(TagOfPlayer.player).stopAllActions();
-                            self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
-                            self.adjustPosition (self);
+                            if(!self.isShooting && self.shootcountdown == 0) {
+                                self.weapon = self.weapon == 2 ? 0 : self.weapon + 1;
+                                self.getChildByTag(TagOfPlayer.player).stopAllActions();
+                                self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
+                                self.adjustPosition (self);
+                            }
                         break;
                     case cc.KEY.k:
                             self.levels [0] = self.levels [0] == self.levelmax ? 0 : self.levels [0] + 1;
@@ -125,14 +127,16 @@ var playerLayer = cc.Layer.extend({
                             self.adjustPosition (self);
                         break;
                     case cc.KEY.l:
-                            self.player = self.player == 1 ? 0 : self.player + 1;
-                            self.getChildByTag(TagOfPlayer.player).stopAllActions();
-                            self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
+                            if(!self.isShooting && self.shootcountdown == 0) {
+                                self.player = self.player == 1 ? 0 : self.player + 1;
+                                self.getChildByTag(TagOfPlayer.player).stopAllActions();
+                                self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
 
-                            self.getChildByTag(TagOfPlayer.anim).visible=true;
-                            self.getChildByTag(TagOfPlayer.anim).stopAllActions();
-                            self.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(self.summondeathAction[self.player],cc.callFunc(function() {self.getChildByTag(TagOfPlayer.anim).visible=false},self)));
-                            self.adjustPosition (self);
+                                self.getChildByTag(TagOfPlayer.anim).visible=true;
+                                self.getChildByTag(TagOfPlayer.anim).stopAllActions();
+                                self.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(self.summondeathAction[self.player],cc.callFunc(function() {self.getChildByTag(TagOfPlayer.anim).visible=false},self)));
+                                self.adjustPosition (self);
+                            }
                         break;
                     case cc.KEY.a:
                         self.shoot(self);
@@ -266,7 +270,7 @@ var playerLayer = cc.Layer.extend({
                 this.levels [i] +=1;
                 this.levelgrowth[i] = this.levelgrowth[i]-this.levelgrowthmax;
                 this.getChildByTag(TagOfPlayer.player).stopAllActions();
-                this.getChildByTag(TagOfPlayer.player).runAction (this.flyAction[this.player][this.weapon][this.levels[this.weapon]]);
+                this.shootEnd(this);
                 this.getChildByTag(TagOfPlayer.anim).visible=true;
                 this.getChildByTag(TagOfPlayer.anim).stopAllActions();
                 var self = this;

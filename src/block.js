@@ -44,7 +44,7 @@ var blockLayer = cc.Layer.extend({
         g_enp.changeState(encophys.RUN);
 
         //Création du block personnage
-        for (i = -2 ; i <= 2 ; i++) {
+        for (i = -1 ; i <= 1 ; i++) {
             for (j = -1 ; j <= 1 ; j++) {
                 k = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.x/g_blocksize)+i;
                 l = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.y/g_blocksize)+j;
@@ -67,15 +67,18 @@ var blockLayer = cc.Layer.extend({
         }
 
         //Détruit les blocs personnage et repositionne les blocs personnages
+        k = 0;
         for (i = 0 ; i < g_enp.size.x ; i++) {
             for (j = 0 ; j < g_enp.size.y ; j++) {
                 if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.player) {
-                    g_enp.destroy(i,j);
+                    k = Math.max(g_enp.destroy(i,j),k);
                     //g_enp.map[i][j]=null;
                     //g_enp.mapIddle[i][j]=false;
                 }
             }
         }
+        this.getParent().getChildByTag(TagOfLayer.player).health -= k;
+
         for (i = -1 ; i <= 1 ; i++) {
             for (j = -1 ; j <= 1 ; j++) {
                 k = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.x/g_blocksize)+i;
@@ -87,6 +90,7 @@ var blockLayer = cc.Layer.extend({
                     //Dégat à appliquer
                     if(k>0) {
                         this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
+                        this.getParent().getChildByTag(TagOfLayer.player).health -= k;
                     }
                 } else {
                     //ajouter dégats et mettre une animation
@@ -94,6 +98,7 @@ var blockLayer = cc.Layer.extend({
                     //Dégat à appliquer
                     if(k>0) {
                         this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
+                        this.getParent().getChildByTag(TagOfLayer.player).health -= k;
                     }
                 }
             }
@@ -172,11 +177,11 @@ var blockLayer = cc.Layer.extend({
         if(this.space < this.layer.length) {
             for(i = 0 ; i < this.lenghtx1 ; i++) {
                 material = this.layer[this.space][Math.round(this.layer[this.space].length * Math.random() - 0.5)];
-                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,10,BlockIndex.standard);
+                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,1,BlockIndex.standard);
             }
             for(i = g_enp.size.x-1 ; i > this.lenghtx2 ; i--) {
                 material = this.layer[this.space][Math.round(this.layer[this.space].length * Math.random() - 0.5)];
-                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,10,BlockIndex.standard);
+                if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,1,BlockIndex.standard);
             }
         }
 

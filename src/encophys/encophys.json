@@ -116,11 +116,11 @@
   },
   "booms":{
     "standard":{
-        "maxdiameter":6,
+        "maxdiameter":5,
         "growth":100,
         "force":50,
         "heat":500,
-        "damage":5,
+        "damage":100,
         "duration":0.5
     },
     "joannaarrow1":{
@@ -225,7 +225,7 @@
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
+        "damage":20,
         "duration":0.5
     },
     "monstersarrow4":{
@@ -241,7 +241,7 @@
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
+        "damage":20,
         "duration":0.5
     },
     "monstersarrow8":{
@@ -249,7 +249,7 @@
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
+        "damage":20,
         "duration":0.5
     },
     "monstersarrow9":{
@@ -257,7 +257,7 @@
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
+        "damage":20,
         "duration":0.5
     },
     "monstersarrow10":{
@@ -265,7 +265,7 @@
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
+        "damage":20,
         "duration":0.5
     }
   }

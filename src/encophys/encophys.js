@@ -1,11 +1,3 @@
-//TODO corriger arborescence sprites (commencer à 0, évietr arrow12)
-//TODO Menu (main - explication et loading - pause - endgame et highscore)
-//Test sprites
-//TODO Mécanique de jeu (call-back destruction, AI monster, projectiles, scores, levels, player management)
-//TODO Hightscore
-//TODO move the init to loader
-
-
 var encophys = encophys || {};
 
 encophys.PAUSE = 0;
@@ -226,6 +218,19 @@ encophys.world = function () {
                         this.map[i][j].speed.x = 0;
                         this.map[i][j].speed.y = 0;
                     }
+                } else {
+                    //Pour les autres points uniquement dégats des forces (hors friendly fire)
+                    if(this.map[i][j]!=null) {
+                        for (k = 0 ; k < this.forces.length ; k++) {
+                            if((this.map[i][j].index == BlockIndex.player && this.forces[k].type.substring (0,1) == "m") || (this.map[i][j].index >= BlockIndex.monsters && this.forces[k].type.substring (0,1) != "m")) {
+                                calc.x=Math.abs(i-this.forces[k].position.x);
+                                calc.y=Math.abs(j-this.forces[k].position.y);
+                                if(calc.x<this.forces[k].diameter && calc.y<this.forces[k].diameter) {
+                                    this.map[i][j].health-=this.booms[this.forces[k].type].damage*this.framestep;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -389,9 +394,14 @@ encophys.world = function () {
 
     //Détruit un point
     this.destroy = function (i,j) {
-        this.map[i][j]=null;
-        this.isConnectedInit (i,j);
+        if(this.map[i][j]!=null){
+            var damage = this.materials[this.map[i][j].material].basehealth - this.map[i][j].health;
+            this.map[i][j]=null;
+            this.isConnectedInit (i,j);
+        }
         this.mapIddle[i][j]=false;
+
+        return damage;
     };
 
     //Ajoute un point et créée les link adéquats

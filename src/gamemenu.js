@@ -82,15 +82,17 @@ var infoLayer = cc.Layer.extend({
         //Recalibre l'indicateur d'XP
         var xplimit = this.getParent().getChildByTag(TagOfLayer.player).levelgrowth[this.getParent().getChildByTag(TagOfLayer.player).weapon];
         var xp = this.getParent().getChildByTag(TagOfLayer.player).levels[this.getParent().getChildByTag(TagOfLayer.player).weapon];
+        var loading = !this.getParent().getChildByTag(TagOfLayer.player).isShooting && this.getParent().getChildByTag(TagOfLayer.player).shootcountdown == 0 ? 1 : 0.5 ;
+        this.getChildByTag(1000).opacity = Math.floor(255*loading);
         for(var i = 1 ; i < 3 ; i++) {
             if(i <= xp){
                 this.getChildByTag(1000+i).visible = true;
                 this.getChildByTag(1000+i).setColor(cc.color(255,255,255));
-                this.getChildByTag(1000+i).opacity = 255;
+                this.getChildByTag(1000+i).opacity = Math.floor(255*loading);
             } else {
                 if (i == xp+1) {
                     this.getChildByTag(1000+i).visible = true;
-                    this.getChildByTag(1000+i).opacity = Math.floor(xplimit*2.55);
+                    this.getChildByTag(1000+i).opacity = Math.floor(xplimit*2.55*loading);
                     this.getChildByTag(1000+i).setColor(cc.color(100,100,0));
                 } else this.getChildByTag(1000+i).visible = false;
             }

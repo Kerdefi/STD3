@@ -102,7 +102,6 @@ monster = function (layer,tag) {
         if (this.speed > 0) this.layer.getChildByTag (this.tag).flippedX = true;
         this.life = this.lifeArray [level];
         this.shootCount = this.shootTime [level];
-        this.baby
         this.dying = false;
         this.shooting=false;
     };
@@ -123,28 +122,24 @@ monster = function (layer,tag) {
             }
             this.layer.getChildByTag (this.tag).setPosition(this.layer.getChildByTag (this.tag).getPositionX() + this.speed*g_enp.framestep,this.layer.getChildByTag (this.tag).getPositionY() - (g_blocksize * g_enp.framestep * g_blockspeed));
 
-            //Protection contre un monstre zombie - sauf au premier tour
-            var blockfound=false;
-            if (this.baby) {
-                this.baby=false;
-                blockfound=true;
-            }
             //Détruit les blocs personnage et repositionne les blocs personnages
+            var k = 0;
             for (i = 0 ; i < g_enp.size.x ; i++) {
                 for (j = 0 ; j < g_enp.size.y ; j++) {
                     if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.monsters+this.tag) {
-                        g_enp.destroy(i,j);
-                        blockfound=true;
+                        k = Math.max(g_enp.destroy(i,j),k);
                         //g_enp.map[i][j]=null;
                         //g_enp.mapIddle[i][j]=false;
                     }
                 }
             }
+            this.life -= k;
+
             for (i = -this.sizeArray[this.level] ; i <= this.sizeArray[this.level] ; i++) {
                 for (j = -this.sizeArray[this.level] ; j <= this.sizeArray[this.level] ; j++) {
                     k = Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize)+i;
                     l = Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize)+j;
-                    if(g_enp.inLimits(k,l) && g_enp.map[k][l]!=null) {
+                    if(g_enp.inLimits(k,l)) {
                         //ajouter dégats et mettre une animation
                         this.life -= g_enp.addPoint(k,l,"playermonster",this.lifeArray[this.level], BlockIndex.monsters+this.tag);
                     }
@@ -152,7 +147,7 @@ monster = function (layer,tag) {
             }
 
             //TODO on vérifie que le point est en vie si ce n'est pas le cas lance l'animation
-            if(this.life <= 0 || blockfound) this.deathstart (true);
+            if(this.life <= 0) this.deathstart (true);
 
             //TODO on vérifie que le monstre n'est pas complétement hors frame
             if(k<-this.sizeArray[this.level]) this.death(this);
@@ -163,11 +158,12 @@ monster = function (layer,tag) {
     };
 
     this.shoot = function () {
-        this.shooting=true;
-        //Lance l'animation
-        this.layer.getChildByTag(this.tag).stopAllActions();
-        this.layer.getChildByTag(this.tag).runAction (new cc.Sequence(self.action[self.level][2],cc.callFunc(function() {self.shootend(self)},self)));
-
+        if(!this.isDying) {
+            this.shooting=true;
+            //Lance l'animation
+            this.layer.getChildByTag(this.tag).stopAllActions();
+            this.layer.getChildByTag(this.tag).runAction (new cc.Sequence(self.action[self.level][2],cc.callFunc(function() {self.shootend(self)},self)));
+        }
         return this.shootTime [this.level];
     };
 
@@ -195,38 +191,41 @@ monster = function (layer,tag) {
     };
 
     this.deathstart = function (withhonor) {
-        //Détruit les blocs personnage et repositionne les blocs personnages
-        for (i = 0 ; i < g_enp.size.x ; i++) {
-            for (j = 0 ; j < g_enp.size.y ; j++) {
-                if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.monsters+this.tag) {
-                    g_enp.destroy(i,j);
-                    //g_enp.map[i][j]=null;
-                    //g_enp.mapIddle[i][j]=false;
+        if(!this.shooting) {
+            //Détruit les blocs personnage et repositionne les blocs personnages
+            for (i = 0 ; i < g_enp.size.x ; i++) {
+                for (j = 0 ; j < g_enp.size.y ; j++) {
+                    if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.monsters+this.tag) {
+                        g_enp.destroy(i,j);
+                        //g_enp.map[i][j]=null;
+                        //g_enp.mapIddle[i][j]=false;
+                    }
                 }
             }
-        }
-        this.layer.getChildByTag(this.tag).stopAllActions();
-        this.layer.getChildByTag(this.tag).runAction (new cc.Sequence(self.action[self.level][1],cc.callFunc(function() {self.death(self)},self)));
-        this.dying = true;
-        //déclenche l'explosion si le monstre déclenche des explosions
-        if(this.level == 3) {
-            //boom
-            var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize));
-            g_enp.addForce(new encophys.force("monstersarrow4",boompos));
-        }
-        //Créée un bonus (si la chance est du bon côté)
-        if(Math.random()<g_bonusproba && withhonor) {
-            //Une chance sur deux d'avoir une vie par rapport à XP
-            if(Math.random()<0.5) {
-                this.layer.getParent().getChildByTag(TagOfLayer.bonus).createCoeur (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
-            } else {
-                this.layer.getParent().getChildByTag(TagOfLayer.bonus).createBonus (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
+            this.layer.getChildByTag(this.tag).stopAllActions();
+            this.layer.getChildByTag(this.tag).runAction (new cc.Sequence(self.action[self.level][1],cc.callFunc(function() {self.death(self)},self)));
+            this.dying = true;
+            //déclenche l'explosion si le monstre déclenche des explosions
+            if(this.level == 3) {
+                //boom
+                var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize));
+                g_enp.addForce(new encophys.force("monstersarrow4",boompos));
             }
-            //Augmente l'expérience
-            this.layer.getParent().getChildByTag(TagOfLayer.player).addXP(g_monsterxpgain);
-        }
+            //Créée un bonus (si la chance est du bon côté)
+            if(Math.random()<g_bonusproba && withhonor) {
+                //Une chance sur deux d'avoir une vie par rapport à XP
+                if(Math.random()<0.5) {
+                    this.layer.getParent().getChildByTag(TagOfLayer.bonus).createCoeur (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
+                } else {
+                    this.layer.getParent().getChildByTag(TagOfLayer.bonus).createBonus (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
+                }
+                //Augmente l'expérience
+                this.layer.getParent().getChildByTag(TagOfLayer.player).addXP(g_monsterxpgain);
+            }
+        } else this.life = 0;
 
-        return this.lifeArray[this.level];
+        if (this.life == 0) return 0;
+        else return this.lifeArray[this.level];
     };
 
     this.death = function (self) {
