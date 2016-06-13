@@ -1,6 +1,7 @@
 var res = {
     //new
     bkgnd_png : "res/new/bkgnd.png",
+    bkgndhelp_png : "res/new/bkgndhelp.png",
     menu_png  : "res/new/menu.png",
     menu_plist : "res/new/menu.plist",
     divers_png  : "res/new/divers.png",
@@ -28,6 +29,7 @@ var res = {
 var g_resources = [
     //new
     res.bkgnd_png,
+    res.bkgndhelp_png,
     res.menu_png,
     res.menu_plist,
     res.divers_png,

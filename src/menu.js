@@ -4,44 +4,59 @@ var MenuLayer = cc.Layer.extend({
         this._super();
     },
     init:function(){
+        g_gamestate = TagOfState.start;
+
+        var self = this;
         var winsize = cc.director.getWinSize();
 
         //Menu anims and Bkgnd
         this.addChild(new MenuBack(),1,1);
-        this.addChild(new MenuAnim(),1,1);
+        this.addChild(new MenuAnim(),1,2);
 
-        //create a menu and assign onPlay event callback to it
-        cc.spriteFrameCache.addSpriteFrames(res.menu_plist);
-        var buttonpos = cc.p(winsize.width / 2, winsize.height * 2 / 3);
-        var menuItemPlay = new cc.MenuItemSprite(
-            new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("menu/buttons/start_n.png")), // normal state image
-            new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("menu/buttons/start_s.png")), // select state image
-            this.onClick, this);
-
-        var menu = new cc.Menu(menuItemPlay);
-        menu.setAnchorPoint(0,0);
-        menu.setPosition(0,0);
-        menuItemPlay.setScale(0.75,0.75);
-        menuItemPlay.setAnchorPoint(0.5,0.5);
-        menuItemPlay.setPosition(buttonpos);
-
-        this.addChild(menu,98,200);
-
-        buttonpos = cc.p(winsize.width / 2, winsize.height * 1 / 2);
+        var pos = cc.p(winsize.width / 2, winsize.height * 1 / 2);
         this.labelBonus = new cc.LabelTTF("High score", "Helvetica", 40);
         this.labelBonus.setColor(cc.color(255,255,255));//black color
         this.labelBonus.setAnchorPoint(cc.p(0.5, 0.5));
-        this.labelBonus.setPosition(buttonpos);
+        this.labelBonus.setPosition(pos);
         this.addChild(this.labelBonus,99,100);
+
+        var pos = cc.p(winsize.width / 2, winsize.height / 2  + 100);
+        this.labelBonus = new cc.LabelTTF("Press any key to start", "Helvetica", 40);
+        this.labelBonus.setColor(cc.color(255,255,255));//black color
+        this.labelBonus.setAnchorPoint(cc.p(0.5, 0.5));
+        this.labelBonus.setPosition(pos);
+        this.addChild(this.labelBonus,99,100);
+
+        this.textAction = new cc.Sequence(new cc.scaleBy(1.5, 1.3, 1.3), new cc.scaleBy(1.5, 1 / 1.3, 1 / 1.3));
+        this.textAction.repeatForever();
+        this.textAction.setTag(1);
+
+        this.getChildByTag(100).runAction(this.textAction);
 
         //Init EncoPhys
         g_enp = new encophys.world ();
         g_enp.init ("src/encophys/encophys.json");
+
+        //Add keyboard stroke listener
+        if( 'keyboard' in cc.sys.capabilities ) {
+            cc.eventManager.addListener({
+                event: cc.EventListener.KEYBOARD,
+                onKeyReleased:function(key, event) {
+                    //Si on est en help lance le jeu
+                    if(g_gamestate==TagOfState.help) {
+                        g_gamestate=TagOfState.run;
+                        cc.director.runScene(new gameScene());
+                    }
+                    //Sinon affiche l'écran d'aide
+                    if(g_gamestate==TagOfState.start) {
+                        g_gamestate=TagOfState.help;
+                        self.addChild(new MenuHelp(),4,3);
+                    }
+                }
+            }, this);
+        }
     },
     update:function (){
-    },
-    onClick:function (){
-        cc.director.runScene(new gameScene());
     }
 });
 
@@ -67,8 +82,24 @@ var MenuBack = cc.Layer.extend({
         var spriteTitle = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("menu/buttons/start_n.png"));
         spriteTitle.setAnchorPoint(0.5,0.5);
         spriteTitle.setPosition(buttonpos);
-        spriteBG.setScale(20,20);
+        spriteTitle.setScale(4,4);
         this.addChild(spriteTitle,1,1);
+    }
+});
+
+var MenuHelp = cc.Layer.extend({
+    ctor : function(){
+        //1. call super class's ctor function
+        this._super();
+        this.init();
+    },
+    init:function(){
+        //create the background image and position it at the center of screen
+        var spriteBG = new cc.Sprite(res.bkgndhelp_png);
+        spriteBG.setAnchorPoint(0,0);
+        spriteBG.setPosition(0,0);
+        spriteBG.setScale(4,4);
+        this.addChild(spriteBG,0,0);
     }
 });
 

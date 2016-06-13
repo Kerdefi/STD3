@@ -16,6 +16,17 @@ var g_bonushealthgain = 10 ;
 var g_score = 0 ;
 var g_blockplayer = 9 ;
 
+if(typeof TagOfState == "undefined") {
+    var TagOfState = {};
+    TagOfState.start = 0;
+    TagOfState.help = 1;
+    TagOfState.run = 2;
+    TagOfState.pause = 3;
+    TagOfState.endanim = 4;
+    TagOfState.end = 5;
+}
+
+
 if(typeof TagOfLayer == "undefined") {
     var TagOfLayer = {};
     TagOfLayer.background = 0;

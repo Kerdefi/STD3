@@ -105,7 +105,7 @@
         "automove":0,
         "friction":0,
         "linkstrenght":0,
-        "basehealth":5,
+        "basehealth":1,
         "baseheat":20,
         "burnheat":19000,
         "meltheat":20000,
