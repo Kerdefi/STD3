@@ -8,6 +8,8 @@ var gameLayer = cc.Layer.extend({
         //call super class's super function
         this._super();
 
+        var self = this;
+
         g_enp.reset();
         g_score = 0;
 
@@ -20,6 +22,10 @@ var gameLayer = cc.Layer.extend({
         this.addChild(new monstersbulletLayer(),6,TagOfLayer.monstersbullet);
         this.addChild(new bonusLayer(),7,TagOfLayer.bonus);
         this.addChild(new infoLayer(),50,TagOfLayer.info);
+        this.addChild(new pauseLayer(),15,TagOfLayer.pause);
+        this.addChild(new endLayer(),15,TagOfLayer.end);
+
+        this.getChildByTag(TagOfLayer.pause).visible=false;
 
         this.getChildByTag(TagOfLayer.booms).init();
         this.getChildByTag(TagOfLayer.block).init ();
@@ -27,19 +33,47 @@ var gameLayer = cc.Layer.extend({
         this.getChildByTag(TagOfLayer.monstersbullet).init ();
         this.getChildByTag(TagOfLayer.info).init ();
 
+        //Add keyboard stroke listener
+        if('keyboard' in cc.sys.capabilities ) {
+            cc.eventManager.addListener({
+                event: cc.EventListener.KEYBOARD,
+                onKeyReleased:function(key, event) {
+                    //Si on est en help lance le jeu
+                    if(key == cc.KEY.p && g_gamestate==TagOfState.run) {
+                        g_gamestate=TagOfState.pause;
+                        g_enp.changeState (encophys.PAUSE);
+                        self.getChildByTag(TagOfLayer.pause).visible=true;
+                    } else {
+                        if(g_gamestate==TagOfState.pause) {
+                            if(key == cc.KEY.z || key == cc.KEY.s) {
+                                self.getChildByTag(TagOfLayer.pause).Toggle ();
+                            }
+                            if(key == cc.KEY.a) {
+                                self.getChildByTag(TagOfLayer.pause).Click ();
+                                self.getChildByTag(TagOfLayer.pause).visible=false;
+                                g_enp.changeState (encophys.RUN);
+                            }
+                        }
+                    }
+                }
+            }, this);
+        }
+
         this.scheduleUpdate();
     },
 
     update:function () {
-        this.getChildByTag(TagOfLayer.block).onUpdate();
-        this.getChildByTag(TagOfLayer.player).onUpdate();
-        this.getChildByTag(TagOfLayer.bullets).onUpdate();
-        this.getChildByTag(TagOfLayer.booms).onUpdate();
-        this.getChildByTag(TagOfLayer.monsters).onUpdate();
-        this.getChildByTag(TagOfLayer.monstersbullet).onUpdate();
-        this.getChildByTag(TagOfLayer.bonus).onUpdate();
-        this.getChildByTag(TagOfLayer.info).onUpdate();
-        g_gamestate = 1;
+        if (g_gamestate == TagOfState.run) {
+            this.getChildByTag(TagOfLayer.block).onUpdate();
+
+            this.getChildByTag(TagOfLayer.bullets).onUpdate();
+            this.getChildByTag(TagOfLayer.booms).onUpdate();
+            this.getChildByTag(TagOfLayer.monsters).onUpdate();
+            this.getChildByTag(TagOfLayer.monstersbullet).onUpdate();
+            this.getChildByTag(TagOfLayer.bonus).onUpdate();
+            this.getChildByTag(TagOfLayer.info).onUpdate();
+        }
+        if (g_gamestate == TagOfState.run || g_gamestate == TagOfState.endanim) this.getChildByTag(TagOfLayer.player).onUpdate();
     }
 });
 
@@ -65,5 +99,8 @@ var gameScene = cc.Scene.extend({
         this._super();
         var layer = new gameLayer();
         this.addChild(layer,0,0);
+    },
+    onExit:function () {
+        this._super();
     }
 });

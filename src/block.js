@@ -109,25 +109,23 @@ var blockLayer = cc.Layer.extend({
         if(this.frameburnmax < this.frameburn) {this.frameburn=0; this.burn=1-this.burn;}
 
         //Affichage des blocks
-        if(g_gamestate == 1){
-            for (i = 0 ; i < g_enp.size.x ; i++) {
-                for (j = 0 ; j < g_enp.size.y ; j++) {
-                    if(!g_enp.mapIddle[i][j]) {
-                        if(g_enp.map[i][j]!=null) {
-                            if(g_enp.map[i][j].index==BlockIndex.standard) {
-                                this.getChildByTag(1000+i+j*1000).visible=true;
-                                this.getChildByTag(1000+i+j*1000).setPosition(i*g_blocksize+g_enp.map[i][j].smoothposition.x*g_blocksize, j*g_blocksize+g_enp.map[i][j].smoothposition.y*g_blocksize);
+        for (i = 0 ; i < g_enp.size.x ; i++) {
+            for (j = 0 ; j < g_enp.size.y ; j++) {
+                if(!g_enp.mapIddle[i][j]) {
+                    if(g_enp.map[i][j]!=null) {
+                        if(g_enp.map[i][j].index==BlockIndex.standard) {
+                            this.getChildByTag(1000+i+j*1000).visible=true;
+                            this.getChildByTag(1000+i+j*1000).setPosition(i*g_blocksize+g_enp.map[i][j].smoothposition.x*g_blocksize, j*g_blocksize+g_enp.map[i][j].smoothposition.y*g_blocksize);
 
-                                if(g_enp.map[i][j].heat >= g_enp.materials[g_enp.map[i][j].material].burnheat && g_enp.materials[g_enp.map[i][j].material].burnheat < g_enp.materials[g_enp.map[i][j].material].meltheat) {
-                                    this.getChildByTag(1000+i+j*1000).setTexture(res[g_enp.map[i][j].material+"burn"+this.burn+"_png"]);
-                                } else {
-                                    this.getChildByTag(1000+i+j*1000).setTexture(res[g_enp.map[i][j].material+"_png"]);
-                                }
-                            } else this.getChildByTag(1000+i+j*1000).visible=false;
+                            if(g_enp.map[i][j].heat >= g_enp.materials[g_enp.map[i][j].material].burnheat && g_enp.materials[g_enp.map[i][j].material].burnheat < g_enp.materials[g_enp.map[i][j].material].meltheat) {
+                                this.getChildByTag(1000+i+j*1000).setTexture(res[g_enp.map[i][j].material+"burn"+this.burn+"_png"]);
+                            } else {
+                                this.getChildByTag(1000+i+j*1000).setTexture(res[g_enp.map[i][j].material+"_png"]);
+                            }
                         } else this.getChildByTag(1000+i+j*1000).visible=false;
-                    }
-                    g_enp.mapIddle[i][j]=true;
+                    } else this.getChildByTag(1000+i+j*1000).visible=false;
                 }
+                g_enp.mapIddle[i][j]=true;
             }
         }
     },

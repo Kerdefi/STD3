@@ -37,6 +37,7 @@ var infoLayer = cc.Layer.extend({
         }
 
         //affichage du score
+        g_score = 0;
         this.labelScore = new cc.LabelTTF("Score : "+g_score, "Helvetica", 30);
         this.labelScore.setColor(cc.color(255,215,0));//black color
         this.labelScore.setAnchorPoint(cc.p(0, 0));
@@ -46,6 +47,8 @@ var infoLayer = cc.Layer.extend({
 
     onUpdate:function () {
         //Change le score
+        g_score += g_enp.framestep*g_blockspeed;
+        this.getChildByTag(10000).setString ("Score : " + Math.round(g_score) + " fps : "+ Math.round(cc.director._frameRate));
 
         //Recalibre l'indicateur de vie
         var healthlimit = Math.min(this.getParent().getChildByTag(TagOfLayer.player).health,this.getParent().getChildByTag(TagOfLayer.player).maxhealth) % 10 ;
@@ -105,13 +108,64 @@ var pauseLayer = cc.Layer.extend({
 
     ctor:function () {
         this._super();
+        this.init();
     },
 
     init:function () {
         this._super();
+
+        this.selected = 0;
+
+        //create the blur layer
+        var spriteBG = new cc.Sprite(res.bkgnd_png);
+        //spriteBG.texture.setAliasTexParameters(false);
+        spriteBG.setAnchorPoint(0,0);
+        spriteBG.setPosition(0,0);
+        spriteBG.setScale(4,4);
+        spriteBG.opacity = 200;
+        this.addChild(spriteBG,0,2);
+
+        var winsize = cc.director.getWinSize();
+
+        var pos = cc.p(winsize.width / 2, winsize.height * 1.2 / 3);
+        this.labelBonus = new cc.LabelTTF("Continue", "Helvetica", 30);
+        this.labelBonus.setColor(cc.color(255,215,0));//black color
+        this.labelBonus.setAnchorPoint(cc.p(0.5, 0.5));
+        this.labelBonus.setPosition(pos);
+        this.addChild(this.labelBonus,99,0);
+
+        var pos = cc.p(winsize.width / 2, winsize.height / 3);
+        this.labelBonus = new cc.LabelTTF("Quit", "Helvetica", 30);
+        this.labelBonus.setColor(cc.color(255,215,0));//black color
+        this.labelBonus.setAnchorPoint(cc.p(0.5, 0.5));
+        this.labelBonus.setPosition(pos);
+        this.addChild(this.labelBonus,99,1);
+
+        this.textAction = new cc.Sequence(new cc.scaleBy(0.5, 1.1, 1.1), new cc.scaleBy(0.5, 1 / 1.1, 1 / 1.1));
+        this.textAction.repeatForever();
+        this.textAction.setTag(1);
+
+        this.getChildByTag(0).runAction(this.textAction);
     },
 
-    onUpdate:function () {
+    Toggle:function () {
+        if(this.selected == 0) {
+            this.getChildByTag(0).stopAllActions ();
+            this.getChildByTag(1).runAction(this.textAction);
+        } else {
+            this.getChildByTag(1).stopAllActions ();
+            this.getChildByTag(0).runAction(this.textAction);
+        }
+        this.selected = 1 - this.selected;
+    },
+
+    Click:function () {
+        if(this.selected == 0) {
+            g_gamestate = TagOfState.run;
+        } else {
+            g_gamestate = TagOfState.run;
+            this.getParent().getChildByTag(TagOfLayer.player).health = 0;
+        }
     }
 });
 
@@ -125,8 +179,109 @@ var endLayer = cc.Layer.extend({
 
     init:function () {
         this._super();
-    },
 
-    onUpdate:function () {
+        this.selected = 0;
+        this.letter = [0,1,2];
+        this.alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+
+        //create the blur layer
+        var spriteBG = new cc.Sprite(res.bkgnd_png);
+        //spriteBG.texture.setAliasTexParameters(false);
+        spriteBG.setAnchorPoint(0,0);
+        spriteBG.setPosition(0,0);
+        spriteBG.setScale(4,4);
+        spriteBG.opacity = 200;
+        this.addChild(spriteBG,0,10);
+
+        var winsize = cc.director.getWinSize();
+
+        //Titre (à remplacer par un sprite)
+        var pos = cc.p(winsize.width / 2, winsize.height * 1.5 / 3);
+        var label = new cc.LabelTTF("Game Over", "Helvetica", 30);
+        label.setColor(cc.color(255,215,0));//black color
+        label.setAnchorPoint(cc.p(0.5, 0.5));
+        label.setPosition(pos);
+        this.addChild(label,99,0);
+
+        //Label score
+        pos = cc.p(winsize.width / 2, winsize.height * 1.4 / 3);
+        label = new cc.LabelTTF("Score : " + Math.round(g_score), "Helvetica", 30);
+        label.setColor(cc.color(255,215,0));//black color
+        label.setAnchorPoint(cc.p(0.5, 0.5));
+        label.setPosition(pos);
+        this.addChild(label,99,1);
+
+        //Label enter your name
+        pos = cc.p(winsize.width / 2, winsize.height * 1.3 / 3);
+        label = new cc.LabelTTF("Enter your name", "Helvetica", 30);
+        label.setColor(cc.color(255,215,0));//black color
+        label.setAnchorPoint(cc.p(0.5, 0.5));
+        label.setPosition(pos);
+        this.addChild(label,99,2);
+
+        //Lettres
+        pos = cc.p(winsize.width * 0.5 / 2, winsize.height * 1 / 3);
+        label = new cc.LabelTTF("A", "Helvetica", 100);
+        label.setColor(cc.color(255,215,0));//black color
+        label.setAnchorPoint(cc.p(0.5, 0.5));
+        label.setPosition(pos);
+        this.addChild(label,99,3);
+
+        pos = cc.p(winsize.width / 2, winsize.height * 1 / 3);
+        label = new cc.LabelTTF("B", "Helvetica", 100);
+        label.setColor(cc.color(255,215,0));//black color
+        label.setAnchorPoint(cc.p(0.5, 0.5));
+        label.setPosition(pos);
+        this.addChild(label,99,4);
+
+        pos = cc.p(winsize.width * 1.5 / 2, winsize.height * 1 / 3);
+        label = new cc.LabelTTF("C", "Helvetica", 100);
+        label.setColor(cc.color(255,215,0));//black color
+        label.setAnchorPoint(cc.p(0.5, 0.5));
+        label.setPosition(pos);
+        this.addChild(label,99,5);
+
+        this.textAction = new cc.Sequence(new cc.scaleBy(0.5, 1.1, 1.1), new cc.scaleBy(0.5, 1 / 1.1, 1 / 1.1));
+        this.textAction.repeatForever();
+        this.textAction.setTag(1);
+
+        this.getChildByTag(3).runAction(this.textAction);
+
+        var self = this;
+
+        //Add keyboard stroke listener
+        if('keyboard' in cc.sys.capabilities ) {
+            cc.eventManager.addListener({
+                event: cc.EventListener.KEYBOARD,
+                onKeyReleased:function(key, event) {
+                    //Si on est en help lance le jeu
+                    if(key == cc.KEY.z) {self.letter[self.selected] = (self.letter[self.selected] + 1) % 26;}
+                    if(key == cc.KEY.s) {self.letter[self.selected] = self.letter[self.selected] - 1 == -1 ? 25 : self.letter[self.selected] - 1;}
+                    self.getChildByTag(self.selected+3).setString(self.alphabet[self.letter[self.selected]]);
+                    if(key == cc.KEY.a) {
+                        //fin complète du jeu
+                        if(self.selected < 2) {
+                            self.selected++;
+                            self.getChildByTag(2+self.selected).stopAllActions();
+                            self.getChildByTag(2+self.selected).runAction(self.textAction);
+                            self.getChildByTag(3+self.selected).runAction(self.textAction);
+                        }
+                        else {
+                            for (var i = 4 ; i >= 0 ; i--) {
+                                if(g_score > g_highscore.score[i] && (i==0 || g_highscore.score[i-1] > g_score)) {
+                                    g_highscore.score.splice(i,0,Math.round(g_score));
+                                    g_highscore.player.splice(i,0,self.alphabet[self.letter[0]]+self.alphabet[self.letter[1]]+self.alphabet[self.letter[2]]);
+                                    g_highscore.score.pop();
+                                    g_highscore.player.pop();
+                                    i = -5;
+                                }
+                            }
+                            cc.sys.localStorage.setItem("HighScore", JSON.stringify(g_highscore));
+                            cc.director.runScene(new MenuScene());
+                        }
+                    }
+                }
+            }, this);
+        }
     }
 });

@@ -4,6 +4,9 @@ var MenuLayer = cc.Layer.extend({
         this._super();
     },
     init:function(){
+        //charge le score
+        g_highscore = JSON.parse(cc.sys.localStorage.getItem("HighScore")) != null ? JSON.parse(cc.sys.localStorage.getItem("HighScore")) : g_highscore;
+
         g_gamestate = TagOfState.start;
 
         var self = this;
@@ -13,21 +16,31 @@ var MenuLayer = cc.Layer.extend({
         this.addChild(new MenuBack(),1,1);
         this.addChild(new MenuAnim(),1,2);
 
-        var pos = cc.p(winsize.width / 2, winsize.height * 1 / 2);
-        this.labelBonus = new cc.LabelTTF("High score", "Helvetica", 40);
-        this.labelBonus.setColor(cc.color(255,255,255));//black color
+        //hight score
+        var pos = cc.p(winsize.width / 2, winsize.height * (1 / 2 + 1/16));
+        var label = new cc.LabelTTF("High score", "Helvetica", 30);
+        label.setColor(cc.color(255,255,255));//black color
+        label.setAnchorPoint(cc.p(0.5, 0.5));
+        label.setPosition(pos);
+        this.addChild(label,99,49);
+
+        for (var i = 0 ; i < 5 ; i++) {
+            var pos = cc.p(winsize.width / 2, winsize.height * (1 / 2 - i*1/16));
+            var label = new cc.LabelTTF(g_highscore.player[i] + " ...... "+ g_highscore.score[i], "Helvetica", 30);
+            label.setColor(cc.color(255,215+i*10,i*255/4));//black color
+            label.setAnchorPoint(cc.p(0.5, 0.5));
+            label.setPosition(pos);
+            this.addChild(label,99,50+i);
+        }
+
+        var pos = cc.p(winsize.width / 2, winsize.height / 20);
+        this.labelBonus = new cc.LabelTTF("Press any key to start", "Helvetica", 30);
+        this.labelBonus.setColor(cc.color(255,215,0));//black color
         this.labelBonus.setAnchorPoint(cc.p(0.5, 0.5));
         this.labelBonus.setPosition(pos);
         this.addChild(this.labelBonus,99,100);
 
-        var pos = cc.p(winsize.width / 2, winsize.height / 2  + 100);
-        this.labelBonus = new cc.LabelTTF("Press any key to start", "Helvetica", 40);
-        this.labelBonus.setColor(cc.color(255,255,255));//black color
-        this.labelBonus.setAnchorPoint(cc.p(0.5, 0.5));
-        this.labelBonus.setPosition(pos);
-        this.addChild(this.labelBonus,99,100);
-
-        this.textAction = new cc.Sequence(new cc.scaleBy(1.5, 1.3, 1.3), new cc.scaleBy(1.5, 1 / 1.3, 1 / 1.3));
+        this.textAction = new cc.Sequence(new cc.scaleBy(0.5, 1.1, 1.1), new cc.scaleBy(0.5, 1 / 1.1, 1 / 1.1));
         this.textAction.repeatForever();
         this.textAction.setTag(1);
 
@@ -57,6 +70,9 @@ var MenuLayer = cc.Layer.extend({
         }
     },
     update:function (){
+        for (var i = 0 ; i < 5 ; i++) {
+            this.getChildByTag(50+i).setString(g_highscore.player[i] + " ...... "+ g_highscore.score[i]);
+        }
     }
 });
 

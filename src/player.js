@@ -89,11 +89,11 @@ var playerLayer = cc.Layer.extend({
         this.addChild(damage,2,TagOfPlayer.damage);
 
         //Add keyboard stroke listener
-        if( 'keyboard' in cc.sys.capabilities ) {
+        if( 'keyboard' in cc.sys.capabilities) {
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
                 onKeyReleased:function(key, event) {
-                    switch(key) {
+                    if(g_gamestate == TagOfState.run) { switch(key) {
                     case cc.KEY.q:
                         self.playerspeed.x=self.playerspeed.x < 0 ? 0 : self.playerspeed.x;
                         break;
@@ -141,13 +141,14 @@ var playerLayer = cc.Layer.extend({
                     case cc.KEY.a:
                         self.shoot(self);
                         break;
-                    }
+                    }}
                 }
             }, this);
+
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
                 onKeyPressed:function(key, event) {
-                    switch(key) {
+                    if(g_gamestate == TagOfState.run) { switch(key) {
                     case cc.KEY.q:
                         self.playerspeed.x=-self.playerspeedmax;
                         self.getChildByTag(TagOfPlayer.player).flippedX = true;
@@ -162,7 +163,7 @@ var playerLayer = cc.Layer.extend({
                     case cc.KEY.z:
                         self.playerspeed.y=self.playerspeedmax;
                         break;
-                    }
+                    }}
                 }
             }, this);
         }
@@ -241,6 +242,23 @@ var playerLayer = cc.Layer.extend({
     },
 
     onUpdate:function () {
+        //Détecte si la partie est finie
+        if(this.health <= 0 && g_gamestate == TagOfState.run) {
+            g_gamestate = TagOfState.endanim ;
+            var self = this;
+            this.playerspeed.x = 0;
+            this.playerspeed.y = 0;
+
+            this.getChildByTag(TagOfPlayer.player).runAction(new cc.FadeOut(0.5));
+
+            this.getChildByTag(TagOfPlayer.anim).visible=true;
+            this.getChildByTag(TagOfPlayer.anim).stopAllActions();
+            this.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(self.summondeathAction[self.player],cc.callFunc(function() {
+                g_gamestate = TagOfState.end;
+                self.getParent().getChildByTag(TagOfLayer.end).init();
+            },this)));
+        }
+
         //mise à jour de la position
         if(this.playerspeed.x != 0 || this.playerspeed.y != 0) {
             this.playerposition.x+=this.playerspeed.x*g_enp.framestep;

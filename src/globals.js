@@ -15,6 +15,9 @@ var g_bonusxpgain = 30 ;
 var g_bonushealthgain = 10 ;
 var g_score = 0 ;
 var g_blockplayer = 9 ;
+var g_highscore = {} ;
+g_highscore.player = ["ABC","ABC","ABC","ABC","ABC"];
+g_highscore.score = [100,20,10,5,1];
 
 if(typeof TagOfState == "undefined") {
     var TagOfState = {};
@@ -42,6 +45,8 @@ if(typeof TagOfLayer == "undefined") {
     TagOfLayer.monsters = 10;
     TagOfLayer.monstersbullet = 11;
     TagOfLayer.info = 12;
+    TagOfLayer.pause = 13;
+    TagOfLayer.end = 14;
 };
 
 if(typeof TagOfAction == "undefined") {
