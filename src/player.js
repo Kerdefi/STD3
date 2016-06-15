@@ -20,7 +20,7 @@ var playerLayer = cc.Layer.extend({
         this.player = 0;
         this.playerposition = new cc.math.Vec2(100, 300);
         this.playerspeed = new cc.math.Vec2(0, 0);
-        this.playerspeedmax = 250;
+        this.playerspeedmax = 400;
         this.damage = 0;
         this.damageduration = 0.1;
 

@@ -13,6 +13,8 @@ var gameLayer = cc.Layer.extend({
         g_enp.reset();
         g_score = 0;
 
+        this.level = 0;
+
         this.addChild(new gameBack(),0,TagOfLayer.background);
         this.addChild(new playerLayer(),2,TagOfLayer.player);
         this.addChild(new blockLayer(),1,TagOfLayer.block);
@@ -65,13 +67,13 @@ var gameLayer = cc.Layer.extend({
     update:function () {
         if (g_gamestate == TagOfState.run) {
             this.getChildByTag(TagOfLayer.block).onUpdate();
-
             this.getChildByTag(TagOfLayer.bullets).onUpdate();
             this.getChildByTag(TagOfLayer.booms).onUpdate();
             this.getChildByTag(TagOfLayer.monsters).onUpdate();
             this.getChildByTag(TagOfLayer.monstersbullet).onUpdate();
             this.getChildByTag(TagOfLayer.bonus).onUpdate();
             this.getChildByTag(TagOfLayer.info).onUpdate();
+            this.level = Math.min (9,Math.round(g_score/50));
         }
         if (g_gamestate == TagOfState.run || g_gamestate == TagOfState.endanim) this.getChildByTag(TagOfLayer.player).onUpdate();
     }

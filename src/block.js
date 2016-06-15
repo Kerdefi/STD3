@@ -3,17 +3,47 @@ var blockLayer = cc.Layer.extend({
         this._super();
         this.offsetblock = 0;
         this.space = 0;
-        this.minspace = 10;
-        this.layer = [["stone"],["wood","wood","grass","wood","grass"]];
-        this.lenghtx1 = 0 ;
+
+        //level des monsters
+        this.monster = [
+            [0,1],
+            [0,1,2],
+            [0,1,2,3],
+            [1,2,3,4],
+            [1,2,3,4],
+            [2,3,4,5],
+            [3,4,5,6],
+            [4,5,6,7],
+            [4,5,6,7,8],
+            [4,6,7,8,9,9]
+        ];
+        //level des maxmonsters
+        this.probamonster = [1.5,2.3,2.5,3.3,3.3,2.5,2.5,1.8,1.8,1.8];
+        //level des min et maxlength
+        this.minlenght = [10,11,12,13,14,15,16,17,18,19];
+        this.maxlenght = [15,16,17,18,19,20,21,22,23,24];
+        //level des minspace
+        this.minspace = [14,13,13,12,12,12,12,12,12,12];
+        //level des layers
+        this.layer = [
+            [["wood"],["grass"]],
+            [["wood"],["wood","grass"]],
+            [["ice"],["ice","water"]],
+            [["ice"],["ice","water","water","void"]],
+            [["stone"],["stone","wood"]],
+            [["stone"],["stone","wood","wood","wood","wood","wood","lava","void","void","void"]],
+            [["stone"],["ice"],["water","ice","ice","void"]],
+            [["stone"],["ice"],["ice","ice","ice","ice","ice","ice","ice","lava","void","void","void"]],
+            [["stone"],["stone"],["stone","lava","lava"]],
+            [["stone"],["stone"],["stone","lava","lava","lava"],["lava","lava","void"]]
+        ];
+        this.spawnproba = 0.8;
+
+        this.lenghtx1 = 0;
         this.lenghtx2 = 0;
-        this.minlenght = 20 ;
-        this.maxlenght = 25 ;
-        this.spawnproba = 0.5;
         this.burn = 0;
         this.frameburn = 0;
         this.frameburnmax = 5 ;
-
         this.setAnchorPoint(0,0);
         this.setPosition(0,0);
     },
@@ -163,33 +193,50 @@ var blockLayer = cc.Layer.extend({
     populate:function() {
         var material ;
         var i = 0;
+        var l = this.getParent().level;
 
         //Fixe la forme de la couche
         if(this.space == 0) {
-            this.lenghtx1 = Math.round(Math.random()*(this.maxlenght-this.minlenght+1)) + this.minlenght;
+            this.lenghtx1 = Math.round(Math.random()*(this.maxlenght[l]-this.minlenght[l]+1)) + this.minlenght[l];
             this.lenghtx2 = Math.round(Math.random()*this.lenghtx1);
             this.lenghtx1 -= this.lenghtx2;
             this.lenghtx2 = g_enp.size.x - this.lenghtx2;
         }
         //Créée la couche tant que l'on est dans l'épaisseur admise (caractérisée par la taille du tableau layer)
-        if(this.space < this.layer.length) {
+        if(this.space < this.layer[l].length) {
             for(i = 0 ; i < this.lenghtx1 ; i++) {
-                material = this.layer[this.space][Math.round(this.layer[this.space].length * Math.random() - 0.5)];
+                material = this.layer[l][this.space][Math.round(this.layer[l][this.space].length * Math.random() - 0.5)];
                 if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,1,BlockIndex.standard);
             }
             for(i = g_enp.size.x-1 ; i > this.lenghtx2 ; i--) {
-                material = this.layer[this.space][Math.round(this.layer[this.space].length * Math.random() - 0.5)];
+                material = this.layer[l][this.space][Math.round(this.layer[l][this.space].length * Math.random() - 0.5)];
                 if(material !="void") g_enp.addPoint(i,g_enp.size.y-1,material,1,BlockIndex.standard);
             }
         }
 
         //Incrémente et décide de créer une nouvelle couche
         this.space += 1 ;
-        if(this.space > this.minspace && Math.random() < this.spawnproba) this.space = 0;
+        if(this.space > this.minspace[l] && Math.random() < this.spawnproba) this.space = 0;
 
         //zone de création de monstres
-        if (this.space == Math.round(this.minspace/2)+3) {
-            this.getParent().getChildByTag(TagOfLayer.monsters).addMonster(new cc.math.Vec2 (400,1024),Math.round(Math.random()*9));
+        if (this.space == Math.round(this.minspace[l]/2)+1) {
+            i = this.probamonster[l];
+            while (i > 2) {
+                material = this.monster[l][Math.round(this.monster[l].length * Math.random() - 0.5)];
+                this.getParent().getChildByTag(TagOfLayer.monsters).addMonster(new cc.math.Vec2 (200+(Math.random()*100-50),1100+(Math.random()*100-50)),material);
+                i--;
+            }
+            if(Math.random()<=i-1) {
+                //monstre 1
+                material = this.monster[l][Math.round(this.monster[l].length * Math.random() - 0.5)];
+                this.getParent().getChildByTag(TagOfLayer.monsters).addMonster(new cc.math.Vec2 (200+(Math.random()*100-50),1100+(Math.random()*100-50)),material);
+                //monstre 2
+                material = this.monster[l][Math.round(this.monster[l].length * Math.random() - 0.5)];
+                this.getParent().getChildByTag(TagOfLayer.monsters).addMonster(new cc.math.Vec2 (400+(Math.random()*100-50),1100+(Math.random()*100-50)),material);
+            } else {
+                material = this.monster[l][Math.round(this.monster[l].length * Math.random() - 0.5)];
+                this.getParent().getChildByTag(TagOfLayer.monsters).addMonster(new cc.math.Vec2 (300+(Math.random()*100-50),1100+(Math.random()*100-50)),material);
+            }
         }
     }
 });

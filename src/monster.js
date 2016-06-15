@@ -88,18 +88,18 @@ monster = function (layer,tag) {
 
     //Créée et lie à un point encophys
     this.create = function (position, level) {
-        this.position = position;
-        i = Math.round(this.position.x/g_blocksize);
-        j = Math.round(this.position.y/g_blocksize);
+        i = Math.round(position.x/g_blocksize);
+        j = Math.round(position.y/g_blocksize);
 
         this.isAlive = true;
         this.layer.getChildByTag (this.tag).visible=true;
-        this.layer.getChildByTag (this.tag).setPosition(this.position);
+        this.layer.getChildByTag (this.tag).setPosition(position);
         this.layer.getChildByTag(this.tag).stopAllActions();
         this.layer.getChildByTag(this.tag).runAction (this.action[level][0]);
         this.level = level;
-        this.speed = g_monstersmaxspeed * 1-2*Math.round(Math.random());
+        this.speed = g_monstersmaxspeed * (1-2*Math.round(Math.random()));
         if (this.speed > 0) this.layer.getChildByTag (this.tag).flippedX = true;
+        else this.layer.getChildByTag (this.tag).flippedX = false;
         this.life = this.lifeArray [level];
         this.shootCount = this.shootTime [level];
         this.dying = false;
@@ -108,8 +108,14 @@ monster = function (layer,tag) {
 
     this.onUpdate = function () {
         if(!this.dying) {
-            k = Math.max(0,Math.min(g_enp.size.x,Math.round(this.position.x/g_blocksize)));
-            l = Math.max(0,Math.min(g_enp.size.y,Math.round(this.position.y/g_blocksize)));
+            k = Math.max(0,Math.min(g_enp.size.x,Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize)));
+            l = Math.min(g_enp.size.y,Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize));
+
+            //TODO on vérifie que le monstre n'est pas complétement hors frame
+            if(l<-this.sizeArray[this.level]) {
+                this.death(this);
+                return 0;
+            } else l = Math.max(0,l);
 
             if((this.layer.getChildByTag (this.tag).getPositionX() + this.speed*g_enp.framestep)/g_blocksize < 1) {
                 this.speed = g_monstersmaxspeed ;
@@ -148,9 +154,6 @@ monster = function (layer,tag) {
 
             //TODO on vérifie que le point est en vie si ce n'est pas le cas lance l'animation
             if(this.life <= 0) this.deathstart (true);
-
-            //TODO on vérifie que le monstre n'est pas complétement hors frame
-            if(k<-this.sizeArray[this.level]) this.death(this);
 
             //TODO shoot et update timer
             if(this.canShoot[this.level] && !this.shooting) this.shootCount = this.shootCount - g_enp.framestep > 0 ? this.shootCount - g_enp.framestep : this.shoot ();
@@ -230,6 +233,7 @@ monster = function (layer,tag) {
 
     this.death = function (self) {
         //libère l'espace
+        this.layer.getChildByTag(this.tag).stopAllActions();
         self.isAlive = false;
         self.layer.getChildByTag (self.tag).visible=false;
     };

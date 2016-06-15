@@ -411,6 +411,8 @@ encophys.world = function () {
             var damagedone = 0;
             if(this.map[x][y]!=null && this.map[x][y].index != index) {
                 damagedone = this.map[x][y].damage;
+                //exception si croisement de monstre
+                if(this.map[x][y].index >= BlockIndex.monsters && index >= BlockIndex.monsters) damagedone = 0;
                 this.isConnectedInit(x,y);
             }
 
