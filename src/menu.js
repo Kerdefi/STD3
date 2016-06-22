@@ -4,6 +4,8 @@ var MenuLayer = cc.Layer.extend({
         this._super();
     },
     init:function(){
+
+        this._super();
         //charge le score
         g_highscore = JSON.parse(cc.sys.localStorage.getItem("HighScore")) != null ? JSON.parse(cc.sys.localStorage.getItem("HighScore")) : g_highscore;
 
@@ -68,11 +70,16 @@ var MenuLayer = cc.Layer.extend({
                 }
             }, this);
         }
+
+        this.gp = new gp_check (this);
+
+        this.scheduleUpdate();
     },
     update:function (){
         for (var i = 0 ; i < 5 ; i++) {
             this.getChildByTag(50+i).setString(g_highscore.player[i] + " ...... "+ g_highscore.score[i]);
         }
+        this.gp.update();
     }
 });
 

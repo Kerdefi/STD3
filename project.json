@@ -23,6 +23,7 @@
         "src/booms.js",
         "src/monster.js",
         "src/monsterbullet.js",
-        "src/gamemenu.js"
+        "src/gamemenu.js",
+        "src/gp.js"
     ]
 }

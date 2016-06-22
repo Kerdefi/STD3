@@ -221,8 +221,9 @@ var playerLayer = cc.Layer.extend({
     shoot:function (self) {
         if (!self.isShooting && self.shootcountdown==0 && (self.weapon!=2 || self.mana >= self.manacost)) {
             if(self.weapon == 0) {
-                var pos = new cc.math.Vec2(Math.round(self.playerposition.x/g_blocksize),Math.round(self.playerposition.y/g_blocksize));
-                g_enp.addForce (new encophys.force ("standard", pos));
+                var pos = new cc.math.Vec2(Math.round(self.playerposition.x/g_blocksize),Math.round((self.playerposition.y+2)/g_blocksize));
+                if(self.player == 0) g_enp.addForce (new encophys.force ("joannasword"+(self.levels[self.weapon]+1), pos));
+                else g_enp.addForce (new encophys.force ("nicolassword"+(self.levels[self.weapon]+1), pos));
             } else {
                 //crée le projectile
                 var projectilepos = new cc.math.Vec2(self.playerposition.x, self.playerposition.y+g_blocksize*3);

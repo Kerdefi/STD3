@@ -6,14 +6,13 @@
   "heatTransferRate":0.1,
   "burnrate":0.4,
   "roundlimit":80,
-  "collisionfriction":0.8,
   "size":{"x":26,"y":35},
   "materials":{
     "stone":{
-        "mass":10,
+        "mass":6,
         "automove":0,
         "friction":0.02,
-        "linkstrenght":2,
+        "linkstrenght":30,
         "basehealth":100,
         "baseheat":20,
         "burnheat":5000,
@@ -75,7 +74,7 @@
         "fix":false
     },
     "lava":{
-        "mass":10,
+        "mass":6,
         "automove":0.4,
         "friction":0.02,
         "linkstrenght":0,
@@ -123,6 +122,54 @@
         "damage":100,
         "duration":0.5
     },
+    "nicolassword1":{
+        "maxdiameter":3,
+        "growth":100,
+        "force":50,
+        "heat":50,
+        "damage":250,
+        "duration":0.2
+    },
+    "nicolassword2":{
+        "maxdiameter":4,
+        "growth":100,
+        "force":1000,
+        "heat":100,
+        "damage":500,
+        "duration":0.5
+    },
+    "nicolassword3":{
+        "maxdiameter":5,
+        "growth":100,
+        "force":150,
+        "heat":300,
+        "damage":50,
+        "duration":0.5
+    },
+    "joannasword1":{
+        "maxdiameter":1,
+        "growth":100,
+        "force":50,
+        "heat":-50,
+        "damage":250,
+        "duration":0.2
+    },
+    "joannasword2":{
+        "maxdiameter":2,
+        "growth":100,
+        "force":100,
+        "heat":-100,
+        "damage":500,
+        "duration":0.2
+    },
+    "joannasword3":{
+        "maxdiameter":3,
+        "growth":100,
+        "force":150,
+        "heat":-200,
+        "damage":750,
+        "duration":0.2
+    },
     "joannaarrow1":{
         "maxdiameter":1,
         "growth":100,
@@ -146,8 +193,7 @@
         "heat":50,
         "damage":5,
         "duration":0.5
-    }
-    ,
+    },
     "joannaspell1":{
         "maxdiameter":2,
         "growth":100,
