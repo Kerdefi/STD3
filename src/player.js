@@ -88,6 +88,9 @@ var playerLayer = cc.Layer.extend({
         damage.visible=false;
         this.addChild(damage,2,TagOfPlayer.damage);
 
+        //Add controler (manque 1 bouton pour changer d'arme + ordre up / down + menu fin de jeu)
+        this.gp = new gp_check (null,null,this.change,null,this.shoot,null,this.centerlr,this.left,this.right,this.centerud,this.down,this.up);
+
         //Add keyboard stroke listener
         if( 'keyboard' in cc.sys.capabilities) {
             cc.eventManager.addListener({
@@ -127,16 +130,7 @@ var playerLayer = cc.Layer.extend({
                             self.adjustPosition (self);
                         break;
                     case cc.KEY.l:
-                            if(!self.isShooting && self.shootcountdown == 0) {
-                                self.player = self.player == 1 ? 0 : self.player + 1;
-                                self.getChildByTag(TagOfPlayer.player).stopAllActions();
-                                self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
-
-                                self.getChildByTag(TagOfPlayer.anim).visible=true;
-                                self.getChildByTag(TagOfPlayer.anim).stopAllActions();
-                                self.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(self.summondeathAction[self.player],cc.callFunc(function() {self.getChildByTag(TagOfPlayer.anim).visible=false},self)));
-                                self.adjustPosition (self);
-                            }
+                            self.change(self);
                         break;
                     case cc.KEY.a:
                         self.shoot(self);
@@ -150,23 +144,60 @@ var playerLayer = cc.Layer.extend({
                 onKeyPressed:function(key, event) {
                     if(g_gamestate == TagOfState.run) { switch(key) {
                     case cc.KEY.q:
-                        self.playerspeed.x=-self.playerspeedmax;
-                        self.getChildByTag(TagOfPlayer.player).flippedX = true;
+                        self.left(self);
                         break;
                     case cc.KEY.d:
-                        self.playerspeed.x=self.playerspeedmax;
-                        self.getChildByTag(TagOfPlayer.player).flippedX = false;
+                        self.right(self);
                         break;
                     case cc.KEY.s:
-                        self.playerspeed.y=-self.playerspeedmax;
+                        self.up(self);
                         break;
                     case cc.KEY.z:
-                        self.playerspeed.y=self.playerspeedmax;
+                        self.down(self);
                         break;
                     }}
                 }
             }, this);
         }
+    },
+
+    change:function(self) {
+        if(!self.isShooting && self.shootcountdown == 0) {
+            self.player = self.player == 1 ? 0 : self.player + 1;
+            self.getChildByTag(TagOfPlayer.player).stopAllActions();
+            self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
+
+            self.getChildByTag(TagOfPlayer.anim).visible=true;
+            self.getChildByTag(TagOfPlayer.anim).stopAllActions();
+            self.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(self.summondeathAction[self.player],cc.callFunc(function() {self.getChildByTag(TagOfPlayer.anim).visible=false},self)));
+            self.adjustPosition (self);
+        }
+    },
+
+    up:function(self) {
+        self.playerspeed.y=-self.playerspeedmax;
+    },
+
+    down:function(self) {
+        self.playerspeed.y=self.playerspeedmax;
+    },
+
+    left:function(self) {
+        self.playerspeed.x=-self.playerspeedmax;
+        self.getChildByTag(TagOfPlayer.player).flippedX = true;
+    },
+
+    right:function(self) {
+        self.playerspeed.x=self.playerspeedmax;
+        self.getChildByTag(TagOfPlayer.player).flippedX = false;
+    },
+
+    centerud:function(self) {
+        self.playerspeed.y = 0;
+    },
+
+    centerlr:function(self) {
+        self.playerspeed.x = 0;
     },
 
     createAnimationChara:function (text,anim,action,target,tag,repeat) {
@@ -243,6 +274,8 @@ var playerLayer = cc.Layer.extend({
     },
 
     onUpdate:function () {
+        this.gp.update(this);
+
         //Détecte si la partie est finie
         if(this.health <= 0 && g_gamestate == TagOfState.run) {
             g_gamestate = TagOfState.endanim ;

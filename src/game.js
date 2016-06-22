@@ -48,12 +48,10 @@ var gameLayer = cc.Layer.extend({
                     } else {
                         if(g_gamestate==TagOfState.pause) {
                             if(key == cc.KEY.z || key == cc.KEY.s) {
-                                self.getChildByTag(TagOfLayer.pause).Toggle ();
+                                self.arrow(self);
                             }
                             if(key == cc.KEY.a) {
-                                self.getChildByTag(TagOfLayer.pause).Click ();
-                                self.getChildByTag(TagOfLayer.pause).visible=false;
-                                g_enp.changeState (encophys.RUN);
+                                self.pause(self);
                             }
                         }
                     }
@@ -61,10 +59,25 @@ var gameLayer = cc.Layer.extend({
             }, this);
         }
 
+        //add controler
+        this.gp = new gp_check (null,this.down,null,null,null,null,null,null,null,null,this.arrow,this.arrow);
+
         this.scheduleUpdate();
     },
 
+    arrow:function(self) {
+        self.getChildByTag(TagOfLayer.pause).Toggle ();
+    },
+
+    pause:function(self) {
+        self.getChildByTag(TagOfLayer.pause).Click ();
+        self.getChildByTag(TagOfLayer.pause).visible=false;
+        g_enp.changeState (encophys.RUN);
+    },
+
     update:function () {
+        this.gp.update(this);
+
         if (g_gamestate == TagOfState.run) {
             this.getChildByTag(TagOfLayer.block).onUpdate();
             this.getChildByTag(TagOfLayer.bullets).onUpdate();

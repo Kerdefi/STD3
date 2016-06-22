@@ -57,21 +57,12 @@ var MenuLayer = cc.Layer.extend({
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
                 onKeyReleased:function(key, event) {
-                    //Si on est en help lance le jeu
-                    if(g_gamestate==TagOfState.help) {
-                        g_gamestate=TagOfState.run;
-                        cc.director.runScene(new gameScene());
-                    }
-                    //Sinon affiche l'écran d'aide
-                    if(g_gamestate==TagOfState.start) {
-                        g_gamestate=TagOfState.help;
-                        self.addChild(new MenuHelp(),4,3);
-                    }
+                    self.ap(self);
                 }
             }, this);
         }
 
-        this.gp = new gp_check (this);
+        this.gp = new gp_check (null,this.ap,null,this.ap,null,this.ap,this.ap,null,null,this.ap,null,null);
 
         this.scheduleUpdate();
     },
@@ -79,7 +70,19 @@ var MenuLayer = cc.Layer.extend({
         for (var i = 0 ; i < 5 ; i++) {
             this.getChildByTag(50+i).setString(g_highscore.player[i] + " ...... "+ g_highscore.score[i]);
         }
-        this.gp.update();
+        this.gp.update(this);
+    },
+    ap:function (self){
+        //Si on est en help lance le jeu
+        if(g_gamestate==TagOfState.help) {
+            g_gamestate=TagOfState.run;
+            cc.director.runScene(new gameScene());
+        }
+        //Sinon affiche l'écran d'aide
+        if(g_gamestate==TagOfState.start) {
+            g_gamestate=TagOfState.help;
+            self.addChild(new MenuHelp(),4,3);
+        }
     }
 });
 
