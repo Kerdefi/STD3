@@ -26,7 +26,7 @@
         "automove":0,
         "friction":0.02,
         "linkstrenght":10,
-        "basehealth":50,
+        "basehealth":70,
         "baseheat":20,
         "burnheat":300,
         "meltheat":600,
@@ -39,7 +39,7 @@
         "automove":0,
         "friction":0.02,
         "linkstrenght":1,
-        "basehealth":5,
+        "basehealth":30,
         "baseheat":20,
         "burnheat":200,
         "meltheat":500,
@@ -52,7 +52,7 @@
         "automove":0.8,
         "friction":0.02,
         "linkstrenght":0,
-        "basehealth":50,
+        "basehealth":70,
         "baseheat":20,
         "burnheat":100,
         "meltheat":0,
@@ -65,7 +65,7 @@
         "automove":0,
         "friction":0.02,
         "linkstrenght":10,
-        "basehealth":50,
+        "basehealth":70,
         "baseheat":-50,
         "burnheat":5000,
         "meltheat":0,
@@ -127,31 +127,31 @@
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":250,
+        "damage":11,
         "duration":0.2
     },
     "nicolassword2":{
         "maxdiameter":4,
         "growth":100,
-        "force":1000,
+        "force":100,
         "heat":100,
-        "damage":500,
-        "duration":0.5
+        "damage":38,
+        "duration":0.2
     },
     "nicolassword3":{
         "maxdiameter":5,
         "growth":100,
         "force":150,
-        "heat":300,
-        "damage":50,
-        "duration":0.5
+        "heat":150,
+        "damage":75,
+        "duration":0.2
     },
     "joannasword1":{
-        "maxdiameter":1,
+        "maxdiameter":2,
         "growth":100,
         "force":50,
         "heat":-50,
-        "damage":250,
+        "damage":30,
         "duration":0.2
     },
     "joannasword2":{
@@ -159,15 +159,15 @@
         "growth":100,
         "force":100,
         "heat":-100,
-        "damage":500,
+        "damage":50,
         "duration":0.2
     },
     "joannasword3":{
         "maxdiameter":3,
         "growth":100,
         "force":150,
-        "heat":-200,
-        "damage":750,
+        "heat":-150,
+        "damage":100,
         "duration":0.2
     },
     "joannaarrow1":{
@@ -175,143 +175,143 @@
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
-        "duration":0.5
+        "damage":150,
+        "duration":0.1
     },
     "joannaarrow2":{
-        "maxdiameter":2,
+        "maxdiameter":1,
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
-        "duration":0.5
+        "damage":200,
+        "duration":0.1
     },
     "joannaarrow3":{
-        "maxdiameter":3,
+        "maxdiameter":1,
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
-        "duration":0.5
+        "damage":300,
+        "duration":0.1
     },
     "joannaspell1":{
         "maxdiameter":2,
         "growth":100,
         "force":100,
         "heat":50,
-        "damage":5,
+        "damage":25,
         "duration":0.5
     },
     "joannaspell2":{
+        "maxdiameter":2,
+        "growth":100,
+        "force":100,
+        "heat":50,
+        "damage":40,
+        "duration":0.5
+    },
+    "joannaspell3":{
         "maxdiameter":3,
         "growth":100,
         "force":100,
         "heat":50,
-        "damage":5,
-        "duration":0.5
-    },
-    "joannaspell3":{
-        "maxdiameter":4,
-        "growth":100,
-        "force":100,
-        "heat":50,
-        "damage":5,
+        "damage":70,
         "duration":0.5
     },
     "nicolasarrow1":{
-        "maxdiameter":1,
+        "maxdiameter":2,
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
-        "duration":0.5
+        "damage":113,
+        "duration":0.1
     },
     "nicolasarrow2":{
         "maxdiameter":2,
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
-        "duration":0.5
+        "damage":150,
+        "duration":0.1
     },
     "nicolasarrow3":{
-        "maxdiameter":3,
+        "maxdiameter":2,
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":5,
-        "duration":0.5
+        "damage":225,
+        "duration":0.1
     },
     "nicolasspell1":{
-        "maxdiameter":2,
+        "maxdiameter":3,
         "growth":100,
         "force":100,
         "heat":50,
-        "damage":5,
+        "damage":19,
         "duration":0.5
     },
     "nicolasspell2":{
-        "maxdiameter":3,
-        "growth":100,
-        "force":100,
-        "heat":50,
-        "damage":5,
-        "duration":0.5
-    },
-    "nicolasspell3":{
         "maxdiameter":4,
         "growth":100,
         "force":100,
-        "heat":50,
-        "damage":5,
+        "heat":100,
+        "damage":30,
+        "duration":0.5
+    },
+    "nicolasspell3":{
+        "maxdiameter":5,
+        "growth":100,
+        "force":150,
+        "heat":150,
+        "damage":53,
         "duration":0.5
     },
     "monstersarrow3":{
-        "maxdiameter":3,
+        "maxdiameter":2,
         "growth":100,
-        "force":50,
+        "force":10,
         "heat":50,
-        "damage":20,
+        "damage":15,
         "duration":0.5
     },
-    "monstersarrow4":{
-        "maxdiameter":3,
-        "growth":100,
-        "force":50,
+    "monstersarrow5":{
+        "maxdiameter":5,
+        "growth":20,
+        "force":30,
         "heat":50,
-        "damage":5,
+        "damage":15,
         "duration":0.5
     },
     "monstersarrow7":{
-        "maxdiameter":3,
+        "maxdiameter":2,
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":20,
+        "damage":15,
         "duration":0.5
     },
     "monstersarrow8":{
-        "maxdiameter":3,
+        "maxdiameter":2,
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":20,
+        "damage":30,
         "duration":0.5
     },
     "monstersarrow9":{
-        "maxdiameter":3,
-        "growth":100,
+        "maxdiameter":4,
+        "growth":20,
         "force":50,
         "heat":50,
-        "damage":20,
+        "damage":80,
         "duration":0.5
     },
     "monstersarrow10":{
-        "maxdiameter":3,
+        "maxdiameter":2,
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":20,
+        "damage":80,
         "duration":0.5
     }
   }

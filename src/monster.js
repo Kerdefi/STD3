@@ -42,7 +42,7 @@ monster = function (layer,tag) {
     //Nombre de balles - doit être impair
     this.shootBullets = [0,0,3,0,0,0,9,3,0,5] ;
     this.shootAngle = [0,0,30,0,0,0,38,30,0,36] ;
-    this.lifeArray = [1,2,3,4,5,6,7,8,9,10] ;
+    this.lifeArray = [5,10,10,15,5,25,20,25,30,35] ;
     this.sizeArray = [1,1,1,1,1,1,1,1,1,1] ;
     this.listOfActions = ["fly","die","shoot"];
     this.dying = false;
@@ -225,7 +225,10 @@ monster = function (layer,tag) {
                 //Augmente l'expérience
                 this.layer.getParent().getChildByTag(TagOfLayer.player).addXP(g_monsterxpgain);
             }
-        } else this.life = 0;
+        } else {
+            this.life = 0;
+            return this.lifeArray[this.level];
+        }
 
         if (this.life == 0) return 0;
         else return this.lifeArray[this.level];

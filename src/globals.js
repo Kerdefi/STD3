@@ -11,13 +11,15 @@ var g_monstersmaxspeed = 125 ;
 var g_monsterbulletspeed = 200 ;
 var g_bonusproba = 0.5 ;
 var g_monsterxpgain = 5 ;
-var g_bonusxpgain = 30 ;
-var g_bonushealthgain = 10 ;
+var g_bonusxpgain = 40 ;
+var g_bonushealthgain = 40 ;
 var g_score = 0 ;
 var g_blockplayer = 9 ;
 var g_highscore = {} ;
 g_highscore.player = ["ABC","ABC","ABC","ABC","ABC"];
 g_highscore.score = [100,20,10,5,1];
+var g_levellength = 200 ;
+var g_blockdamage = 2 ;
 
 if(typeof TagOfState == "undefined") {
     var TagOfState = {};

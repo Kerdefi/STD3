@@ -86,7 +86,7 @@ var gameLayer = cc.Layer.extend({
             this.getChildByTag(TagOfLayer.monstersbullet).onUpdate();
             this.getChildByTag(TagOfLayer.bonus).onUpdate();
             this.getChildByTag(TagOfLayer.info).onUpdate();
-            this.level = Math.min (9,Math.round(g_score/50));
+            this.level = Math.min (9,Math.round(g_score/g_levellength));
         }
         if (g_gamestate == TagOfState.run || g_gamestate == TagOfState.endanim) this.getChildByTag(TagOfLayer.player).onUpdate();
     }
