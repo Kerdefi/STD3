@@ -10,8 +10,9 @@ var gameLayer = cc.Layer.extend({
 
         var self = this;
 
-        g_enp.reset();
         g_score = 0;
+
+        g_enp.reset();
 
         this.level = 0;
 
@@ -42,16 +43,14 @@ var gameLayer = cc.Layer.extend({
                 onKeyReleased:function(key, event) {
                     //Si on est en help lance le jeu
                     if(key == cc.KEY.p && g_gamestate==TagOfState.run) {
-                        g_gamestate=TagOfState.pause;
-                        g_enp.changeState (encophys.PAUSE);
-                        self.getChildByTag(TagOfLayer.pause).visible=true;
+                        self.pauseme(self);
                     } else {
                         if(g_gamestate==TagOfState.pause) {
                             if(key == cc.KEY.z || key == cc.KEY.s) {
                                 self.arrow(self);
                             }
                             if(key == cc.KEY.a) {
-                                self.pause(self);
+                                self.pauseme(self);
                             }
                         }
                     }
@@ -60,19 +59,25 @@ var gameLayer = cc.Layer.extend({
         }
 
         //add controler
-        this.gp = new gp_check (null,this.down,null,null,null,null,null,null,null,null,this.arrow,this.arrow);
+        this.gp = new gp_check (null,this.pauseme,null,null,null,null,null,null,null,null,null,null,this.arrow,this.arrow);
 
         this.scheduleUpdate();
     },
 
     arrow:function(self) {
-        self.getChildByTag(TagOfLayer.pause).Toggle ();
+        if(g_gamestate==TagOfState.pause) {self.getChildByTag(TagOfLayer.pause).Toggle ()};
     },
 
-    pause:function(self) {
-        self.getChildByTag(TagOfLayer.pause).Click ();
-        self.getChildByTag(TagOfLayer.pause).visible=false;
-        g_enp.changeState (encophys.RUN);
+    pauseme:function(self) {
+        if(g_gamestate==TagOfState.run) {
+            g_gamestate=TagOfState.pause;
+            g_enp.changeState (encophys.PAUSE);
+            self.getChildByTag(TagOfLayer.pause).visible=true;
+        } else if(g_gamestate==TagOfState.pause) {
+            self.getChildByTag(TagOfLayer.pause).Click ();
+            self.getChildByTag(TagOfLayer.pause).visible=false;
+            g_enp.changeState (encophys.RUN);
+        }
     },
 
     update:function () {

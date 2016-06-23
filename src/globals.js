@@ -2,7 +2,7 @@ var g_gamestate = 0;
 var g_enp ;
 var g_blocksize = 30;
 var g_textureblocksize = 20;
-var g_blockspeed = 6;
+var g_blockspeed = 7;
 var g_animtime = 0.15;
 var g_maxbullets = 20 ;
 var g_maxbooms = 20 ;
@@ -10,8 +10,8 @@ var g_maxmonsters = 15 ;
 var g_monstersmaxspeed = 125 ;
 var g_monsterbulletspeed = 200 ;
 var g_bonusproba = 0.5 ;
-var g_monsterxpgain = 5 ;
-var g_bonusxpgain = 40 ;
+var g_monsterxpgain = 10 ;
+var g_bonusxpgain = 50 ;
 var g_bonushealthgain = 40 ;
 var g_score = 0 ;
 var g_blockplayer = 9 ;
@@ -20,6 +20,8 @@ g_highscore.player = ["ABC","ABC","ABC","ABC","ABC"];
 g_highscore.score = [100,20,10,5,1];
 var g_levellength = 200 ;
 var g_blockdamage = 2 ;
+var g_monsterdamagemultiplier = 1.3;
+var g_monsterdamagereduction = 0.5;
 
 if(typeof TagOfState == "undefined") {
     var TagOfState = {};

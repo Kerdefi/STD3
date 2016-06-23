@@ -51,6 +51,10 @@ cc.game.onStart = function(){
     cc.view.setDesignResolutionSize(768, 1024, cc.ResolutionPolicy.SHOW_ALL);
     cc.view.resizeWithBrowserSize(true);
 
+    //Init EncoPhys
+    g_enp = new encophys.world ();
+    g_enp.init ("src/encophys/encophys.json");
+
     //load resources
     cc.LoaderScene.preload(g_resources, function () {
         cc.director.runScene(new MenuScene());

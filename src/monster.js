@@ -143,8 +143,8 @@ monster = function (layer,tag) {
 
             for (i = -this.sizeArray[this.level] ; i <= this.sizeArray[this.level] ; i++) {
                 for (j = -this.sizeArray[this.level] ; j <= this.sizeArray[this.level] ; j++) {
-                    k = Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize)+i;
-                    l = Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize)+j;
+                    k = Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize+i);
+                    l = Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize+j);
                     if(g_enp.inLimits(k,l)) {
                         //ajouter dégats et mettre une animation
                         this.life -= g_enp.addPoint(k,l,"playermonster",this.lifeArray[this.level], BlockIndex.monsters+this.tag);
@@ -171,7 +171,7 @@ monster = function (layer,tag) {
     };
 
     this.shootend = function (self) {
-        if(self.isAlive) {
+        if(self.isAlive && !self.dying) {
             //Créée la bullet
             if (self.level != 8) {
                 for (var i=-(self.shootBullets[self.level]-1)/2;i<=(self.shootBullets[self.level]-1)/2;i++) {
@@ -183,7 +183,7 @@ monster = function (layer,tag) {
 
             } else {
                 //boom
-                var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize)-3);
+                var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize-3));
                 g_enp.addForce(new encophys.force("monstersarrow9",boompos));
             }
 
@@ -194,44 +194,46 @@ monster = function (layer,tag) {
     };
 
     this.deathstart = function (withhonor) {
-        if(!this.shooting) {
-            //Détruit les blocs personnage et repositionne les blocs personnages
-            for (i = 0 ; i < g_enp.size.x ; i++) {
-                for (j = 0 ; j < g_enp.size.y ; j++) {
-                    if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.monsters+this.tag) {
-                        g_enp.destroy(i,j);
-                        //g_enp.map[i][j]=null;
-                        //g_enp.mapIddle[i][j]=false;
+        if(!this.dying) {
+            if(!this.shooting) {
+                //Détruit les blocs personnage et repositionne les blocs personnages
+                for (i = 0 ; i < g_enp.size.x ; i++) {
+                    for (j = 0 ; j < g_enp.size.y ; j++) {
+                        if(g_enp.map[i][j]!=null && g_enp.map[i][j].index == BlockIndex.monsters+this.tag) {
+                            g_enp.destroy(i,j);
+                            //g_enp.map[i][j]=null;
+                            //g_enp.mapIddle[i][j]=false;
+                        }
                     }
                 }
-            }
-            this.layer.getChildByTag(this.tag).stopAllActions();
-            this.layer.getChildByTag(this.tag).runAction (new cc.Sequence(self.action[self.level][1],cc.callFunc(function() {self.death(self)},self)));
-            this.dying = true;
-            //déclenche l'explosion si le monstre déclenche des explosions
-            if(this.level == 3) {
-                //boom
-                var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize));
-                g_enp.addForce(new encophys.force("monstersarrow4",boompos));
-            }
-            //Créée un bonus (si la chance est du bon côté)
-            if(Math.random()<g_bonusproba && withhonor) {
-                //Une chance sur deux d'avoir une vie par rapport à XP
-                if(Math.random()<0.5) {
-                    this.layer.getParent().getChildByTag(TagOfLayer.bonus).createCoeur (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
-                } else {
-                    this.layer.getParent().getChildByTag(TagOfLayer.bonus).createBonus (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
+                this.layer.getChildByTag(this.tag).stopAllActions();
+                this.layer.getChildByTag(this.tag).runAction (new cc.Sequence(self.action[self.level][1],cc.callFunc(function() {self.death(self)},self)));
+                this.dying = true;
+                //déclenche l'explosion si le monstre déclenche des explosions
+                if(this.level == 4) {
+                    //boom
+                    var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize));
+                    g_enp.addForce(new encophys.force("monstersarrow5",boompos));
                 }
-                //Augmente l'expérience
-                this.layer.getParent().getChildByTag(TagOfLayer.player).addXP(g_monsterxpgain);
+                //Créée un bonus (si la chance est du bon côté)
+                if(Math.random()<g_bonusproba && withhonor) {
+                    //Une chance sur deux d'avoir une vie par rapport à XP
+                    if(Math.random()<0.5) {
+                        this.layer.getParent().getChildByTag(TagOfLayer.bonus).createCoeur (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
+                    } else {
+                        this.layer.getParent().getChildByTag(TagOfLayer.bonus).createBonus (new cc.math.Vec2 (this.layer.getChildByTag (this.tag).getPositionX(),this.layer.getChildByTag (this.tag).getPositionY()));
+                    }
+                    //Augmente l'expérience
+                    this.layer.getParent().getChildByTag(TagOfLayer.player).addXP(g_monsterxpgain);
+                }
+            } else {
+                this.life = 0;
+                return this.lifeArray[this.level]*g_monsterdamagemultiplier;
             }
-        } else {
-            this.life = 0;
-            return this.lifeArray[this.level];
-        }
 
-        if (this.life == 0) return 0;
-        else return this.lifeArray[this.level];
+            if (this.life == 0) return 0;
+            else return this.lifeArray[this.level]*g_monsterdamagemultiplier;
+        }
     };
 
     this.death = function (self) {

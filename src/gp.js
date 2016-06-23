@@ -1,7 +1,8 @@
-gp_check = function (startp,startu,shootp,shootu,changep,changeu,a0n,a0d,a0u,a1n,a1d,a1u) {
+gp_check = function (startp,startu,shootp,shootu,weaponp,weaponu,changep,changeu,a0n,a0d,a0u,a1n,a1d,a1u) {
     this.button1 = false;
     this.button2 = false;
     this.button3 = false;
+    this.button4 = false;
 
     this.axes0 = 0;
     this.axes1 = 0;
@@ -12,6 +13,8 @@ gp_check = function (startp,startu,shootp,shootu,changep,changeu,a0n,a0d,a0u,a1n
     this.shootu = shootu;
     this.changep = changep;
     this.changeu = changeu;
+    this.weaponp = weaponp;
+    this.weaponu = weaponu;
     this.a0n = a0n;
     this.a0d = a0d;
     this.a0u = a0u;
@@ -42,21 +45,30 @@ gp_check = function (startp,startu,shootp,shootu,changep,changeu,a0n,a0d,a0u,a1n
                 if(this.startu != null) this.startu(self);
             }
             //Bouton change perso
-            if(gp.buttons[2].pressed == true && this.button2 == false) {
-                this.button2 = true ;
+            if(gp.buttons[4].pressed == true && this.button4 == false) {
+                this.button4 = true ;
                 if(this.changep != null) this.changep(self);
             }
-            if(gp.buttons[2].pressed == false && this.button2 == true) {
-                this.button2 = false ;
+            if(gp.buttons[4].pressed == false && this.button4 == true) {
+                this.button4 = false ;
                 if(this.changeu != null) this.changeu(self);
             }
-            //Bouton shoot
+            //Bouton change perso
             if(gp.buttons[3].pressed == true && this.button3 == false) {
                 this.button3 = true ;
-                if(this.shootp != null) this.shootp(self);
+                if(this.weaponp != null) this.weaponp(self);
             }
             if(gp.buttons[3].pressed == false && this.button3 == true) {
                 this.button3 = false ;
+                if(this.weaponu != null) this.weaponu(self);
+            }
+            //Bouton shoot
+            if(gp.buttons[2].pressed == true && this.button2 == false) {
+                this.button2 = true ;
+                if(this.shootp != null) this.shootp(self);
+            }
+            if(gp.buttons[2].pressed == false && this.button2 == true) {
+                this.button2 = false ;
                 if(this.shootu != null) this.shootu(self);
             }
             //axes left - right

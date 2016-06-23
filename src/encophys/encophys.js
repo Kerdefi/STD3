@@ -67,7 +67,7 @@ encophys.world = function () {
 
     //remets le moteur en état initial
     this.reset = function () {
-        this.changeState(encophys.PAUSE);
+        //this.changeState(encophys.PAUSE);
         //Efface tous les tableaux
         var i = 0;
         var j = 0;

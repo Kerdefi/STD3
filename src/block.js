@@ -88,6 +88,7 @@ var blockLayer = cc.Layer.extend({
         var j = 0;
         var k = 0;
         var l = 0;
+        var m = 0;
 
         //Scrolldown
         if(g_enp.state == encophys.RUN) {
@@ -107,28 +108,28 @@ var blockLayer = cc.Layer.extend({
                 }
             }
         }
-        this.getParent().getChildByTag(TagOfLayer.player).health -= k;
+        this.getParent().getChildByTag(TagOfLayer.player).health -= k*g_monsterdamagereduction;
 
         for (i = -1 ; i <= 1 ; i++) {
             for (j = -1 ; j <= 1 ; j++) {
-                k = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.x/g_blocksize)+i;
-                l = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.y/g_blocksize)+j;
+                k = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.x/g_blocksize+i);
+                l = Math.round(this.getParent().getChildByTag(TagOfLayer.player).playerposition.y/g_blocksize+j);
                 //Vérifie si le point est un monstre
                 if(g_enp.inLimits(k,l) && g_enp.map[k][l]!=null && g_enp.map[k][l].index >= BlockIndex.monsters) {
-                    k = this.getParent().getChildByTag(TagOfLayer.monsters).monsters[g_enp.map[k][l].index-BlockIndex.monsters].deathstart(false);
+                    m = this.getParent().getChildByTag(TagOfLayer.monsters).monsters[g_enp.map[k][l].index-BlockIndex.monsters].deathstart(false);
                     g_enp.addPoint(k,l,"playermonster",0, BlockIndex.player);
                     //Dégat à appliquer
-                    if(k>0) {
+                    if(m>0) {
                         this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
-                        this.getParent().getChildByTag(TagOfLayer.player).health -= k;
+                        this.getParent().getChildByTag(TagOfLayer.player).health -= m*g_monsterdamagereduction;
                     }
                 } else {
                     //ajouter dégats et mettre une animation
-                    k = g_enp.addPoint(k,l,"playermonster",0, BlockIndex.player);
+                    m = g_enp.addPoint(k,l,"playermonster",0, BlockIndex.player);
                     //Dégat à appliquer
-                    if(k>0) {
+                    if(m>0) {
                         this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
-                        this.getParent().getChildByTag(TagOfLayer.player).health -= k;
+                        this.getParent().getChildByTag(TagOfLayer.player).health -= m*g_monsterdamagereduction;
                     }
                 }
             }

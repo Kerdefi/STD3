@@ -138,6 +138,8 @@ bullet = function (layer,tag) {
         //libère l'espace
         this.isAlive = false;
         this.layer.getChildByTag (this.tag).visible=false;
+        this.position.x = Math.round(this.position.x);
+        this.position.y = Math.round(this.position.y+1*g_blocksize);
         //déclenche l'explosion
         this.layer.getParent().getChildByTag(TagOfLayer.booms).addBoom(this.position,this.player,this.weapon,this.level);
     };

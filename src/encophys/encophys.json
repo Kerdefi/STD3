@@ -123,7 +123,7 @@
         "duration":0.5
     },
     "nicolassword1":{
-        "maxdiameter":3,
+        "maxdiameter":5,
         "growth":100,
         "force":50,
         "heat":50,
@@ -131,7 +131,7 @@
         "duration":0.2
     },
     "nicolassword2":{
-        "maxdiameter":4,
+        "maxdiameter":5,
         "growth":100,
         "force":100,
         "heat":100,
@@ -147,7 +147,7 @@
         "duration":0.2
     },
     "joannasword1":{
-        "maxdiameter":2,
+        "maxdiameter":4,
         "growth":100,
         "force":50,
         "heat":-50,
@@ -155,7 +155,7 @@
         "duration":0.2
     },
     "joannasword2":{
-        "maxdiameter":2,
+        "maxdiameter":4,
         "growth":100,
         "force":100,
         "heat":-100,
@@ -163,7 +163,7 @@
         "duration":0.2
     },
     "joannasword3":{
-        "maxdiameter":3,
+        "maxdiameter":4,
         "growth":100,
         "force":150,
         "heat":-150,

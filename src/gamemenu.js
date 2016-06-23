@@ -247,6 +247,9 @@ var endLayer = cc.Layer.extend({
 
         this.getChildByTag(3).runAction(this.textAction);
 
+        //Add controler
+        this.gp = new gp_check (null,this.start,null,this.start,null,this.start,null,this.start,null,null,null,null,this.down,this.up);
+
         var self = this;
 
         //Add keyboard stroke listener
@@ -255,33 +258,53 @@ var endLayer = cc.Layer.extend({
                 event: cc.EventListener.KEYBOARD,
                 onKeyReleased:function(key, event) {
                     //Si on est en help lance le jeu
-                    if(key == cc.KEY.z) {self.letter[self.selected] = (self.letter[self.selected] + 1) % 26;}
-                    if(key == cc.KEY.s) {self.letter[self.selected] = self.letter[self.selected] - 1 == -1 ? 25 : self.letter[self.selected] - 1;}
-                    self.getChildByTag(self.selected+3).setString(self.alphabet[self.letter[self.selected]]);
+                    if(key == cc.KEY.z) {self.up(self);}
+                    if(key == cc.KEY.s) {self.down(self);}
                     if(key == cc.KEY.a) {
-                        //fin complète du jeu
-                        if(self.selected < 2) {
-                            self.selected++;
-                            self.getChildByTag(2+self.selected).stopAllActions();
-                            self.getChildByTag(2+self.selected).runAction(self.textAction);
-                            self.getChildByTag(3+self.selected).runAction(self.textAction);
-                        }
-                        else {
-                            for (var i = 4 ; i >= 0 ; i--) {
-                                if(g_score > g_highscore.score[i] && (i==0 || g_highscore.score[i-1] > g_score)) {
-                                    g_highscore.score.splice(i,0,Math.round(g_score));
-                                    g_highscore.player.splice(i,0,self.alphabet[self.letter[0]]+self.alphabet[self.letter[1]]+self.alphabet[self.letter[2]]);
-                                    g_highscore.score.pop();
-                                    g_highscore.player.pop();
-                                    i = -5;
-                                }
-                            }
-                            cc.sys.localStorage.setItem("HighScore", JSON.stringify(g_highscore));
-                            cc.director.runScene(new MenuScene());
-                        }
+                        self.start(self);
                     }
                 }
             }, this);
+        }
+
+        this.scheduleUpdate();
+    },
+
+    update:function() {
+        this.gp.update(this);
+    },
+
+    up:function(self) {
+        self.letter[self.selected] = (self.letter[self.selected] + 1) % 26;
+        self.getChildByTag(self.selected+3).setString(self.alphabet[self.letter[self.selected]]);
+    },
+
+    down:function(self) {
+        self.letter[self.selected] = self.letter[self.selected] - 1 == -1 ? 25 : self.letter[self.selected] - 1;
+        self.getChildByTag(self.selected+3).setString(self.alphabet[self.letter[self.selected]]);
+    },
+
+    start:function(self) {
+        //fin complète du jeu
+        if(self.selected < 2) {
+            self.selected++;
+            self.getChildByTag(2+self.selected).stopAllActions();
+            self.getChildByTag(2+self.selected).runAction(self.textAction);
+            self.getChildByTag(3+self.selected).runAction(self.textAction);
+        }
+        else {
+            for (var i = 4 ; i >= 0 ; i--) {
+                if(g_score > g_highscore.score[i] && (i==0 || g_highscore.score[i-1] > g_score)) {
+                    g_highscore.score.splice(i,0,Math.round(g_score));
+                    g_highscore.player.splice(i,0,self.alphabet[self.letter[0]]+self.alphabet[self.letter[1]]+self.alphabet[self.letter[2]]);
+                    g_highscore.score.pop();
+                    g_highscore.player.pop();
+                    i = -5;
+                }
+            }
+            cc.sys.localStorage.setItem("HighScore", JSON.stringify(g_highscore));
+
+            cc.director.runScene(new MenuScene());
         }
     }
 });

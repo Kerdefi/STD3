@@ -48,10 +48,6 @@ var MenuLayer = cc.Layer.extend({
 
         this.getChildByTag(100).runAction(this.textAction);
 
-        //Init EncoPhys
-        g_enp = new encophys.world ();
-        g_enp.init ("src/encophys/encophys.json");
-
         //Add keyboard stroke listener
         if( 'keyboard' in cc.sys.capabilities ) {
             cc.eventManager.addListener({
@@ -62,7 +58,7 @@ var MenuLayer = cc.Layer.extend({
             }, this);
         }
 
-        this.gp = new gp_check (null,this.ap,null,this.ap,null,this.ap,this.ap,null,null,this.ap,null,null);
+        this.gp = new gp_check (null,this.ap,null,this.ap,null,this.ap,null,this.ap,this.ap,null,null,this.ap,null,null);
 
         this.scheduleUpdate();
     },
