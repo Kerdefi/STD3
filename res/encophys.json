@@ -147,27 +147,27 @@
         "duration":0.2
     },
     "joannasword1":{
-        "maxdiameter":4,
+        "maxdiameter":3,
         "growth":100,
         "force":50,
         "heat":-50,
-        "damage":30,
+        "damage":100,
         "duration":0.2
     },
     "joannasword2":{
-        "maxdiameter":4,
+        "maxdiameter":3,
         "growth":100,
         "force":100,
         "heat":-100,
-        "damage":50,
+        "damage":200,
         "duration":0.2
     },
     "joannasword3":{
-        "maxdiameter":4,
+        "maxdiameter":3,
         "growth":100,
         "force":150,
         "heat":-150,
-        "damage":100,
+        "damage":300,
         "duration":0.2
     },
     "joannaarrow1":{

@@ -22,12 +22,15 @@ var res = {
     water_png  : "res/new/tiles/water/0.png",
     ice_png  : "res/new/tiles/ice/0.png",
     lava_png  : "res/new/tiles/lava/0.png",
+    encophys_json : "res/encophys.json",
     //old
     heart_png : "res/tile/heart.png"
+
 };
 
 var g_resources = [
     //new
+    res.encophys_json,
     res.bkgnd_png,
     res.bkgndhelp_png,
     res.menu_png,

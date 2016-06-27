@@ -53,7 +53,7 @@ cc.game.onStart = function(){
 
     //Init EncoPhys
     g_enp = new encophys.world ();
-    g_enp.init ("src/encophys/encophys.json");
+    g_enp.init ("res/encophys.json");
 
     //load resources
     cc.LoaderScene.preload(g_resources, function () {

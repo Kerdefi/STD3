@@ -12,6 +12,8 @@ var bonusLayer = cc.Layer.extend({
         this._super();
         this.coeurAlive = false;
         this.bonusAlive = false;
+        this.coeurDying = false;
+        this.bonusDying = false;
         var self = this;
 
         //Création du coeur qui bas
@@ -56,54 +58,55 @@ var bonusLayer = cc.Layer.extend({
     },
 
     onUpdate:function () {
-        if(this.coeurAlive) {
+        if(this.coeurAlive && !this.coeurDying) {
             this.getChildByTag (0).setPosition(this.getChildByTag (0).getPositionX(),this.getChildByTag (0).getPositionY() - (g_blocksize * g_enp.framestep * g_blockspeed));
 
             //Vérifie si colision avec le joueur
             var player = new cc.Rect(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionX(),
                 this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY(),
-                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).width/2,
-                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).height/2);
+                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).width+g_blocksize,
+                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).height+g_blocksize);
             var bonusrect = new cc.Rect(this.getChildByTag(0).getPositionX(),
                 this.getChildByTag(0).getPositionY(),
-                this.getChildByTag(0).width/2,
-                this.getChildByTag(0).height/2);
+                this.getChildByTag(0).width,
+                this.getChildByTag(0).height);
 
             if(cc.rectIntersectsRect(player, bonusrect)) {
+                this.getChildByTag(0).stopAllActions();
                 this.getChildByTag(0).runAction(this.coeurActionTouche);
-                this.coeurAlive = false;
+                this.coeurDying = false;
                 //ajouter gain vie
                 this.getParent().getChildByTag(TagOfLayer.player).addHealth(g_bonushealthgain);
             }
             //Vérifie si le point est toujours dans le cadre
-            if(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY()<-g_blocksize) {
+            if(this.getChildByTag(0).getPositionY()<-g_blocksize) {
                 this.deathCoeur(this);
                 this.coeurAlive = false;
             }
         }
-        if(this.bonusAlive) {
+        if(this.bonusAlive && !this.bonusDying) {
             this.getChildByTag (1).setPosition(this.getChildByTag (1).getPositionX(),this.getChildByTag (1).getPositionY() - (g_blocksize * g_enp.framestep * g_blockspeed));
 
             //Vérifie si colision avec le joueur
             var player = new cc.Rect(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionX(),
                 this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY(),
-                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).width/2,
-                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).height/2);
+                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).width+g_blocksize,
+                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).height+g_blocksize);
             var bonusrect = new cc.Rect(this.getChildByTag(1).getPositionX(),
                 this.getChildByTag(1).getPositionY(),
-                this.getChildByTag(1).width/2,
-                this.getChildByTag(1).height/2);
+                this.getChildByTag(1).width,
+                this.getChildByTag(1).height);
 
             if(cc.rectIntersectsRect(player, bonusrect)) {
+                this.getChildByTag(1).stopAllActions();
                 this.getChildByTag(1).runAction(this.bonusActionTouche);
-                this.bonusAlive = false;
+                this.bonusDying = true;
                 //ajouter gain XP
                 this.getParent().getChildByTag(TagOfLayer.player).addXP(g_bonusxpgain);
             }
             //Vérifie si le point est toujours dans le cadre
-            if(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY()<-g_blocksize) {
+            if(this.getChildByTag(1).getPositionY()<-g_blocksize) {
                 this.deathBonus(this);
-                this.bonusAlive = false;
             }
         }
     },
@@ -132,11 +135,15 @@ var bonusLayer = cc.Layer.extend({
         self.getChildByTag(0).stopAllActions();
         self.getChildByTag(0).setScale(1,1);
         self.getChildByTag(0).visible = false;
+        self.coeurDying = false;
+        self.coeurAlive = false;
     },
 
     deathBonus:function (self) {
         self.getChildByTag(1).stopAllActions();
         self.getChildByTag(1).setScale(1,1);
         self.getChildByTag(1).visible = false;
+        self.bonusDying = false;
+        self.bonusAlive = false;
     }
 });

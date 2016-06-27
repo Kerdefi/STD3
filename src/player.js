@@ -278,6 +278,7 @@ var playerLayer = cc.Layer.extend({
                 self.isShooting=true;
                 self.getChildByTag(TagOfPlayer.player).stopAllActions();
                 self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]],cc.callFunc(function() {self.shootEnd(self)},self)));
+                //self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(new cc.Spawn (new cc.Sequence(new cc.scaleBy(0.2, 2.0, 2.0), new cc.scaleBy(0.2, 0.5, 0.5)),new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]])),cc.callFunc(function() {self.shootEnd(self)},self)));
             }
         }
     },
@@ -334,7 +335,7 @@ var playerLayer = cc.Layer.extend({
 
         //Ajuste le niveau d'XP
         for (var i = 0 ; i < 3 ; i++) {
-            if(this.levelgrowth[i] >= this.levelgrowthmax && this.levels [i] != this.levelmax) {
+            if(!this.isShooting && this.levelgrowth[i] >= this.levelgrowthmax && this.levels [i] != this.levelmax) {
                 this.levels [i] +=1;
                 this.levelgrowth[i] = this.levelgrowth[i]-this.levelgrowthmax;
                 this.getChildByTag(TagOfPlayer.player).stopAllActions();
