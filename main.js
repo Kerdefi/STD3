@@ -48,8 +48,12 @@
  */
 
 cc.game.onStart = function(){
+
     cc.view.setDesignResolutionSize(768, 1024, cc.ResolutionPolicy.SHOW_ALL);
     cc.view.resizeWithBrowserSize(true);
+
+    //cc.Screen.getInstance().requestFullScreen();
+    //cc.screen.getInstance().requestFullScreen(document.getElementById("gameCanvas"));
 
     //Init EncoPhys
     g_enp = new encophys.world ();
@@ -60,4 +64,5 @@ cc.game.onStart = function(){
         cc.director.runScene(new MenuScene());
     }, this);
 };
+
 cc.game.run();

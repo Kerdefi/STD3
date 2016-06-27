@@ -53,7 +53,8 @@ var MenuLayer = cc.Layer.extend({
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
                 onKeyReleased:function(key, event) {
-                    self.ap(self);
+                    if (key == cc.KEY.f) self.fs();
+                    else self.ap(self);
                 }
             }, this);
         }
@@ -78,6 +79,17 @@ var MenuLayer = cc.Layer.extend({
         if(g_gamestate==TagOfState.start) {
             g_gamestate=TagOfState.help;
             self.addChild(new MenuHelp(),4,3);
+        }
+    },
+    fs:function(){
+        if(document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+        } else if(document.documentElement.mozRequestFullScreen) {
+        document.documentElement.mozRequestFullScreen();
+        } else if(document.documentElement.webkitRequestFullscreen) {
+        document.documentElement.webkitRequestFullscreen();
+        } else if(document.documentElement.msRequestFullscreen) {
+        document.documentElement.msRequestFullscreen();
         }
     }
 });
