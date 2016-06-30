@@ -7,6 +7,7 @@
   "burnrate":0.4,
   "roundlimit":80,
   "size":{"x":26,"y":35},
+  "collisionfriction":0.5,
   "materials":{
     "stone":{
         "mass":6,

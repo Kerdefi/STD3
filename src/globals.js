@@ -2,7 +2,7 @@ var g_gamestate = 0;
 var g_enp ;
 var g_blocksize = 30;
 var g_textureblocksize = 20;
-var g_blockspeed = 4;
+var g_blockspeed = 2;
 var g_animtime = 0.15;
 var g_maxbullets = 20 ;
 var g_maxbooms = 20 ;

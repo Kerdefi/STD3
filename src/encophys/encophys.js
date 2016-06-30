@@ -284,7 +284,7 @@ encophys.world = function () {
                         k = (Math.abs(this.map[i][j].speed.y)+this.gravity*this.framestep)*this.framestep;
                         if(Math.abs(this.map[i][j].smoothposition.y) > k) {
                             this.map[i][j].smoothposition.y *= 1-k/Math.abs(this.map[i][j].smoothposition.y);
-                        } else this.map[i][j].smoothposition.flipY = 0;
+                        } else this.map[i][j].smoothposition.y = 0;
                         this.mapIddle[i][j]=false;
                     }
                     //this.map[i][j].smoothposition.x = 0;
@@ -575,8 +575,8 @@ encophys.world = function () {
         this.map[x1][y1].speed.add(residual);
 
         //Réalise les dégats
-        this.map[x2][y2].health-=this.map[x1][y1].damage;
-        this.map[x1][y1].health-=this.map[x2][y2].damage;
+        if(this.map[x2][y2].index != BlockIndex.standard) this.map[x2][y2].health-=this.map[x1][y1].damage;
+        if(this.map[x1][y1].index != BlockIndex.standard) this.map[x1][y1].health-=this.map[x2][y2].damage;
 
         //Marque le point touché en isnotiddle
         this.mapIddle[x2][y2]=false;
