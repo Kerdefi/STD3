@@ -18,8 +18,8 @@ var MenuLayer = cc.Layer.extend({
         this.addChild(new MenuBack(),1,1);
         this.addChild(new MenuAnim(),1,2);
 
-        //hight score
-        var pos = cc.p(winsize.width / 2, winsize.height * (1 / 2 + 1/16));
+        //higth score
+        var pos = cc.p(winsize.width / 2, winsize.height * (1.7 / 3 + 1/16));
         var label = new cc.LabelTTF("High score", "Helvetica", 30);
         label.setColor(cc.color(255,255,255));//black color
         label.setAnchorPoint(cc.p(0.5, 0.5));
@@ -27,7 +27,7 @@ var MenuLayer = cc.Layer.extend({
         this.addChild(label,99,49);
 
         for (var i = 0 ; i < 5 ; i++) {
-            var pos = cc.p(winsize.width / 2, winsize.height * (1 / 2 - i*1/16));
+            var pos = cc.p(winsize.width / 2, winsize.height * (1.7 / 3 - i*1/16));
             var label = new cc.LabelTTF(g_highscore.player[i] + " ...... "+ g_highscore.score[i], "Helvetica", 30);
             label.setColor(cc.color(255,215+i*10,i*255/4));//black color
             label.setAnchorPoint(cc.p(0.5, 0.5));
@@ -40,7 +40,7 @@ var MenuLayer = cc.Layer.extend({
         this.labelBonus.setColor(cc.color(255,215,0));//black color
         this.labelBonus.setAnchorPoint(cc.p(0.5, 0.5));
         this.labelBonus.setPosition(pos);
-        this.addChild(this.labelBonus,99,100);
+        this.addChild(this.labelBonus,200,100);
 
         this.textAction = new cc.Sequence(new cc.scaleBy(0.5, 1.1, 1.1), new cc.scaleBy(0.5, 1 / 1.1, 1 / 1.1));
         this.textAction.repeatForever();
@@ -78,7 +78,7 @@ var MenuLayer = cc.Layer.extend({
         //Sinon affiche l'écran d'aide
         if(g_gamestate==TagOfState.start) {
             g_gamestate=TagOfState.help;
-            self.addChild(new MenuHelp(),4,3);
+            self.addChild(new MenuHelp(),100,3);
         }
     },
     fs:function(){
@@ -110,13 +110,12 @@ var MenuBack = cc.Layer.extend({
         this.addChild(spriteBG,0,0);
 
         var winsize = cc.director.getWinSize();
-        var buttonpos = cc.p(winsize.width / 2, winsize.height * 3/4);
+        var buttonpos = cc.p(winsize.width / 2, winsize.height * 5/6);
 
-        cc.spriteFrameCache.addSpriteFrames(res.menu_plist);
-        var spriteTitle = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("menu/buttons/start_n.png"));
+        var spriteTitle = new cc.Sprite(res.title_png);
         spriteTitle.setAnchorPoint(0.5,0.5);
         spriteTitle.setPosition(buttonpos);
-        spriteTitle.setScale(4,4);
+        spriteTitle.setScale(1.2,1.2);
         this.addChild(spriteTitle,1,1);
     }
 });
@@ -212,7 +211,7 @@ var MenuAnim = cc.Layer.extend({
         spriteJoanna.texture.setAliasTexParameters(false);
         spriteJoanna.flippedX = true;
         spriteJoanna.setAnchorPoint(0,0);
-        spriteJoanna.setPosition(200,135);
+        spriteJoanna.setPosition(340,135);
         this.addChild(spriteJoanna,0,1);
 
         this.getChildByTag(1).runAction(this.joannaAction);
@@ -220,16 +219,16 @@ var MenuAnim = cc.Layer.extend({
         var spriteNicolas = new cc.Sprite(res.heart_png);
         spriteNicolas.texture.setAliasTexParameters(false);
         spriteNicolas.setAnchorPoint(0,0);
-        spriteNicolas.setPosition(300,135);
+        spriteNicolas.setPosition(410,135);
         this.addChild(spriteNicolas,0,2);
 
         this.getChildByTag(2).runAction(this.nicolasAction);
 
         var spriteStorm = new cc.Sprite(res.heart_png);
         spriteStorm.texture.setAliasTexParameters(false);
-        spriteStorm.setAnchorPoint(0,0);
+        spriteStorm.setAnchorPoint(0.5,0.5);
         spriteStorm.setScale(3,3);
-        spriteStorm.setPosition(200,135);
+        spriteStorm.setPosition(384,335);
         this.addChild(spriteStorm,0,3);
 
         this.getChildByTag(3).runAction(this.stormAction);

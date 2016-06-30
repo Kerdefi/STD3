@@ -93,7 +93,7 @@
         "friction":0,
         "linkstrenght":1000,
         "basehealth":1000,
-        "baseheat":10000,
+        "baseheat":50,
         "burnheat":19000,
         "meltheat":20000,
         "meltmatter":"stone",
@@ -302,10 +302,10 @@
     "monstersarrow9":{
         "maxdiameter":4,
         "growth":20,
-        "force":200,
+        "force":300,
         "heat":50,
         "damage":80,
-        "duration":0.5
+        "duration":0.2
     },
     "monstersarrow10":{
         "maxdiameter":2,

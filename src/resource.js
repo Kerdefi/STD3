@@ -23,9 +23,13 @@ var res = {
     ice_png  : "res/new/tiles/ice/0.png",
     lava_png  : "res/new/tiles/lava/0.png",
     encophys_json : "res/encophys.json",
-    //old
-    heart_png : "res/tile/heart.png"
-
+    heart_png : "res/new/heart.png",
+    mana_png : "res/new/mana.png",
+    level_png : "res/new/level.png",
+    swordshoot_png : "res/new/swordshoot.png",
+    title_png : "res/new/title.png",
+    jshield_png : "res/new/jshield.png",
+    nshield_png : "res/new/nshield.png"
 };
 
 var g_resources = [
@@ -53,6 +57,11 @@ var g_resources = [
     res.water_png,
     res.ice_png,
     res.lava_png,
-    //old
-    res.heart_png
+    res.heart_png,
+    res.mana_png,
+    res.level_png,
+    res.swordshoot_png,
+    res.title_png,
+    res.jshield_png,
+    res.nshield_png
 ];

@@ -162,7 +162,7 @@ monster = function (layer,tag) {
     };
 
     this.shoot = function () {
-        if(!this.isDying) {
+        if(!this.dying) {
             this.shooting=true;
             //Lance l'animation
             this.layer.getChildByTag(this.tag).stopAllActions();
@@ -184,7 +184,7 @@ monster = function (layer,tag) {
 
             } else {
                 //boom
-                var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize-3));
+                var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize-2));
                 g_enp.addForce(new encophys.force("monstersarrow9",boompos));
             }
 
@@ -227,19 +227,19 @@ monster = function (layer,tag) {
                     //Augmente l'expérience
                     this.layer.getParent().getChildByTag(TagOfLayer.player).addXP(g_monsterxpgain);
                 }
+                if (this.life == 0) return 0;
+                else return this.lifeArray[this.level]*g_monsterdamagemultiplier;
             } else {
                 this.life = 0;
-                return this.lifeArray[this.level]*g_monsterdamagemultiplier;
+                if (this.life == 0) return 0;
+                else return this.lifeArray[this.level]*g_monsterdamagemultiplier;
             }
-
-            if (this.life == 0) return 0;
-            else return this.lifeArray[this.level]*g_monsterdamagemultiplier;
         }
     };
 
     this.death = function (self) {
         //libère l'espace
-        this.layer.getChildByTag(this.tag).stopAllActions();
+        //this.layer.getChildByTag(this.tag).stopAllActions();
         self.isAlive = false;
         self.layer.getChildByTag (self.tag).visible=false;
     };

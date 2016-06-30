@@ -16,13 +16,15 @@ var playerLayer = cc.Layer.extend({
         this.weapon = 0;
         this.isShooting = false;
         this.shootcountdown = 0;
-        this.shootduration = [[2,0.05,0.05],[3,0.05,0.05]];
+        this.shootduration = [[2,0.2,0.05],[2.5,0.2,0.05]];
         this.player = 0;
         this.playerposition = new cc.math.Vec2(100, 300);
         this.playerspeed = new cc.math.Vec2(0, 0);
         this.playerspeedmax = 600;
         this.damage = 0;
         this.damageduration = 0.1;
+        this.shield = 0;
+        this.shieldduration = 1;
 
         this.init();
     },
@@ -90,13 +92,46 @@ var playerLayer = cc.Layer.extend({
         this.addChild(damage,2,TagOfPlayer.damage);
 
         //sprite sword shoot
-        var swordshoot = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("nicolas/deathsummon/5.png"));
+        var swordshoot = new cc.Sprite(res.swordshoot_png);
         swordshoot.setAnchorPoint(0.5, 0.5);
-        swordshoot.setScale(4,4);
+        swordshoot.setScale(3,3);
         swordshoot.setPosition(this.playerposition);
         swordshoot.texture.setAliasTexParameters(true);
         swordshoot.visible=false;
         this.addChild(swordshoot,2,TagOfPlayer.swordshoot);
+
+        var swordaction = new cc.Sequence(new cc.FadeOut(0.25), new cc.FadeIn(0.25));
+        swordaction.repeatForever();
+
+        this.getChildByTag(TagOfPlayer.swordshoot).runAction(swordaction);
+
+        //sprite joannashield
+        var jshield = new cc.Sprite(res.jshield_png);
+        jshield.setAnchorPoint(0.5, 0.5);
+        jshield.setScale(3,3);
+        jshield.setPosition(this.playerposition);
+        jshield.texture.setAliasTexParameters(true);
+        jshield.visible=false;
+        this.addChild(jshield,2,TagOfPlayer.jshield);
+
+        var jshieldaction = new cc.Sequence(new cc.FadeOut(0.5), new cc.FadeIn(0.5));
+        jshieldaction.repeatForever();
+
+        this.getChildByTag(TagOfPlayer.jshield).runAction(jshieldaction);
+
+        //sprite nicolasshield
+        var nshield = new cc.Sprite(res.nshield_png);
+        nshield.setAnchorPoint(0.5, 0.5);
+        nshield.setScale(3,3);
+        nshield.setPosition(this.playerposition);
+        nshield.texture.setAliasTexParameters(true);
+        nshield.visible=false;
+        this.addChild(nshield,2,TagOfPlayer.nshield);
+
+        var nshieldaction = new cc.Sequence(new cc.FadeOut(0.5), new cc.FadeIn(0.5));
+        nshieldaction.repeatForever();
+
+        this.getChildByTag(TagOfPlayer.nshield).runAction(nshieldaction);
 
 
         //Add controler
@@ -286,9 +321,32 @@ var playerLayer = cc.Layer.extend({
                 } else {
                     //crée le projectile
                     var projectilepos = new cc.math.Vec2(self.playerposition.x, self.playerposition.y+g_blocksize*3);
-                    if (!self.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(self.playerposition.x, self.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),self.player,self.weapon,self.levels[self.weapon])) return false;
+
+                    if(self.weapon==1) {
+                        //créée plusieurs projectiles
+                        if(self.levels[1]==1) {
+                            if (!self.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(self.playerposition.x-2*g_blocksize, self.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),self.player,self.weapon,self.levels[self.weapon])) return false;
+
+                            self.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(self.playerposition.x+2*g_blocksize, self.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),self.player,self.weapon,self.levels[self.weapon]);
+                        } else {
+                            if (!self.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(self.playerposition.x, self.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),self.player,self.weapon,self.levels[self.weapon])) return false;
+
+                            if(self.levels[1]==2) {
+                                self.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(self.playerposition.x-3*g_blocksize, self.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),self.player,self.weapon,self.levels[self.weapon]);
+
+                                self.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(self.playerposition.x+3*g_blocksize, self.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),self.player,self.weapon,self.levels[self.weapon]);
+                            }
+                        }
+
+                    } else {
+                        if (!self.getParent().getChildByTag(TagOfLayer.bullets).addBullet(new cc.math.Vec2(self.playerposition.x, self.playerposition.y+g_blocksize*3),new cc.math.Vec2(0,20),self.player,self.weapon,self.levels[self.weapon])) return false;
+                    }
                 }
-                if(self.weapon==2) self.mana = Math.max(self.mana-self.manacost,0);
+                if(self.weapon==2) {
+                    self.mana = Math.max(self.mana-self.manacost,0);
+                    self.shield = self.shieldduration;
+                }
+
                 self.isShooting=true;
                 self.getChildByTag(TagOfPlayer.player).stopAllActions();
                 self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]],cc.callFunc(function() {self.shootEnd(self)},self)));
@@ -341,6 +399,24 @@ var playerLayer = cc.Layer.extend({
             this.damage = 0;
         }
 
+        //affiche le shield
+        if(this.shield > 0) {
+            if(this.player == 0) {
+                this.getChildByTag(TagOfPlayer.jshield).visible = true;
+                this.getChildByTag(TagOfPlayer.nshield).visible = false;
+            }
+            else {
+                this.getChildByTag(TagOfPlayer.nshield).visible = true;
+                this.getChildByTag(TagOfPlayer.jshield).visible = false;
+            }
+            this.shield -= g_enp.framestep;
+        }
+        else {
+            this.getChildByTag(TagOfPlayer.nshield).visible = false;
+            this.getChildByTag(TagOfPlayer.jshield).visible = false;
+            this.shield = 0;
+        }
+
         //Rempli la jauge de mana
         this.mana = this.mana + this.managrowth*g_enp.framestep > this.maxmana ? this.maxmana : this.mana + this.managrowth*g_enp.framestep;
 
@@ -391,5 +467,7 @@ var playerLayer = cc.Layer.extend({
         self.getChildByTag(TagOfPlayer.anim).setPosition(self.playerposition);
         self.getChildByTag(TagOfPlayer.damage).setPosition(self.playerposition);
         self.getChildByTag(TagOfPlayer.swordshoot).setPosition(self.playerposition);
+        self.getChildByTag(TagOfPlayer.jshield).setPosition(self.playerposition);
+        self.getChildByTag(TagOfPlayer.nshield).setPosition(self.playerposition);
     }
 });

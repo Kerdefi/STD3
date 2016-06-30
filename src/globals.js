@@ -24,12 +24,13 @@ var g_blockdamage = 2 ;
 var g_monsterdamagemultiplier = 1.3;
 //Tous les dégats
 var g_monsterdamagereduction = 0.7;
-var g_scalebullet = 1.5 ;
-var g_scalemonsterbullet = 2 ;
+var g_bowshield = 0.3;
+var g_scalebullet = 1.3 ;
+var g_scalemonsterbullet = 1.5 ;
 var g_scaleboom = 2 ;
 var g_scalemonster = 1.2 ;
 var g_scalebonus = 1.5 ;
-var g_swordhealth = [5,25,50];
+var g_swordhealth = [10,25,50];
 
 if(typeof TagOfState == "undefined") {
     var TagOfState = {};
@@ -74,6 +75,8 @@ if(typeof TagOfPlayer== "undefined") {
     TagOfPlayer.anim = 1;
     TagOfPlayer.damage = 2;
     TagOfPlayer.swordshoot = 3;
+    TagOfPlayer.jshield = 4;
+    TagOfPlayer.nshield = 5;
 };
 
 if(typeof BlockIndex== "undefined") {

@@ -21,7 +21,7 @@ var infoLayer = cc.Layer.extend({
         }
         //Création de l'indicateur de mana
         for(var i = 0 ; i < 10 ; i++) {
-            var spriteMana = new cc.Sprite(res.heart_png);
+            var spriteMana = new cc.Sprite(res.mana_png);
             spriteMana.setAnchorPoint(0.5, 0.5);
             spriteMana.setPosition(90+i*30,50);
             spriteMana.texture.setAliasTexParameters(true);
@@ -29,7 +29,7 @@ var infoLayer = cc.Layer.extend({
         }
         //Création de l'indicateur de niveau
         for(var i = 0 ; i < 3 ; i++) {
-            var spriteLevel = new cc.Sprite(res.heart_png);
+            var spriteLevel = new cc.Sprite(res.level_png);
             spriteLevel.setAnchorPoint(0.5, 0.5);
             spriteLevel.setPosition(90+i*30,80);
             spriteLevel.texture.setAliasTexParameters(true);
@@ -155,7 +155,7 @@ var infoLayer = cc.Layer.extend({
                 if (i == xp+1) {
                     this.getChildByTag(1000+i).visible = true;
                     this.getChildByTag(1000+i).opacity = Math.floor(xplimit*2.55*loading);
-                    this.getChildByTag(1000+i).setColor(cc.color(100,100,0));
+                    this.getChildByTag(1000+i).setColor(cc.color(255,0,0));
                 } else this.getChildByTag(1000+i).visible = false;
             }
         }

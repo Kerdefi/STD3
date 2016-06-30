@@ -20,8 +20,8 @@ var blockLayer = cc.Layer.extend({
         //level des maxmonsters
         this.probamonster = [1.5,2.3,2.5,3.3,3.3,2.5,2.5,1.8,1.8,1.8];
         //level des min et maxlength
-        this.minlenght = [10,11,12,13,14,15,16,17,18,19];
-        this.maxlenght = [15,16,17,18,19,20,21,22,23,24];
+        this.minlenght = [10,11,11,12,12,13,13,14,14,15];
+        this.maxlenght = [15,15,16,16,17,17,18,18,19,20];
         //level des minspace
         this.minspace = [14,13,13,12,12,12,12,12,12,12];
         //level des layers
@@ -108,7 +108,7 @@ var blockLayer = cc.Layer.extend({
                 }
             }
         }
-        this.getParent().getChildByTag(TagOfLayer.player).health -= k*g_monsterdamagereduction;
+        this.getParent().getChildByTag(TagOfLayer.player).health -= k*g_monsterdamagereduction*(this.getParent().getChildByTag(TagOfLayer.player).shield > 0 ? g_bowshield : 1);
 
         for (i = -1 ; i <= 1 ; i++) {
             for (j = -1 ; j <= 1 ; j++) {
@@ -121,7 +121,7 @@ var blockLayer = cc.Layer.extend({
                     //Dégat à appliquer
                     if(m>0) {
                         this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
-                        this.getParent().getChildByTag(TagOfLayer.player).health -= m*g_monsterdamagereduction;
+                        this.getParent().getChildByTag(TagOfLayer.player).health -= m*g_monsterdamagereduction*(this.getParent().getChildByTag(TagOfLayer.player).shield > 0 ? g_bowshield : 1);
                     }
                 } else {
                     //ajouter dégats et mettre une animation
@@ -129,7 +129,7 @@ var blockLayer = cc.Layer.extend({
                     //Dégat à appliquer
                     if(m>0) {
                         this.getParent().getChildByTag(TagOfLayer.player).damage = this.getParent().getChildByTag(TagOfLayer.player).damageduration;
-                        this.getParent().getChildByTag(TagOfLayer.player).health -= m*g_monsterdamagereduction;
+                        this.getParent().getChildByTag(TagOfLayer.player).health -= m*g_monsterdamagereduction*(this.getParent().getChildByTag(TagOfLayer.player).shield > 0 ? g_bowshield : 1);
                     }
                 }
             }
