@@ -2,7 +2,7 @@ var g_gamestate = 0;
 var g_enp ;
 var g_blocksize = 30;
 var g_textureblocksize = 20;
-var g_blockspeed = 2;
+var g_blockspeed = 7;
 var g_animtime = 0.15;
 var g_maxbullets = 20 ;
 var g_maxbooms = 20 ;
@@ -23,7 +23,7 @@ var g_blockdamage = 2 ;
 //Juste toucher les monstres
 var g_monsterdamagemultiplier = 1.3;
 //Tous les dégats
-var g_monsterdamagereduction = 0;
+var g_monsterdamagereduction = 0.7;
 var g_scalebullet = 1.5 ;
 var g_scalemonsterbullet = 2 ;
 var g_scaleboom = 2 ;
