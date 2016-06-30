@@ -255,9 +255,11 @@ encophys.world = function () {
             for (j = 0 ; j < this.size.y ; j++) {
                 if(this.map[i][j]!=null) {
                     //smoothmove à zéro si un point est à côté
-                    if(i==0 && this.map[i][j].smoothposition.x<0 || i>0 && this.map[i-1][j]!=null && this.map[i][j].smoothposition.x<0)this.map[i][j].smoothposition.x= (i==0 ? 0 : Math.min(0,this.map[i-1][j].smoothposition.x));
+                    if(i==0 && this.map[i][j].smoothposition.x<0 || i>0 && this.map[i-1][j]!=null && this.map[i][j].smoothposition.x<0) this.map[i][j].smoothposition.x = 0;
+                        //this.map[i][j].smoothposition.x= (i==0 ? 0 : Math.min(0,this.map[i-1][j].smoothposition.x));
 
-                    if(i==this.size.x-1 && this.map[i][j].smoothposition.x>0 || i < this.size.x-1 && this.map[i+1][j]!=null && this.map[i][j].smoothposition.x>0)this.map[i][j].smoothposition.x= (i==this.size.x-1 ? 0 : Math.min(0,this.map[i+1][j].smoothposition.x));
+                    if(i==this.size.x-1 && this.map[i][j].smoothposition.x>0 || i < this.size.x-1 && this.map[i+1][j]!=null && this.map[i][j].smoothposition.x>0) this.map[i][j].smoothposition.x = 0
+                        //this.map[i][j].smoothposition.x= (i==this.size.x-1 ? 0 : Math.min(0,this.map[i+1][j].smoothposition.x));
 
                     //smoothmove à 1 au max
                     if(Math.abs(this.map[i][j].smoothposition.x)>1)this.map[i][j].smoothposition.x = this.map[i][j].smoothposition.x/Math.abs(this.map[i][j].smoothposition.x);
@@ -272,9 +274,11 @@ encophys.world = function () {
                     }
 
                      //smoothmove à zéro si un point est à côté
-                    if(j==0 && this.map[i][j].smoothposition.y<0 || j>0 && this.map[i][j-1]!=null && this.map[i][j].smoothposition.y<0)this.map[i][j].smoothposition.y= (j==0 ? 0 : Math.min(0,this.map[i][j-1].smoothposition.y));
+                    if(j==0 && this.map[i][j].smoothposition.y<0 || j>0 && this.map[i][j-1]!=null && this.map[i][j].smoothposition.y<0) this.map[i][j].smoothposition.y=0;
+                        //this.map[i][j].smoothposition.y= (j==0 ? 0 : Math.min(0,this.map[i][j-1].smoothposition.y));
 
-                    if(j==this.size.y-1 && this.map[i][j].smoothposition.y>0 || j < this.size.y-1 && this.map[i][j+1]!=null && this.map[i][j].smoothposition.y>0)this.map[i][j].smoothposition.y = (j==this.size.y-1 ? 0 : Math.min(0,this.map[i][j+1].smoothposition.y));
+                    if(j==this.size.y-1 && this.map[i][j].smoothposition.y>0 || j < this.size.y-1 && this.map[i][j+1]!=null && this.map[i][j].smoothposition.y>0) this.map[i][j].smoothposition.y = 0;
+                        //this.map[i][j].smoothposition.y = (j==this.size.y-1 ? 0 : Math.min(0,this.map[i][j+1].smoothposition.y));
 
                     //smoothmove à 1 au max
                     if(Math.abs(this.map[i][j].smoothposition.y)>1)this.map[i][j].smoothposition.y = this.map[i][j].smoothposition.y/Math.abs(this.map[i][j].smoothposition.y);
