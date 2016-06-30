@@ -26,6 +26,7 @@ var bonusLayer = cc.Layer.extend({
         var spriteCoeur = new cc.Sprite(res.heart_png);
         spriteCoeur.setAnchorPoint(0.5, 0.5);
         spriteCoeur.setPosition(0,0);
+        spriteCoeur.setScale(g_scalebonus,g_scalebonus);
         spriteCoeur.visible = false;
         spriteCoeur.texture.setAliasTexParameters(true);
         this.addChild(spriteCoeur,0,0);
@@ -51,6 +52,7 @@ var bonusLayer = cc.Layer.extend({
         var spriteBonus = new cc.Sprite(res.heart_png);
         spriteBonus.setAnchorPoint(0.5, 0.5);
         spriteBonus.setPosition(0,0);
+        spriteBonus.setScale(g_scalebonus,g_scalebonus);
         spriteBonus.visible = false;
         spriteBonus.texture.setAliasTexParameters(true);
         this.addChild(spriteBonus,0,1);
@@ -62,19 +64,19 @@ var bonusLayer = cc.Layer.extend({
             this.getChildByTag (0).setPosition(this.getChildByTag (0).getPositionX(),this.getChildByTag (0).getPositionY() - (g_blocksize * g_enp.framestep * g_blockspeed));
 
             //Vérifie si colision avec le joueur
-            var player = new cc.Rect(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionX(),
-                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY(),
+            var player = new cc.Rect(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionX()-(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).width+g_blocksize)/2,
+                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY()-(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).height+g_blocksize)/2,
                 this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).width+g_blocksize,
                 this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).height+g_blocksize);
-            var bonusrect = new cc.Rect(this.getChildByTag(0).getPositionX(),
-                this.getChildByTag(0).getPositionY(),
+            var bonusrect = new cc.Rect(this.getChildByTag(0).getPositionX()-this.getChildByTag(0).width/2,
+                this.getChildByTag(0).getPositionY()-this.getChildByTag(0).height/2,
                 this.getChildByTag(0).width,
                 this.getChildByTag(0).height);
 
             if(cc.rectIntersectsRect(player, bonusrect)) {
                 this.getChildByTag(0).stopAllActions();
                 this.getChildByTag(0).runAction(this.coeurActionTouche);
-                this.coeurDying = false;
+                this.coeurDying = true;
                 //ajouter gain vie
                 this.getParent().getChildByTag(TagOfLayer.player).addHealth(g_bonushealthgain);
             }
@@ -88,12 +90,12 @@ var bonusLayer = cc.Layer.extend({
             this.getChildByTag (1).setPosition(this.getChildByTag (1).getPositionX(),this.getChildByTag (1).getPositionY() - (g_blocksize * g_enp.framestep * g_blockspeed));
 
             //Vérifie si colision avec le joueur
-            var player = new cc.Rect(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionX(),
-                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY(),
+            var player = new cc.Rect(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionX()-(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).width+g_blocksize)/2,
+                this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).getPositionY()-(this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).height+g_blocksize)/2,
                 this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).width+g_blocksize,
                 this.getParent().getChildByTag(TagOfLayer.player).getChildByTag(TagOfPlayer.player).height+g_blocksize);
-            var bonusrect = new cc.Rect(this.getChildByTag(1).getPositionX(),
-                this.getChildByTag(1).getPositionY(),
+            var bonusrect = new cc.Rect(this.getChildByTag(1).getPositionX()-this.getChildByTag(1).width/2,
+                this.getChildByTag(1).getPositionY()-this.getChildByTag(1).height/2,
                 this.getChildByTag(1).width,
                 this.getChildByTag(1).height);
 
@@ -133,7 +135,7 @@ var bonusLayer = cc.Layer.extend({
 
     deathCoeur:function (self) {
         self.getChildByTag(0).stopAllActions();
-        self.getChildByTag(0).setScale(1,1);
+        self.getChildByTag(0).setScale(g_scalebonus,g_scalebonus);
         self.getChildByTag(0).visible = false;
         self.coeurDying = false;
         self.coeurAlive = false;
@@ -141,7 +143,7 @@ var bonusLayer = cc.Layer.extend({
 
     deathBonus:function (self) {
         self.getChildByTag(1).stopAllActions();
-        self.getChildByTag(1).setScale(1,1);
+        self.getChildByTag(1).setScale(g_scalebonus,g_scalebonus);
         self.getChildByTag(1).visible = false;
         self.bonusDying = false;
         self.bonusAlive = false;

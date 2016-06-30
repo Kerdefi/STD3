@@ -15,7 +15,7 @@ var infoLayer = cc.Layer.extend({
         for(var i = 0 ; i < 10 ; i++) {
             var spriteCoeur = new cc.Sprite(res.heart_png);
             spriteCoeur.setAnchorPoint(0.5, 0.5);
-            spriteCoeur.setPosition(30+i*30,30);
+            spriteCoeur.setPosition(90+i*30,20);
             spriteCoeur.texture.setAliasTexParameters(true);
             this.addChild(spriteCoeur,0,i);
         }
@@ -23,7 +23,7 @@ var infoLayer = cc.Layer.extend({
         for(var i = 0 ; i < 10 ; i++) {
             var spriteMana = new cc.Sprite(res.heart_png);
             spriteMana.setAnchorPoint(0.5, 0.5);
-            spriteMana.setPosition(30+i*30,60);
+            spriteMana.setPosition(90+i*30,50);
             spriteMana.texture.setAliasTexParameters(true);
             this.addChild(spriteMana,0,100+i);
         }
@@ -31,24 +31,83 @@ var infoLayer = cc.Layer.extend({
         for(var i = 0 ; i < 3 ; i++) {
             var spriteLevel = new cc.Sprite(res.heart_png);
             spriteLevel.setAnchorPoint(0.5, 0.5);
-            spriteLevel.setPosition(30+i*30,90);
+            spriteLevel.setPosition(90+i*30,80);
             spriteLevel.texture.setAliasTexParameters(true);
             this.addChild(spriteLevel,0,1000+i);
         }
 
         //affichage du score
         g_score = 0;
-        this.labelScore = new cc.LabelTTF("Score : "+g_score, "Helvetica", 30);
+        this.labelScore = new cc.LabelTTF("Score : "+g_score, "Helvetica", 20);
         this.labelScore.setColor(cc.color(255,215,0));//black color
         this.labelScore.setAnchorPoint(cc.p(0, 0));
         this.labelScore.setPosition(cc.p(10, 980));
         this.addChild(this.labelScore,99,10000);
+
+        //Affiche player
+        var label = new cc.LabelTTF("The Bride - Joanna", "Helvetica", 20);
+        label.setColor(cc.color(255,215,0));//black color
+        label.setAnchorPoint(cc.p(0, 0));
+        label.setPosition(cc.p(10, 950));
+        this.addChild(label,99,10001);
+
+        //Affiche weapon
+        var label2 = new cc.LabelTTF("Sword", "Helvetica", 20);
+        label2.setColor(cc.color(255,215,0));//black color
+        label2.setAnchorPoint(cc.p(0, 0));
+        label2.setPosition(cc.p(10, 920));
+        this.addChild(label2,99,10003);
+
+        //Affiche reloading
+        var label1 = new cc.LabelTTF("Reloading", "Helvetica", 20);
+        label1.setColor(cc.color(255,215,0));//black color
+        label1.setAnchorPoint(cc.p(0, 0));
+        label1.setPosition(cc.p(10, 100));
+        label1.visible = false;
+        this.addChild(label1,99,10002);
+
+        //Texte fixe level
+        var label3 = new cc.LabelTTF("Level : ", "Helvetica", 20);
+        label3.setColor(cc.color(255,215,0));//black color
+        label3.setAnchorPoint(cc.p(0, 0));
+        label3.setPosition(cc.p(10, 70));
+        this.addChild(label3,99,10004);
+
+        //Texte fixe mana
+        var label4 = new cc.LabelTTF("Mana : ", "Helvetica", 20);
+        label4.setColor(cc.color(255,215,0));//black color
+        label4.setAnchorPoint(cc.p(0, 0));
+        label4.setPosition(cc.p(10, 40));
+        this.addChild(label4,99,10005);
+
+        //Texte fixe life
+        var label5 = new cc.LabelTTF("Life : ", "Helvetica", 20);
+        label5.setColor(cc.color(255,215,0));//black color
+        label5.setAnchorPoint(cc.p(0, 0));
+        label5.setPosition(cc.p(10, 10));
+        this.addChild(label5,99,10006);
+
     },
 
     onUpdate:function () {
         //Change le score
         g_score += g_enp.framestep*g_blockspeed;
-        this.getChildByTag(10000).setString ("Score : " + Math.round(g_score) + " fps : "+ Math.round(cc.director._frameRate));
+        //this.getChildByTag(10000).setString ("Score : " + Math.round(g_score) + " fps : "+ Math.round(cc.director._frameRate));
+        this.getChildByTag(10000).setString ("Score : " + Math.round(g_score));
+
+        //Change le player
+        if(this.getParent().getChildByTag(TagOfLayer.player).player == 0) this.getChildByTag(10001).setString ("The Bride - Joanna");
+        else this.getChildByTag(10001).setString ("The groom - Nicolas");
+
+        //Change le reloading
+        if(this.getParent().getChildByTag(TagOfLayer.player).isShooting || this.getParent().getChildByTag(TagOfLayer.player).shootcountdown!=0) this.getChildByTag(10002).visible = true ;
+        else this.getChildByTag(10002).visible = false ;
+
+        //Change le weapon
+        if(this.getParent().getChildByTag(TagOfLayer.player).weapon == 0) this.getChildByTag(10003).setString ("Sword");
+        if(this.getParent().getChildByTag(TagOfLayer.player).weapon == 1) this.getChildByTag(10003).setString ("Bow");
+        if(this.getParent().getChildByTag(TagOfLayer.player).weapon == 2) this.getChildByTag(10003).setString ("Spell");
+
 
         //Recalibre l'indicateur de vie
         var healthlimit = Math.min(this.getParent().getChildByTag(TagOfLayer.player).health,this.getParent().getChildByTag(TagOfLayer.player).maxhealth) % 10 ;

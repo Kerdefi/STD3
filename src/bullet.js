@@ -83,6 +83,7 @@ bullet = function (layer,tag) {
     var bullet = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("nicolas/fly/sword1/0.png"));
     bullet.setAnchorPoint(0.5, 0.5);
     bullet.setPosition(0,0);
+    bullet.setScale(g_scalebullet,g_scalebullet);
     bullet.texture.setAliasTexParameters(true);
     bullet.visible=false;
     layer.addChild(bullet,1,this.tag);

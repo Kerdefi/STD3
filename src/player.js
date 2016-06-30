@@ -10,13 +10,13 @@ var playerLayer = cc.Layer.extend({
         this.mana = 100;
         this.managrowth = 5;
         this.maxmana = 100;
-        this.manacost = 10;
-        this.health = 100;
+        this.manacost = 15;
+        this.health = 50;
         this.maxhealth = 100;
         this.weapon = 0;
         this.isShooting = false;
         this.shootcountdown = 0;
-        this.shootduration = [0.2,0.2,0.05];
+        this.shootduration = [[2,0.05,0.05],[3,0.05,0.05]];
         this.player = 0;
         this.playerposition = new cc.math.Vec2(100, 300);
         this.playerspeed = new cc.math.Vec2(0, 0);
@@ -83,11 +83,21 @@ var playerLayer = cc.Layer.extend({
         //spritedamage
         var damage = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("nicolas/deathsummon/5.png"));
         damage.setAnchorPoint(0.5, 0.5);
-        damage.setScale(1.5,1.5);
+        damage.setScale(2,2);
         damage.setPosition(this.playerposition);
         damage.texture.setAliasTexParameters(true);
         damage.visible=false;
         this.addChild(damage,2,TagOfPlayer.damage);
+
+        //sprite sword shoot
+        var swordshoot = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("nicolas/deathsummon/5.png"));
+        swordshoot.setAnchorPoint(0.5, 0.5);
+        swordshoot.setScale(4,4);
+        swordshoot.setPosition(this.playerposition);
+        swordshoot.texture.setAliasTexParameters(true);
+        swordshoot.visible=false;
+        this.addChild(swordshoot,2,TagOfPlayer.swordshoot);
+
 
         //Add controler
         this.gp = new gp_check (null,null,this.shoot,null,this.changeweapon,null,this.change,null,this.centerlr,this.left,this.right,this.centerud,this.down,this.up);
@@ -114,16 +124,18 @@ var playerLayer = cc.Layer.extend({
                         self.changeweapon(self);
                         break;
                     case cc.KEY.k:
-                            self.levels [0] = self.levels [0] == self.levelmax ? 0 : self.levels [0] + 1;
-                            self.levels [1] = self.levels [1] == self.levelmax ? 0 : self.levels [1] + 1;
-                            self.levels [2] = self.levels [2] == self.levelmax ? 0 : self.levels [2] + 1;
-                            self.getChildByTag(TagOfPlayer.player).stopAllActions();
-                            self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
+                            if(!self.isShooting) {
+                                self.levels [0] = self.levels [0] == self.levelmax ? 0 : self.levels [0] + 1;
+                                self.levels [1] = self.levels [1] == self.levelmax ? 0 : self.levels [1] + 1;
+                                self.levels [2] = self.levels [2] == self.levelmax ? 0 : self.levels [2] + 1;
+                                self.getChildByTag(TagOfPlayer.player).stopAllActions();
+                                self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
 
-                            self.getChildByTag(TagOfPlayer.anim).visible=true;
-                            self.getChildByTag(TagOfPlayer.anim).stopAllActions();
-                            self.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(self.lvlupAction[self.player],cc.callFunc(function() {self.getChildByTag(TagOfPlayer.anim).visible=false},self)));
-                            self.adjustPosition (self);
+                                self.getChildByTag(TagOfPlayer.anim).visible=true;
+                                self.getChildByTag(TagOfPlayer.anim).stopAllActions();
+                                self.getChildByTag(TagOfPlayer.anim).runAction (new cc.Sequence(self.lvlupAction[self.player],cc.callFunc(function() {self.getChildByTag(TagOfPlayer.anim).visible=false},self)));
+                                self.adjustPosition (self);
+                            }
                         break;
                     case cc.KEY.l:
                             self.change(self);
@@ -266,9 +278,11 @@ var playerLayer = cc.Layer.extend({
          if(g_gamestate == TagOfState.run) {
             if (!self.isShooting && self.shootcountdown==0 && (self.weapon!=2 || self.mana >= self.manacost)) {
                 if(self.weapon == 0) {
-                    var pos = new cc.math.Vec2(Math.round(self.playerposition.x/g_blocksize),Math.round((self.playerposition.y)/g_blocksize+1));
+                    var pos = new cc.math.Vec2(Math.round(self.playerposition.x/g_blocksize),Math.round((self.playerposition.y)/g_blocksize+3));
                     if(self.player == 0) g_enp.addForce (new encophys.force ("joannasword"+(self.levels[self.weapon]+1), pos));
                     else g_enp.addForce (new encophys.force ("nicolassword"+(self.levels[self.weapon]+1), pos));
+                    //Ajoute de la vie
+                    self.addHealth(g_swordhealth[self.levels[self.weapon]]);
                 } else {
                     //crée le projectile
                     var projectilepos = new cc.math.Vec2(self.playerposition.x, self.playerposition.y+g_blocksize*3);
@@ -285,7 +299,7 @@ var playerLayer = cc.Layer.extend({
 
     shootEnd:function (self) {
         self.getChildByTag(TagOfPlayer.player).runAction (self.flyAction[self.player][self.weapon][self.levels[self.weapon]]);
-        self.shootcountdown = self.shootduration[self.weapon];
+        self.shootcountdown = self.shootduration[self.player][self.weapon];
         self.isShooting=false;
     },
 
@@ -333,6 +347,11 @@ var playerLayer = cc.Layer.extend({
         //Réduit le shootcountdown
         this.shootcountdown = this.shootcountdown - g_enp.framestep < 0 ? 0 : this.shootcountdown - g_enp.framestep;
 
+        //Affiche le swordshoot
+        if(this.weapon == 0 && this.isShooting) {
+            this.getChildByTag(TagOfPlayer.swordshoot).visible=true;
+        } else this.getChildByTag(TagOfPlayer.swordshoot).visible=false;
+
         //Ajuste le niveau d'XP
         for (var i = 0 ; i < 3 ; i++) {
             if(!this.isShooting && this.levelgrowth[i] >= this.levelgrowthmax && this.levels [i] != this.levelmax) {
@@ -371,5 +390,6 @@ var playerLayer = cc.Layer.extend({
         self.getChildByTag(TagOfPlayer.player).setPosition(self.playerposition);
         self.getChildByTag(TagOfPlayer.anim).setPosition(self.playerposition);
         self.getChildByTag(TagOfPlayer.damage).setPosition(self.playerposition);
+        self.getChildByTag(TagOfPlayer.swordshoot).setPosition(self.playerposition);
     }
 });

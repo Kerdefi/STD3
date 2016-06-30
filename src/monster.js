@@ -82,6 +82,7 @@ monster = function (layer,tag) {
     var monster = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("monsters/m0/fly/0.png"));
     monster.setAnchorPoint(0.5, 0.5);
     monster.setPosition(0,0);
+    monster.setScale(g_scalemonster,g_scalemonster);
     monster.texture.setAliasTexParameters(true);
     monster.visible=false;
     layer.addChild(monster,1,this.tag);

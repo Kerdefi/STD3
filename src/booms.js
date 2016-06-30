@@ -94,6 +94,7 @@ boom = function (layer,tag) {
     var boom = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("monsters/m0/fly/0.png"));
     boom.setAnchorPoint(0.5, 0.5);
     boom.setPosition(0,0);
+    boom.setScale(g_scaleboom,g_scaleboom);
     boom.texture.setAliasTexParameters(true);
     boom.visible=false;
     this.layer.addChild(boom,1,this.tag+100);
