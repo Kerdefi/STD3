@@ -10,8 +10,8 @@ var g_maxmonsters = 15 ;
 var g_monstersmaxspeed = 125 ;
 var g_monsterbulletspeed = 200 ;
 var g_bonusproba = 0.4 ;
-var g_monsterxpgain = 6 ;
-var g_bonusxpgain = 12 ;
+var g_monsterxpgain = 7 ;
+var g_bonusxpgain = 14 ;
 var g_bonushealthgain = 30 ;
 var g_bonusmana = 30 ;
 var g_score = 0 ;
@@ -34,6 +34,7 @@ var g_scalemonster = 1.2 ;
 var g_scalebonus = 1.5 ;
 var g_swordhealth = [20,35,50];
 var g_firstshoot = 0.2;
+var g_level = 1.7;
 
 if(typeof TagOfState == "undefined") {
     var TagOfState = {};

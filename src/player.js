@@ -10,7 +10,7 @@ var playerLayer = cc.Layer.extend({
         this.mana = 100;
         this.managrowth = 3;
         this.maxmana = 100;
-        this.manacost = 17;
+        this.manacost = 15;
         this.health = 100;
         this.maxhealth = 100;
         this.weapon = 1;
@@ -470,9 +470,15 @@ var playerLayer = cc.Layer.extend({
 
     addXP:function (xp) {
         //this.levelgrowth[this.weapon]+=xp;
-        this.levelgrowth[0]+=xp;
-        this.levelgrowth[1]+=xp;
-        this.levelgrowth[2]+=xp;
+        if(this.levels[0]==0) {
+            this.levelgrowth[0]+=xp;
+            this.levelgrowth[1]+=xp;
+            this.levelgrowth[2]+=xp;
+        } else {
+            this.levelgrowth[0]+=xp/g_level;
+            this.levelgrowth[1]+=xp/g_level;
+            this.levelgrowth[2]+=xp/g_level;
+        }
     },
 
     addHealth:function (heal) {
