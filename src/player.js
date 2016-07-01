@@ -83,7 +83,7 @@ var playerLayer = cc.Layer.extend({
         this.addChild(anim,2,TagOfPlayer.anim);
 
         //spritedamage
-        var damage = new cc.Sprite(cc.spriteFrameCache.getSpriteFrame("nicolas/deathsummon/5.png"));
+        var damage = new cc.Sprite(res.damage_png);
         damage.setAnchorPoint(0.5, 0.5);
         damage.setScale(2,2);
         damage.setPosition(this.playerposition);

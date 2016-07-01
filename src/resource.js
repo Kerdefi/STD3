@@ -29,7 +29,8 @@ var res = {
     swordshoot_png : "res/new/swordshoot.png",
     title_png : "res/new/title.png",
     jshield_png : "res/new/jshield.png",
-    nshield_png : "res/new/nshield.png"
+    nshield_png : "res/new/nshield.png",
+    damage_png : "res/new/damage.png"
 };
 
 var g_resources = [
@@ -63,5 +64,6 @@ var g_resources = [
     res.swordshoot_png,
     res.title_png,
     res.jshield_png,
-    res.nshield_png
+    res.nshield_png,
+    res.damage_png
 ];

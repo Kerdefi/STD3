@@ -21,9 +21,9 @@ g_highscore.score = [100,20,10,5,1];
 var g_levellength = 100 ;
 var g_blockdamage = 2 ;
 //Juste toucher les monstres
-var g_monsterdamagemultiplier = 1.3;
+var g_monsterdamagemultiplier = 1.2;
 //Tous les dégats
-var g_monsterdamagereduction = 0.7;
+var g_monsterdamagereduction = 0.8;
 var g_bowshield = 0.3;
 var g_scalebullet = 1.3 ;
 var g_scalemonsterbullet = 1.5 ;
