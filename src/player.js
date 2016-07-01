@@ -8,15 +8,15 @@ var playerLayer = cc.Layer.extend({
         this.levelgrowthmax = 100;
         this.weapons = ["sword","bow","spell"];
         this.mana = 100;
-        this.managrowth = 5;
+        this.managrowth = 3;
         this.maxmana = 100;
-        this.manacost = 15;
+        this.manacost = 17;
         this.health = 100;
         this.maxhealth = 100;
         this.weapon = 1;
         this.isShooting = false;
         this.shootcountdown = [0,0,0];
-        this.shootduration = [[5,0.2,0.05],[5,0.2,0.05]];
+        this.shootduration = [[7,0.2,0.05],[7,0.2,0.05]];
         this.player = Math.round(Math.random());
         this.playerposition = new cc.math.Vec2(100, 300);
         this.playerspeed = new cc.math.Vec2(0, 0);
@@ -25,6 +25,8 @@ var playerLayer = cc.Layer.extend({
         this.damageduration = 0.1;
         this.shield = 0;
         this.shieldduration = 1;
+        this.reloading = 0;
+        this.reloadingduration = 0.2;
 
         this.init();
     },
@@ -90,6 +92,14 @@ var playerLayer = cc.Layer.extend({
         damage.texture.setAliasTexParameters(true);
         damage.visible=false;
         this.addChild(damage,2,TagOfPlayer.damage);
+
+        //spritereloading
+        var sreloading = new cc.Sprite(res.reloading_png);
+        sreloading.setAnchorPoint(0.5, 0.5);
+        sreloading.setPosition(this.playerposition);
+        sreloading.texture.setAliasTexParameters(true);
+        sreloading.visible=false;
+        this.addChild(sreloading,2,TagOfPlayer.reloading);
 
         //sprite sword shoot
         var swordshoot = new cc.Sprite(res.swordshoot_png);
@@ -351,6 +361,8 @@ var playerLayer = cc.Layer.extend({
                 self.getChildByTag(TagOfPlayer.player).stopAllActions();
                 self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]],cc.callFunc(function() {self.shootEnd(self)},self)));
                 //self.getChildByTag(TagOfPlayer.player).runAction (new cc.Sequence(new cc.Spawn (new cc.Sequence(new cc.scaleBy(0.2, 2.0, 2.0), new cc.scaleBy(0.2, 0.5, 0.5)),new cc.Sequence(self.shootAction[self.player][self.weapon][self.levels[self.weapon]])),cc.callFunc(function() {self.shootEnd(self)},self)));
+            } else {
+                if (self.weapon == 0 || (self.weapon == 2 && self.mana < self.manacost)) self.reloading = self.reloadingduration;
             }
         }
     },
@@ -387,6 +399,16 @@ var playerLayer = cc.Layer.extend({
             this.playerposition.x+=this.playerspeed.x*g_enp.framestep;
             this.playerposition.y+=this.playerspeed.y*g_enp.framestep;
             this.adjustPosition (this);
+        }
+
+        //affiche les dégats
+        if(this.reloading > 0) {
+            this.getChildByTag(TagOfPlayer.reloading).visible = true;
+            this.reloading -= g_enp.framestep;
+        }
+        else {
+            this.getChildByTag(TagOfPlayer.reloading).visible = false;
+            this.reloading = 0;
         }
 
         //affiche les dégats
@@ -474,5 +496,6 @@ var playerLayer = cc.Layer.extend({
         self.getChildByTag(TagOfPlayer.swordshoot).setPosition(self.playerposition);
         self.getChildByTag(TagOfPlayer.jshield).setPosition(self.playerposition);
         self.getChildByTag(TagOfPlayer.nshield).setPosition(self.playerposition);
+        self.getChildByTag(TagOfPlayer.reloading).setPosition(self.playerposition);
     }
 });

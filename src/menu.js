@@ -132,6 +132,7 @@ var MenuHelp = cc.Layer.extend({
         spriteBG.setAnchorPoint(0,0);
         spriteBG.setPosition(0,0);
         spriteBG.setScale(4,4);
+        spriteBG.texture.setAliasTexParameters(false);
         this.addChild(spriteBG,0,0);
     }
 });

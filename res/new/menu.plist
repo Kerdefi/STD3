@@ -4,96 +4,6 @@
     <dict>
         <key>frames</key>
         <dict>
-            <key>menu/buttons/continue_n.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-1}</string>
-                <key>spriteSize</key>
-                <string>{196,64}</string>
-                <key>spriteSourceSize</key>
-                <string>{252,86}</string>
-                <key>textureRect</key>
-                <string>{{1,1},{196,64}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>menu/buttons/continue_s.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-1}</string>
-                <key>spriteSize</key>
-                <string>{196,64}</string>
-                <key>spriteSourceSize</key>
-                <string>{252,86}</string>
-                <key>textureRect</key>
-                <string>{{1,1},{196,64}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>menu/buttons/quit_n.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-1}</string>
-                <key>spriteSize</key>
-                <string>{196,64}</string>
-                <key>spriteSourceSize</key>
-                <string>{252,86}</string>
-                <key>textureRect</key>
-                <string>{{1,1},{196,64}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>menu/buttons/quit_s.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-1}</string>
-                <key>spriteSize</key>
-                <string>{196,64}</string>
-                <key>spriteSourceSize</key>
-                <string>{252,86}</string>
-                <key>textureRect</key>
-                <string>{{1,1},{196,64}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>menu/buttons/start_n.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,-1}</string>
-                <key>spriteSize</key>
-                <string>{196,64}</string>
-                <key>spriteSourceSize</key>
-                <string>{252,86}</string>
-                <key>textureRect</key>
-                <string>{{1,1},{196,64}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>menu/buttons/start_s.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{-1,4}</string>
-                <key>spriteSize</key>
-                <string>{196,64}</string>
-                <key>spriteSourceSize</key>
-                <string>{252,86}</string>
-                <key>textureRect</key>
-                <string>{{1,67},{196,64}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
             <key>menu/joanna/0.png</key>
             <dict>
                 <key>aliases</key>
@@ -105,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{54,66}</string>
                 <key>textureRect</key>
-                <string>{{1,133},{54,66}}</string>
+                <string>{{1,47},{54,66}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>menu/joanna/1.png</key>
             <dict>
@@ -120,9 +30,9 @@
                 <key>spriteSourceSize</key>
                 <string>{54,66}</string>
                 <key>textureRect</key>
-                <string>{{57,133},{54,66}}</string>
+                <string>{{69,47},{54,66}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>menu/joanna/2.png</key>
             <dict>
@@ -135,52 +45,7 @@
                 <key>spriteSourceSize</key>
                 <string>{54,66}</string>
                 <key>textureRect</key>
-                <string>{{113,133},{54,66}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>menu/life/hud_heartEmpty.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{53,45}</string>
-                <key>spriteSourceSize</key>
-                <string>{53,45}</string>
-                <key>textureRect</key>
-                <string>{{181,145},{53,45}}</string>
-                <key>textureRotated</key>
-                <false/>
-            </dict>
-            <key>menu/life/hud_heartFull.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{53,45}</string>
-                <key>spriteSourceSize</key>
-                <string>{53,45}</string>
-                <key>textureRect</key>
-                <string>{{113,189},{53,45}}</string>
-                <key>textureRotated</key>
-                <true/>
-            </dict>
-            <key>menu/life/hud_heartHalf.png</key>
-            <dict>
-                <key>aliases</key>
-                <array/>
-                <key>spriteOffset</key>
-                <string>{0,0}</string>
-                <key>spriteSize</key>
-                <string>{53,45}</string>
-                <key>spriteSourceSize</key>
-                <string>{53,45}</string>
-                <key>textureRect</key>
-                <string>{{160,192},{53,45}}</string>
+                <string>{{137,47},{54,66}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -195,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{44,70}</string>
                 <key>textureRect</key>
-                <string>{{199,1},{44,70}}</string>
+                <string>{{1,1},{44,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>menu/nicolas/1.png</key>
             <dict>
@@ -210,9 +75,9 @@
                 <key>spriteSourceSize</key>
                 <string>{44,70}</string>
                 <key>textureRect</key>
-                <string>{{199,73},{44,70}}</string>
+                <string>{{73,1},{44,70}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>menu/nicolas/2.png</key>
             <dict>
@@ -225,7 +90,7 @@
                 <key>spriteSourceSize</key>
                 <string>{44,70}</string>
                 <key>textureRect</key>
-                <string>{{1,201},{44,70}}</string>
+                <string>{{145,1},{44,70}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -241,9 +106,9 @@
             <key>realTextureFileName</key>
             <string>menu.png</string>
             <key>size</key>
-            <string>{244,246}</string>
+            <string>{216,102}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:16c8c0e4e41ecb02fca702f9341c4ac1:667035a1305773be928adc8478872f1d:9622c220910f706aac7e93396e53b943$</string>
+            <string>$TexturePacker:SmartUpdate:8b34aadb094fd9e24d9af78b510a74c1:a3c04da7471bf2c0bd69efb0802f10bd:9622c220910f706aac7e93396e53b943$</string>
             <key>textureFileName</key>
             <string>menu.png</string>
         </dict>

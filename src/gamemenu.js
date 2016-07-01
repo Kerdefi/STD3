@@ -59,7 +59,7 @@ var infoLayer = cc.Layer.extend({
         this.addChild(label2,99,10003);
 
         //Affiche reloading
-        var label1 = new cc.LabelTTF("Reloading", "Helvetica", 20);
+        var label1 = new cc.LabelTTF("Reloading", "Helvetica", 30);
         label1.setColor(cc.color(255,215,0));//black color
         label1.setAnchorPoint(cc.p(0, 0));
         label1.setPosition(cc.p(10, 100));

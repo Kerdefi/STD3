@@ -94,9 +94,9 @@ var gameLayer = cc.Layer.extend({
             this.getChildByTag(TagOfLayer.info).onUpdate();
             this.level = Math.min (9,Math.round(g_score/g_levellength));
 
-            if(g_score > 1100) {
-                g_monsterdamagereduction = g_monsterdamagereductionorigin * ((g_score - 1100)/ 500);
-                this.getChildByTag(TagOfLayer.background).setColor(cc.color(255,255*100/(g_score - 1000),255*100/(g_score - 1000)));
+            if(g_score > 1000) {
+                g_monsterdamagereduction = g_monsterdamagereductionorigin * ((g_score - 1000)/ 300);
+                this.getChildByTag(TagOfLayer.background).getChildByTag(0).setColor(cc.color(255,255*200/(g_score - 800),255*200/(g_score - 800)));
             }
         }
         if (g_gamestate == TagOfState.run || g_gamestate == TagOfState.endanim) this.getChildByTag(TagOfLayer.player).onUpdate();

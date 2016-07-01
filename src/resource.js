@@ -30,7 +30,8 @@ var res = {
     title_png : "res/new/title.png",
     jshield_png : "res/new/jshield.png",
     nshield_png : "res/new/nshield.png",
-    damage_png : "res/new/damage.png"
+    damage_png : "res/new/damage.png",
+    reloading_png : "res/new/reloading.png"
 };
 
 var g_resources = [
@@ -65,5 +66,6 @@ var g_resources = [
     res.title_png,
     res.jshield_png,
     res.nshield_png,
-    res.damage_png
+    res.damage_png,
+    res.reloading_png
 ];

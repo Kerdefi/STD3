@@ -10,8 +10,8 @@ var g_maxmonsters = 15 ;
 var g_monstersmaxspeed = 125 ;
 var g_monsterbulletspeed = 200 ;
 var g_bonusproba = 0.4 ;
-var g_monsterxpgain = 8 ;
-var g_bonusxpgain = 16 ;
+var g_monsterxpgain = 6 ;
+var g_bonusxpgain = 12 ;
 var g_bonushealthgain = 30 ;
 var g_bonusmana = 30 ;
 var g_score = 0 ;
@@ -22,9 +22,9 @@ g_highscore.score = [100,20,10,5,1];
 var g_levellength = 100 ;
 var g_blockdamage = 2 ;
 //Juste toucher les monstres
-var g_monsterdamagemultiplier = 1.1;
+var g_monsterdamagemultiplier = 1.2;
 //Tous les dégats
-var g_monsterdamagereductionorigin = 0.7;
+var g_monsterdamagereductionorigin = 0.8;
 var g_monsterdamagereduction = g_monsterdamagereductionorigin;
 var g_bowshield = 0.3;
 var g_scalebullet = 1.4 ;
@@ -80,6 +80,7 @@ if(typeof TagOfPlayer== "undefined") {
     TagOfPlayer.swordshoot = 3;
     TagOfPlayer.jshield = 4;
     TagOfPlayer.nshield = 5;
+    TagOfPlayer.reloading = 6;
 };
 
 if(typeof BlockIndex== "undefined") {

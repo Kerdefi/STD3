@@ -15,9 +15,9 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{814,318},{25,20}}</string>
+                <string>{{709,286},{25,20}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/booms/arrow1/1.png</key>
             <dict>
@@ -30,7 +30,7 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{833,704},{25,20}}</string>
+                <string>{{893,1132},{25,20}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -45,9 +45,9 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{824,805},{21,18}}</string>
+                <string>{{305,790},{21,18}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/arrow2/0.png</key>
             <dict>
@@ -60,9 +60,9 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{814,318},{25,20}}</string>
+                <string>{{709,286},{25,20}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/booms/arrow2/1.png</key>
             <dict>
@@ -75,7 +75,7 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{833,704},{25,20}}</string>
+                <string>{{893,1132},{25,20}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -90,9 +90,9 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{824,805},{21,18}}</string>
+                <string>{{305,790},{21,18}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/arrow3/0.png</key>
             <dict>
@@ -105,9 +105,9 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{824,783},{23,20}}</string>
+                <string>{{910,1074},{23,20}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/arrow3/1.png</key>
             <dict>
@@ -120,7 +120,7 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{833,731},{25,20}}</string>
+                <string>{{906,1020},{25,20}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -135,7 +135,7 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{744,923},{25,20}}</string>
+                <string>{{906,1047},{25,20}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -150,9 +150,9 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{814,318},{25,20}}</string>
+                <string>{{709,286},{25,20}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/booms/arrow3/4.png</key>
             <dict>
@@ -165,7 +165,7 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{833,704},{25,20}}</string>
+                <string>{{893,1132},{25,20}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -180,9 +180,9 @@
                 <key>spriteSourceSize</key>
                 <string>{25,20}</string>
                 <key>textureRect</key>
-                <string>{{824,805},{21,18}}</string>
+                <string>{{305,790},{21,18}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/spell1/0.png</key>
             <dict>
@@ -195,9 +195,9 @@
                 <key>spriteSourceSize</key>
                 <string>{54,40}</string>
                 <key>textureRect</key>
-                <string>{{626,921},{54,40}}</string>
+                <string>{{899,789},{54,40}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/spell1/1.png</key>
             <dict>
@@ -210,7 +210,7 @@
                 <key>spriteSourceSize</key>
                 <string>{54,40}</string>
                 <key>textureRect</key>
-                <string>{{764,973},{46,40}}</string>
+                <string>{{845,1085},{46,40}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -225,9 +225,9 @@
                 <key>spriteSourceSize</key>
                 <string>{54,40}</string>
                 <key>textureRect</key>
-                <string>{{520,959},{46,36}}</string>
+                <string>{{845,1127},{46,36}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/booms/spell1/3.png</key>
             <dict>
@@ -240,7 +240,7 @@
                 <key>spriteSourceSize</key>
                 <string>{54,40}</string>
                 <key>textureRect</key>
-                <string>{{811,345},{42,36}}</string>
+                <string>{{905,208},{42,36}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -255,54 +255,54 @@
                 <key>spriteSourceSize</key>
                 <string>{54,40}</string>
                 <key>textureRect</key>
-                <string>{{819,578},{34,30}}</string>
+                <string>{{896,903},{34,30}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/spell2/0.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,1}</string>
+                <string>{0,3}</string>
                 <key>spriteSize</key>
-                <string>{48,48}</string>
+                <string>{100,102}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{110,110}</string>
                 <key>textureRect</key>
-                <string>{{662,963},{48,48}}</string>
+                <string>{{339,425},{100,102}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/spell2/1.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,1}</string>
+                <string>{2,3}</string>
                 <key>spriteSize</key>
-                <string>{50,48}</string>
+                <string>{106,104}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{110,110}</string>
                 <key>textureRect</key>
-                <string>{{558,962},{50,48}}</string>
+                <string>{{536,915},{106,104}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/spell2/2.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,1}</string>
+                <string>{1,3}</string>
                 <key>spriteSize</key>
-                <string>{50,48}</string>
+                <string>{108,104}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{110,110}</string>
                 <key>textureRect</key>
-                <string>{{610,963},{50,48}}</string>
+                <string>{{840,315},{108,104}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/spell2/3.png</key>
             <dict>
@@ -311,11 +311,11 @@
                 <key>spriteOffset</key>
                 <string>{0,0}</string>
                 <key>spriteSize</key>
-                <string>{50,50}</string>
+                <string>{110,110}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{110,110}</string>
                 <key>textureRect</key>
-                <string>{{712,956},{50,50}}</string>
+                <string>{{556,521},{110,110}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -324,13 +324,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,2}</string>
+                <string>{0,5}</string>
                 <key>spriteSize</key>
-                <string>{46,46}</string>
+                <string>{98,96}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{110,110}</string>
                 <key>textureRect</key>
-                <string>{{151,692},{46,46}}</string>
+                <string>{{756,598},{98,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -339,28 +339,28 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,1}</string>
+                <string>{0,2}</string>
                 <key>spriteSize</key>
-                <string>{44,36}</string>
+                <string>{92,72}</string>
                 <key>spriteSourceSize</key>
-                <string>{50,50}</string>
+                <string>{110,110}</string>
                 <key>textureRect</key>
-                <string>{{812,973},{44,36}}</string>
+                <string>{{756,696},{92,72}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/booms/spell3/0.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{2,-3}</string>
+                <string>{7,-9}</string>
                 <key>spriteSize</key>
-                <string>{79,84}</string>
+                <string>{183,196}</string>
                 <key>spriteSourceSize</key>
-                <string>{83,90}</string>
+                <string>{199,216}</string>
                 <key>textureRect</key>
-                <string>{{636,238},{79,84}}</string>
+                <string>{{599,1},{183,196}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -369,13 +369,13 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{1,0}</string>
                 <key>spriteSize</key>
-                <string>{79,86}</string>
+                <string>{185,202}</string>
                 <key>spriteSourceSize</key>
-                <string>{83,90}</string>
+                <string>{199,216}</string>
                 <key>textureRect</key>
-                <string>{{199,812},{79,86}}</string>
+                <string>{{395,1},{185,202}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -384,28 +384,28 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{0,0}</string>
+                <string>{-1,0}</string>
                 <key>spriteSize</key>
-                <string>{83,90}</string>
+                <string>{197,214}</string>
                 <key>spriteSourceSize</key>
-                <string>{83,90}</string>
+                <string>{199,216}</string>
                 <key>textureRect</key>
-                <string>{{630,319},{83,90}}</string>
+                <string>{{1,1},{197,214}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/booms/spell3/3.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{2,0}</string>
+                <string>{8,0}</string>
                 <key>spriteSize</key>
-                <string>{79,90}</string>
+                <string>{183,216}</string>
                 <key>spriteSourceSize</key>
-                <string>{83,90}</string>
+                <string>{199,216}</string>
                 <key>textureRect</key>
-                <string>{{473,790},{79,90}}</string>
+                <string>{{1,217},{183,216}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -414,43 +414,43 @@
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{2,1}</string>
+                <string>{7,2}</string>
                 <key>spriteSize</key>
-                <string>{79,74}</string>
+                <string>{185,172}</string>
                 <key>spriteSourceSize</key>
-                <string>{83,90}</string>
+                <string>{199,216}</string>
                 <key>textureRect</key>
-                <string>{{693,827},{79,74}}</string>
+                <string>{{151,836},{185,172}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/spell3/5.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{2,2}</string>
+                <string>{5,5}</string>
                 <key>spriteSize</key>
-                <string>{79,70}</string>
+                <string>{189,164}</string>
                 <key>spriteSourceSize</key>
-                <string>{83,90}</string>
+                <string>{199,216}</string>
                 <key>textureRect</key>
-                <string>{{774,901},{79,70}}</string>
+                <string>{{139,645},{189,164}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/booms/spell3/6.png</key>
             <dict>
                 <key>aliases</key>
                 <array/>
                 <key>spriteOffset</key>
-                <string>{-2,4}</string>
+                <string>{-4,10}</string>
                 <key>spriteSize</key>
-                <string>{49,60}</string>
+                <string>{109,138}</string>
                 <key>spriteSourceSize</key>
-                <string>{83,90}</string>
+                <string>{199,216}</string>
                 <key>textureRect</key>
-                <string>{{458,959},{49,60}}</string>
+                <string>{{428,288},{109,138}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -465,7 +465,7 @@
                 <key>spriteSourceSize</key>
                 <string>{10,30}</string>
                 <key>textureRect</key>
-                <string>{{364,987},{10,30}}</string>
+                <string>{{139,836},{10,30}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -480,9 +480,9 @@
                 <key>spriteSourceSize</key>
                 <string>{10,30}</string>
                 <key>textureRect</key>
-                <string>{{458,1010},{10,30}}</string>
+                <string>{{383,201},{10,30}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/bullets/arrow2/0.png</key>
             <dict>
@@ -495,7 +495,7 @@
                 <key>spriteSourceSize</key>
                 <string>{15,45}</string>
                 <key>textureRect</key>
-                <string>{{838,243},{15,45}}</string>
+                <string>{{893,1085},{15,45}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -510,9 +510,9 @@
                 <key>spriteSourceSize</key>
                 <string>{15,45}</string>
                 <key>textureRect</key>
-                <string>{{812,664},{13,45}}</string>
+                <string>{{845,1165},{13,45}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/bullets/arrow3/0.png</key>
             <dict>
@@ -525,9 +525,9 @@
                 <key>spriteSourceSize</key>
                 <string>{33,60}</string>
                 <key>textureRect</key>
-                <string>{{204,987},{33,60}}</string>
+                <string>{{914,511},{33,60}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/bullets/arrow3/1.png</key>
             <dict>
@@ -540,9 +540,9 @@
                 <key>spriteSourceSize</key>
                 <string>{33,60}</string>
                 <key>textureRect</key>
-                <string>{{682,923},{31,60}}</string>
+                <string>{{896,84},{31,60}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/bullets/arrow3/2.png</key>
             <dict>
@@ -555,9 +555,9 @@
                 <key>spriteSourceSize</key>
                 <string>{33,60}</string>
                 <key>textureRect</key>
-                <string>{{266,987},{33,60}}</string>
+                <string>{{896,146},{33,60}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/bullets/arrow3/3.png</key>
             <dict>
@@ -570,7 +570,7 @@
                 <key>spriteSourceSize</key>
                 <string>{33,60}</string>
                 <key>textureRect</key>
-                <string>{{811,383},{31,60}}</string>
+                <string>{{905,246},{31,60}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -585,7 +585,7 @@
                 <key>spriteSourceSize</key>
                 <string>{23,23}</string>
                 <key>textureRect</key>
-                <string>{{384,435},{23,23}}</string>
+                <string>{{914,573},{23,23}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -600,7 +600,7 @@
                 <key>spriteSourceSize</key>
                 <string>{23,23}</string>
                 <key>textureRect</key>
-                <string>{{824,758},{23,23}}</string>
+                <string>{{754,186},{23,23}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -615,7 +615,7 @@
                 <key>spriteSourceSize</key>
                 <string>{23,23}</string>
                 <key>textureRect</key>
-                <string>{{831,466},{21,21}}</string>
+                <string>{{910,1099},{21,21}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -630,7 +630,7 @@
                 <key>spriteSourceSize</key>
                 <string>{23,23}</string>
                 <key>textureRect</key>
-                <string>{{824,758},{23,23}}</string>
+                <string>{{754,186},{23,23}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -645,9 +645,9 @@
                 <key>spriteSourceSize</key>
                 <string>{23,50}</string>
                 <key>textureRect</key>
-                <string>{{836,318},{17,22}}</string>
+                <string>{{550,267},{17,22}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/bullets/spell2/1.png</key>
             <dict>
@@ -660,9 +660,9 @@
                 <key>spriteSourceSize</key>
                 <string>{23,50}</string>
                 <key>textureRect</key>
-                <string>{{811,445},{19,36}}</string>
+                <string>{{578,188},{19,36}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/bullets/spell2/2.png</key>
             <dict>
@@ -675,7 +675,7 @@
                 <key>spriteSourceSize</key>
                 <string>{23,50}</string>
                 <key>textureRect</key>
-                <string>{{665,81},{17,38}}</string>
+                <string>{{809,770},{17,38}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -690,9 +690,9 @@
                 <key>spriteSourceSize</key>
                 <string>{23,50}</string>
                 <key>textureRect</key>
-                <string>{{151,411},{19,32}}</string>
+                <string>{{578,226},{19,32}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/bullets/spell2/4.png</key>
             <dict>
@@ -705,7 +705,7 @@
                 <key>spriteSourceSize</key>
                 <string>{23,50}</string>
                 <key>textureRect</key>
-                <string>{{812,711},{19,32}}</string>
+                <string>{{928,903},{19,32}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -720,9 +720,9 @@
                 <key>spriteSourceSize</key>
                 <string>{20,50}</string>
                 <key>textureRect</key>
-                <string>{{819,610},{20,46}}</string>
+                <string>{{899,845},{20,46}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/bullets/spell3/1.png</key>
             <dict>
@@ -735,7 +735,7 @@
                 <key>spriteSourceSize</key>
                 <string>{20,50}</string>
                 <key>textureRect</key>
-                <string>{{827,658},{20,44}}</string>
+                <string>{{910,939},{20,44}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -750,9 +750,9 @@
                 <key>spriteSourceSize</key>
                 <string>{85,100}</string>
                 <key>textureRect</key>
-                <string>{{693,903},{65,18}}</string>
+                <string>{{926,1},{65,18}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/deathsummon/1.png</key>
             <dict>
@@ -765,9 +765,9 @@
                 <key>spriteSourceSize</key>
                 <string>{85,100}</string>
                 <key>textureRect</key>
-                <string>{{814,243},{73,22}}</string>
+                <string>{{583,753},{73,22}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/deathsummon/2.png</key>
             <dict>
@@ -780,7 +780,7 @@
                 <key>spriteSourceSize</key>
                 <string>{85,100}</string>
                 <key>textureRect</key>
-                <string>{{814,164},{77,26}}</string>
+                <string>{{550,188},{77,26}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -795,9 +795,9 @@
                 <key>spriteSourceSize</key>
                 <string>{85,100}</string>
                 <key>textureRect</key>
-                <string>{{295,959},{79,26}}</string>
+                <string>{{355,201},{79,26}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/deathsummon/4.png</key>
             <dict>
@@ -810,7 +810,7 @@
                 <key>spriteSourceSize</key>
                 <string>{85,100}</string>
                 <key>textureRect</key>
-                <string>{{814,81},{81,28}}</string>
+                <string>{{896,1},{81,28}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -825,7 +825,7 @@
                 <key>spriteSourceSize</key>
                 <string>{85,100}</string>
                 <key>textureRect</key>
-                <string>{{384,462},{85,100}}</string>
+                <string>{{684,1098},{85,100}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -840,7 +840,7 @@
                 <key>spriteSourceSize</key>
                 <string>{85,100}</string>
                 <key>textureRect</key>
-                <string>{{627,404},{85,100}}</string>
+                <string>{{812,511},{85,100}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -855,7 +855,7 @@
                 <key>spriteSourceSize</key>
                 <string>{85,100}</string>
                 <key>textureRect</key>
-                <string>{{744,476},{85,100}}</string>
+                <string>{{669,623},{85,100}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -870,7 +870,7 @@
                 <key>spriteSourceSize</key>
                 <string>{85,100}</string>
                 <key>textureRect</key>
-                <string>{{272,690},{85,98}}</string>
+                <string>{{856,598},{85,98}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -885,9 +885,9 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{636,100},{136,80}}</string>
+                <string>{{1,1103},{136,80}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/fly/bow1/1.png</key>
             <dict>
@@ -900,7 +900,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{624,491},{118,84}}</string>
+                <string>{{325,937},{118,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -915,9 +915,9 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{359,549},{136,80}}</string>
+                <string>{{139,1103},{136,80}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/fly/bow2/1.png</key>
             <dict>
@@ -930,9 +930,9 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{579,577},{118,84}}</string>
+                <string>{{583,633},{118,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/fly/bow3/0.png</key>
             <dict>
@@ -945,7 +945,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{489,398},{136,80}}</string>
+                <string>{{277,1103},{136,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -960,7 +960,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{572,663},{118,84}}</string>
+                <string>{{827,425},{118,84}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -975,7 +975,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{486,480},{136,80}}</string>
+                <string>{{415,1103},{136,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -990,9 +990,9 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{699,578},{118,84}}</string>
+                <string>{{629,777},{118,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/fly/spell2/0.png</key>
             <dict>
@@ -1005,7 +1005,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{486,480},{136,80}}</string>
+                <string>{{415,1103},{136,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1020,9 +1020,9 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{699,578},{118,84}}</string>
+                <string>{{629,777},{118,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/fly/spell3/0.png</key>
             <dict>
@@ -1035,7 +1035,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{486,480},{136,80}}</string>
+                <string>{{415,1103},{136,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1050,9 +1050,9 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{699,578},{118,84}}</string>
+                <string>{{629,777},{118,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/fly/sword1/0.png</key>
             <dict>
@@ -1065,9 +1065,9 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{441,562},{136,80}}</string>
+                <string>{{501,639},{136,80}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/fly/sword1/1.png</key>
             <dict>
@@ -1080,9 +1080,9 @@
                 <key>spriteSourceSize</key>
                 <string>{136,84}</string>
                 <key>textureRect</key>
-                <string>{{692,664},{118,84}}</string>
+                <string>{{642,897},{118,84}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/fly/sword2/0.png</key>
             <dict>
@@ -1095,7 +1095,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,101}</string>
                 <key>textureRect</key>
-                <string>{{351,139},{136,97}}</string>
+                <string>{{418,540},{136,97}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1110,9 +1110,9 @@
                 <key>spriteSourceSize</key>
                 <string>{136,101}</string>
                 <key>textureRect</key>
-                <string>{{1,901},{118,101}}</string>
+                <string>{{707,397},{118,101}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/fly/sword3/0.png</key>
             <dict>
@@ -1125,7 +1125,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,98}</string>
                 <key>textureRect</key>
-                <string>{{718,81},{136,94}}</string>
+                <string>{{533,777},{136,94}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1140,7 +1140,7 @@
                 <key>spriteSourceSize</key>
                 <string>{136,98}</string>
                 <key>textureRect</key>
-                <string>{{104,897},{120,98}}</string>
+                <string>{{543,399},{120,98}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1155,9 +1155,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{328,987},{33,34}}</string>
+                <string>{{896,867},{33,34}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/levelup/1.png</key>
             <dict>
@@ -1170,7 +1170,7 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{554,827},{43,68}}</string>
+                <string>{{669,725},{43,68}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1185,9 +1185,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{101,746},{149,96}}</string>
+                <string>{{754,217},{149,96}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/levelup/11.png</key>
             <dict>
@@ -1200,7 +1200,7 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{196,139},{153,96}}</string>
+                <string>{{200,201},{153,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1215,9 +1215,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{1,746},{153,98}}</string>
+                <string>{{395,188},{153,98}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/levelup/13.png</key>
             <dict>
@@ -1230,7 +1230,7 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{185,237},{153,98}}</string>
+                <string>{{599,186},{153,98}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1245,9 +1245,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{489,100},{145,98}}</string>
+                <string>{{325,790},{145,98}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/levelup/15.png</key>
             <dict>
@@ -1260,7 +1260,7 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{489,298},{139,98}}</string>
+                <string>{{568,286},{139,98}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1275,9 +1275,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{437,726},{115,62}}</string>
+                <string>{{643,386},{115,62}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/levelup/17.png</key>
             <dict>
@@ -1290,9 +1290,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{449,100},{31,30}}</string>
+                <string>{{910,985},{31,30}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/levelup/2.png</key>
             <dict>
@@ -1305,9 +1305,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{376,959},{57,80}}</string>
+                <string>{{786,1096},{57,80}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/levelup/3.png</key>
             <dict>
@@ -1320,9 +1320,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{561,872},{63,88}}</string>
+                <string>{{816,1020},{63,88}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/levelup/4.png</key>
             <dict>
@@ -1335,9 +1335,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{626,827},{65,92}}</string>
+                <string>{{728,951},{65,92}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/levelup/5.png</key>
             <dict>
@@ -1350,7 +1350,7 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{338,337},{69,96}}</string>
+                <string>{{741,500},{69,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1365,7 +1365,7 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{259,549},{139,98}}</string>
+                <string>{{443,399},{139,98}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1380,7 +1380,7 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{185,337},{151,96}}</string>
+                <string>{{186,429},{151,96}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1395,9 +1395,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{340,238},{147,96}}</string>
+                <string>{{305,641},{147,96}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/levelup/9.png</key>
             <dict>
@@ -1410,9 +1410,9 @@
                 <key>spriteSourceSize</key>
                 <string>{153,100}</string>
                 <key>textureRect</key>
-                <string>{{489,200},{145,96}}</string>
+                <string>{{403,641},{145,96}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/shoot/bow1/0.png</key>
             <dict>
@@ -1425,7 +1425,7 @@
                 <key>spriteSourceSize</key>
                 <string>{88,75}</string>
                 <key>textureRect</key>
-                <string>{{473,882},{86,75}}</string>
+                <string>{{822,943},{86,75}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1440,7 +1440,7 @@
                 <key>spriteSourceSize</key>
                 <string>{88,75}</string>
                 <key>textureRect</key>
-                <string>{{644,750},{88,75}}</string>
+                <string>{{809,789},{88,75}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1455,7 +1455,7 @@
                 <key>spriteSourceSize</key>
                 <string>{88,75}</string>
                 <key>textureRect</key>
-                <string>{{734,750},{88,75}}</string>
+                <string>{{806,866},{88,75}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1470,7 +1470,7 @@
                 <key>spriteSourceSize</key>
                 <string>{88,76}</string>
                 <key>textureRect</key>
-                <string>{{385,881},{86,76}}</string>
+                <string>{{461,1023},{86,76}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1485,9 +1485,9 @@
                 <key>spriteSourceSize</key>
                 <string>{88,76}</string>
                 <key>textureRect</key>
-                <string>{{295,881},{88,76}}</string>
+                <string>{{728,861},{88,76}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/shoot/bow2/2.png</key>
             <dict>
@@ -1500,7 +1500,7 @@
                 <key>spriteSourceSize</key>
                 <string>{88,76}</string>
                 <key>textureRect</key>
-                <string>{{554,749},{88,76}}</string>
+                <string>{{726,1018},{88,76}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1515,9 +1515,9 @@
                 <key>spriteSourceSize</key>
                 <string>{92,89}</string>
                 <key>textureRect</key>
-                <string>{{381,790},{90,89}}</string>
+                <string>{{445,931},{90,89}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/shoot/bow3/1.png</key>
             <dict>
@@ -1530,9 +1530,9 @@
                 <key>spriteSourceSize</key>
                 <string>{92,89}</string>
                 <key>textureRect</key>
-                <string>{{204,893},{92,89}}</string>
+                <string>{{850,698},{92,89}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/shoot/bow3/2.png</key>
             <dict>
@@ -1545,7 +1545,7 @@
                 <key>spriteSourceSize</key>
                 <string>{92,89}</string>
                 <key>textureRect</key>
-                <string>{{287,790},{92,89}}</string>
+                <string>{{715,770},{92,89}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1560,7 +1560,7 @@
                 <key>spriteSourceSize</key>
                 <string>{214,97}</string>
                 <key>textureRect</key>
-                <string>{{199,692},{118,71}}</string>
+                <string>{{668,503},{118,71}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1575,9 +1575,9 @@
                 <key>spriteSourceSize</key>
                 <string>{214,97}</string>
                 <key>textureRect</key>
-                <string>{{449,1},{214,97}}</string>
+                <string>{{797,1},{214,97}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/shoot/spell2/0.png</key>
             <dict>
@@ -1590,7 +1590,7 @@
                 <key>spriteSourceSize</key>
                 <string>{251,154}</string>
                 <key>textureRect</key>
-                <string>{{151,549},{141,106}}</string>
+                <string>{{425,788},{141,106}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1605,7 +1605,7 @@
                 <key>spriteSourceSize</key>
                 <string>{251,154}</string>
                 <key>textureRect</key>
-                <string>{{1,411},{203,148}}</string>
+                <string>{{1,898},{203,148}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1620,9 +1620,9 @@
                 <key>spriteSourceSize</key>
                 <string>{251,154}</string>
                 <key>textureRect</key>
-                <string>{{196,1},{251,136}}</string>
+                <string>{{1,645},{251,136}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/shoot/spell3/0.png</key>
             <dict>
@@ -1635,7 +1635,7 @@
                 <key>spriteSourceSize</key>
                 <string>{221,198}</string>
                 <key>textureRect</key>
-                <string>{{441,644},{129,80}}</string>
+                <string>{{553,1101},{129,80}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1650,7 +1650,7 @@
                 <key>spriteSourceSize</key>
                 <string>{221,198}</string>
                 <key>textureRect</key>
-                <string>{{151,435},{139,112}}</string>
+                <string>{{185,527},{139,112}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1665,7 +1665,7 @@
                 <key>spriteSourceSize</key>
                 <string>{221,198}</string>
                 <key>textureRect</key>
-                <string>{{1,1},{193,198}}</string>
+                <string>{{200,1},{193,198}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1680,9 +1680,9 @@
                 <key>spriteSourceSize</key>
                 <string>{129,80}</string>
                 <key>textureRect</key>
-                <string>{{774,827},{79,72}}</string>
+                <string>{{652,1017},{79,72}}</string>
                 <key>textureRotated</key>
-                <false/>
+                <true/>
             </dict>
             <key>joanna/shoot/sword1/1.png</key>
             <dict>
@@ -1695,9 +1695,9 @@
                 <key>spriteSourceSize</key>
                 <string>{129,80}</string>
                 <key>textureRect</key>
-                <string>{{359,687},{101,76}}</string>
+                <string>{{549,1023},{101,76}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/shoot/sword1/2.png</key>
             <dict>
@@ -1710,9 +1710,9 @@
                 <key>spriteSourceSize</key>
                 <string>{129,80}</string>
                 <key>textureRect</key>
-                <string>{{729,345},{129,80}}</string>
+                <string>{{709,315},{129,80}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/shoot/sword2/0.png</key>
             <dict>
@@ -1725,9 +1725,9 @@
                 <key>spriteSourceSize</key>
                 <string>{198,128}</string>
                 <key>textureRect</key>
-                <string>{{409,336},{124,78}}</string>
+                <string>{{335,1023},{124,78}}</string>
                 <key>textureRotated</key>
-                <true/>
+                <false/>
             </dict>
             <key>joanna/shoot/sword2/1.png</key>
             <dict>
@@ -1740,7 +1740,7 @@
                 <key>spriteSourceSize</key>
                 <string>{198,128}</string>
                 <key>textureRect</key>
-                <string>{{722,219},{90,124}}</string>
+                <string>{{336,299},{90,124}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1755,7 +1755,7 @@
                 <key>spriteSourceSize</key>
                 <string>{198,128}</string>
                 <key>textureRect</key>
-                <string>{{665,1},{182,78}}</string>
+                <string>{{151,1023},{182,78}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1770,7 +1770,7 @@
                 <key>spriteSourceSize</key>
                 <string>{208,182}</string>
                 <key>textureRect</key>
-                <string>{{292,435},{90,112}}</string>
+                <string>{{326,527},{90,112}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1785,7 +1785,7 @@
                 <key>spriteSourceSize</key>
                 <string>{208,182}</string>
                 <key>textureRect</key>
-                <string>{{1,616},{148,128}}</string>
+                <string>{{186,299},{148,128}}</string>
                 <key>textureRotated</key>
                 <false/>
             </dict>
@@ -1800,7 +1800,7 @@
                 <key>spriteSourceSize</key>
                 <string>{208,182}</string>
                 <key>textureRect</key>
-                <string>{{1,201},{208,182}}</string>
+                <string>{{1,435},{208,182}}</string>
                 <key>textureRotated</key>
                 <true/>
             </dict>
@@ -1816,9 +1816,9 @@
             <key>realTextureFileName</key>
             <string>joanna.png</string>
             <key>size</key>
-            <string>{854,1021}</string>
+            <string>{948,1184}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:8e802f7f3756812197a7f2b1e7d0fdc3:1f5a1b957a9b384b5b798b09ec224d5f:97eeacd75898b8e79a691a0c9eab20ee$</string>
+            <string>$TexturePacker:SmartUpdate:406fa7feb66c160d7dcec83b05c302e9:1feeb4c5726929c27cbc4eaf7e59dbb1:97eeacd75898b8e79a691a0c9eab20ee$</string>
             <key>textureFileName</key>
             <string>joanna.png</string>
         </dict>
