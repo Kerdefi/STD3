@@ -126,49 +126,49 @@
     "nicolassword1":{
         "maxdiameter":5,
         "growth":100,
-        "force":50,
+        "force":150,
         "heat":300,
-        "damage":70,
+        "damage":100,
         "duration":0.2
     },
     "nicolassword2":{
         "maxdiameter":5,
         "growth":100,
-        "force":100,
+        "force":200,
         "heat":400,
-        "damage":140,
+        "damage":150,
         "duration":0.2
     },
     "nicolassword3":{
         "maxdiameter":5,
         "growth":100,
-        "force":150,
+        "force":300,
         "heat":700,
-        "damage":210,
+        "damage":200,
         "duration":0.2
     },
     "joannasword1":{
         "maxdiameter":4,
         "growth":100,
-        "force":50,
+        "force":150,
         "heat":-50,
-        "damage":70,
+        "damage":100,
         "duration":0.2
     },
     "joannasword2":{
         "maxdiameter":4,
         "growth":100,
-        "force":100,
+        "force":200,
         "heat":-100,
-        "damage":140,
+        "damage":150,
         "duration":0.2
     },
     "joannasword3":{
         "maxdiameter":4,
         "growth":100,
-        "force":150,
+        "force":300,
         "heat":-150,
-        "damage":210,
+        "damage":200,
         "duration":0.2
     },
     "joannaarrow1":{
@@ -192,7 +192,7 @@
         "growth":100,
         "force":10,
         "heat":-50,
-        "damage":180,
+        "damage":170,
         "duration":0.15
     },
     "joannaspell1":{
@@ -204,7 +204,7 @@
         "duration":0.5
     },
     "joannaspell2":{
-        "maxdiameter":2,
+        "maxdiameter":3,
         "growth":100,
         "force":100,
         "heat":-50,
@@ -212,11 +212,11 @@
         "duration":0.5
     },
     "joannaspell3":{
-        "maxdiameter":3,
+        "maxdiameter":4,
         "growth":100,
         "force":100,
         "heat":-50,
-        "damage":90,
+        "damage":100,
         "duration":0.5
     },
     "nicolasarrow1":{
@@ -224,7 +224,7 @@
         "growth":100,
         "force":10,
         "heat":150,
-        "damage":110,
+        "damage":60,
         "duration":0.15
     },
     "nicolasarrow2":{
@@ -232,7 +232,7 @@
         "growth":100,
         "force":10,
         "heat":150,
-        "damage":220,
+        "damage":120,
         "duration":0.15
     },
     "nicolasarrow3":{
@@ -240,7 +240,7 @@
         "growth":100,
         "force":10,
         "heat":150,
-        "damage":320,
+        "damage":170,
         "duration":0.15
     },
     "nicolasspell1":{
@@ -252,7 +252,7 @@
         "duration":0.5
     },
     "nicolasspell2":{
-        "maxdiameter":3,
+        "maxdiameter":4,
         "growth":100,
         "force":100,
         "heat":400,
@@ -260,11 +260,11 @@
         "duration":0.5
     },
     "nicolasspell3":{
-        "maxdiameter":4,
+        "maxdiameter":5,
         "growth":100,
         "force":150,
         "heat":700,
-        "damage":90,
+        "damage":100,
         "duration":0.5
     },
     "monstersarrow3":{
@@ -272,7 +272,7 @@
         "growth":100,
         "force":10,
         "heat":50,
-        "damage":15,
+        "damage":10,
         "duration":0.5
     },
     "monstersarrow5":{
@@ -288,7 +288,7 @@
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":15,
+        "damage":20,
         "duration":0.5
     },
     "monstersarrow8":{
@@ -296,23 +296,23 @@
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":30,
+        "damage":25,
         "duration":0.5
     },
     "monstersarrow9":{
-        "maxdiameter":4,
+        "maxdiameter":5,
         "growth":20,
-        "force":300,
-        "heat":50,
-        "damage":80,
-        "duration":0.2
+        "force":500,
+        "heat":500,
+        "damage":40,
+        "duration":0.3
     },
     "monstersarrow10":{
         "maxdiameter":2,
         "growth":100,
         "force":50,
         "heat":50,
-        "damage":80,
+        "damage":60,
         "duration":0.5
     }
   }

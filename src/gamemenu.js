@@ -100,7 +100,7 @@ var infoLayer = cc.Layer.extend({
         else this.getChildByTag(10001).setString ("The groom - Nicolas");
 
         //Change le reloading
-        if(this.getParent().getChildByTag(TagOfLayer.player).isShooting || this.getParent().getChildByTag(TagOfLayer.player).shootcountdown!=0) this.getChildByTag(10002).visible = true ;
+        if(this.getParent().getChildByTag(TagOfLayer.player).isShooting || this.getParent().getChildByTag(TagOfLayer.player).shootcountdown[this.getParent().getChildByTag(TagOfLayer.player).weapon]!=0) this.getChildByTag(10002).visible = true ;
         else this.getChildByTag(10002).visible = false ;
 
         //Change le weapon
@@ -144,7 +144,7 @@ var infoLayer = cc.Layer.extend({
         //Recalibre l'indicateur d'XP
         var xplimit = this.getParent().getChildByTag(TagOfLayer.player).levelgrowth[this.getParent().getChildByTag(TagOfLayer.player).weapon];
         var xp = this.getParent().getChildByTag(TagOfLayer.player).levels[this.getParent().getChildByTag(TagOfLayer.player).weapon];
-        var loading = !this.getParent().getChildByTag(TagOfLayer.player).isShooting && this.getParent().getChildByTag(TagOfLayer.player).shootcountdown == 0 ? 1 : 0.5 ;
+        var loading = !this.getParent().getChildByTag(TagOfLayer.player).isShooting && this.getParent().getChildByTag(TagOfLayer.player).shootcountdown[this.getParent().getChildByTag(TagOfLayer.player).weapon] == 0 ? 1 : 0.5 ;
         this.getChildByTag(1000).opacity = Math.floor(255*loading);
         for(var i = 1 ; i < 3 ; i++) {
             if(i <= xp){
@@ -155,7 +155,7 @@ var infoLayer = cc.Layer.extend({
                 if (i == xp+1) {
                     this.getChildByTag(1000+i).visible = true;
                     this.getChildByTag(1000+i).opacity = Math.floor(xplimit*2.55*loading);
-                    this.getChildByTag(1000+i).setColor(cc.color(255,0,0));
+                    this.getChildByTag(1000+i).setColor(cc.color(148,197,197));
                 } else this.getChildByTag(1000+i).visible = false;
             }
         }

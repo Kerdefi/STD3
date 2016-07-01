@@ -84,7 +84,8 @@ monsterbullet = function (layer,tag) {
         this.layer.getChildByTag (this.tag).visible=true;
         this.layer.getChildByTag (this.tag).setPosition(this.position);
         //Rotate
-        var angle = Math.acos(speed.x*1/speed.length())*180/3.14;
+        var angle = Math.acos(speed.x/speed.length())*180/3.14;
+        if(speed.y > 0) angle = -angle;
         if (level != 7 && level !=6) this.layer.getChildByTag (this.tag).setRotation(angle);
         else this.layer.getChildByTag (this.tag).setRotation(0);
         this.layer.getChildByTag(this.tag).stopAllActions();

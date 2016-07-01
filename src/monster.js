@@ -38,10 +38,10 @@ monster = function (layer,tag) {
     this.tag = tag;
     this.isAlive = false;
     this.canShoot = [false,false,true,false,false,false,true,true,true,true] ;
-    this.shootTime = [0,0,2,0,0,0,2,2,3,2] ;
+    this.shootTime = [0,0,1.5,0,0,0,1.5,1.5,2.5,1.5] ;
     //Nombre de balles - doit être impair
-    this.shootBullets = [0,0,3,0,0,0,9,3,0,5] ;
-    this.shootAngle = [0,0,30,0,0,0,38,30,0,36] ;
+    this.shootBullets = [0,0,3,0,0,0,9,5,0,9] ;
+    this.shootAngle = [0,0,30,0,0,0,40,72,0,40] ;
     this.lifeArray = [5,10,10,15,5,25,20,25,30,35] ;
     this.sizeArray = [1,1,1,1,1,1,1,1,1,1] ;
     this.listOfActions = ["fly","die","shoot"];
@@ -102,7 +102,7 @@ monster = function (layer,tag) {
         if (this.speed > 0) this.layer.getChildByTag (this.tag).flippedX = true;
         else this.layer.getChildByTag (this.tag).flippedX = false;
         this.life = this.lifeArray [level];
-        this.shootCount = this.shootTime [level];
+        this.shootCount = this.shootTime [level]*g_firstshoot;
         this.dying = false;
         this.shooting=false;
     };
@@ -184,7 +184,7 @@ monster = function (layer,tag) {
 
             } else {
                 //boom
-                var boompos = new cc.math.Vec2(Math.round(this.layer.getChildByTag (this.tag).getPositionX()/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize-2));
+                var boompos = new cc.math.Vec2(Math.round((this.layer.getChildByTag (this.tag).getPositionX() + self.speed*0.5)/g_blocksize),Math.round(this.layer.getChildByTag (this.tag).getPositionY()/g_blocksize-2));
                 g_enp.addForce(new encophys.force("monstersarrow9",boompos));
             }
 

@@ -15,13 +15,13 @@ var blockLayer = cc.Layer.extend({
             [3,4,5,6],
             [4,5,6,7],
             [4,5,6,7,8],
-            [4,6,7,8,9,9]
+            [4,6,7,8,9]
         ];
         //level des maxmonsters
         this.probamonster = [1.5,2.3,2.5,3.3,3.3,2.5,2.5,1.8,1.8,1.8];
         //level des min et maxlength
-        this.minlenght = [10,11,11,12,12,13,13,14,14,15];
-        this.maxlenght = [15,15,16,16,17,17,18,18,19,20];
+        this.minlenght = [10,11,11,12,12,13,13,14,14,14];
+        this.maxlenght = [15,15,16,16,17,17,18,18,19,19];
         //level des minspace
         this.minspace = [14,13,13,12,12,12,12,12,12,12];
         //level des layers
@@ -32,10 +32,10 @@ var blockLayer = cc.Layer.extend({
             [["ice"],["ice","water","water","void"]],
             [["stone"],["stone","wood"]],
             [["stone"],["stone","wood","wood","wood","wood","wood","lava","void","void","void"]],
-            [["stone"],["ice"],["water","ice","ice","void"]],
-            [["stone"],["ice"],["ice","ice","ice","ice","ice","ice","ice","lava","void","void","void"]],
-            [["stone"],["stone"],["stone","lava","lava"]],
-            [["stone"],["stone"],["stone","lava","lava","lava"],["lava","lava","void"]]
+            [["stone"],["ice"],["water","ice","ice","void","void","void"]],
+            [["stone"],["ice"],["ice","ice","ice","ice","lava","void","void","void","void","void"]],
+            [["stone"],["stone","lava"],["lava","lava","void"]],
+            [["stone"],["stone"],["lava","lava","lava"],["lava","void","void"]]
         ];
         this.spawnproba = 0.8;
 
