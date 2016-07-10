@@ -166,6 +166,7 @@ var frameBack = cc.Layer.extend({
             frame[i].setPosition(0,0);
             frame[i].setScale(0.5,0.5);
             frame[i].visible = false;
+            frame[i].opacity = 190;
             this.addChild(frame[i],0,i);
         }
     },
@@ -196,7 +197,7 @@ var frameBack = cc.Layer.extend({
                 this.posY[i] = 1100;
 
                 this.getChildByTag(i).setScale(1/this.scaleHere [i],1/this.scaleHere[i]);
-                this.scaleHere [i]=0.2+Math.random()*0.8;
+                this.scaleHere [i]=0.2+Math.random();
 
                 this.getChildByTag(i).setTexture(res["frame"+Math.round(Math.random()*9)+"_png"]);
                 this.getChildByTag(i).setScale(this.scaleHere[i],this.scaleHere[i]);
