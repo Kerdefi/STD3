@@ -133,7 +133,7 @@ var gameBack = cc.Layer.extend({
         this.addChild(spriteBG1,1,1);
     },
     onUpdate:function(){
-        this.posY -= g_enp.framestep * g_blockspeed * g_blocksize;
+        this.posY = Math.round(this.posY - g_enp.framestep * g_blockspeed * g_blocksize) ;
         if(this.posY < -1024) this.posY += 1024 ;
         this.getChildByTag(0).setPosition(0,this.posY);
         this.getChildByTag(1).setPosition(0,this.posY+1024);
@@ -173,15 +173,15 @@ var frameBack = cc.Layer.extend({
         //apparition d'un ou deux cadres tous les X blocks
         if(this.test != -Math.round(this.getParent().getChildByTag(TagOfLayer.background).posY)){
             this.test = -Math.round(this.getParent().getChildByTag(TagOfLayer.background).posY);
-            if(this.test % 30 == 0 && Math.random() < 0.5) this.addFrame();
+            if(this.test % 40 == 0 && Math.random() < 0.5) this.addFrame();
         }
 
         for(var i = 0 ; i < g_maxframe ; i++) {
             if(this.alive[i]) {
-                this.posY [i] -= g_enp.framestep * g_blockspeed * g_blocksize;
+                this.posY[i] = Math.round(this.posY[i] - g_enp.framestep * g_blockspeed * g_blocksize) ;
                 this.getChildByTag(i).setPosition(this.posX[i],this.posY[i]);
 
-                if(this.posY [i] < -200) {
+                if(this.posY [i] < -100) {
                     this.getChildByTag(i).visible = false;
                     this.alive[i] = false;
                 }
@@ -193,12 +193,12 @@ var frameBack = cc.Layer.extend({
             if(!this.alive[i]) {
                 this.alive[i] = true;
                 this.posX[i] = Math.round(Math.random()*768);
-                this.posY[i] = 1300;
+                this.posY[i] = 1100;
 
                 this.getChildByTag(i).setScale(1/this.scaleHere [i],1/this.scaleHere[i]);
                 this.scaleHere [i]=0.2+Math.random()*0.8;
 
-                this.getChildByTag(i).setTexture(res["frame"+Math.round(Math.random()*10)+"_png"]);
+                this.getChildByTag(i).setTexture(res["frame"+Math.round(Math.random()*9)+"_png"]);
                 this.getChildByTag(i).setScale(this.scaleHere[i],this.scaleHere[i]);
                 this.getChildByTag(i).setPosition(this.posX[i],this.posY[i]);
                 this.getChildByTag(i).visible = true;

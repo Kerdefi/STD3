@@ -35,7 +35,7 @@ var g_scalebonus = 1.5 ;
 var g_swordhealth = [20,35,50];
 var g_firstshoot = 0.2;
 var g_level = 1.7;
-var g_maxframe = 5;
+var g_maxframe = 8;
 
 if(typeof TagOfState == "undefined") {
     var TagOfState = {};
