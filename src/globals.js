@@ -4,8 +4,8 @@ var g_blocksize = 30;
 var g_textureblocksize = 20;
 var g_blockspeed = 7;
 var g_animtime = 0.15;
-var g_maxbullets = 20 ;
-var g_maxbooms = 20 ;
+var g_maxbullets = 40 ;
+var g_maxbooms = 30 ;
 var g_maxmonsters = 15 ;
 var g_monstersmaxspeed = 125 ;
 var g_monsterbulletspeed = 200 ;
@@ -22,11 +22,11 @@ g_highscore.score = [100,20,10,5,1];
 var g_levellength = 100 ;
 var g_blockdamage = 2 ;
 //Juste toucher les monstres
-var g_monsterdamagemultiplier = 1.2;
+var g_monsterdamagemultiplier = 1.4;
 //Tous les dégats
 var g_monsterdamagereductionorigin = 0.8;
 var g_monsterdamagereduction = g_monsterdamagereductionorigin;
-var g_bowshield = 0.3;
+var g_bowshield = 0.2;
 var g_scalebullet = 1.4 ;
 var g_scalemonsterbullet = 1.4 ;
 var g_scaleboom = 2 ;
@@ -35,6 +35,7 @@ var g_scalebonus = 1.5 ;
 var g_swordhealth = [20,35,50];
 var g_firstshoot = 0.2;
 var g_level = 1.7;
+var g_maxframe = 5;
 
 if(typeof TagOfState == "undefined") {
     var TagOfState = {};
@@ -64,6 +65,7 @@ if(typeof TagOfLayer == "undefined") {
     TagOfLayer.info = 12;
     TagOfLayer.pause = 13;
     TagOfLayer.end = 14;
+    TagOfLayer.frames = 15;
 };
 
 if(typeof TagOfAction == "undefined") {

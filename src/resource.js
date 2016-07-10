@@ -31,7 +31,20 @@ var res = {
     jshield_png : "res/new/jshield.png",
     nshield_png : "res/new/nshield.png",
     damage_png : "res/new/damage.png",
-    reloading_png : "res/new/reloading.png"
+    reloading_png : "res/new/reloading.png",
+
+    //Frames
+
+    frame0_png : "res/new/frames/0.png",
+    frame1_png : "res/new/frames/1.png",
+    frame2_png : "res/new/frames/2.png",
+    frame3_png : "res/new/frames/3.png",
+    frame4_png : "res/new/frames/4.png",
+    frame5_png : "res/new/frames/5.png",
+    frame6_png : "res/new/frames/6.png",
+    frame7_png : "res/new/frames/7.png",
+    frame8_png : "res/new/frames/8.png",
+    frame9_png : "res/new/frames/9.png"
 };
 
 var g_resources = [
@@ -67,5 +80,18 @@ var g_resources = [
     res.jshield_png,
     res.nshield_png,
     res.damage_png,
-    res.reloading_png
+    res.reloading_png,
+
+    //frames
+
+    res.frame0_png,
+    res.frame1_png,
+    res.frame2_png,
+    res.frame3_png,
+    res.frame4_png,
+    res.frame5_png,
+    res.frame6_png,
+    res.frame7_png,
+    res.frame8_png,
+    res.frame9_png
 ];
